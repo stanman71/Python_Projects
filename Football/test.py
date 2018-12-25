@@ -3,14 +3,30 @@ from bs4 import BeautifulSoup
 
 import csv
 
-url = "https://www.dfb.de/bundesliga/spieltagtabelle/?spieledb_path=/competitions/12/seasons/17683/matchday&spieledb_path=/competitions/12/seasons/17820/matchday/17"
+url = "https://www.dfb.de/2-bundesliga/spieltagtabelle/?no_cache=1"
 
 r = requests.get(url)
 
 doc = BeautifulSoup(r.text, "html.parser")
 
-content = doc.select_one(".cross-tab")
 
 
-print(content)
 
+
+def GET_Table(input):
+
+    table = []
+
+    content = input.find("div", {"id": "tabular"})
+
+    rows = content.find_all('tr')
+
+    for row in rows:
+        cols = row.find_all('td')
+        cols = [ele.text.strip() for ele in cols]
+
+        table.append([ele for ele in cols if ele])
+
+    return(table)
+
+print(GET_Table(doc))
