@@ -1,32 +1,26 @@
-import requests
-from bs4 import BeautifulSoup
-
-import csv
-
-url = "https://www.dfb.de/2-bundesliga/spieltagtabelle/?no_cache=1"
-
-r = requests.get(url)
-
-doc = BeautifulSoup(r.text, "html.parser")
+import sys, csv ,operator
+import codecs
 
 
 
 
 
-def GET_Table(input):
+file = "./Python_Projects/Football/1.Bundesliga_2018_2019.csv"
 
-    table = []
 
-    content = input.find("div", {"id": "tabular"})
 
-    rows = content.find_all('tr')
 
-    for row in rows:
-        cols = row.find_all('td')
-        cols = [ele.text.strip() for ele in cols]
+    # Sort CSV
 
-        table.append([ele for ele in cols if ele])
 
-    return(table)
+with open(file, newline='', encoding='utf-8') as f:
+    data = csv.reader(f)
 
-print(GET_Table(doc))
+    sortedlist = sorted(data, key=operator.itemgetter(0))   
+
+    with open(file, "w", encoding="utf-8", newline='') as f:
+        fileWriter = csv.writer(f, delimiter=',')
+        for row in sortedlist:
+            fileWriter.writerow(row)
+
+  

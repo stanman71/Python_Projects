@@ -1,16 +1,15 @@
 import requests
 from bs4 import BeautifulSoup
-import csv
+import sys, csv ,operator
 
 
-#url = "https://www.dfb.de/bundesliga/spieltagtabelle/?spieledb_path=/competitions/12/seasons/17683/matchday&spieledb_path=%2Fcompetitions%2F12%2Fseasons%2F17820%2Fmatchday%2F17"
-url = "https://www.dfb.de/2-bundesliga/spieltagtabelle/?no_cache=1&spieledb_path=%2Fcompetitions%2F3%2Fseasons%2Fcurrent%2Fmatchday%2F18"
-#url = "https://www.dfb.de/3-liga/spieltagtabelle/?no_cache=1&spieledb_path=%2Fcompetitions%2F4%2Fseasons%2Fcurrent%2Fmatchday%2F20"
+#url = "https://www.dfb.de/bundesliga/spieltagtabelle/?spieledb_path=/competitions/12/seasons/17683/matchday&spieledb_path=%2Fcompetitions%2F12%2Fseasons%2F17820%2Fmatchday%2F13"
+#url = "https://www.dfb.de/2-bundesliga/spieltagtabelle/?no_cache=1&spieledb_path=%2Fcompetitions%2F3%2Fseasons%2Fcurrent%2Fmatchday%2F4"
+url = "https://www.dfb.de/3-liga/spieltagtabelle/?no_cache=1&spieledb_path=%2Fcompetitions%2F4%2Fseasons%2Fcurrent%2Fmatchday%2F26"
 
 r = requests.get(url)
 
 doc = BeautifulSoup(r.text, "html.parser")
-
 
 
 ########################
@@ -24,13 +23,13 @@ def GET_BasicInfo(input):
     # LIGA
 
     if "bundesliga" in url:
-        liga = "1_Bundesliga"
+        liga = "1.Bundesliga"
 
         if "2-bundesliga" in url:
-            liga = "2_Bundesliga"
+            liga = "2.Bundesliga"
 
     if "3-liga" in url:
-        liga = "3_Bundesliga"
+        liga = "3.Bundesliga"
 
     info.append(liga)
 
@@ -39,6 +38,11 @@ def GET_BasicInfo(input):
 
     for option in doc.find_all('option', selected=True):
         info.append(option.text)    
+
+    info[2] = info[2].split(" ")[1]
+
+    if int(info[2]) < 10:
+        info[2] = "0" + info[2]
 
     return(info)
 
@@ -134,31 +138,64 @@ def GET_Cross_Table(input):
 
 def CREATE_CSV(data):
 
-    with open('./Python_Projects/Football/results.csv', mode='w', encoding="utf-8") as result_file:
-        result_writer = csv.writer(result_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+    season = data[1].replace("/", "_")
 
-        result_writer.writerow([data[0]])
-        result_writer.writerow([data[1]])
-        result_writer.writerow([data[2]])
+    file = "./Python_Projects/Football/" + data[0] + "_" + season + ".csv"
 
-        counter = len(data)
+    # Check CSV
 
-        for i in range (3, counter, 3):
-            print(i)
-            result_writer.writerow([data[i], data[i+1], data[i+2]])
+    exist = False
 
-        print("CSV created")
+    try:
+        with open(file, newline='', encoding='utf-8') as f:
+            spamreader = csv.reader(f)      
+            
+            for row in spamreader:
+                if data[2] in row:
+                    exist = True
 
+            if exist == True:
+                print("Already exist")
 
+    except:
+        pass
 
+        # ADD Infos
+
+    if exist == False:
+        with open(file, mode='a', encoding="utf-8", newline='') as result_file:
+            result_writer = csv.writer(result_file, delimiter=',')
+
+            counter = len(data)
+
+            for i in range (3, counter, 3):
+                result_writer.writerow([data[2], data[i], data[i+1], data[i+2]])
+
+            print("CSV created")
+
+        # Sort CSV
+
+        with open(file, newline='', encoding='utf-8') as f:
+            data = csv.reader(f)
+
+            sortedlist = sorted(data, key=operator.itemgetter(0))   
+
+            with open(file, "w", encoding="utf-8", newline='') as f:
+                fileWriter = csv.writer(f, delimiter=',')
+                for row in sortedlist:
+                    fileWriter.writerow(row)
+
+               
+                    
+
+#print(GET_BasicInfo(doc))
 
 #print(GET_Results(doc))
 
 #print(GET_Table(doc))
 
-#CREATE_CSV(GET_Results(doc))
-
 #print(GET_Cross_Table(doc))
-
 #print(GET_Cross_Table(doc)[6][6])
+
+CREATE_CSV(GET_Results(doc))
 
