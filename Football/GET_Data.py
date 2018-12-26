@@ -7,7 +7,7 @@ import sys, csv ,operator
 # GET_BASICINFO
 ########################
 
-def GET_BasicInfo(url, doc):
+def GET_BASICINFO(url, doc):
  
     info = []
 
@@ -44,12 +44,12 @@ def GET_BasicInfo(url, doc):
 # GET_RESULTS
 ########################
 
-def GET_Results(url):
+def GET_RESULTS(url):
 
     r = requests.get(url)
     doc = BeautifulSoup(r.text, "html.parser")
 
-    data_results = GET_BasicInfo(url, doc)
+    data_results = GET_BASICINFO(url, doc)
 
     # RESULTS   
 
@@ -65,16 +65,17 @@ def GET_Results(url):
 
 
 
+
 ########################
 # GET_Table
 ########################
 
-def GET_Table(url):
+def GET_TABLE(url):
 
     r = requests.get(url)
     doc = BeautifulSoup(r.text, "html.parser")
 
-    table = GET_BasicInfo(url, doc)
+    table = GET_BASICINFO(url, doc)
 
     content = doc.find("div", {"id": "tabular"})
 
@@ -95,12 +96,12 @@ def GET_Table(url):
 # GET_Cross_Table
 ########################
 
-def GET_Cross_Table(url):
+def GET_CROSS_TABLE(url):
 
     r = requests.get(url)
     doc = BeautifulSoup(r.text, "html.parser")
 
-    cross_table = GET_BasicInfo(url, doc)
+    cross_table = GET_BASICINFO(url, doc)
 
     content = doc.select_one(".cross-tab")
 
@@ -138,7 +139,7 @@ def GET_Cross_Table(url):
 
 def CREATE_CSV(url):
 
-    data = GET_Results(url)
+    data = GET_RESULTS(url)
 
     season = data[1].replace("/", "_")
 
@@ -165,7 +166,7 @@ def CREATE_CSV(url):
 
     # ADD Infos
 
-    if exist_entry == False:
+    if exist_entry == False and not "- : -" in data[4]:
         with open(file, mode='a', encoding="utf-8", newline='') as result_file:
             result_writer = csv.writer(result_file, delimiter=',')
 
@@ -174,6 +175,11 @@ def CREATE_CSV(url):
             for i in range (3, counter, 3):
                 goals = data[i+1].split(" : ")
                 result_writer.writerow([data[2], data[i], data[i+2], goals[0], goals[1]])
+                # data[2]   > Spieltag
+                # data[i]   > Team_1
+                # data[i+2] > Team_2 
+                # goals[0]  > Tore_Team_1
+                # goals[1]  > Tore_Team_2
 
             print("CSV created")
 
