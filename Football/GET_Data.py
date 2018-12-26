@@ -1,36 +1,26 @@
 import requests
 from bs4 import BeautifulSoup
 import sys, csv ,operator
-import pandas as pd
-
-
-#url = "https://www.dfb.de/bundesliga/spieltagtabelle/?spieledb_path=/competitions/12/seasons/17683/matchday&spieledb_path=%2Fcompetitions%2F12%2Fseasons%2F17820%2Fmatchday%2F13"
-url = "https://www.dfb.de/2-bundesliga/spieltagtabelle/?no_cache=1&spieledb_path=%2Fcompetitions%2F3%2Fseasons%2Fcurrent%2Fmatchday%2F6"
-#url = "https://www.dfb.de/3-liga/spieltagtabelle/?no_cache=1&spieledb_path=%2Fcompetitions%2F4%2Fseasons%2Fcurrent%2Fmatchday%2F15"
-
-r = requests.get(url)
-
-doc = BeautifulSoup(r.text, "html.parser")
 
 
 ########################
 # GET_BASICINFO
 ########################
 
-def GET_BasicInfo(input):
-
+def GET_BasicInfo(url, doc):
+ 
     info = []
 
     # LIGA
 
     if "bundesliga" in url:
-        liga = "1.Bundesliga"
+        liga = "1_Bundesliga"
 
         if "2-bundesliga" in url:
-            liga = "2.Bundesliga"
+            liga = "2_Bundesliga"
 
     if "3-liga" in url:
-        liga = "3.Bundesliga"
+        liga = "3_Bundesliga"
 
     info.append(liga)
 
@@ -54,9 +44,12 @@ def GET_BasicInfo(input):
 # GET_RESULTS
 ########################
 
-def GET_Results(input):
+def GET_Results(url):
 
-    data_results = GET_BasicInfo(doc)
+    r = requests.get(url)
+    doc = BeautifulSoup(r.text, "html.parser")
+
+    data_results = GET_BasicInfo(url, doc)
 
     # RESULTS   
 
@@ -76,11 +69,14 @@ def GET_Results(input):
 # GET_Table
 ########################
 
-def GET_Table(input):
+def GET_Table(url):
 
-    table = GET_BasicInfo(doc)
+    r = requests.get(url)
+    doc = BeautifulSoup(r.text, "html.parser")
 
-    content = input.find("div", {"id": "tabular"})
+    table = GET_BasicInfo(url, doc)
+
+    content = doc.find("div", {"id": "tabular"})
 
     rows = content.find_all('tr')
 
@@ -99,11 +95,14 @@ def GET_Table(input):
 # GET_Cross_Table
 ########################
 
-def GET_Cross_Table(input):
+def GET_Cross_Table(url):
 
-    cross_table = GET_BasicInfo(doc)
-  
-    content = input.select_one(".cross-tab")
+    r = requests.get(url)
+    doc = BeautifulSoup(r.text, "html.parser")
+
+    cross_table = GET_BasicInfo(url, doc)
+
+    content = doc.select_one(".cross-tab")
 
     # GET Clubs
 
@@ -137,11 +136,13 @@ def GET_Cross_Table(input):
 # Create CSV
 ########################
 
-def CREATE_CSV(data):
+def CREATE_CSV(url):
+
+    data = GET_Results(url)
 
     season = data[1].replace("/", "_")
 
-    file = "./Python_Projects/Football/" + data[0] + "_" + season + ".csv"
+    file = "./Python_Projects/Football/CSV/" + data[0] + "_" + season + ".csv"
 
     # Check CSV
 
@@ -160,7 +161,7 @@ def CREATE_CSV(data):
 
     except:
         pass
- 
+
 
     # ADD Infos
 
@@ -176,7 +177,7 @@ def CREATE_CSV(data):
 
             print("CSV created")
 
- 
+
         # Sort CSV
 
         with open(file, newline='', encoding='utf-8') as f:
@@ -192,26 +193,10 @@ def CREATE_CSV(data):
 
                 # Case: Empty list
                 if counter < 10:
-                    for i, row in enumerate(sortedlist):
+                    for row in sortedlist:
                         fileWriter.writerow(row)                    
 
                 else:
                     for i, row in enumerate(sortedlist):
                         if i < counter-1:
                             fileWriter.writerow(row)
-                
-
-               
-         
-
-#print(GET_BasicInfo(doc))
-
-#print(GET_Results(doc))
-
-#print(GET_Table(doc))
-
-#print(GET_Cross_Table(doc))
-#print(GET_Cross_Table(doc)[6][6])
-
-CREATE_CSV(GET_Results(doc))
-

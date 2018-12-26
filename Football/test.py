@@ -6,7 +6,7 @@
 import pandas as pd
 
 
-df = pd.read_csv("./Python_Projects/Football/2.Bundesliga_2018_2019.csv", delimiter=",")
+df = pd.read_csv("./Python_Projects/Football/CSV/2_Bundesliga_2018_2019.csv", delimiter=",")
 
 print(df[["Spieltag", "Team_1", "Tore_Team_1"]])
 
