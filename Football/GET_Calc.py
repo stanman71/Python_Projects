@@ -115,7 +115,7 @@ def GET_ATT_DEF_VALUE(Club, df):
 
 
 
-def GET_APP_GOALS(Club_1, Club_2, df):
+def GET_ESTIMATE_GOALS(Club_1, Club_2, df):
 
     # https://www.onlinemathe.de/forum/Fussballergebnisse-Berechnen-Formel
  
@@ -174,6 +174,50 @@ def GET_POINTS(Club, df):
 
 
 
+def GET_SEASON(Club, df):
+
+    return_list = []
+  
+    df = df[(df.Team_1 == Club) | (df.Team_2 == Club)]
+
+    Complete_1 = df['Team_1'].values.tolist()
+    Complete_2 = df['Team_2'].values.tolist()
+
+    for i in range (0, len(Complete_1)):
+        return_list.append(i+1)
+        return_list.append(Complete_1[i])
+        return_list.append(Complete_2[i])
+    
+    return(return_list)
+
+
+
+def CALC_SEASON(Club, df):
+
+    return_list = []
+
+    season = GET_SEASON(Club, df)
+
+    for i in range (0, len(season), 3):
+        result = GET_ESTIMATE_GOALS(season[i + 1], season[i + 2], df)
+
+        return_list.append(season[i])
+
+        if season[i + 1] == Club:
+            return_list.append("H")
+            return_list.append(season[i + 2])   # Gegner
+            return_list.append(result[0])       # Tore Club
+            return_list.append(result[1])       # Hits Club
+        else:
+            return_list.append("A")
+            return_list.append(season[i + 1])   # Gegner
+            return_list.append(result[1])       # Tore Club
+            return_list.append(result[0])       # Hits Club
+
+    return(return_list)
+
+  
+
 
 
 file = "./Python_Projects/Football/CSV/1_Bundesliga_2018_2019.csv"
@@ -187,6 +231,10 @@ df   = pd.read_csv(file, delimiter=",")
 
 #print(GET_ATT_DEF_VALUE("Bayern München", df))
 
-#print(GET_APP_GOALS("1. FSV Mainz 05", "Bayern München", df))
+#print(GET_ESTIMATE_GOALS("Borussia Dortmund", "1. FC Nürnberg", df))
 
-print(GET_POINTS("Borussia Dortmund", df))
+#print(GET_POINTS("Borussia Dortmund", df))
+
+#print(GET_SEASON("Borussia Dortmund", df))
+
+print(CALC_SEASON("Borussia Dortmund", df))
