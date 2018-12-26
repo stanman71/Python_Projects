@@ -1,11 +1,12 @@
 import requests
 from bs4 import BeautifulSoup
 import sys, csv ,operator
+import pandas as pd
 
 
 #url = "https://www.dfb.de/bundesliga/spieltagtabelle/?spieledb_path=/competitions/12/seasons/17683/matchday&spieledb_path=%2Fcompetitions%2F12%2Fseasons%2F17820%2Fmatchday%2F13"
-#url = "https://www.dfb.de/2-bundesliga/spieltagtabelle/?no_cache=1&spieledb_path=%2Fcompetitions%2F3%2Fseasons%2Fcurrent%2Fmatchday%2F4"
-url = "https://www.dfb.de/3-liga/spieltagtabelle/?no_cache=1&spieledb_path=%2Fcompetitions%2F4%2Fseasons%2Fcurrent%2Fmatchday%2F15"
+url = "https://www.dfb.de/2-bundesliga/spieltagtabelle/?no_cache=1&spieledb_path=%2Fcompetitions%2F3%2Fseasons%2Fcurrent%2Fmatchday%2F6"
+#url = "https://www.dfb.de/3-liga/spieltagtabelle/?no_cache=1&spieledb_path=%2Fcompetitions%2F4%2Fseasons%2Fcurrent%2Fmatchday%2F15"
 
 r = requests.get(url)
 
@@ -144,25 +145,26 @@ def CREATE_CSV(data):
 
     # Check CSV
 
-    exist = False
+    exist_entry = False
 
     try:
         with open(file, newline='', encoding='utf-8') as f:
             spamreader = csv.reader(f)      
-            
+
             for row in spamreader:
                 if data[2] in row:
-                    exist = True
+                    exist_entry = True
 
-            if exist == True:
+            if exist_entry == True:
                 print("Already exist")
 
     except:
         pass
  
+
     # ADD Infos
 
-    if exist == False:
+    if exist_entry == False:
         with open(file, mode='a', encoding="utf-8", newline='') as result_file:
             result_writer = csv.writer(result_file, delimiter=',')
 
@@ -174,6 +176,7 @@ def CREATE_CSV(data):
 
             print("CSV created")
 
+ 
         # Sort CSV
 
         with open(file, newline='', encoding='utf-8') as f:
@@ -183,13 +186,19 @@ def CREATE_CSV(data):
 
             with open(file, "w", encoding="utf-8", newline='') as f:
                 fileWriter = csv.writer(f, delimiter=',')
-                fileWriter.writerow(["Spieltag", "Mannschaft_1", "Mannschaft_2", "Tore_Mannschaft_1", "Tore_Mannschaft_2"])
+                fileWriter.writerow(["Spieltag", "Team_1", "Team_2", "Tore_Team_1", "Tore_Team_2"])
 
                 counter = len(sortedlist)
 
-                for i, row in enumerate(sortedlist):
-                    if i < counter-1:
-                        fileWriter.writerow(row)
+                # Case: Empty list
+                if counter < 10:
+                    for i, row in enumerate(sortedlist):
+                        fileWriter.writerow(row)                    
+
+                else:
+                    for i, row in enumerate(sortedlist):
+                        if i < counter-1:
+                            fileWriter.writerow(row)
                 
 
                
