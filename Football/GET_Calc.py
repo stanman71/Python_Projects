@@ -158,18 +158,19 @@ def GET_POINTS(Club, df):
     AVG_Points = df['Points'].mean()
     AVG_Points = round(AVG_Points, 2)
 
-    Trend = Complete[-5:]
-    Trend = sum(Trend) / float(len(Trend))
+    Last_5 = Complete[-5:]
+    Last_5 = sum(Last_5) / float(len(Last_5))
+    Last_5 = round(Last_5, 2)
+
+    Trend = Last_5 - AVG_Points
     Trend = round(Trend, 2)
 
     return_list.append(Sum)
     return_list.append(AVG_Points)
-    return_list.append(Trend)    
+    return_list.append(Trend)        
     return_list.append(Complete)
 
     return(return_list)
-
-
 
 
 
@@ -186,6 +187,6 @@ df   = pd.read_csv(file, delimiter=",")
 
 #print(GET_ATT_DEF_VALUE("Bayern München", df))
 
-#print(GET_APP_GOALS("Borussia Dortmund", "Bayern München", df))
+#print(GET_APP_GOALS("1. FSV Mainz 05", "Bayern München", df))
 
-print(GET_POINTS("Bayern München", df))
+print(GET_POINTS("Borussia Dortmund", df))
