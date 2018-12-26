@@ -4,6 +4,7 @@
 
 
 import pandas as pd
+import numpy as np
 
 
 
@@ -133,6 +134,46 @@ def GET_APP_GOALS(Club_1, Club_2, df):
 
 
 
+def GET_POINTS(Club, df):
+
+    return_list = []    
+ 
+    df = df[(df.Team_1 == Club) | (df.Team_2 == Club)]
+
+    df = df.copy()
+
+    conditions = [
+        (df['Team_1'] == Club) & ((df['Tore_Team_1']) >  (df['Tore_Team_2'])),
+        (df['Team_1'] == Club) & ((df['Tore_Team_1']) == (df['Tore_Team_2'])),
+        (df['Team_1'] == Club) & ((df['Tore_Team_1']) <  (df['Tore_Team_2'])),
+        (df['Team_2'] == Club) & ((df['Tore_Team_1']) >  (df['Tore_Team_2'])),
+        (df['Team_2'] == Club) & ((df['Tore_Team_1']) == (df['Tore_Team_2'])),
+        (df['Team_2'] == Club) & ((df['Tore_Team_1']) <  (df['Tore_Team_2']))]
+
+    choices = [3, 1, 0, 0, 1, 3]
+    df['Points'] = np.select(conditions, choices)
+    
+    Sum        = df['Points'].sum()
+    Complete   = df['Points'].values.tolist()
+    AVG_Points = df['Points'].mean()
+    AVG_Points = round(AVG_Points, 2)
+
+    Trend = Complete[-5:]
+    Trend = sum(Trend) / float(len(Trend))
+    Trend = round(Trend, 2)
+
+    return_list.append(Sum)
+    return_list.append(AVG_Points)
+    return_list.append(Trend)    
+    return_list.append(Complete)
+
+    return(return_list)
+
+
+
+
+
+
 
 file = "./Python_Projects/Football/CSV/1_Bundesliga_2018_2019.csv"
 df   = pd.read_csv(file, delimiter=",")
@@ -143,6 +184,8 @@ df   = pd.read_csv(file, delimiter=",")
 
 #print(GET_STATS_FROM_CLUB("FC Augsburg", df))
 
-print(GET_ATT_DEF_VALUE("Bayern München", df))
+#print(GET_ATT_DEF_VALUE("Bayern München", df))
 
-print(GET_APP_GOALS("Borussia Dortmund", "Bayern München", df))
+#print(GET_APP_GOALS("Borussia Dortmund", "Bayern München", df))
+
+print(GET_POINTS("Bayern München", df))
