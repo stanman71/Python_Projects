@@ -1,26 +1,13 @@
-import sys, csv ,operator
-import codecs
+# Error: ImportError: Missing required dependencies ['dateutil']
+# >>> Try pd.test()
+# >>> pip install python-dateutil pytz --force-reinstall --upgrade
 
 
 
+import pandas as pd
 
 
-file = "./Python_Projects/Football/1.Bundesliga_2018_2019.csv"
+df = pd.read_csv("./Python_Projects/Football/3.Bundesliga_2018_2019.csv", delimiter=",")
 
+print(df[["Spieltag", "Mannschaft_1", "Tore_Mannschaft_1"]])
 
-
-
-    # Sort CSV
-
-
-with open(file, newline='', encoding='utf-8') as f:
-    data = csv.reader(f)
-
-    sortedlist = sorted(data, key=operator.itemgetter(0))   
-
-    with open(file, "w", encoding="utf-8", newline='') as f:
-        fileWriter = csv.writer(f, delimiter=',')
-        for row in sortedlist:
-            fileWriter.writerow(row)
-
-  

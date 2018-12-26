@@ -5,7 +5,7 @@ import sys, csv ,operator
 
 #url = "https://www.dfb.de/bundesliga/spieltagtabelle/?spieledb_path=/competitions/12/seasons/17683/matchday&spieledb_path=%2Fcompetitions%2F12%2Fseasons%2F17820%2Fmatchday%2F13"
 #url = "https://www.dfb.de/2-bundesliga/spieltagtabelle/?no_cache=1&spieledb_path=%2Fcompetitions%2F3%2Fseasons%2Fcurrent%2Fmatchday%2F4"
-url = "https://www.dfb.de/3-liga/spieltagtabelle/?no_cache=1&spieledb_path=%2Fcompetitions%2F4%2Fseasons%2Fcurrent%2Fmatchday%2F26"
+url = "https://www.dfb.de/3-liga/spieltagtabelle/?no_cache=1&spieledb_path=%2Fcompetitions%2F4%2Fseasons%2Fcurrent%2Fmatchday%2F15"
 
 r = requests.get(url)
 
@@ -159,8 +159,8 @@ def CREATE_CSV(data):
 
     except:
         pass
-
-        # ADD Infos
+ 
+    # ADD Infos
 
     if exist == False:
         with open(file, mode='a', encoding="utf-8", newline='') as result_file:
@@ -169,7 +169,8 @@ def CREATE_CSV(data):
             counter = len(data)
 
             for i in range (3, counter, 3):
-                result_writer.writerow([data[2], data[i], data[i+1], data[i+2]])
+                goals = data[i+1].split(" : ")
+                result_writer.writerow([data[2], data[i], data[i+2], goals[0], goals[1]])
 
             print("CSV created")
 
@@ -182,11 +183,17 @@ def CREATE_CSV(data):
 
             with open(file, "w", encoding="utf-8", newline='') as f:
                 fileWriter = csv.writer(f, delimiter=',')
-                for row in sortedlist:
-                    fileWriter.writerow(row)
+                fileWriter.writerow(["Spieltag", "Mannschaft_1", "Mannschaft_2", "Tore_Mannschaft_1", "Tore_Mannschaft_2"])
+
+                counter = len(sortedlist)
+
+                for i, row in enumerate(sortedlist):
+                    if i < counter-1:
+                        fileWriter.writerow(row)
+                
 
                
-                    
+         
 
 #print(GET_BasicInfo(doc))
 

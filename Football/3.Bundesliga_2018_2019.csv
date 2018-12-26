@@ -1,30 +1,41 @@
-16,Sportfreunde Lotte,1 : 0,Hansa Rostock
-16,Hallescher FC,2 : 0,SG Sonnenhof Großaspach
-16,KFC Uerdingen,2 : 0,VfR Aalen
-16,VfL Osnabrück,3 : 1,Energie Cottbus
-16,FC Carl Zeiss Jena,4 : 5,SpVgg Unterhaching
-16,Fortuna Köln,0 : 0,FC Würzburger Kickers
-16,FSV Zwickau,1 : 1,SV Meppen
-16,Karlsruher SC,3 : 2,TSV 1860 München
-16,1. FC Kaiserslautern,0 : 0,SV Wehen Wiesbaden
-16,Preußen Münster,3 : 0,Eintracht Braunschweig
-20,SV Wehen Wiesbaden,2 : 1,VfR Aalen
-20,Karlsruher SC,1 : 1,Eintracht Braunschweig
-20,FC Würzburger Kickers,1 : 2,VfL Osnabrück
-20,SV Meppen,2 : 0,Sportfreunde Lotte
-20,TSV 1860 München,2 : 1,1. FC Kaiserslautern
-20,Preußen Münster,0 : 2,Fortuna Köln
-20,Hallescher FC,2 : 0,FSV Zwickau
-20,Hansa Rostock,0 : 2,Energie Cottbus
-20,SpVgg Unterhaching,4 : 0,KFC Uerdingen
-20,SG Sonnenhof Großaspach,0 : 0,FC Carl Zeiss Jena
-26,Hallescher FC,- : -,KFC Uerdingen
-26,Preußen Münster,- : -,VfR Aalen
-26,Karlsruher SC,- : -,VfL Osnabrück
-26,FSV Zwickau,- : -,Sportfreunde Lotte
-26,Fortuna Köln,- : -,1. FC Kaiserslautern
-26,SV Meppen,- : -,SV Wehen Wiesbaden
-26,SG Sonnenhof Großaspach,- : -,Energie Cottbus
-26,TSV 1860 München,- : -,Hansa Rostock
-26,FC Carl Zeiss Jena,- : -,Eintracht Braunschweig
-26,FC Würzburger Kickers,- : -,SpVgg Unterhaching
+Spieltag,Mannschaft_1,Mannschaft_2,Tore_Mannschaft_1,Tore_Mannschaft_2
+13,Eintracht Braunschweig,VfL Osnabrück,3,4
+13,KFC Uerdingen,Sportfreunde Lotte,0,2
+13,FC Würzburger Kickers,Hallescher FC,1,2
+13,SpVgg Unterhaching,Karlsruher SC,0,0
+13,SV Wehen Wiesbaden,FSV Zwickau,0,0
+13,Hansa Rostock,Fortuna Köln,3,1
+13,Energie Cottbus,FC Carl Zeiss Jena,2,1
+13,TSV 1860 München,SG Sonnenhof Großaspach,2,2
+13,SV Meppen,Preußen Münster,1,2
+13,VfR Aalen,1. FC Kaiserslautern,1,2
+14,1. FC Kaiserslautern,Energie Cottbus,0,2
+14,Preußen Münster,TSV 1860 München,0,0
+14,SG Sonnenhof Großaspach,Eintracht Braunschweig,1,1
+14,Sportfreunde Lotte,VfR Aalen,1,1
+14,FC Carl Zeiss Jena,Hansa Rostock,1,1
+14,FSV Zwickau,SpVgg Unterhaching,2,2
+14,Karlsruher SC,FC Würzburger Kickers,2,1
+14,Hallescher FC,SV Meppen,2,1
+14,Fortuna Köln,SV Wehen Wiesbaden,0,7
+14,VfL Osnabrück,KFC Uerdingen,2,1
+15,FC Würzburger Kickers,FSV Zwickau,0,2
+15,Eintracht Braunschweig,KFC Uerdingen,0,2
+15,VfR Aalen,VfL Osnabrück,1,1
+15,TSV 1860 München,Hallescher FC,1,1
+15,SV Meppen,Karlsruher SC,2,3
+15,Hansa Rostock,1. FC Kaiserslautern,4,1
+15,Energie Cottbus,Sportfreunde Lotte,2,2
+15,SpVgg Unterhaching,Fortuna Köln,6,0
+15,SG Sonnenhof Großaspach,Preußen Münster,3,1
+15,SV Wehen Wiesbaden,FC Carl Zeiss Jena,2,3
+16,Sportfreunde Lotte,Hansa Rostock,1,0
+16,Hallescher FC,SG Sonnenhof Großaspach,2,0
+16,KFC Uerdingen,VfR Aalen,2,0
+16,VfL Osnabrück,Energie Cottbus,3,1
+16,FC Carl Zeiss Jena,SpVgg Unterhaching,4,5
+16,Fortuna Köln,FC Würzburger Kickers,0,0
+16,FSV Zwickau,SV Meppen,1,1
+16,Karlsruher SC,TSV 1860 München,3,2
+16,1. FC Kaiserslautern,SV Wehen Wiesbaden,0,0
+16,Preußen Münster,Eintracht Braunschweig,3,0
