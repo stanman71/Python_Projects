@@ -1,12 +1,94 @@
-<!DOCTYPE html>
-<html>
-    <title>Graphs</title>
-    <body>
-        <div>Graph 1</div>
-        <div><img src='{{ graph1 }}'></img></div>
-        <div>Graph 2</div>
-        <div><img src='{{ graph2 }}'></img></div>
-        <div>Graph 3</div>
-        <div><img src='{{ graph3 }}'></img></div>
-    </body>
-</html>
+<!-- https://getbootstrap.com/docs/3.3/components -->
+<!-- https://getbootstrap.com/docs/4.0/layout/grid/ -->
+<!-- https://www.w3schools.com/bootstrap/bootstrap_grid_examples.asp -->
+
+<!-- https://pythonhosted.org/Flask-Bootstrap/ -->
+
+
+
+{% extends "bootstrap/base.html" %}
+
+{% block content %} 
+
+<div class="container">
+
+  <!-- HIDDEN -->
+
+  <div class="row">
+    <div class="col">
+      <div class="invisible">HIDDEN</div>
+    </div>
+    <div class="col">
+      <div class="invisible">HIDDEN</div>
+    </div>
+  </div> 
+  
+  <!-- NAVIGATION -->
+
+  <div class="row">
+    <div class="col-sm">
+      <ul class="nav nav-pills">             
+        <li role="presentation" class="active"><a href="#">{{ site1 }}</a></li>
+        <li role="presentation" class="active"><a href="#">{{ site2 }}</a></li>
+        <li role="presentation" class="active"><a href="#">{{ site1 }}</a></li>
+        <li role="presentation" class="active"><a href="#">{{ site2 }}</a></li>
+      </ul>       
+    </div>
+  </div>
+
+  <!-- HIDDEN -->
+
+  <div class="row">
+    <div class="col">
+      <div class="invisible">HIDDEN</div>
+    </div>
+    <div class="col">
+      <div class="invisible">HIDDEN</div>
+    </div>
+  </div> 
+
+  <!-- CONTENT -->
+
+  <div class="row">
+    <div class="col-sm-4">
+      <p>
+        This is a template for a simple marketing or informational website. It includes a large callout called the hero unit and three supporting pieces of content. Use it as a starting point to create something more unique.
+      </p>
+    </div>
+
+    <div class="col-sm-4">
+      <p>
+        This is a template for a simple marketing or informational website. It includes a large callout called the hero unit and three supporting pieces of content. Use it as a starting point to create something more unique.
+      </p>
+    </div>
+
+    <div class="col-sm-4">
+      <div class="list-group">
+          <a href="#" class="list-group-item active">
+            Cras justo odio
+          </a>
+          <a href="#" class="list-group-item">Dapibus ac facilisis in</a>
+          <a href="#" class="list-group-item">Morbi leo risus</a>
+          <a href="#" class="list-group-item">Porta ac consectetur ac</a>
+          <a href="#" class="list-group-item">Vestibulum at eros</a>
+      </div>
+    </div>
+
+    <!-- GRAPHS -->
+
+    <div>Graph 1</div>
+    <div><img src='{{ graph1 }}'></img></div>
+    <div>Graph 2</div>
+    <div><img src='{{ graph2 }}'></img></div>
+    <div>Graph 3</div>
+    <div><img src='{{ graph3 }}'></img></div>
+    
+
+  </div>
+</div>
+
+
+{% endblock %}
+
+
+
