@@ -171,9 +171,7 @@ def CREATE_CSV(url):
         if exist_entry == False:
             result_writer.writerow(["Spieltag", "Status", "Team_1", "Team_2", "Tore_Team_1", "Tore_Team_2"])
 
-        counter = len(data)
-
-        for i in range (3, counter, 3):
+        for i in range (3, len(data), 3):
             goals = data[i+1].split(" : ")
 
             if goals[0] is not "-":

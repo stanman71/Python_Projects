@@ -44,10 +44,11 @@ def GET_ALL_GOALS(file):
 
 
 
-def GET_STATS_FROM_CLUB(Club, file):  
+def GET_STATS_FROM_CLUB(Club, file, day = 34):  
     
     df = pd.read_csv(file, delimiter=",")
     df = df.loc[df['Status'] == "PASS"]
+    df = df.loc[df['Spieltag'] <= day]
 
     return_list = [] 
     list_Heim = []  
@@ -69,18 +70,21 @@ def GET_STATS_FROM_CLUB(Club, file):
     Heim_Goals_AVG = df_heim_1.mean()
     Heim_Goals_AVG = round(Heim_Goals_AVG, 2)
 
-    # Trend Tore Heim
-    Last_5 = df_heim_1[-5:]
-    Last_5 = sum(Last_5) / float(len(Last_5))
-    Last_5 = round(Last_5, 2)
+    try:
+        # Trend Tore Heim
+        Last_5 = df_heim_1[-5:]
+        Last_5 = sum(Last_5) / float(len(Last_5))
+        Last_5 = round(Last_5, 2)
 
-    Trend_Heim_Goals = Last_5 - Heim_Goals_AVG
-    Trend_Heim_Goals  = round(Trend_Heim_Goals, 2)
+        Trend_Heim_Goals = Last_5 - Heim_Goals_AVG
+        Trend_Heim_Goals  = round(Trend_Heim_Goals, 2)
 
-    list_Heim_Goals = []
-    list_Heim_Goals.append(Heim_Goals) 
-    list_Heim_Goals.append(Heim_Goals_AVG)
-    list_Heim_Goals.append(Trend_Heim_Goals)
+        list_Heim_Goals = []
+        list_Heim_Goals.append(Heim_Goals) 
+        list_Heim_Goals.append(Heim_Goals_AVG)
+        list_Heim_Goals.append(Trend_Heim_Goals)
+    except:
+        pass
 
     # Gegentore Heim
     df_heim_2      = df_heim_0["Tore_Team_2"]
@@ -88,18 +92,21 @@ def GET_STATS_FROM_CLUB(Club, file):
     Heim_Hits_AVG  = df_heim_2.mean()
     Heim_Hits_AVG  = round(Heim_Hits_AVG, 2)
 
-    # Trend Gegentore Heim
-    Last_5 = df_heim_2[-5:]
-    Last_5 = sum(Last_5) / float(len(Last_5))
-    Last_5 = round(Last_5, 2)
+    try:
+        # Trend Gegentore Heim
+        Last_5 = df_heim_2[-5:]
+        Last_5 = sum(Last_5) / float(len(Last_5))
+        Last_5 = round(Last_5, 2)
 
-    Trend_Heim_Hits = Last_5 - Heim_Hits_AVG
-    Trend_Heim_Hits  = round(Trend_Heim_Hits, 2)
+        Trend_Heim_Hits = Last_5 - Heim_Hits_AVG
+        Trend_Heim_Hits  = round(Trend_Heim_Hits, 2)
 
-    list_Heim_Hits = []
-    list_Heim_Hits.append(Heim_Hits)
-    list_Heim_Hits.append(Heim_Hits_AVG)
-    list_Heim_Hits.append(Trend_Heim_Hits)
+        list_Heim_Hits = []
+        list_Heim_Hits.append(Heim_Hits)
+        list_Heim_Hits.append(Heim_Hits_AVG)
+        list_Heim_Hits.append(Trend_Heim_Hits)
+    except:
+        pass
 
     list_Heim.append(Sum_Heim)
     list_Heim.append(list_Heim_Goals)
@@ -111,18 +118,21 @@ def GET_STATS_FROM_CLUB(Club, file):
     Aus_Goals_AVG  = df_aus_1.mean()
     Aus_Goals_AVG  = round(Aus_Goals_AVG, 2)
 
-    # Trend Tore Aus
-    Last_5 = df_aus_1[-5:]
-    Last_5 = sum(Last_5) / float(len(Last_5))
-    Last_5 = round(Last_5, 2)
+    try:
+        # Trend Tore Aus
+        Last_5 = df_aus_1[-5:]
+        Last_5 = sum(Last_5) / float(len(Last_5))
+        Last_5 = round(Last_5, 2)
 
-    Trend_Aus_Goals = Last_5 - Aus_Goals_AVG
-    Trend_Aus_Goals  = round(Trend_Aus_Goals, 2)
+        Trend_Aus_Goals = Last_5 - Aus_Goals_AVG
+        Trend_Aus_Goals  = round(Trend_Aus_Goals, 2)
 
-    list_Aus_Goals = []
-    list_Aus_Goals.append(Aus_Goals) 
-    list_Aus_Goals.append(Aus_Goals_AVG)
-    list_Aus_Goals.append(Trend_Aus_Goals)
+        list_Aus_Goals = []
+        list_Aus_Goals.append(Aus_Goals) 
+        list_Aus_Goals.append(Aus_Goals_AVG)
+        list_Aus_Goals.append(Trend_Aus_Goals)
+    except:
+        pass
 
     # Gegentore Aus
     df_aus_2       = df_aus_0["Tore_Team_1"]
@@ -130,22 +140,25 @@ def GET_STATS_FROM_CLUB(Club, file):
     Aus_Hits_AVG   = df_aus_2.mean()
     Aus_Hits_AVG   = round(Aus_Hits_AVG, 2)
 
-    # Trend Gegentore Aus
-    Last_5 = df_aus_2[-5:]
-    Last_5 = sum(Last_5) / float(len(Last_5))
-    Last_5 = round(Last_5, 2)
+    try:
+        # Trend Gegentore Aus
+        Last_5 = df_aus_2[-5:]
+        Last_5 = sum(Last_5) / float(len(Last_5))
+        Last_5 = round(Last_5, 2)
 
-    Trend_Aus_Hits = Last_5 - Aus_Hits_AVG
-    Trend_Aus_Hits  = round(Trend_Aus_Hits, 2)
+        Trend_Aus_Hits = Last_5 - Aus_Hits_AVG
+        Trend_Aus_Hits  = round(Trend_Aus_Hits, 2)
 
-    list_Aus_Hits = []
-    list_Aus_Hits.append(Aus_Hits) 
-    list_Aus_Hits.append(Aus_Hits_AVG)
-    list_Aus_Hits.append(Trend_Aus_Hits)
+        list_Aus_Hits = []
+        list_Aus_Hits.append(Aus_Hits) 
+        list_Aus_Hits.append(Aus_Hits_AVG)
+        list_Aus_Hits.append(Trend_Aus_Hits)
 
-    list_Aus.append(Sum_Aus)
-    list_Aus.append(list_Aus_Goals)
-    list_Aus.append(list_Aus_Hits)
+        list_Aus.append(Sum_Aus)
+        list_Aus.append(list_Aus_Goals)
+        list_Aus.append(list_Aus_Hits)
+    except:
+        pass
 
     return_list.append(Sum)
     return_list.append(list_Heim)
@@ -325,12 +338,15 @@ def CALC_SEASON(Club, file):
 
     season = GET_SEASON(Club, file)
 
-    # estimate results
+    ########################
+    # block estimate results
+    ########################
 
     for i in range (0, len(season)):
         result = GET_ESTIMATE_GOALS(season[i][1][0], season[i][1][1], file)
 
         day = []
+
         day.append(season[i][0])
 
         if season[i][1][0] == Club:
@@ -347,15 +363,47 @@ def CALC_SEASON(Club, file):
         estimate.append(result[1][1])         # Poisson Hits Club
         day.append(estimate)
 
-        day.append(season[i][2])    
+        ####################
+        # block real results
+        ####################
+
+        real_result = []
+        real_result.append(season[i][2])    
+
+        # add trend
+
+        trend = GET_STATS_FROM_CLUB(Club, file, i + 1)
+
+        if day[1] == "H":
+            try:
+                trend_list = []
+                trend_list.append(trend[1][1][2])
+                trend_list.append(trend[1][2][2])
+                real_result.append(trend_list)
+            except:
+                pass
+
+        if day[1] == "A":
+            try:
+                trend_list = []
+                trend_list.append(trend[2][1][2])
+                trend_list.append(trend[2][2][2])
+                real_result.append(trend_list)
+            except:
+                pass        
+
+        # add difference
 
         try:        
             diff = []
-            diff.append(round((result[0][0])-(season[i][2][0]), 2))     # Difference
-            diff.append(round((result[1][0])-(season[i][2][1]), 2))     # Difference
-            day.append(diff)
+            diff.append(round((season[i][2][0]) - (result[0][0]), 2))     
+            diff.append(round((season[i][2][1]) - (result[1][0]), 2))     
+            real_result.append(diff)
         except:
             pass
+       
+
+        day.append(real_result)
 
         return_list.append(day)
 
