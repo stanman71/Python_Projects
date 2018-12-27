@@ -42,9 +42,9 @@ def graphs():
     x3 = [0, 1, 2, 3, 4]
     y3 = [0, 30, 10, 5, 30]
 
-    graph1_url = build_graph(x1,y1);
-    graph2_url = build_graph(x2,y2);
-    graph3_url = build_graph(x3,y3);
+    graph1_url = build_graph(x1,y1)
+    graph2_url = build_graph(x2,y2)
+    graph3_url = build_graph(x3,y3)
  
     return render_template('index.html',
                             graph1=graph1_url,

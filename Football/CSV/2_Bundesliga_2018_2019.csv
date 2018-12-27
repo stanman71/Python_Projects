@@ -98,3 +98,210 @@ Spieltag,Status,Team_1,Team_2,Tore_Team_1,Tore_Team_2
 11,PASS,FC Ingolstadt,MSV Duisburg,1,1
 11,PASS,FC St. Pauli,Holstein Kiel,0,1
 11,PASS,VfL Bochum,Jahn Regensburg,3,3
+12,PASS,Dynamo Dresden,SV Sandhausen,3,1
+12,PASS,SpVgg Greuther Fürth,VfL Bochum,2,2
+12,PASS,Holstein Kiel,FC Ingolstadt,2,2
+12,PASS,MSV Duisburg,SC Paderborn 07,2,0
+12,PASS,SV Darmstadt 98,1. FC Magdeburg,3,1
+12,PASS,Arminia Bielefeld,FC St. Pauli,1,2
+12,PASS,Jahn Regensburg,1. FC Union Berlin,1,1
+12,PASS,1. FC Heidenheim,Erzgebirge Aue,1,0
+12,PASS,Hamburger SV,1. FC Köln,1,0
+13,PASS,SV Sandhausen,MSV Duisburg,0,0
+13,PASS,SC Paderborn 07,Holstein Kiel,4,4
+13,PASS,1. FC Köln,Dynamo Dresden,8,1
+13,PASS,FC St. Pauli,1. FC Heidenheim,1,1
+13,PASS,Erzgebirge Aue,Hamburger SV,1,3
+13,PASS,1. FC Union Berlin,SpVgg Greuther Fürth,4,0
+13,PASS,FC Ingolstadt,Arminia Bielefeld,1,1
+13,PASS,1. FC Magdeburg,Jahn Regensburg,2,3
+13,PASS,VfL Bochum,SV Darmstadt 98,1,0
+14,PASS,Arminia Bielefeld,MSV Duisburg,0,1
+14,PASS,SpVgg Greuther Fürth,1. FC Magdeburg,3,2
+14,PASS,Holstein Kiel,SV Sandhausen,2,1
+14,PASS,VfL Bochum,Erzgebirge Aue,2,1
+14,PASS,SV Darmstadt 98,1. FC Köln,0,3
+14,PASS,Jahn Regensburg,FC St. Pauli,1,1
+14,PASS,1. FC Heidenheim,SC Paderborn 07,1,5
+14,PASS,Dynamo Dresden,FC Ingolstadt,2,0
+14,PASS,Hamburger SV,1. FC Union Berlin,2,2
+15,PASS,Erzgebirge Aue,Jahn Regensburg,1,1
+15,PASS,SC Paderborn 07,Arminia Bielefeld,2,2
+15,PASS,1. FC Köln,SpVgg Greuther Fürth,4,0
+15,PASS,1. FC Union Berlin,SV Darmstadt 98,3,1
+15,PASS,FC Ingolstadt,Hamburger SV,1,2
+15,PASS,FC St. Pauli,Dynamo Dresden,1,1
+15,PASS,MSV Duisburg,Holstein Kiel,0,4
+15,PASS,SV Sandhausen,1. FC Heidenheim,1,2
+15,PASS,1. FC Magdeburg,VfL Bochum,0,0
+16,PASS,Hamburger SV,SC Paderborn 07,1,0
+16,PASS,Jahn Regensburg,1. FC Köln,1,3
+16,PASS,SV Darmstadt 98,FC Ingolstadt,1,1
+16,PASS,1. FC Heidenheim,MSV Duisburg,4,1
+16,PASS,SpVgg Greuther Fürth,Erzgebirge Aue,0,5
+16,PASS,Arminia Bielefeld,SV Sandhausen,1,1
+16,PASS,Dynamo Dresden,Holstein Kiel,0,2
+16,PASS,1. FC Magdeburg,1. FC Union Berlin,1,1
+16,PASS,VfL Bochum,FC St. Pauli,1,3
+17,PASS,Holstein Kiel,Arminia Bielefeld,1,2
+17,PASS,MSV Duisburg,Hamburger SV,1,2
+17,PASS,1. FC Union Berlin,VfL Bochum,2,0
+17,PASS,FC St. Pauli,SpVgg Greuther Fürth,2,0
+17,PASS,SC Paderborn 07,Dynamo Dresden,3,0
+17,PASS,FC Ingolstadt,1. FC Heidenheim,1,1
+17,PASS,SV Sandhausen,Jahn Regensburg,2,2
+17,PASS,Erzgebirge Aue,SV Darmstadt 98,2,2
+17,PASS,1. FC Köln,1. FC Magdeburg,3,0
+18,PASS,1. FC Köln,VfL Bochum,2,3
+18,PASS,SV Sandhausen,SpVgg Greuther Fürth,0,0
+18,PASS,Arminia Bielefeld,1. FC Heidenheim,1,2
+18,PASS,FC Ingolstadt,Jahn Regensburg,1,2
+18,PASS,FC St. Pauli,1. FC Magdeburg,4,1
+18,PASS,Holstein Kiel,Hamburger SV,3,1
+18,PASS,MSV Duisburg,Dynamo Dresden,1,3
+18,PASS,Erzgebirge Aue,1. FC Union Berlin,3,0
+18,PASS,SC Paderborn 07,SV Darmstadt 98,6,2
+19,OPEN,VfL Bochum,MSV Duisburg,,
+19,OPEN,SV Darmstadt 98,FC St. Pauli,,
+19,OPEN,SpVgg Greuther Fürth,FC Ingolstadt,,
+19,OPEN,1. FC Magdeburg,Erzgebirge Aue,,
+19,OPEN,Jahn Regensburg,SC Paderborn 07,,
+19,OPEN,Hamburger SV,SV Sandhausen,,
+19,OPEN,1. FC Heidenheim,Holstein Kiel,,
+19,OPEN,Dynamo Dresden,Arminia Bielefeld,,
+19,OPEN,1. FC Union Berlin,1. FC Köln,,
+20,OPEN,MSV Duisburg,SV Darmstadt 98,,
+20,OPEN,FC Ingolstadt,1. FC Magdeburg,,
+20,OPEN,Arminia Bielefeld,Hamburger SV,,
+20,OPEN,1. FC Heidenheim,Dynamo Dresden,,
+20,OPEN,SC Paderborn 07,SpVgg Greuther Fürth,,
+20,OPEN,Holstein Kiel,Jahn Regensburg,,
+20,OPEN,SV Sandhausen,VfL Bochum,,
+20,OPEN,Erzgebirge Aue,1. FC Köln,,
+20,OPEN,FC St. Pauli,1. FC Union Berlin,,
+21,OPEN,1. FC Köln,FC St. Pauli,,
+21,OPEN,Jahn Regensburg,Arminia Bielefeld,,
+21,OPEN,VfL Bochum,SC Paderborn 07,,
+21,OPEN,1. FC Union Berlin,SV Sandhausen,,
+21,OPEN,SpVgg Greuther Fürth,MSV Duisburg,,
+21,OPEN,SV Darmstadt 98,1. FC Heidenheim,,
+21,OPEN,Erzgebirge Aue,FC Ingolstadt,,
+21,OPEN,1. FC Magdeburg,Holstein Kiel,,
+21,OPEN,Hamburger SV,Dynamo Dresden,,
+22,OPEN,SV Sandhausen,SV Darmstadt 98,,
+22,OPEN,SC Paderborn 07,1. FC Köln,,
+22,OPEN,MSV Duisburg,1. FC Union Berlin,,
+22,OPEN,FC Ingolstadt,VfL Bochum,,
+22,OPEN,FC St. Pauli,Erzgebirge Aue,,
+22,OPEN,1. FC Heidenheim,Hamburger SV,,
+22,OPEN,Holstein Kiel,SpVgg Greuther Fürth,,
+22,OPEN,Arminia Bielefeld,1. FC Magdeburg,,
+22,OPEN,Dynamo Dresden,Jahn Regensburg,,
+23,OPEN,1. FC Union Berlin,Arminia Bielefeld,,
+23,OPEN,SpVgg Greuther Fürth,1. FC Heidenheim,,
+23,OPEN,1. FC Köln,SV Sandhausen,,
+23,OPEN,VfL Bochum,Holstein Kiel,,
+23,OPEN,SV Darmstadt 98,Dynamo Dresden,,
+23,OPEN,FC St. Pauli,FC Ingolstadt,,
+23,OPEN,Jahn Regensburg,Hamburger SV,,
+23,OPEN,Erzgebirge Aue,MSV Duisburg,,
+23,OPEN,1. FC Magdeburg,SC Paderborn 07,,
+24,OPEN,Holstein Kiel,1. FC Union Berlin,,
+24,OPEN,MSV Duisburg,1. FC Magdeburg,,
+24,OPEN,SV Sandhausen,Erzgebirge Aue,,
+24,OPEN,1. FC Heidenheim,Jahn Regensburg,,
+24,OPEN,SC Paderborn 07,FC St. Pauli,,
+24,OPEN,Arminia Bielefeld,SV Darmstadt 98,,
+24,OPEN,FC Ingolstadt,1. FC Köln,,
+24,OPEN,Dynamo Dresden,VfL Bochum,,
+24,OPEN,Hamburger SV,SpVgg Greuther Fürth,,
+25,OPEN,VfL Bochum,1. FC Heidenheim,,
+25,OPEN,1. FC Union Berlin,FC Ingolstadt,,
+25,OPEN,1. FC Köln,Arminia Bielefeld,,
+25,OPEN,Jahn Regensburg,MSV Duisburg,,
+25,OPEN,SV Darmstadt 98,Holstein Kiel,,
+25,OPEN,Erzgebirge Aue,SC Paderborn 07,,
+25,OPEN,SpVgg Greuther Fürth,Dynamo Dresden,,
+25,OPEN,FC St. Pauli,Hamburger SV,,
+25,OPEN,1. FC Magdeburg,SV Sandhausen,,
+26,OPEN,Holstein Kiel,Erzgebirge Aue,,
+26,OPEN,1. FC Heidenheim,1. FC Union Berlin,,
+26,OPEN,Hamburger SV,SV Darmstadt 98,,
+26,OPEN,SV Sandhausen,FC St. Pauli,,
+26,OPEN,Dynamo Dresden,1. FC Magdeburg,,
+26,OPEN,Arminia Bielefeld,VfL Bochum,,
+26,OPEN,MSV Duisburg,1. FC Köln,,
+26,OPEN,SC Paderborn 07,FC Ingolstadt,,
+26,OPEN,Jahn Regensburg,SpVgg Greuther Fürth,,
+27,OPEN,FC St. Pauli,MSV Duisburg,,
+27,OPEN,1. FC Magdeburg,1. FC Heidenheim,,
+27,OPEN,VfL Bochum,Hamburger SV,,
+27,OPEN,1. FC Union Berlin,SC Paderborn 07,,
+27,OPEN,SV Darmstadt 98,Jahn Regensburg,,
+27,OPEN,1. FC Köln,Holstein Kiel,,
+27,OPEN,FC Ingolstadt,SV Sandhausen,,
+27,OPEN,SpVgg Greuther Fürth,Arminia Bielefeld,,
+27,OPEN,Erzgebirge Aue,Dynamo Dresden,,
+28,OPEN,Arminia Bielefeld,Erzgebirge Aue,,
+28,OPEN,Jahn Regensburg,VfL Bochum,,
+28,OPEN,Holstein Kiel,FC St. Pauli,,
+28,OPEN,MSV Duisburg,FC Ingolstadt,,
+28,OPEN,SV Sandhausen,SC Paderborn 07,,
+28,OPEN,1. FC Heidenheim,1. FC Köln,,
+28,OPEN,Dynamo Dresden,1. FC Union Berlin,,
+28,OPEN,SpVgg Greuther Fürth,SV Darmstadt 98,,
+28,OPEN,Hamburger SV,1. FC Magdeburg,,
+29,OPEN,1. FC Köln,Hamburger SV,,
+29,OPEN,VfL Bochum,SpVgg Greuther Fürth,,
+29,OPEN,1. FC Union Berlin,Jahn Regensburg,,
+29,OPEN,FC Ingolstadt,Holstein Kiel,,
+29,OPEN,SV Sandhausen,Dynamo Dresden,,
+29,OPEN,FC St. Pauli,Arminia Bielefeld,,
+29,OPEN,Erzgebirge Aue,1. FC Heidenheim,,
+29,OPEN,1. FC Magdeburg,SV Darmstadt 98,,
+29,OPEN,SC Paderborn 07,MSV Duisburg,,
+30,OPEN,Hamburger SV,Erzgebirge Aue,,
+30,OPEN,Holstein Kiel,SC Paderborn 07,,
+30,OPEN,Arminia Bielefeld,FC Ingolstadt,,
+30,OPEN,Jahn Regensburg,1. FC Magdeburg,,
+30,OPEN,MSV Duisburg,SV Sandhausen,,
+30,OPEN,SV Darmstadt 98,VfL Bochum,,
+30,OPEN,1. FC Heidenheim,FC St. Pauli,,
+30,OPEN,Dynamo Dresden,1. FC Köln,,
+30,OPEN,SpVgg Greuther Fürth,1. FC Union Berlin,,
+31,OPEN,1. FC Köln,SV Darmstadt 98,,
+31,OPEN,MSV Duisburg,Arminia Bielefeld,,
+31,OPEN,1. FC Union Berlin,Hamburger SV,,
+31,OPEN,FC Ingolstadt,Dynamo Dresden,,
+31,OPEN,SV Sandhausen,Holstein Kiel,,
+31,OPEN,FC St. Pauli,Jahn Regensburg,,
+31,OPEN,Erzgebirge Aue,VfL Bochum,,
+31,OPEN,1. FC Magdeburg,SpVgg Greuther Fürth,,
+31,OPEN,SC Paderborn 07,1. FC Heidenheim,,
+32,OPEN,Hamburger SV,FC Ingolstadt,,
+32,OPEN,Holstein Kiel,MSV Duisburg,,
+32,OPEN,Arminia Bielefeld,SC Paderborn 07,,
+32,OPEN,Jahn Regensburg,Erzgebirge Aue,,
+32,OPEN,VfL Bochum,1. FC Magdeburg,,
+32,OPEN,SV Darmstadt 98,1. FC Union Berlin,,
+32,OPEN,1. FC Heidenheim,SV Sandhausen,,
+32,OPEN,Dynamo Dresden,FC St. Pauli,,
+32,OPEN,SpVgg Greuther Fürth,1. FC Köln,,
+33,OPEN,1. FC Köln,Jahn Regensburg,,
+33,OPEN,Holstein Kiel,Dynamo Dresden,,
+33,OPEN,MSV Duisburg,1. FC Heidenheim,,
+33,OPEN,1. FC Union Berlin,1. FC Magdeburg,,
+33,OPEN,FC Ingolstadt,SV Darmstadt 98,,
+33,OPEN,SV Sandhausen,Arminia Bielefeld,,
+33,OPEN,FC St. Pauli,VfL Bochum,,
+33,OPEN,Erzgebirge Aue,SpVgg Greuther Fürth,,
+33,OPEN,SC Paderborn 07,Hamburger SV,,
+34,OPEN,Hamburger SV,MSV Duisburg,,
+34,OPEN,Arminia Bielefeld,Holstein Kiel,,
+34,OPEN,Jahn Regensburg,SV Sandhausen,,
+34,OPEN,VfL Bochum,1. FC Union Berlin,,
+34,OPEN,SV Darmstadt 98,Erzgebirge Aue,,
+34,OPEN,1. FC Heidenheim,FC Ingolstadt,,
+34,OPEN,Dynamo Dresden,SC Paderborn 07,,
+34,OPEN,SpVgg Greuther Fürth,FC St. Pauli,,
+34,OPEN,1. FC Magdeburg,1. FC Köln,,
