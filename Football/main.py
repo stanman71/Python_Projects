@@ -10,7 +10,7 @@ url = "https://www.dfb.de/2-bundesliga/spieltagtabelle/?no_cache=1&spieledb_path
 #url = "https://www.dfb.de/3-liga/spieltagtabelle/?no_cache=1&spieledb_path=%2Fcompetitions%2F4%2Fseasons%2Fcurrent%2Fmatchday%2F3"
 
 
-GET_ALL(url)
+#GET_ALL(url)
 
 #print(GET_TABLE(url))
 
@@ -29,14 +29,14 @@ file = "./Python_Projects/Football/CSV/1_Bundesliga_2018_2019.csv"
 
 #print(GET_ALL_GOALS(file))
 
-#print(GET_STATS_FROM_CLUB("Borussia Dortmund", file))
+print(GET_STATS_FROM_CLUB("Bayern München", file))
 
-#print(GET_ATT_DEF_VALUE("1. FC Nürnberg", file))
-#print(GET_ATT_DEF_VALUE("VfB Stuttgart", file))
+print(GET_ATT_DEF_VALUE("Borussia Dortmund", file))
+print(GET_ATT_DEF_VALUE("VfB Stuttgart", file))
 
-#print(GET_ESTIMATE_GOALS("Eintracht Frankfurt", "Bayern München", file))
+print(GET_ESTIMATE_GOALS("Eintracht Frankfurt", "Bayern München", file))
 
-#print(GET_POINTS("Borussia Dortmund", file))
+#print(GET_POINTS("Bayern München", file))
 
 #print(GET_SEASON("Borussia Dortmund", file))
 

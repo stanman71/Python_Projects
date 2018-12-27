@@ -47,47 +47,96 @@ def GET_STATS_FROM_CLUB(Club, file):
     df = pd.read_csv(file, delimiter=",")
     df = df.loc[df['Status'] == "PASS"]
 
-    return_list = []    
+    return_list = [] 
+    list_Heim = []  
+    list_Aus = []   
  
+    # Table Heim
     df_heim_0 = df.loc[df['Team_1'] == Club]
     Sum_Heim = df_heim_0.shape[0]
 
+    # Table Aus
     df_aus_0 = df.loc[df['Team_2'] == Club]  
     Sum_Aus = df_aus_0.shape[0]
 
     Sum = Sum_Heim + Sum_Aus
 
+    # Tore Heim
     df_heim_1      = df_heim_0["Tore_Team_1"]
     Heim_Goals     = int(df_heim_1.sum())
     Heim_Goals_AVG = df_heim_1.mean()
     Heim_Goals_AVG = round(Heim_Goals_AVG, 2)
-  
+
+    # Trend Tore Heim
+    Last_5 = df_heim_1[-5:]
+    Last_5 = sum(Last_5) / float(len(Last_5))
+    Last_5 = round(Last_5, 2)
+
+    Trend_Heim_Goals = Last_5 - Heim_Goals_AVG
+    Trend_Heim_Goals  = round(Trend_Heim_Goals, 2)
+
+    # Gegentore Heim
     df_heim_2      = df_heim_0["Tore_Team_2"]
     Heim_Hits      = int(df_heim_2.sum())
     Heim_Hits_AVG  = df_heim_2.mean()
     Heim_Hits_AVG  = round(Heim_Hits_AVG, 2)
 
+    # Trend Gegentore Heim
+    Last_5 = df_heim_2[-5:]
+    Last_5 = sum(Last_5) / float(len(Last_5))
+    Last_5 = round(Last_5, 2)
+
+    Trend_Heim_Hits = Last_5 - Heim_Hits_AVG
+    Trend_Heim_Hits  = round(Trend_Heim_Hits, 2)
+
+    list_Heim.append(Sum_Heim)
+    list_Heim.append(Heim_Goals) 
+    list_Heim.append(Heim_Goals_AVG)
+    list_Heim.append(Trend_Heim_Goals)
+    list_Heim.append(Heim_Hits)
+    list_Heim.append(Heim_Hits_AVG)
+    list_Heim.append(Trend_Heim_Hits)
+
+    # Trend Tore Aus
     df_aus_1       = df_aus_0["Tore_Team_2"]
     Aus_Goals      = int(df_aus_1.sum())
     Aus_Goals_AVG  = df_aus_1.mean()
     Aus_Goals_AVG  = round(Aus_Goals_AVG, 2)
 
+    # Trend Tore Aus
+    Last_5 = df_aus_1[-5:]
+    Last_5 = sum(Last_5) / float(len(Last_5))
+    Last_5 = round(Last_5, 2)
+
+    Trend_Aus_Goals = Last_5 - Aus_Goals_AVG
+    Trend_Aus_Goals  = round(Trend_Aus_Goals, 2)
+
+    # Gegentore Aus
     df_aus_2       = df_aus_0["Tore_Team_1"]
     Aus_Hits       = int(df_aus_2.sum())
     Aus_Hits_AVG   = df_aus_2.mean()
     Aus_Hits_AVG   = round(Aus_Hits_AVG, 2)
 
+    # Trend Gegentore Aus
+    Last_5 = df_aus_2[-5:]
+    Last_5 = sum(Last_5) / float(len(Last_5))
+    Last_5 = round(Last_5, 2)
+
+    Trend_Aus_Hits = Last_5 - Aus_Hits_AVG
+    Trend_Aus_Hits  = round(Trend_Aus_Hits, 2)
+
+    list_Aus.append(Sum_Aus)
+    list_Aus.append(Aus_Goals) 
+    list_Aus.append(Aus_Goals_AVG)
+    list_Aus.append(Trend_Aus_Goals)
+    list_Aus.append(Aus_Hits)
+    list_Aus.append(Aus_Hits_AVG)
+    list_Aus.append(Trend_Aus_Hits)    
+
     return_list.append(Sum)
-    return_list.append(Sum_Heim)
-    return_list.append(Heim_Goals) 
-    return_list.append(Heim_Goals_AVG)
-    return_list.append(Heim_Hits)
-    return_list.append(Heim_Hits_AVG)
-    return_list.append(Sum_Aus)
-    return_list.append(Aus_Goals) 
-    return_list.append(Aus_Goals_AVG)
-    return_list.append(Aus_Hits)
-    return_list.append(Aus_Hits_AVG)
+    return_list.append(list_Heim)
+    return_list.append(list_Aus) 
+
 
     return(return_list)   
 
@@ -102,14 +151,14 @@ def GET_ATT_DEF_VALUE(Club, file):
 
     return_list = []
 
-    ATT_Heim = (GET_STATS_FROM_CLUB(Club, file)[3])/(GET_ALL_GOALS(file)[4])
+    ATT_Heim = (GET_STATS_FROM_CLUB(Club, file)[1][2])/(GET_ALL_GOALS(file)[4])
     ATT_Heim = round(ATT_Heim, 2)
-    DEF_Heim = (GET_STATS_FROM_CLUB(Club, file)[5])/(GET_ALL_GOALS(file)[6])
+    DEF_Heim = (GET_STATS_FROM_CLUB(Club, file)[1][5])/(GET_ALL_GOALS(file)[6])
     DEF_Heim = round(DEF_Heim, 2)
 
-    ATT_Aus  = (GET_STATS_FROM_CLUB(Club, file)[8])/(GET_ALL_GOALS(file)[6])
+    ATT_Aus  = (GET_STATS_FROM_CLUB(Club, file)[2][2])/(GET_ALL_GOALS(file)[6])
     ATT_Aus  = round(ATT_Aus, 2)
-    DEF_Aus  = (GET_STATS_FROM_CLUB(Club, file)[10])/(GET_ALL_GOALS(file)[4])
+    DEF_Aus  = (GET_STATS_FROM_CLUB(Club, file)[2][5])/(GET_ALL_GOALS(file)[4])
     DEF_Aus  = round(DEF_Aus, 2)
 
     return_list.append(ATT_Heim)
