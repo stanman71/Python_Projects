@@ -194,22 +194,27 @@ def GET_ESTIMATE_GOALS(Club_1, Club_2, file):
     Goals_Club_2 = GET_ATT_DEF_VALUE(Club_1, file)[1] * GET_ALL_GOALS(file)[6] * GET_ATT_DEF_VALUE(Club_2, file)[2]
     Goals_Club_2 = round(Goals_Club_2, 2)
 
-    return_list.append(Goals_Club_1)
-    return_list.append(Goals_Club_2)   
+    goals = []
+    goals.append(Goals_Club_1)
+    goals.append(Goals_Club_2)   
 
     # calculate poisson
     # http://muthu.co/poisson-distribution-with-python/
 
-    for i in range (0, len(return_list)):
+    for i in range (0, len(goals)):
  
         array = []
-        element = return_list[i]
+        element = goals[i]
 
         rv = poisson(element)  # Average
         for num in range(0,5):
             array.append(round(rv.pmf(num) * 100, 2))
 
-        return_list.append(array)
+        club = []
+        club.append(element)    # Goals
+        club.append(array)      # Poisson
+
+        return_list.append(club)
 
     return(return_list)
 
@@ -320,10 +325,10 @@ def CALC_SEASON(Club, file):
             day.append(season[i][1][0])   # Gegner
 
         estimate = []
-        estimate.append(result[0])         # Tore Club
-        estimate.append(result[2])         # Poisson Tore Club        
-        estimate.append(result[1])         # Hits Club       
-        estimate.append(result[3])         # Poisson Hits Club
+        estimate.append(result[0][0])         # Tore Club
+        estimate.append(result[0][1])         # Poisson Tore Club        
+        estimate.append(result[1][0])         # Hits Club       
+        estimate.append(result[1][1])         # Poisson Hits Club
         day.append(estimate)
 
         day.append(season[i][2])    

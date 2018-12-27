@@ -40,6 +40,6 @@ file = "./Python_Projects/Football/CSV/1_Bundesliga_2018_2019.csv"
 
 #print(GET_SEASON("Borussia Dortmund", file))
 
-print(CALC_SEASON("Borussia Dortmund", file))
+#print(CALC_SEASON("Borussia Dortmund", file))
 
 
