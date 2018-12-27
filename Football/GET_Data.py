@@ -1,7 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
-import sys, csv ,operator
-
+import sys, csv , operator, time
 
 ########################
 # GET_BASICINFO
@@ -206,3 +205,23 @@ def CREATE_CSV(url):
                     for i, row in enumerate(sortedlist):
                         if i < counter-1:
                             fileWriter.writerow(row)
+
+
+
+########################
+# GET_ALL
+########################
+
+def GET_ALL(url): 
+    
+    if url[-2:-1] is not "F":
+        url = url[:-2] 
+    elif url[-1:] is not "F":
+        url = url[:-1]
+
+    i = 1
+    while i < 35:
+        url_temp = url + str(i)
+        CREATE_CSV(url_temp)
+        time.sleep(5)
+        i = i + 1

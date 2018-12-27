@@ -7,8 +7,9 @@ import pandas as pd
 import numpy as np
 
 
+def GET_ALL_GOALS(file):
 
-def GET_ALL_GOALS(df):
+    df = pd.read_csv(file, delimiter=",")
 
     return_list = []
 
@@ -39,7 +40,9 @@ def GET_ALL_GOALS(df):
 
 
 
-def GET_STATS_FROM_CLUB(Club, df):  
+def GET_STATS_FROM_CLUB(Club, file):  
+    
+    df = pd.read_csv(file, delimiter=",")
     
     return_list = []    
  
@@ -87,23 +90,25 @@ def GET_STATS_FROM_CLUB(Club, df):
 
 
 
-def GET_ATT_DEF_VALUE(Club, df):
+def GET_ATT_DEF_VALUE(Club, file):
 
     # https://www.onlinemathe.de/forum/Fussballergebnisse-Berechnen-Formel
 
     # Verhältnis von den (durchschnittlichen) Heimtoren/Heimtreffern des Vereins zu den 
     # (durchschnittlichen) Heimtoren aller Vereine
 
+    df = pd.read_csv(file, delimiter=",")
+
     return_list = []
 
-    ATT_Heim = (GET_STATS_FROM_CLUB(Club, df)[3])/(GET_ALL_GOALS(df)[4])
+    ATT_Heim = (GET_STATS_FROM_CLUB(Club, file)[3])/(GET_ALL_GOALS(file)[4])
     ATT_Heim = round(ATT_Heim, 2)
-    DEF_Heim = (GET_STATS_FROM_CLUB(Club, df)[5])/(GET_ALL_GOALS(df)[4])
+    DEF_Heim = (GET_STATS_FROM_CLUB(Club, file)[5])/(GET_ALL_GOALS(file)[6])
     DEF_Heim = round(DEF_Heim, 2)
 
-    ATT_Aus  = (GET_STATS_FROM_CLUB(Club, df)[8])/(GET_ALL_GOALS(df)[6])
+    ATT_Aus  = (GET_STATS_FROM_CLUB(Club, file)[8])/(GET_ALL_GOALS(file)[6])
     ATT_Aus  = round(ATT_Aus, 2)
-    DEF_Aus  = (GET_STATS_FROM_CLUB(Club, df)[10])/(GET_ALL_GOALS(df)[6])
+    DEF_Aus  = (GET_STATS_FROM_CLUB(Club, file)[10])/(GET_ALL_GOALS(file)[4])
     DEF_Aus  = round(DEF_Aus, 2)
 
     return_list.append(ATT_Heim)
@@ -115,15 +120,18 @@ def GET_ATT_DEF_VALUE(Club, df):
 
 
 
-def GET_ESTIMATE_GOALS(Club_1, Club_2, df):
+def GET_ESTIMATE_GOALS(Club_1, Club_2, file):
 
     # https://www.onlinemathe.de/forum/Fussballergebnisse-Berechnen-Formel
+    # https://www.wettstern.com/sportwetten-mathematik/poisson-saisonwetten
  
+    df = pd.read_csv(file, delimiter=",")
+
     return_list = []
 
-    Goals_Club_1 = GET_ATT_DEF_VALUE(Club_1, df)[0] * GET_ALL_GOALS(df)[2] * GET_ATT_DEF_VALUE(Club_2, df)[3]
+    Goals_Club_1 = GET_ATT_DEF_VALUE(Club_1, file)[0] * GET_ALL_GOALS(file)[4] * GET_ATT_DEF_VALUE(Club_2, file)[3]
     Goals_Club_1 = round(Goals_Club_1, 2)
-    Goals_Club_2 = GET_ATT_DEF_VALUE(Club_1, df)[1] * GET_ALL_GOALS(df)[2] * GET_ATT_DEF_VALUE(Club_2, df)[2]
+    Goals_Club_2 = GET_ATT_DEF_VALUE(Club_1, file)[1] * GET_ALL_GOALS(file)[6] * GET_ATT_DEF_VALUE(Club_2, file)[2]
     Goals_Club_2 = round(Goals_Club_2, 2)
 
     return_list.append(Goals_Club_1)
@@ -133,8 +141,9 @@ def GET_ESTIMATE_GOALS(Club_1, Club_2, df):
 
 
 
+def GET_POINTS(Club, file):
 
-def GET_POINTS(Club, df):
+    df = pd.read_csv(file, delimiter=",")
 
     return_list = []    
  
@@ -174,7 +183,9 @@ def GET_POINTS(Club, df):
 
 
 
-def GET_SEASON(Club, df):
+def GET_SEASON(Club, file):
+
+    df = pd.read_csv(file, delimiter=",")
 
     return_list = []
   
@@ -192,14 +203,14 @@ def GET_SEASON(Club, df):
 
 
 
-def CALC_SEASON(Club, df):
+def CALC_SEASON(Club, file):
 
     return_list = []
 
-    season = GET_SEASON(Club, df)
+    season = GET_SEASON(Club, file)
 
     for i in range (0, len(season), 3):
-        result = GET_ESTIMATE_GOALS(season[i + 1], season[i + 2], df)
+        result = GET_ESTIMATE_GOALS(season[i + 1], season[i + 2], file)
 
         return_list.append(season[i])
 
@@ -216,25 +227,3 @@ def CALC_SEASON(Club, df):
 
     return(return_list)
 
-  
-
-
-
-file = "./Python_Projects/Football/CSV/1_Bundesliga_2018_2019.csv"
-df   = pd.read_csv(file, delimiter=",")
-
-
-
-#print(GET_ALL_GOALS(df))
-
-#print(GET_STATS_FROM_CLUB("FC Augsburg", df))
-
-#print(GET_ATT_DEF_VALUE("Bayern München", df))
-
-#print(GET_ESTIMATE_GOALS("Borussia Dortmund", "1. FC Nürnberg", df))
-
-#print(GET_POINTS("Borussia Dortmund", df))
-
-#print(GET_SEASON("Borussia Dortmund", df))
-
-print(CALC_SEASON("Borussia Dortmund", df))
