@@ -17,11 +17,13 @@ def GET_ALL_GOALS(file):
 
     Sum = int(df.shape[0] / 9)
 
+    # Heimtore
     df_1         = df["Tore_Team_1"]
     Heim         = int(df_1.sum())
     Heim_AVG     = df_1.mean()
     Heim_AVG     = round(Heim_AVG, 2)
 
+    # Auswärtztore
     df_2         = df["Tore_Team_2"]
     Aus          = int(df_2.sum())
     Aus_AVG      = df_2.mean()
@@ -158,15 +160,22 @@ def GET_ATT_DEF_VALUE(Club, file):
 
     # https://www.onlinemathe.de/forum/Fussballergebnisse-Berechnen-Formel
 
+    return_list = []
+
+    # Heim
+
     # Verhältnis von den (durchschnittlichen) Heimtoren/Heimtreffern des Vereins zu den 
     # (durchschnittlichen) Heimtoren aller Vereine
-
-    return_list = []
 
     ATT_Heim = (GET_STATS_FROM_CLUB(Club, file)[1][1][1])/(GET_ALL_GOALS(file)[4])
     ATT_Heim = round(ATT_Heim, 2)
     DEF_Heim = (GET_STATS_FROM_CLUB(Club, file)[1][2][1])/(GET_ALL_GOALS(file)[6])
     DEF_Heim = round(DEF_Heim, 2)
+
+    # Aus
+ 
+    # Verhältnis von den (durchschnittlichen) Auswärtztoren/Auswärtztreffern des Vereins zu den 
+    # (durchschnittlichen) Auswärtztoren aller Vereine
 
     ATT_Aus  = (GET_STATS_FROM_CLUB(Club, file)[2][1][1])/(GET_ALL_GOALS(file)[6])
     ATT_Aus  = round(ATT_Aus, 2)
@@ -229,10 +238,12 @@ def GET_POINTS(Club, file):
  
     df = df[(df.Team_1 == Club) | (df.Team_2 == Club)]
 
+    # prevent error massage
     df = df.copy()
 
+    # cases
     conditions = [
-        (df['Team_1'] == Club) & ((df['Tore_Team_1']) >  (df['Tore_Team_2'])),
+        (df['Team_1'] == Club) & ((df['Tore_Team_1']) >  (df['Tore_Team_2'])), 
         (df['Team_1'] == Club) & ((df['Tore_Team_1']) == (df['Tore_Team_2'])),
         (df['Team_1'] == Club) & ((df['Tore_Team_1']) <  (df['Tore_Team_2'])),
         (df['Team_2'] == Club) & ((df['Tore_Team_1']) >  (df['Tore_Team_2'])),
@@ -243,10 +254,11 @@ def GET_POINTS(Club, file):
     df['Points'] = np.select(conditions, choices)
     
     Sum        = df['Points'].sum()
-    Complete   = df['Points'].values.tolist()
+    Complete   = df['Points'].values.tolist()   # convert to list
     AVG_Points = df['Points'].mean()
     AVG_Points = round(AVG_Points, 2)
 
+    # Trend
     Last_5 = Complete[-5:]
     Last_5 = sum(Last_5) / float(len(Last_5))
     Last_5 = round(Last_5, 2)
@@ -271,14 +283,18 @@ def GET_SEASON(Club, file):
   
     df = df[(df.Team_1 == Club) | (df.Team_2 == Club)]
 
+    # get clubnames
     Club_1  = df['Team_1'].values.tolist()
     Club_2  = df['Team_2'].values.tolist()
 
+    # only with results
     df_goals = df[(df.Status == "PASS")]
 
+    # get goals
     Goals_1 = df_goals['Tore_Team_1'].values.tolist()
     Goals_2 = df_goals['Tore_Team_2'].values.tolist()
 
+    # create array
     for i in range (0, len(Club_1)):
 
         club_names = []
@@ -333,7 +349,14 @@ def CALC_SEASON(Club, file):
 
         day.append(season[i][2])    
 
+        try:        
+            diff = []
+            diff.append(round((result[0][0])-(season[i][2][0]), 2))     # Difference
+            diff.append(round((result[1][0])-(season[i][2][1]), 2))     # Difference
+            day.append(diff)
+        except:
+            pass
+
         return_list.append(day)
 
     return(return_list)
-
