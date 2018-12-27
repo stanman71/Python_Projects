@@ -266,14 +266,34 @@ def GET_SEASON(Club, file):
   
     df = df[(df.Team_1 == Club) | (df.Team_2 == Club)]
 
-    Complete_1 = df['Team_1'].values.tolist()
-    Complete_2 = df['Team_2'].values.tolist()
+    Club_1  = df['Team_1'].values.tolist()
+    Club_2  = df['Team_2'].values.tolist()
 
-    for i in range (0, len(Complete_1)):
-        return_list.append(i+1)
-        return_list.append(Complete_1[i])
-        return_list.append(Complete_2[i])
-    
+    df_goals = df[(df.Status == "PASS")]
+
+    Goals_1 = df_goals['Tore_Team_1'].values.tolist()
+    Goals_2 = df_goals['Tore_Team_2'].values.tolist()
+
+    for i in range (0, len(Club_1)):
+
+        club_names = []
+        club_names.append(Club_1[i])
+        club_names.append(Club_2[i])
+
+        try:
+            goals = []
+            goals.append(int(Goals_1[i]))
+            goals.append(int(Goals_2[i]))
+        except:
+            pass
+
+        day = []
+        day.append(i+1)
+        day.append(club_names)
+        day.append(goals)
+
+        return_list.append(day)
+
     return(return_list)
 
 
@@ -284,25 +304,31 @@ def CALC_SEASON(Club, file):
 
     season = GET_SEASON(Club, file)
 
-    for i in range (0, len(season), 3):
-        result = GET_ESTIMATE_GOALS(season[i + 1], season[i + 2], file)
+    # estimate results
 
-        return_list.append(season[i])
+    for i in range (0, len(season)):
+        result = GET_ESTIMATE_GOALS(season[i][1][0], season[i][1][1], file)
 
-        if season[i + 1] == Club:
-            return_list.append("H")
-            return_list.append(season[i + 2])   # Gegner
-            return_list.append(result[0])       # Tore Club
-            return_list.append(result[1])       # Hits Club
-            return_list.append(result[2])       # Poisson Tore Club
-            return_list.append(result[3])       # Poisson Hits Club
+        day = []
+        day.append(season[i][0])
+
+        if season[i][1][0] == Club:
+            day.append("H")
+            day.append(season[i][1][1])   # Gegner
         else:
-            return_list.append("A")
-            return_list.append(season[i + 1])   # Gegner
-            return_list.append(result[1])       # Tore Club
-            return_list.append(result[0])       # Hits Club
-            return_list.append(result[3])       # Poisson Tore Club
-            return_list.append(result[2])       # Poisson Hits Club
+            day.append("A")
+            day.append(season[i][1][0])   # Gegner
+
+        estimate = []
+        estimate.append(result[0])         # Tore Club
+        estimate.append(result[2])         # Poisson Tore Club        
+        estimate.append(result[1])         # Hits Club       
+        estimate.append(result[3])         # Poisson Hits Club
+        day.append(estimate)
+
+        day.append(season[i][2])    
+
+        return_list.append(day)
 
     return(return_list)
 
