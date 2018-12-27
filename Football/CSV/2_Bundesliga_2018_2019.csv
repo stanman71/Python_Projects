@@ -1,163 +1,100 @@
-Spieltag,Team_1,Team_2,Tore_Team_1,Tore_Team_2
-01,Hamburger SV,Holstein Kiel,0,3
-01,VfL Bochum,1. FC Köln,0,2
-01,Jahn Regensburg,FC Ingolstadt,2,1
-01,SpVgg Greuther Fürth,SV Sandhausen,3,1
-01,1. FC Magdeburg,FC St. Pauli,1,2
-01,1. FC Union Berlin,Erzgebirge Aue,1,0
-01,SV Darmstadt 98,SC Paderborn 07,1,0
-01,1. FC Heidenheim,Arminia Bielefeld,1,1
-01,Dynamo Dresden,MSV Duisburg,1,0
-02,FC Ingolstadt,SpVgg Greuther Fürth,1,1
-02,SC Paderborn 07,Jahn Regensburg,2,0
-02,FC St. Pauli,SV Darmstadt 98,2,0
-02,MSV Duisburg,VfL Bochum,0,2
-02,Arminia Bielefeld,Dynamo Dresden,2,1
-02,SV Sandhausen,Hamburger SV,0,3
-02,Holstein Kiel,1. FC Heidenheim,1,1
-02,Erzgebirge Aue,1. FC Magdeburg,0,0
-02,1. FC Köln,1. FC Union Berlin,1,1
-03,VfL Bochum,SV Sandhausen,1,0
-03,SV Darmstadt 98,MSV Duisburg,3,0
-03,1. FC Köln,Erzgebirge Aue,3,1
-03,SpVgg Greuther Fürth,SC Paderborn 07,2,2
-03,1. FC Magdeburg,FC Ingolstadt,1,1
-03,Jahn Regensburg,Holstein Kiel,0,0
-03,1. FC Union Berlin,FC St. Pauli,4,1
-03,Dynamo Dresden,1. FC Heidenheim,1,3
-03,Hamburger SV,Arminia Bielefeld,3,0
-04,FC Ingolstadt,Erzgebirge Aue,3,2
-04,SC Paderborn 07,VfL Bochum,2,2
-04,Arminia Bielefeld,Jahn Regensburg,5,3
-04,MSV Duisburg,SpVgg Greuther Fürth,0,1
-04,SV Sandhausen,1. FC Union Berlin,0,0
-04,FC St. Pauli,1. FC Köln,3,5
-04,1. FC Heidenheim,SV Darmstadt 98,0,1
-04,Holstein Kiel,1. FC Magdeburg,2,1
-04,Dynamo Dresden,Hamburger SV,0,1
-05,Jahn Regensburg,Dynamo Dresden,0,2
-05,1. FC Union Berlin,MSV Duisburg,2,2
-05,Hamburger SV,1. FC Heidenheim,3,2
-05,SV Darmstadt 98,SV Sandhausen,1,1
-05,SpVgg Greuther Fürth,Holstein Kiel,4,1
-05,1. FC Köln,SC Paderborn 07,3,5
-05,VfL Bochum,FC Ingolstadt,6,0
-05,Erzgebirge Aue,FC St. Pauli,3,1
-05,1. FC Magdeburg,Arminia Bielefeld,0,0
-06,FC Ingolstadt,FC St. Pauli,0,1
-06,SV Sandhausen,1. FC Köln,0,2
-06,Holstein Kiel,VfL Bochum,2,2
-06,Arminia Bielefeld,1. FC Union Berlin,1,1
-06,Dynamo Dresden,SV Darmstadt 98,4,1
-06,Hamburger SV,Jahn Regensburg,0,5
-06,MSV Duisburg,Erzgebirge Aue,1,2
-06,1. FC Heidenheim,SpVgg Greuther Fürth,2,0
-06,SC Paderborn 07,1. FC Magdeburg,4,4
-07,1. FC Köln,FC Ingolstadt,2,1
-07,VfL Bochum,Dynamo Dresden,0,1
-07,1. FC Union Berlin,Holstein Kiel,2,0
-07,SV Darmstadt 98,Arminia Bielefeld,1,2
-07,Jahn Regensburg,1. FC Heidenheim,2,1
-07,FC St. Pauli,SC Paderborn 07,2,1
-07,Erzgebirge Aue,SV Sandhausen,0,2
-07,1. FC Magdeburg,MSV Duisburg,3,3
-07,SpVgg Greuther Fürth,Hamburger SV,0,0
-08,Holstein Kiel,SV Darmstadt 98,4,2
-08,Arminia Bielefeld,1. FC Köln,1,3
-08,MSV Duisburg,Jahn Regensburg,1,3
-08,1. FC Heidenheim,VfL Bochum,3,2
-08,SC Paderborn 07,Erzgebirge Aue,1,0
-08,Hamburger SV,FC St. Pauli,0,0
-08,SV Sandhausen,1. FC Magdeburg,0,1
-08,Dynamo Dresden,SpVgg Greuther Fürth,0,1
-08,FC Ingolstadt,1. FC Union Berlin,1,2
-09,VfL Bochum,Arminia Bielefeld,1,0
-09,SV Darmstadt 98,Hamburger SV,1,2
-09,SpVgg Greuther Fürth,Jahn Regensburg,1,1
-09,Erzgebirge Aue,Holstein Kiel,2,1
-09,1. FC Magdeburg,Dynamo Dresden,2,2
-09,1. FC Union Berlin,1. FC Heidenheim,1,1
-09,FC Ingolstadt,SC Paderborn 07,1,2
-09,FC St. Pauli,SV Sandhausen,3,1
-09,1. FC Köln,MSV Duisburg,1,2
-10,SV Sandhausen,FC Ingolstadt,4,0
-10,Dynamo Dresden,Erzgebirge Aue,1,1
-10,Holstein Kiel,1. FC Köln,1,1
-10,Arminia Bielefeld,SpVgg Greuther Fürth,2,3
-10,1. FC Heidenheim,1. FC Magdeburg,3,0
-10,Hamburger SV,VfL Bochum,0,0
-10,Jahn Regensburg,SV Darmstadt 98,1,1
-10,SC Paderborn 07,1. FC Union Berlin,0,0
-10,MSV Duisburg,FC St. Pauli,0,1
-11,SV Darmstadt 98,SpVgg Greuther Fürth,2,0
-11,1. FC Magdeburg,Hamburger SV,0,1
-11,1. FC Köln,1. FC Heidenheim,1,1
-11,Erzgebirge Aue,Arminia Bielefeld,1,0
-11,SC Paderborn 07,SV Sandhausen,3,3
-11,1. FC Union Berlin,Dynamo Dresden,0,0
-11,FC Ingolstadt,MSV Duisburg,1,1
-11,FC St. Pauli,Holstein Kiel,0,1
-11,VfL Bochum,Jahn Regensburg,3,3
-12,Dynamo Dresden,SV Sandhausen,3,1
-12,SpVgg Greuther Fürth,VfL Bochum,2,2
-12,Holstein Kiel,FC Ingolstadt,2,2
-12,MSV Duisburg,SC Paderborn 07,2,0
-12,SV Darmstadt 98,1. FC Magdeburg,3,1
-12,Arminia Bielefeld,FC St. Pauli,1,2
-12,Jahn Regensburg,1. FC Union Berlin,1,1
-12,1. FC Heidenheim,Erzgebirge Aue,1,0
-12,Hamburger SV,1. FC Köln,1,0
-13,SV Sandhausen,MSV Duisburg,0,0
-13,SC Paderborn 07,Holstein Kiel,4,4
-13,1. FC Köln,Dynamo Dresden,8,1
-13,FC St. Pauli,1. FC Heidenheim,1,1
-13,Erzgebirge Aue,Hamburger SV,1,3
-13,1. FC Union Berlin,SpVgg Greuther Fürth,4,0
-13,FC Ingolstadt,Arminia Bielefeld,1,1
-13,1. FC Magdeburg,Jahn Regensburg,2,3
-13,VfL Bochum,SV Darmstadt 98,1,0
-14,Arminia Bielefeld,MSV Duisburg,0,1
-14,SpVgg Greuther Fürth,1. FC Magdeburg,3,2
-14,Holstein Kiel,SV Sandhausen,2,1
-14,VfL Bochum,Erzgebirge Aue,2,1
-14,SV Darmstadt 98,1. FC Köln,0,3
-14,Jahn Regensburg,FC St. Pauli,1,1
-14,1. FC Heidenheim,SC Paderborn 07,1,5
-14,Dynamo Dresden,FC Ingolstadt,2,0
-14,Hamburger SV,1. FC Union Berlin,2,2
-15,Erzgebirge Aue,Jahn Regensburg,1,1
-15,SC Paderborn 07,Arminia Bielefeld,2,2
-15,1. FC Köln,SpVgg Greuther Fürth,4,0
-15,1. FC Union Berlin,SV Darmstadt 98,3,1
-15,FC Ingolstadt,Hamburger SV,1,2
-15,FC St. Pauli,Dynamo Dresden,1,1
-15,MSV Duisburg,Holstein Kiel,0,4
-15,SV Sandhausen,1. FC Heidenheim,1,2
-15,1. FC Magdeburg,VfL Bochum,0,0
-16,Hamburger SV,SC Paderborn 07,1,0
-16,Jahn Regensburg,1. FC Köln,1,3
-16,SV Darmstadt 98,FC Ingolstadt,1,1
-16,1. FC Heidenheim,MSV Duisburg,4,1
-16,SpVgg Greuther Fürth,Erzgebirge Aue,0,5
-16,Arminia Bielefeld,SV Sandhausen,1,1
-16,Dynamo Dresden,Holstein Kiel,0,2
-16,1. FC Magdeburg,1. FC Union Berlin,1,1
-16,VfL Bochum,FC St. Pauli,1,3
-17,Holstein Kiel,Arminia Bielefeld,1,2
-17,MSV Duisburg,Hamburger SV,1,2
-17,1. FC Union Berlin,VfL Bochum,2,0
-17,FC St. Pauli,SpVgg Greuther Fürth,2,0
-17,SC Paderborn 07,Dynamo Dresden,3,0
-17,FC Ingolstadt,1. FC Heidenheim,1,1
-17,SV Sandhausen,Jahn Regensburg,2,2
-17,Erzgebirge Aue,SV Darmstadt 98,2,2
-17,1. FC Köln,1. FC Magdeburg,3,0
-18,1. FC Köln,VfL Bochum,2,3
-18,SV Sandhausen,SpVgg Greuther Fürth,0,0
-18,Arminia Bielefeld,1. FC Heidenheim,1,2
-18,FC Ingolstadt,Jahn Regensburg,1,2
-18,FC St. Pauli,1. FC Magdeburg,4,1
-18,Holstein Kiel,Hamburger SV,3,1
-18,MSV Duisburg,Dynamo Dresden,1,3
-18,Erzgebirge Aue,1. FC Union Berlin,3,0
-18,SC Paderborn 07,SV Darmstadt 98,6,2
+Spieltag,Status,Team_1,Team_2,Tore_Team_1,Tore_Team_2
+01,PASS,Hamburger SV,Holstein Kiel,0,3
+01,PASS,VfL Bochum,1. FC Köln,0,2
+01,PASS,Jahn Regensburg,FC Ingolstadt,2,1
+01,PASS,SpVgg Greuther Fürth,SV Sandhausen,3,1
+01,PASS,1. FC Magdeburg,FC St. Pauli,1,2
+01,PASS,1. FC Union Berlin,Erzgebirge Aue,1,0
+01,PASS,SV Darmstadt 98,SC Paderborn 07,1,0
+01,PASS,1. FC Heidenheim,Arminia Bielefeld,1,1
+01,PASS,Dynamo Dresden,MSV Duisburg,1,0
+02,PASS,FC Ingolstadt,SpVgg Greuther Fürth,1,1
+02,PASS,SC Paderborn 07,Jahn Regensburg,2,0
+02,PASS,FC St. Pauli,SV Darmstadt 98,2,0
+02,PASS,MSV Duisburg,VfL Bochum,0,2
+02,PASS,Arminia Bielefeld,Dynamo Dresden,2,1
+02,PASS,SV Sandhausen,Hamburger SV,0,3
+02,PASS,Holstein Kiel,1. FC Heidenheim,1,1
+02,PASS,Erzgebirge Aue,1. FC Magdeburg,0,0
+02,PASS,1. FC Köln,1. FC Union Berlin,1,1
+03,PASS,VfL Bochum,SV Sandhausen,1,0
+03,PASS,SV Darmstadt 98,MSV Duisburg,3,0
+03,PASS,1. FC Köln,Erzgebirge Aue,3,1
+03,PASS,SpVgg Greuther Fürth,SC Paderborn 07,2,2
+03,PASS,1. FC Magdeburg,FC Ingolstadt,1,1
+03,PASS,Jahn Regensburg,Holstein Kiel,0,0
+03,PASS,1. FC Union Berlin,FC St. Pauli,4,1
+03,PASS,Dynamo Dresden,1. FC Heidenheim,1,3
+03,PASS,Hamburger SV,Arminia Bielefeld,3,0
+04,PASS,FC Ingolstadt,Erzgebirge Aue,3,2
+04,PASS,SC Paderborn 07,VfL Bochum,2,2
+04,PASS,Arminia Bielefeld,Jahn Regensburg,5,3
+04,PASS,MSV Duisburg,SpVgg Greuther Fürth,0,1
+04,PASS,SV Sandhausen,1. FC Union Berlin,0,0
+04,PASS,FC St. Pauli,1. FC Köln,3,5
+04,PASS,1. FC Heidenheim,SV Darmstadt 98,0,1
+04,PASS,Holstein Kiel,1. FC Magdeburg,2,1
+04,PASS,Dynamo Dresden,Hamburger SV,0,1
+05,PASS,Jahn Regensburg,Dynamo Dresden,0,2
+05,PASS,1. FC Union Berlin,MSV Duisburg,2,2
+05,PASS,Hamburger SV,1. FC Heidenheim,3,2
+05,PASS,SV Darmstadt 98,SV Sandhausen,1,1
+05,PASS,SpVgg Greuther Fürth,Holstein Kiel,4,1
+05,PASS,1. FC Köln,SC Paderborn 07,3,5
+05,PASS,VfL Bochum,FC Ingolstadt,6,0
+05,PASS,Erzgebirge Aue,FC St. Pauli,3,1
+05,PASS,1. FC Magdeburg,Arminia Bielefeld,0,0
+06,PASS,FC Ingolstadt,FC St. Pauli,0,1
+06,PASS,SV Sandhausen,1. FC Köln,0,2
+06,PASS,Holstein Kiel,VfL Bochum,2,2
+06,PASS,Arminia Bielefeld,1. FC Union Berlin,1,1
+06,PASS,Dynamo Dresden,SV Darmstadt 98,4,1
+06,PASS,Hamburger SV,Jahn Regensburg,0,5
+06,PASS,MSV Duisburg,Erzgebirge Aue,1,2
+06,PASS,1. FC Heidenheim,SpVgg Greuther Fürth,2,0
+06,PASS,SC Paderborn 07,1. FC Magdeburg,4,4
+07,PASS,1. FC Köln,FC Ingolstadt,2,1
+07,PASS,VfL Bochum,Dynamo Dresden,0,1
+07,PASS,1. FC Union Berlin,Holstein Kiel,2,0
+07,PASS,SV Darmstadt 98,Arminia Bielefeld,1,2
+07,PASS,Jahn Regensburg,1. FC Heidenheim,2,1
+07,PASS,FC St. Pauli,SC Paderborn 07,2,1
+07,PASS,Erzgebirge Aue,SV Sandhausen,0,2
+07,PASS,1. FC Magdeburg,MSV Duisburg,3,3
+07,PASS,SpVgg Greuther Fürth,Hamburger SV,0,0
+08,PASS,Holstein Kiel,SV Darmstadt 98,4,2
+08,PASS,Arminia Bielefeld,1. FC Köln,1,3
+08,PASS,MSV Duisburg,Jahn Regensburg,1,3
+08,PASS,1. FC Heidenheim,VfL Bochum,3,2
+08,PASS,SC Paderborn 07,Erzgebirge Aue,1,0
+08,PASS,Hamburger SV,FC St. Pauli,0,0
+08,PASS,SV Sandhausen,1. FC Magdeburg,0,1
+08,PASS,Dynamo Dresden,SpVgg Greuther Fürth,0,1
+08,PASS,FC Ingolstadt,1. FC Union Berlin,1,2
+09,PASS,VfL Bochum,Arminia Bielefeld,1,0
+09,PASS,SV Darmstadt 98,Hamburger SV,1,2
+09,PASS,SpVgg Greuther Fürth,Jahn Regensburg,1,1
+09,PASS,Erzgebirge Aue,Holstein Kiel,2,1
+09,PASS,1. FC Magdeburg,Dynamo Dresden,2,2
+09,PASS,1. FC Union Berlin,1. FC Heidenheim,1,1
+09,PASS,FC Ingolstadt,SC Paderborn 07,1,2
+09,PASS,FC St. Pauli,SV Sandhausen,3,1
+09,PASS,1. FC Köln,MSV Duisburg,1,2
+10,PASS,SV Sandhausen,FC Ingolstadt,4,0
+10,PASS,Dynamo Dresden,Erzgebirge Aue,1,1
+10,PASS,Holstein Kiel,1. FC Köln,1,1
+10,PASS,Arminia Bielefeld,SpVgg Greuther Fürth,2,3
+10,PASS,1. FC Heidenheim,1. FC Magdeburg,3,0
+10,PASS,Hamburger SV,VfL Bochum,0,0
+10,PASS,Jahn Regensburg,SV Darmstadt 98,1,1
+10,PASS,SC Paderborn 07,1. FC Union Berlin,0,0
+10,PASS,MSV Duisburg,FC St. Pauli,0,1
+11,PASS,SV Darmstadt 98,SpVgg Greuther Fürth,2,0
+11,PASS,1. FC Magdeburg,Hamburger SV,0,1
+11,PASS,1. FC Köln,1. FC Heidenheim,1,1
+11,PASS,Erzgebirge Aue,Arminia Bielefeld,1,0
+11,PASS,SC Paderborn 07,SV Sandhausen,3,3
+11,PASS,1. FC Union Berlin,Dynamo Dresden,0,0
+11,PASS,FC Ingolstadt,MSV Duisburg,1,1
+11,PASS,FC St. Pauli,Holstein Kiel,0,1
+11,PASS,VfL Bochum,Jahn Regensburg,3,3

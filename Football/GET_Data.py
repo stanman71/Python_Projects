@@ -2,6 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 import sys, csv , operator, time
 
+
 ########################
 # GET_BASICINFO
 ########################
@@ -144,67 +145,69 @@ def CREATE_CSV(url):
 
     file = "./Python_Projects/Football/CSV/" + data[0] + "_" + season + ".csv"
 
-    # Check CSV
+
+    # check CSV content
 
     exist_entry = False
 
     try:
-        with open(file, newline='', encoding='utf-8') as f:
+        with open(file, mode='r', encoding='utf-8') as f:
             spamreader = csv.reader(f)      
 
             for row in spamreader:
-                if data[2] in row:
-                    exist_entry = True
-
-            if exist_entry == True:
-                print("Already exist")
+                if row is not None:
+                    exist_entry = True              
 
     except:
         pass
+    
 
+    # write content
 
-    # ADD Infos
+    with open(file, mode='a', encoding="utf-8", newline='') as result_file:
+        result_writer = csv.writer(result_file, delimiter=',')
 
-    if exist_entry == False and not "- : -" in data[4]:
-        with open(file, mode='a', encoding="utf-8", newline='') as result_file:
-            result_writer = csv.writer(result_file, delimiter=',')
+        # add header
+        if exist_entry == False:
+            result_writer.writerow(["Spieltag", "Status", "Team_1", "Team_2", "Tore_Team_1", "Tore_Team_2"])
 
-            counter = len(data)
+        counter = len(data)
 
-            for i in range (3, counter, 3):
-                goals = data[i+1].split(" : ")
-                result_writer.writerow([data[2], data[i], data[i+2], goals[0], goals[1]])
+        for i in range (3, counter, 3):
+            goals = data[i+1].split(" : ")
+
+            if goals[0] is not "-":
+                Status = "PASS"
+                result_writer.writerow([data[2], Status, data[i], data[i+2], goals[0], goals[1]])                    
                 # data[2]   > Spieltag
+                # Status    > ausgetragen ?
                 # data[i]   > Team_1
                 # data[i+2] > Team_2 
                 # goals[0]  > Tore_Team_1
                 # goals[1]  > Tore_Team_2
 
-            print("CSV created")
+            else:
+                Status = "OPEN"
+                result_writer.writerow([data[2], Status, data[i], data[i+2], "", ""])   
 
 
-        # Sort CSV
+        print("CSV updated")
 
-        with open(file, newline='', encoding='utf-8') as f:
-            data = csv.reader(f)
 
-            sortedlist = sorted(data, key=operator.itemgetter(0))   
 
-            with open(file, "w", encoding="utf-8", newline='') as f:
-                fileWriter = csv.writer(f, delimiter=',')
-                fileWriter.writerow(["Spieltag", "Team_1", "Team_2", "Tore_Team_1", "Tore_Team_2"])
+########################
+# DELETE_CSV
+########################
 
-                counter = len(sortedlist)
+def DELETE_CSV(url):
 
-                # Case: Empty list
-                if counter < 10:
-                    for row in sortedlist:
-                        fileWriter.writerow(row)                    
+    data = GET_RESULTS(url)
 
-                else:
-                    for i, row in enumerate(sortedlist):
-                        if i < counter-1:
-                            fileWriter.writerow(row)
+    season = data[1].replace("/", "_")
+    file = "./Python_Projects/Football/CSV/" + data[0] + "_" + season + ".csv"    
+
+    f = open(file, "w+") # delete CSV content
+    f.close()    
 
 
 
@@ -218,6 +221,8 @@ def GET_ALL(url):
         url = url[:-2] 
     elif url[-1:] is not "F":
         url = url[:-1]
+
+    DELETE_CSV(url)
 
     i = 1
     while i < 35:

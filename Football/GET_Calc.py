@@ -5,23 +5,25 @@
 
 import pandas as pd
 import numpy as np
+from scipy.stats import poisson
 
 
 def GET_ALL_GOALS(file):
 
     df = pd.read_csv(file, delimiter=",")
+    df = df.loc[df['Status'] == "PASS"]
 
     return_list = []
 
     Sum = int(df.shape[0] / 9)
 
     df_1         = df["Tore_Team_1"]
-    Heim         = df_1.sum()
+    Heim         = int(df_1.sum())
     Heim_AVG     = df_1.mean()
     Heim_AVG     = round(Heim_AVG, 2)
 
     df_2         = df["Tore_Team_2"]
-    Aus          = df_2.sum()
+    Aus          = int(df_2.sum())
     Aus_AVG      = df_2.mean()
     Aus_AVG      = round(Aus_AVG, 2)
 
@@ -43,7 +45,8 @@ def GET_ALL_GOALS(file):
 def GET_STATS_FROM_CLUB(Club, file):  
     
     df = pd.read_csv(file, delimiter=",")
-    
+    df = df.loc[df['Status'] == "PASS"]
+
     return_list = []    
  
     df_heim_0 = df.loc[df['Team_1'] == Club]
@@ -55,22 +58,22 @@ def GET_STATS_FROM_CLUB(Club, file):
     Sum = Sum_Heim + Sum_Aus
 
     df_heim_1      = df_heim_0["Tore_Team_1"]
-    Heim_Goals     = df_heim_1.sum()
+    Heim_Goals     = int(df_heim_1.sum())
     Heim_Goals_AVG = df_heim_1.mean()
     Heim_Goals_AVG = round(Heim_Goals_AVG, 2)
   
     df_heim_2      = df_heim_0["Tore_Team_2"]
-    Heim_Hits      = df_heim_2.sum()
+    Heim_Hits      = int(df_heim_2.sum())
     Heim_Hits_AVG  = df_heim_2.mean()
     Heim_Hits_AVG  = round(Heim_Hits_AVG, 2)
 
     df_aus_1       = df_aus_0["Tore_Team_2"]
-    Aus_Goals      = df_aus_1.sum()
+    Aus_Goals      = int(df_aus_1.sum())
     Aus_Goals_AVG  = df_aus_1.mean()
     Aus_Goals_AVG  = round(Aus_Goals_AVG, 2)
 
     df_aus_2       = df_aus_0["Tore_Team_1"]
-    Aus_Hits       = df_aus_2.sum()
+    Aus_Hits       = int(df_aus_2.sum())
     Aus_Hits_AVG   = df_aus_2.mean()
     Aus_Hits_AVG   = round(Aus_Hits_AVG, 2)
 
@@ -97,8 +100,6 @@ def GET_ATT_DEF_VALUE(Club, file):
     # Verhältnis von den (durchschnittlichen) Heimtoren/Heimtreffern des Vereins zu den 
     # (durchschnittlichen) Heimtoren aller Vereine
 
-    df = pd.read_csv(file, delimiter=",")
-
     return_list = []
 
     ATT_Heim = (GET_STATS_FROM_CLUB(Club, file)[3])/(GET_ALL_GOALS(file)[4])
@@ -124,8 +125,6 @@ def GET_ESTIMATE_GOALS(Club_1, Club_2, file):
 
     # https://www.onlinemathe.de/forum/Fussballergebnisse-Berechnen-Formel
     # https://www.wettstern.com/sportwetten-mathematik/poisson-saisonwetten
- 
-    df = pd.read_csv(file, delimiter=",")
 
     return_list = []
 
@@ -137,6 +136,20 @@ def GET_ESTIMATE_GOALS(Club_1, Club_2, file):
     return_list.append(Goals_Club_1)
     return_list.append(Goals_Club_2)   
 
+    # calculate poisson
+    # http://muthu.co/poisson-distribution-with-python/
+
+    for i in range (0, len(return_list)):
+ 
+        array = []
+        element = return_list[i]
+
+        rv = poisson(element)  # Average
+        for num in range(0,5):
+            array.append(round(rv.pmf(num) * 100, 2))
+
+        return_list.append(array)
+
     return(return_list)
 
 
@@ -144,6 +157,7 @@ def GET_ESTIMATE_GOALS(Club_1, Club_2, file):
 def GET_POINTS(Club, file):
 
     df = pd.read_csv(file, delimiter=",")
+    df = df.loc[df['Status'] == "PASS"]
 
     return_list = []    
  
@@ -186,7 +200,7 @@ def GET_POINTS(Club, file):
 def GET_SEASON(Club, file):
 
     df = pd.read_csv(file, delimiter=",")
-
+    
     return_list = []
   
     df = df[(df.Team_1 == Club) | (df.Team_2 == Club)]
@@ -219,11 +233,15 @@ def CALC_SEASON(Club, file):
             return_list.append(season[i + 2])   # Gegner
             return_list.append(result[0])       # Tore Club
             return_list.append(result[1])       # Hits Club
+            return_list.append(result[2])       # Poisson Tore Club
+            return_list.append(result[3])       # Poisson Hits Club
         else:
             return_list.append("A")
             return_list.append(season[i + 1])   # Gegner
             return_list.append(result[1])       # Tore Club
             return_list.append(result[0])       # Hits Club
+            return_list.append(result[3])       # Poisson Tore Club
+            return_list.append(result[2])       # Poisson Hits Club
 
     return(return_list)
 
