@@ -70,6 +70,8 @@ def GET_STATS_FROM_CLUB(Club, file, day = 34):
     Heim_Goals_AVG = df_heim_1.mean()
     Heim_Goals_AVG = round(Heim_Goals_AVG, 2)
 
+    list_Heim_Goals = []
+
     try:
         # Trend Tore Heim
         Last_5 = df_heim_1[-5:]
@@ -79,7 +81,6 @@ def GET_STATS_FROM_CLUB(Club, file, day = 34):
         Trend_Heim_Goals = Last_5 - Heim_Goals_AVG
         Trend_Heim_Goals  = round(Trend_Heim_Goals, 2)
 
-        list_Heim_Goals = []
         list_Heim_Goals.append(Heim_Goals) 
         list_Heim_Goals.append(Heim_Goals_AVG)
         list_Heim_Goals.append(Trend_Heim_Goals)
@@ -92,6 +93,8 @@ def GET_STATS_FROM_CLUB(Club, file, day = 34):
     Heim_Hits_AVG  = df_heim_2.mean()
     Heim_Hits_AVG  = round(Heim_Hits_AVG, 2)
 
+    list_Heim_Hits = []
+
     try:
         # Trend Gegentore Heim
         Last_5 = df_heim_2[-5:]
@@ -101,7 +104,6 @@ def GET_STATS_FROM_CLUB(Club, file, day = 34):
         Trend_Heim_Hits = Last_5 - Heim_Hits_AVG
         Trend_Heim_Hits  = round(Trend_Heim_Hits, 2)
 
-        list_Heim_Hits = []
         list_Heim_Hits.append(Heim_Hits)
         list_Heim_Hits.append(Heim_Hits_AVG)
         list_Heim_Hits.append(Trend_Heim_Hits)
@@ -204,10 +206,11 @@ def GET_ATT_DEF_VALUE(Club, file):
 
 
 
-def GET_ESTIMATE_GOALS(Club_1, Club_2, file):
+def GET_ESTIMATE_GOALS_POISSON(Club_1, Club_2, file):
 
     # https://www.onlinemathe.de/forum/Fussballergebnisse-Berechnen-Formel
     # https://www.wettstern.com/sportwetten-mathematik/poisson-saisonwetten
+    # https://www.wettstern.com/sportwetten-mathematik/poisson-wetten#angriffsstaerke
 
     return_list = []
 
@@ -222,6 +225,7 @@ def GET_ESTIMATE_GOALS(Club_1, Club_2, file):
 
     # calculate poisson
     # http://muthu.co/poisson-distribution-with-python/
+
 
     for i in range (0, len(goals)):
  
@@ -332,7 +336,7 @@ def GET_SEASON(Club, file):
 
 
 
-def CALC_SEASON(Club, file):
+def CALC_SEASON_POISSON(Club, file):
 
     return_list = []
 
@@ -343,7 +347,7 @@ def CALC_SEASON(Club, file):
     ########################
 
     for i in range (0, len(season)):
-        result = GET_ESTIMATE_GOALS(season[i][1][0], season[i][1][1], file)
+        result = GET_ESTIMATE_GOALS_POISSON(season[i][1][0], season[i][1][1], file)
 
         day = []
 
@@ -352,56 +356,97 @@ def CALC_SEASON(Club, file):
         if season[i][1][0] == Club:
             day.append("H")
             day.append(season[i][1][1])   # Gegner
+
+            estimate = []
+            estimate.append(result[0][0])         # Tore Club
+            estimate.append(result[0][1])         # Poisson Tore Club        
+            estimate.append(result[1][0])         # Hits Club       
+            estimate.append(result[1][1])         # Poisson Hits Club
+            day.append(estimate)
+        
         else:
             day.append("A")
             day.append(season[i][1][0])   # Gegner
 
-        estimate = []
-        estimate.append(result[0][0])         # Tore Club
-        estimate.append(result[0][1])         # Poisson Tore Club        
-        estimate.append(result[1][0])         # Hits Club       
-        estimate.append(result[1][1])         # Poisson Hits Club
-        day.append(estimate)
+            estimate = []
+            estimate.append(result[1][0])         # Tore Club
+            estimate.append(result[1][1])         # Poisson Tore Club        
+            estimate.append(result[0][0])         # Hits Club       
+            estimate.append(result[0][1])         # Poisson Hits Club
+            day.append(estimate)
 
         ####################
         # block real results
         ####################
 
         real_result = []
-        real_result.append(season[i][2])    
 
-        # add trend
-
-        trend = GET_STATS_FROM_CLUB(Club, file, i + 1)
+        # real result
 
         if day[1] == "H":
             try:
+                real_result_goals = []
+                real_result_goals.append(season[i][2][0])    
+                real_result_goals.append(season[i][2][1])
+                real_result.append(real_result_goals)
+            except:
+                real_result_goals = []
+                real_result.append(real_result_goals)
+
+        else:
+            try:
+                real_result_goals = []
+                real_result_goals.append(season[i][2][1])    
+                real_result_goals.append(season[i][2][0])
+                real_result.append(real_result_goals)            
+            except:
+                real_result_goals = []
+                real_result.append(real_result_goals)
+
+        # add difference
+
+        if day[1] == "H":
+            try:        
+                diff = []
+                diff.append(round((season[i][2][0]) - (result[0][0]), 2))     
+                diff.append(round((season[i][2][1]) - (result[1][0]), 2))     
+                real_result.append(diff)
+            except:
+                diff = []
+                real_result.append(diff)       
+
+        if day[1] == "A":
+            try:        
+                diff = []
+                diff.append(round((season[i][2][1]) - (result[1][0]), 2))     
+                diff.append(round((season[i][2][0]) - (result[0][0]), 2))     
+                real_result.append(diff)
+            except:
+                diff = []
+                real_result.append(diff)      
+              
+        # add trend
+
+        trend = GET_STATS_FROM_CLUB(Club, file, i)
+
+        if day[1] == "H" and day[0] == (trend[0]):
+            
                 trend_list = []
                 trend_list.append(trend[1][1][2])
                 trend_list.append(trend[1][2][2])
                 real_result.append(trend_list)
-            except:
-                pass
 
-        if day[1] == "A":
-            try:
-                trend_list = []
-                trend_list.append(trend[2][1][2])
-                trend_list.append(trend[2][2][2])
-                real_result.append(trend_list)
-            except:
-                pass        
-
-        # add difference
-
-        try:        
-            diff = []
-            diff.append(round((season[i][2][0]) - (result[0][0]), 2))     
-            diff.append(round((season[i][2][1]) - (result[1][0]), 2))     
-            real_result.append(diff)
-        except:
-            pass
+        elif day[1] == "A" and day[0] == trend[0]:
        
+            trend_list = []
+            trend_list.append(trend[2][1][2])
+            trend_list.append(trend[2][2][2])
+            real_result.append(trend_list)
+
+        else:
+            trend_list = []
+            real_result.append(trend_list)        
+
 
         day.append(real_result)
 
