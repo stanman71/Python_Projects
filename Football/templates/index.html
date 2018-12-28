@@ -82,7 +82,43 @@
     <div><img src='{{ graph2 }}'></img></div>
     <div>Graph 3</div>
     <div><img src='{{ graph3 }}'></img></div>
-    
+
+  <!-- HIDDEN -->
+
+  <div class="row">
+    <div class="col">
+      <div class="invisible">HIDDEN</div>
+    </div>
+    <div class="col">
+      <div class="invisible">HIDDEN</div>
+    </div>
+  </div> 
+
+  <!-- INPUT -->
+
+    {% if name != None: %}
+    <h1>{{ name }}</h1>
+    {% endif %}
+
+    <form method="get">
+        
+        <label for="name">Name: </label>
+        <input type="text" name="name" id="name" value="{% if name != None %}{{ name }}{% endif %}" />
+
+        <label for="age">Alter:</label>
+        <input type="text" name="age" id="age" value="{% if age != None %}{{ age }}{% endif %}"/>
+
+        <!-- HIDDEN -->
+
+        <div class="row">
+            <div class="col">
+              <div class="invisible">HIDDEN</div>
+            </div>
+        </div> 
+  
+        <input type="submit" value="Formular abschicken!" />
+
+    </form>
 
   </div>
 </div>

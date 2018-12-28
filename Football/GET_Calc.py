@@ -427,7 +427,7 @@ def CALC_SEASON_POISSON(Club, file):
               
         # add trend
 
-        trend = GET_STATS_FROM_CLUB(Club, file, i)
+        trend = GET_STATS_FROM_CLUB(Club, file, i + 1)
 
         if day[1] == "H" and day[0] == (trend[0]):
             
