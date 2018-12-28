@@ -8,6 +8,16 @@ import numpy as np
 from scipy.stats import poisson
 
 
+def GET_ALL_CLUBS(file):
+
+    df = pd.read_csv(file, delimiter=",")   
+    df = df.Team_1.unique()  
+    df.sort()
+
+    return(df)
+
+
+
 def GET_ALL_GOALS(file):
 
     df = pd.read_csv(file, delimiter=",")

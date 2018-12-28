@@ -47,6 +47,43 @@
     </div>
   </div> 
 
+
+
+  <!-- DROPDOWN -->
+
+
+  
+    <p>Select a club:</p>
+    <form id="form1" action="/login" method="POST" enctype="multipart/form-data">
+      <select id="mySelect" name = "clubs">
+        <option value= "{{ club_1 }}" > {{ club_1 }} </option>
+        <option value= "{{ club_2 }}" > {{ club_2 }} </option>
+        <option value= "{{ club_3 }}" > {{ club_3 }} </option>
+        <option value= "{{ club_4 }}" > {{ club_4 }} </option>
+      </select>
+      <input type="submit" value="Submit">
+    </form>
+    
+    <div id="result">
+      {% if club_name is defined %}
+          You have selected: {{ club_name }}
+      {% endif %}
+    </div>
+
+
+
+
+  <!-- HIDDEN -->
+
+  <div class="row">
+    <div class="col">
+      <div class="invisible">HIDDEN</div>
+    </div>
+    <div class="col">
+      <div class="invisible">HIDDEN</div>
+    </div>
+  </div> 
+
   <!-- CONTENT -->
 
   <div class="row">
@@ -127,4 +164,9 @@
 {% endblock %}
 
 
+{% block scripts %}
 
+<script src="{{url_for('.static', filename='myscripts.js')}}"></script>
+{{super()}}
+
+{% endblock %}

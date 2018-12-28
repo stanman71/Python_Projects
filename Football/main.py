@@ -1,5 +1,5 @@
 from GET_Data import GET_RESULTS, GET_TABLE, GET_CROSS_TABLE, CREATE_CSV, GET_ALL
-from GET_Calc import GET_ALL_GOALS, GET_ATT_DEF_VALUE, GET_ESTIMATE_GOALS_POISSON , GET_POINTS, GET_SEASON, GET_STATS_FROM_CLUB, CALC_SEASON_POISSON
+from GET_Calc import GET_ALL_GOALS, GET_ATT_DEF_VALUE, GET_ESTIMATE_GOALS_POISSON , GET_POINTS, GET_SEASON, GET_STATS_FROM_CLUB, CALC_SEASON_POISSON, GET_ALL_CLUBS
 
 
 
@@ -25,6 +25,8 @@ url = "https://www.dfb.de/bundesliga/spieltagtabelle/?spieledb_path=/competition
 file = "./Python_Projects/Football/CSV/1_Bundesliga_2018_2019.csv"
 
 
+#print(GET_ALL_CLUBS(file))
+
 #print(GET_ALL_GOALS(file))
 
 #print(GET_STATS_FROM_CLUB("Eintracht Frankfurt", file, 1))
@@ -44,7 +46,7 @@ file = "./Python_Projects/Football/CSV/1_Bundesliga_2018_2019.csv"
 
 #print(GET_SEASON("Eintracht Frankfurt", file))
 
-print(CALC_SEASON_POISSON("Borussia Dortmund", file))
+#print(CALC_SEASON_POISSON("Borussia Dortmund", file))
 
 # [[Day, Location, Opponent, [Estimate_Goals, [Poisson], 
 #                             Estimate_Hits,  [Poisson]], 
