@@ -23,7 +23,7 @@ def build_graph(x_coordinates, y_coordinates):
     return 'data:image/png;base64,{}'.format(graph_url)
 
 
-url  = "https://www.dfb.de/bundesliga/spieltagtabelle/?spieledb_path=/competitions/12/seasons/17683/matchday&spieledb_path=%2Fcompetitions%2F12%2Fseasons%2F17820%2Fmatchday%2F13"
+
 file = "./Python_Projects/Football/CSV/1_Bundesliga_2018_2019.csv"
 
 
@@ -45,7 +45,9 @@ def graphs():
                             site2="sitegfgf2",
                             name=name,
                             age=age,
-                            dropdown_list=dropdown_list
+                            dropdown_list=dropdown_list,
+                            person_name="Name",
+                            person_age="20"
                             )
 
 
@@ -68,6 +70,8 @@ def login():
    
     dropdown_list = GET_ALL_CLUBS(file)
 
+    season = GET_SEASON(club_name, file)
+
     return render_template('index.html',
                             graph1=graph1_url,
                             site1="Start", 
@@ -75,7 +79,8 @@ def login():
                             name=name,
                             age=age,
                             club_name=club_name,
-                            dropdown_list=dropdown_list
+                            dropdown_list=dropdown_list,
+                            season=season                      
                             )
 
 

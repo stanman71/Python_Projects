@@ -96,7 +96,7 @@
       </p>
     </div>
   </div>
-  
+
   <!-- HIDDEN -->
 
   <div class="row">
@@ -110,13 +110,15 @@
         </div>
         <div class="col">
           <div class="invisible">HIDDEN</div>
-      </div>
+       </div>
     </div> 
 
-    <!-- GRAPHS -->
+  <!-- GRAPHS -->
 
-    <div>{{ club_name }}</div>
-    <div><img src='{{ graph1 }}'></img></div>
+  <div><h1>{{ club_name }}</h1></div>
+  <br>
+  <div><h3>Punkte</h3></div>
+  <div><img src='{{ graph1 }}'></img></div>
 
 
   <!-- HIDDEN -->
@@ -129,6 +131,50 @@
       <div class="invisible">HIDDEN</div>
     </div>
   </div> 
+
+
+  <!-- TABLE -->  
+  <div class="row">
+      <div class="col">
+        <h3>Spielplan</h3>
+        <br>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Spieltag</th>
+                    <th>Heim</th>
+                    <th>Aus</th>
+                    <th>Ergebnis</th>
+                <tr>
+            </thead>
+            <tbody>
+                {% for each_day in season %}
+                <tr>
+                    <td>{{ each_day[0] }}</td>
+                    <td>{{ each_day[1][0] }}</td>
+                    <td>{{ each_day[1][1] }}</td> 
+                    <td>{{ each_day[2][0] }}</td> 
+                    <td>{{ each_day[2][1] }}</td>                    
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+      </div>
+  </div>    
+
+
+  <!-- HIDDEN -->
+
+  <div class="row">
+      <div class="col">
+        <div class="invisible">HIDDEN</div>
+      </div>
+      <div class="col">
+        <div class="invisible">HIDDEN</div>
+      </div>
+    </div> 
+
+
 
   <!-- INPUT -->
 

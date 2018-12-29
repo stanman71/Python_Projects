@@ -44,7 +44,7 @@ file = "./Python_Projects/Football/CSV/1_Bundesliga_2018_2019.csv"
 
 #print(GET_POINTS("Bayern München", file))
 
-#print(GET_SEASON("Eintracht Frankfurt", file))
+print(GET_SEASON("Eintracht Frankfurt", file))
 
 #print(CALC_SEASON_POISSON("Borussia Dortmund", file))
 
