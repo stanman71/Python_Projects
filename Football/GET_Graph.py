@@ -1,8 +1,11 @@
 from GET_Data import GET_RESULTS, GET_TABLE, GET_CROSS_TABLE, CREATE_CSV, GET_ALL
 from GET_Calc import GET_ALL_GOALS, GET_ESTIMATE_GOALS_POISSON , GET_POINTS, GET_SEASON, GET_STATS_FROM_CLUB, CALC_SEASON_POISSON, GET_ALL_CLUBS
 
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, g, url_for
 from flask_bootstrap import Bootstrap 
+
+import requests
+from bs4 import BeautifulSoup
 
 # for image update
 import matplotlib
@@ -36,7 +39,7 @@ Bootstrap(app)
 
 
 @app.route('/', methods=['GET'])
-def graphs():
+def index():
 
     name = request.args.get("name")
     age  = request.args.get("age")
@@ -55,29 +58,44 @@ def graphs():
 
 
 @app.route('/club', methods=['GET', 'POST'])
-def login():
+def club():
 
-    if request.method == "POST":     
-        club_name = request.form.get("club", None)  
+    dropdown_list = GET_ALL_CLUBS(file)
+
+    club_name = request.args.get("club") 
+    season = GET_SEASON(club_name, file) 
+ 
+ 
+    if request.method == "GET":     
 
         if club_name != None:       
             y1 = GET_POINTS(club_name, file)[3]  
             x1 = list(range(1, (len(y1)+1) ))        
             graph1_url = build_graph(x1,y1)   
 
+            return render_template('club.html',
+                                    graph1=graph1_url,
+                                    site1="Start", 
+                                    site2="sitegfgf2",
+                                    club_name=club_name,
+                                    dropdown_list=dropdown_list,
+                                    season=season
+                                    )
 
-    dropdown_list = GET_ALL_CLUBS(file)
 
-    season = GET_SEASON(club_name, file)
+    if request.method == "POST": 
 
-    return render_template('club.html',
-                            graph1=graph1_url,
-                            site1="Start", 
-                            site2="sitegfgf2",
-                            club_name=club_name,
-                            dropdown_list=dropdown_list,
-                            season=season                      
-                            )
+        if 'radioName' in request.form:
+
+            return render_template('club.html',
+                                    site1="Start", 
+                                    site2="sitegfgf2",
+                                    club_name=club_name,
+                                    dropdown_list=dropdown_list,
+                                    season=season
+                                    )
+
+
 
 
 

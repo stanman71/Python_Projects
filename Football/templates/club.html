@@ -51,7 +51,7 @@
 
   
     <p>Select a club:</p>
-    <form id="form1" action="/club" method="POST" enctype="multipart/form-data">
+    <form id="form1" action=/club  method="GET" enctype="multipart/form-data">
       <select id="mySelect" class="btn btn-secondary dropdown-toggle" name = "club">
           {% for each in dropdown_list %}
           <option value="{{each}}">{{each}}</option>
@@ -76,9 +76,37 @@
 
   <div><h1>{{ club_name }}</h1></div>
   <br>
-  <div><h3>Punkte</h3></div>
+ 
+  <div id="result">
+    {% if graph1 is defined %}
+        <div><h3>Punkte</h3></div>
+    {% endif %}
+  </div>
+ 
   <div><img src='{{ graph1 }}'></img></div>
 
+
+  <!-- HIDDEN -->
+  <div class="row">
+    <div class="col">
+      <div class="invisible">HIDDEN</div>
+    </div>
+    <div class="col">
+      <div class="invisible">HIDDEN</div>
+    </div>
+  </div> 
+
+  
+  
+
+  <!-- Buttons -->
+
+  <form action="" method="post"> 
+        <input type="submit" name="radioName" value="val_2"/>
+  </form>
+
+
+  
 
   <!-- HIDDEN -->
   <div class="row">
