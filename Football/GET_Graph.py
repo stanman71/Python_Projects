@@ -53,7 +53,7 @@ def graphs():
 
 
 
-@app.route('/login', methods=['GET', 'POST'])
+@app.route('/club', methods=['GET', 'POST'])
 def login():
 
     name = request.args.get("name")
@@ -72,7 +72,7 @@ def login():
 
     season = GET_SEASON(club_name, file)
 
-    return render_template('index.html',
+    return render_template('club.html',
                             graph1=graph1_url,
                             site1="Start", 
                             site2="sitegfgf2",

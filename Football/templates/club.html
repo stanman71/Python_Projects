@@ -23,7 +23,7 @@
     </div>
   </div> 
   
-
+  
   <!-- NAVIGATION -->
 
   <div class="row">
@@ -60,12 +60,24 @@
       <input type="submit" value="Submit">
     </form>
     
-    <div id="result">
-      {% if club_name is defined %}
-          You have selected: {{ club_name }}
-      {% endif %}
-    </div>
 
+  <!-- HIDDEN -->
+  <div class="row">
+    <div class="col">
+      <div class="invisible">HIDDEN</div>
+    </div>
+    <div class="col">
+      <div class="invisible">HIDDEN</div>
+    </div>
+  </div> 
+
+
+  <!-- GRAPHS -->
+
+  <div><h1>{{ club_name }}</h1></div>
+  <br>
+  <div><h3>Punkte</h3></div>
+  <div><img src='{{ graph1 }}'></img></div>
 
 
   <!-- HIDDEN -->
@@ -79,61 +91,34 @@
   </div> 
 
 
-  <!-- CONTENT -->
-
-  <div class="row">
-    <div class="col-sm-4">
-      <p>
-        This is a template for a simple marketing or informational website. It includes a large callout called the hero unit and three supporting pieces of content. Use it as a starting point to create something more unique.
-      </p>
-    </div>
-
-    <div class="col-sm-4">
-      <p>
-        This is a template for a simple marketing or informational website. It includes a large callout called the hero unit and three supporting pieces of content. Use it as a starting point to create something more unique.
-      </p>
-    </div>
-  </div>
-
-
-  <!-- HIDDEN -->
+  <!-- TABLE -->  
   <div class="row">
       <div class="col">
-        <div class="invisible">HIDDEN</div>
+        <h3>Spielplan</h3>
+        <br>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Spieltag</th>
+                    <th>Heim</th>
+                    <th>Aus</th>
+                    <th>Ergebnis</th>
+                <tr>
+            </thead>
+            <tbody>
+                {% for each_day in season %}
+                <tr>
+                    <td>{{ each_day[0] }}</td>
+                    <td>{{ each_day[1][0] }}</td>
+                    <td>{{ each_day[1][1] }}</td> 
+                    <td>{{ each_day[2][0] }}</td> 
+                    <td>{{ each_day[2][1] }}</td>                    
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
       </div>
-      <div class="col">
-        <div class="invisible">HIDDEN</div>
-      </div>    
-  </div> 
-
-
-  <!-- INPUT -->
-
-    {% if name != None: %}
-    <h1>{{ name }}</h1>
-    {% endif %}
-
-    <form method="get">
-        
-        <label for="name">Name: </label>
-        <input type="text" name="name" id="name" value="{% if name != None %}{{ name }}{% endif %}" />
-
-        <label for="age">Alter:</label>
-        <input type="text" name="age" id="age" value="{% if age != None %}{{ age }}{% endif %}"/>
-
-        <!-- HIDDEN -->
-
-        <div class="row">
-            <div class="col">
-              <div class="invisible">HIDDEN</div>
-            </div>
-        </div> 
-  
-        <input type="submit" value="Formular abschicken!" />
-
-    </form>
-  </div>
-</div>
+  </div>    
 
 
 {% endblock %}
