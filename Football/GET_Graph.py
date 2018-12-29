@@ -38,16 +38,16 @@ def graphs():
     name = request.args.get("name")
     age  = request.args.get("age")
 
+    dropdown_list = GET_ALL_CLUBS(file)
+
     return render_template('index.html',
-                            site1="sitegfgf1", 
+                            site1="Start", 
                             site2="sitegfgf2",
                             name=name,
                             age=age,
-                            club_1=GET_ALL_CLUBS(file)[0],
-                            club_2=GET_ALL_CLUBS(file)[1],
-                            club_3=GET_ALL_CLUBS(file)[2],
-                            club_4=GET_ALL_CLUBS(file)[3]
+                            dropdown_list=dropdown_list
                             )
+
 
 
 
@@ -58,7 +58,7 @@ def login():
     age  = request.args.get("age")
 
     if request.method == "POST":
-        club_name = request.form.get("clubs", None)
+        club_name = request.form.get("club", None)
         if club_name!=None:
             
             y1 = GET_POINTS(club_name, file)[3]  
@@ -66,19 +66,17 @@ def login():
             
             graph1_url = build_graph(x1,y1)    
    
-            return render_template("index.html", 
-                                    graph1=graph1_url,
-                                    site1="sitegfgf1", 
-                                    site2="sitegfgf2",
-                                    name=name,
-                                    age=age,
-                                    club_name=club_name,
-                                    club_1=GET_ALL_CLUBS(file)[0],
-                                    club_2=GET_ALL_CLUBS(file)[1],
-                                    club_3=GET_ALL_CLUBS(file)[2],
-                                    club_4=GET_ALL_CLUBS(file)[3]
-                                    )
+    dropdown_list = GET_ALL_CLUBS(file)
 
+    return render_template('index.html',
+                            graph1=graph1_url,
+                            site1="Start", 
+                            site2="sitegfgf2",
+                            name=name,
+                            age=age,
+                            club_name=club_name,
+                            dropdown_list=dropdown_list
+                            )
 
 
 
@@ -95,3 +93,5 @@ def add_header(response):
 if __name__ == '__main__':
     app.debug = True
     app.run()
+
+

@@ -28,9 +28,7 @@
   <div class="row">
     <div class="col-sm">
       <ul class="nav nav-pills">             
-        <li role="presentation" class="active"><a href="#">{{ site1 }}</a></li>
-        <li role="presentation" class="active"><a href="#">{{ site2 }}</a></li>
-        <li role="presentation" class="active"><a href="#">{{ site1 }}</a></li>
+        <li role="presentation" class="active"><a href="/">{{ site1 }}</a></li>
         <li role="presentation" class="active"><a href="#">{{ site2 }}</a></li>
       </ul>       
     </div>
@@ -55,11 +53,10 @@
   
     <p>Select a club:</p>
     <form id="form1" action="/login" method="POST" enctype="multipart/form-data">
-      <select id="mySelect" name = "clubs">
-        <option value= "{{ club_1 }}" > {{ club_1 }} </option>
-        <option value= "{{ club_2 }}" > {{ club_2 }} </option>
-        <option value= "{{ club_3 }}" > {{ club_3 }} </option>
-        <option value= "{{ club_4 }}" > {{ club_4 }} </option>
+      <select id="mySelect" name = "club">
+          {% for each in dropdown_list %}
+          <option value="{{each}}">{{each}}</option>
+          {% endfor %}
       </select>
       <input type="submit" value="Submit">
     </form>
@@ -98,27 +95,29 @@
         This is a template for a simple marketing or informational website. It includes a large callout called the hero unit and three supporting pieces of content. Use it as a starting point to create something more unique.
       </p>
     </div>
+  </div>
+  
+  <!-- HIDDEN -->
 
-    <div class="col-sm-4">
-      <div class="list-group">
-          <a href="#" class="list-group-item active">
-            Cras justo odio
-          </a>
-          <a href="#" class="list-group-item">Dapibus ac facilisis in</a>
-          <a href="#" class="list-group-item">Morbi leo risus</a>
-          <a href="#" class="list-group-item">Porta ac consectetur ac</a>
-          <a href="#" class="list-group-item">Vestibulum at eros</a>
+  <div class="row">
+      <div class="col">
+        <div class="invisible">HIDDEN</div>
       </div>
-    </div>
+      <div class="col">
+        <div class="invisible">HIDDEN</div>
+      <div class="col">
+          <div class="invisible">HIDDEN</div>
+        </div>
+        <div class="col">
+          <div class="invisible">HIDDEN</div>
+      </div>
+    </div> 
 
     <!-- GRAPHS -->
 
-    <div>Graph 1</div>
+    <div>{{ club_name }}</div>
     <div><img src='{{ graph1 }}'></img></div>
-    <div>Graph 2</div>
-    <div><img src='{{ graph2 }}'></img></div>
-    <div>Graph 3</div>
-    <div><img src='{{ graph3 }}'></img></div>
+
 
   <!-- HIDDEN -->
 
@@ -156,7 +155,6 @@
         <input type="submit" value="Formular abschicken!" />
 
     </form>
-
   </div>
 </div>
 
@@ -164,9 +162,3 @@
 {% endblock %}
 
 
-{% block scripts %}
-
-<script src="{{url_for('.static', filename='myscripts.js')}}"></script>
-{{super()}}
-
-{% endblock %}
