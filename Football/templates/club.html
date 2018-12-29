@@ -52,12 +52,12 @@
   
     <p>Select a club:</p>
     <form id="form1" action="/club" method="POST" enctype="multipart/form-data">
-      <select id="mySelect" name = "club">
+      <select id="mySelect" class="btn btn-secondary dropdown-toggle" name = "club">
           {% for each in dropdown_list %}
           <option value="{{each}}">{{each}}</option>
           {% endfor %}
       </select>
-      <input type="submit" value="Submit">
+      <input type="submit" class="btn btn-secondary" value="Submit">
     </form>
     
 

@@ -4,12 +4,15 @@ from GET_Calc import GET_ALL_GOALS, GET_ESTIMATE_GOALS_POISSON , GET_POINTS, GET
 from flask import Flask, render_template, request
 from flask_bootstrap import Bootstrap 
 
+# for image update
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 
 import io
 import base64
+
+
 
 
 def build_graph(x_coordinates, y_coordinates):
@@ -45,9 +48,7 @@ def graphs():
                             site2="sitegfgf2",
                             name=name,
                             age=age,
-                            dropdown_list=dropdown_list,
-                            person_name="Name",
-                            person_age="20"
+                            dropdown_list=dropdown_list
                             )
 
 
@@ -56,18 +57,15 @@ def graphs():
 @app.route('/club', methods=['GET', 'POST'])
 def login():
 
-    name = request.args.get("name")
-    age  = request.args.get("age")
+    if request.method == "POST":     
+        club_name = request.form.get("club", None)  
 
-    if request.method == "POST":
-        club_name = request.form.get("club", None)
-        if club_name!=None:
-            
+        if club_name != None:       
             y1 = GET_POINTS(club_name, file)[3]  
-            x1 = list(range(1, (len(y1)+1) ))
-            
-            graph1_url = build_graph(x1,y1)    
-   
+            x1 = list(range(1, (len(y1)+1) ))        
+            graph1_url = build_graph(x1,y1)   
+
+
     dropdown_list = GET_ALL_CLUBS(file)
 
     season = GET_SEASON(club_name, file)
@@ -76,8 +74,6 @@ def login():
                             graph1=graph1_url,
                             site1="Start", 
                             site2="sitegfgf2",
-                            name=name,
-                            age=age,
                             club_name=club_name,
                             dropdown_list=dropdown_list,
                             season=season                      

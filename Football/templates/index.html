@@ -52,12 +52,12 @@
   
     <p>Select a club:</p>
     <form id="form1" action="/club" method="POST" enctype="multipart/form-data">
-      <select id="mySelect" name = "club">
+      <select id="mySelect" class="btn btn-secondary dropdown-toggle" name = "club">
           {% for each in dropdown_list %}
           <option value="{{each}}">{{each}}</option>
           {% endfor %}
       </select>
-      <input type="submit" value="Submit">
+          <input type="submit" class="btn btn-secondary" value="Submit">
     </form>
     
     <div id="result">
@@ -98,13 +98,13 @@
 
   <!-- HIDDEN -->
   <div class="row">
-      <div class="col">
-        <div class="invisible">HIDDEN</div>
-      </div>
-      <div class="col">
-        <div class="invisible">HIDDEN</div>
-      </div>    
-  </div> 
+    <div class="col">
+      <div class="invisible">HIDDEN</div>
+    </div>
+    <div class="col">
+      <div class="invisible">HIDDEN</div>
+    </div>    
+</div> 
 
 
   <!-- INPUT -->
@@ -116,10 +116,10 @@
     <form method="get">
         
         <label for="name">Name: </label>
-        <input type="text" name="name" id="name" value="{% if name != None %}{{ name }}{% endif %}" />
+        <input type="text" name="name" id="name" class="form-control" value="{% if name != None %}{{ name }}{% endif %}" />
 
         <label for="age">Alter:</label>
-        <input type="text" name="age" id="age" value="{% if age != None %}{{ age }}{% endif %}"/>
+        <input type="text" name="age" id="age" class="form-control" value="{% if age != None %}{{ age }}{% endif %}"/>
 
         <!-- HIDDEN -->
 
@@ -129,12 +129,11 @@
             </div>
         </div> 
   
-        <input type="submit" value="Formular abschicken!" />
+        <input type="submit" class="btn btn-secondary" value="Formular abschicken!" />
 
     </form>
   </div>
 </div>
-
 
 {% endblock %}
 
