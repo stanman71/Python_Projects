@@ -17,10 +17,16 @@ Bootstrap(app)
 @app.route('/', methods=['GET'])
 def index():
 
+    # input formular
+    name = request.args.get("name")
+    age = request.args.get("age")
+
     dropdown_list = GET_ALL_CLUBS(file)
 
     return render_template('index.html',
                             site1="Start", 
+                            name=name, 
+                            age=age,
                             dropdown_list=dropdown_list
                             )
 
