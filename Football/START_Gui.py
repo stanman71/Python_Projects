@@ -17,28 +17,36 @@ Bootstrap(app)
 @app.route('/', methods=['GET'])
 def index():
 
-    # input formular
-    name = request.args.get("name")
-    age = request.args.get("age")
-
     dropdown_list = GET_ALL_CLUBS(file)
 
+    # input formular with checkbox
+    if request.args.get('checkbox') == "on":  
+
+        name = request.args.get("name")
+        age  = request.args.get("age")
+
+        return render_template('index.html',
+                                site1="Start", 
+                                name=name, 
+                                age=age,
+                                check=True,
+                                dropdown_list=dropdown_list
+                                )
+
     return render_template('index.html',
-                            site1="Start", 
-                            name=name, 
-                            age=age,
-                            dropdown_list=dropdown_list
-                            )
+                        site1="Start",                                       
+                        dropdown_list=dropdown_list                   
+                        )
 
 
 # club information
-@app.route('/club', methods=['GET', 'POST'])
+@app.route('/club', methods=['GET', 'POST']) 
 def club():
 
     club_name = request.args.get("club")    
     dropdown_list = GET_ALL_CLUBS(file)
 
-    # input dropdown
+    # input dropdown (add value to the url)
     if request.method == "GET":     
 
         if club_name != None:       

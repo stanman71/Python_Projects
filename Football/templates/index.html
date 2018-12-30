@@ -46,16 +46,16 @@
 
 
   <!-- DROPDOWN -->
-  <p>Select a club:</p>
-  <form id="form1" action=/club  method="GET" enctype="multipart/form-data">
-    <select id="mySelect" class="btn btn-secondary dropdown-toggle" name = "club">
-        {% for each in dropdown_list %}
-        <option value="{{each}}">{{each}}</option>
-        {% endfor %}
-    </select>
-        <input type="submit" class="btn btn-secondary" value="Submit">
-  </form>
-    
+  <div class="dropdown">
+    <form action=/club  method="GET" enctype="multipart/form-data">
+      <select id="mySelect" class="btn btn-secondary dropdown-toggle" name = "club">
+          {% for each in dropdown_list %}
+          <option value="{{each}}">{{each}}</option>
+          {% endfor %}
+      </select>
+          <input type="submit" class="btn btn-secondary" value="Submit">
+    </form>
+  </div>
 
   <!-- HIDDEN -->
   <div class="row">
@@ -112,40 +112,44 @@
 
 
   <!-- FORM INPUT -->
+  {% if name is defined and check is defined %}
+    <h3>Der Name ist: {{ name }}</h3>
+  {% endif %}
 
+  {% if check is not defined %}
+    <h3>Eingabe mit Checkbox bestätigen</h3>
+  {% endif %}
 
-{% if name != None: %}
-  <h3>Der Name ist: {{ name }}</h3>
-{% endif %}
+  <div class="row">
+    <div class="col">
+      <div class="invisible">HIDDEN</div>
+    </div>
+    <div class="col">
+      <div class="invisible">HIDDEN</div>
+    </div>
+  </div> 
 
-<div class="row">
-  <div class="col">
-    <div class="invisible">HIDDEN</div>
-  </div>
-  <div class="col">
-    <div class="invisible">HIDDEN</div>
-  </div>
-</div> 
-
-<form method="get">
-    <label for="name">Name: </label>
-    <input type="text" name="name" id="name" value="{% if name != None %}{{ name }}{% endif %}" />
-
-    <label for="age">Alter:</label>
-    <input type="text" name="age" id="age" value="{% if age != None %}{{ age }}{% endif %}"/>
-
-    <div class="row">
-      <div class="col">
-        <div class="invisible">HIDDEN</div>
+  <form method="get">
+    <form class="px-4 py-3">
+      <div class="form-group">
+        <label for="name">Name: </label>
+        <input type="text" class="form-control" name="name" id="name" value="{% if name != None %}{{ name }}{% endif %}" />
       </div>
-      <div class="col">
-        <div class="invisible">HIDDEN</div>
+      <div class="form-group">
+        <label for="age">Alter:</label>
+        <input type="text" class="form-control" name="age" id="age" value="{% if age != None %}{{ age }}{% endif %}"/>
       </div>
-    </div>     
-
-    <input type="submit" class="btn btn-secondary" value="Formular abschicken!" />
-</form>
+      <br>
+      <div class="form-check">
+        <input type="checkbox" class="form-check-input" name="checkbox" id="checkbox">
+        <label class="form-check-label" for="dropdownCheck">Checkbox</label>
+      </div>
+      <br>
+      <button type="submit" class="btn btn-primary">Sign in</button>
+    </form>  
+  </form>
 
 {% endblock %}
+
 
 
