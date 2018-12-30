@@ -19,14 +19,14 @@ def index():
 
     dropdown_list = GET_ALL_CLUBS(file)
 
+    name = request.args.get("name")
+    age  = request.args.get("age")
+
     # input formular with checkbox
     if request.args.get('checkbox') == "on":  
 
-        name = request.args.get("name")
-        age  = request.args.get("age")
-
         return render_template('index.html',
-                                site1="Start", 
+                                site1="Index", 
                                 name=name, 
                                 age=age,
                                 check=True,
@@ -34,7 +34,9 @@ def index():
                                 )
 
     return render_template('index.html',
-                        site1="Start",                                       
+                        site1="Index",                                       
+                        name=name, 
+                        age=age,
                         dropdown_list=dropdown_list                   
                         )
 
@@ -52,7 +54,7 @@ def club():
         if club_name != None:       
  
             return render_template('club.html',
-                                    site1="Start", 
+                                    site1="Index", 
                                     club_name=club_name,
                                     dropdown_list=dropdown_list,
                                     )
@@ -66,7 +68,7 @@ def club():
             season = GET_SEASON(club_name, file) 
 
             return render_template('club.html',
-                                    site1="Start", 
+                                    site1="Index", 
                                     club_name=club_name,
                                     dropdown_list=dropdown_list,
                                     season=season
@@ -80,7 +82,7 @@ def club():
             graph1_url = build_graph(x1,y1)  
 
             return render_template('club.html',
-                                    site1="Start",                            
+                                    site1="Index",                            
                                     club_name=club_name,
                                     dropdown_list=dropdown_list,
                                     graph1=graph1_url
@@ -92,7 +94,7 @@ def club():
             poisson = CALC_SEASON_POISSON(club_name, file) 
 
             return render_template('club.html',
-                                    site1="Start",                              
+                                    site1="Index",                              
                                     club_name=club_name,
                                     dropdown_list=dropdown_list,
                                     poisson=poisson

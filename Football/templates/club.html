@@ -12,7 +12,6 @@
 
 <div class="container">
 
-
   <!-- HIDDEN -->
   <div class="row">
     <div class="col">
@@ -46,16 +45,17 @@
 
 
   <!-- DROPDOWN -->
-  <p>Select a club:</p>
-  <form action=/club  method="GET" enctype="multipart/form-data">
-    <select id="mySelect" class="btn btn-secondary dropdown-toggle" name = "club">
-        {% for each in dropdown_list %}
-        <option value="{{each}}">{{each}}</option>
-        {% endfor %}
-    </select>
-    <input type="submit" class="btn btn-secondary" value="Submit">
-  </form>
-    
+  <div class="dropdown">
+    <form action=/club  method="GET" enctype="multipart/form-data">
+      <select class="btn btn-secondary dropdown-toggle" name="club">
+          {% for each in dropdown_list %}
+          <option value="{{each}}">{{each}}</option>
+          {% endfor %}
+      </select>
+      <input type="submit" class="btn btn-secondary" value="Submit">
+    </form>
+  </div> 
+
 
   <!-- HIDDEN -->
   <div class="row">
@@ -69,7 +69,7 @@
 
 
   <!-- TITLE -->  
-  <div><h1>{{ club_name }}</h1></div>
+  <h1>{{ club_name }}</h1>
 
 
   <!-- HIDDEN -->
@@ -104,89 +104,86 @@
 
 
   <!-- GRAPH POINTS -->
-  <div id="result">
-      {% if graph1 is defined %}
-          <div><h3>Punkte</h3></div>
-          <div><img src='{{ graph1 }}'></img></div>
-      {% endif %}
-  </div>
+  {% if graph1 is defined %}
+      <div><h3>Punkte</h3></div>
+      <div><img src='{{ graph1 }}'></img></div>
+  {% endif %}
+  
  
 
   <!-- TABLE SEASON -->  
-  <div id="result">
-      {% if season is defined %}
-          <div class="row">
-              <div class="col">
-                <h3>Spielplan</h3>
-                <br>
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                          <th scope="col">Spieltag</th>
-                          <th scope="col">Heim</th>
-                          <th scope="col">Aus</th>
-                          <th scope="col">Ergebnis</th>
-                        <tr>
-                    </thead>
-                    <tbody>
-                        {% for each_day in season %}
-                        <tr>
-                          <th scope="row">{{ each_day[0] }}</td>
-                          <td>{{ each_day[1][0] }}</td>
-                          <td>{{ each_day[1][1] }}</td> 
-                          <td>{{ each_day[2][0] }}</td> 
-                          <td>{{ each_day[2][1] }}</td>                    
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-              </div>
-          </div>    
-      {% endif %}
-  </div>
+  {% if season is defined %}
+      <div class="row">
+          <div class="col">
+            <h3>Spielplan</h3>
+            <br>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                      <th scope="col">Spieltag</th>
+                      <th scope="col">Heim</th>
+                      <th scope="col">Aus</th>
+                      <th scope="col">Ergebnis</th>
+                    <tr>
+                </thead>
+                <tbody>
+                    {% for each_day in season %}
+                    <tr>
+                      <th scope="row">{{ each_day[0] }}</td>
+                      <td>{{ each_day[1][0] }}</td>
+                      <td>{{ each_day[1][1] }}</td> 
+                      <td>{{ each_day[2][0] }}</td> 
+                      <td>{{ each_day[2][1] }}</td>                    
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+          </div>
+      </div>    
+  {% endif %}
+  
  
 
- <!-- TABLE POISSON -->  
- <div id="result">
-    {% if poisson is defined %}
-        <div class="row">
-            <div class="col">
-              <h3>Poisson</h3>
-              <br>
-              <table class="table table-striped">
-                  <thead>
-                      <tr>
-                        <th scope="col">Spieltag</th>
-                        <th scope="col">Ort</th>
-                        <th scope="col">Gegner</th>
-                        <th scope="col">Tore</th>
-                        <th scope="col">Chance</th>
-                        <th scope="col">Gegentore</th>
-                        <th scope="col">Chance</th>
-                        <th scope="col">Ergebnis</th>       
-                        <th scope="col">Abweichung</th>                                       
-                      <tr>
-                  </thead>
-                  <tbody>
-                      {% for each_day in poisson %}
-                      <tr>
-                        <th scope="row">{{ each_day[0] }}</td>
-                        <td>{{ each_day[1] }}</td>
-                        <td>{{ each_day[2] }}</td> 
-                        <td>{{ each_day[3][0] }}</td> 
-                        <td>{{ each_day[3][1] }}</td>       
-                        <td>{{ each_day[3][2] }}</td> 
-                        <td>{{ each_day[3][3] }}</td>       
-                        <td>{{ each_day[4][0] }}</td> 
-                        <td>{{ each_day[4][1] }}</td>                                                            
-                      </tr>
-                      {% endfor %}
-                  </tbody>
-              </table>
-            </div>
-        </div>    
-    {% endif %}
-</div>
+  <!-- TABLE POISSON --> 
+  {% if poisson is defined %}
+      <div class="row">
+          <div class="col">
+            <h3>Poisson</h3>
+            <br>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                      <th scope="col">Spieltag</th>
+                      <th scope="col">Ort</th>
+                      <th scope="col">Gegner</th>
+                      <th scope="col">Tore</th>
+                      <th scope="col">Chance</th>
+                      <th scope="col">Gegentore</th>
+                      <th scope="col">Chance</th>
+                      <th scope="col">Ergebnis</th>       
+                      <th scope="col">Abweichung</th>                                       
+                    <tr>
+                </thead>
+                <tbody>
+                    {% for each_day in poisson %}
+                    <tr>
+                      <th scope="row">{{ each_day[0] }}</td>
+                      <td>{{ each_day[1] }}</td>
+                      <td>{{ each_day[2] }}</td> 
+                      <td>{{ each_day[3][0] }}</td> 
+                      <td>{{ each_day[3][1] }}</td>       
+                      <td>{{ each_day[3][2] }}</td> 
+                      <td>{{ each_day[3][3] }}</td>       
+                      <td>{{ each_day[4][0] }}</td> 
+                      <td>{{ each_day[4][1] }}</td>                                                            
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+          </div>
+      </div>    
+  {% endif %}
+
 
 
 {% endblock %}
