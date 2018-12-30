@@ -113,9 +113,13 @@
 
   <!-- FORM INPUT -->
   {% if check is defined %}
-    <h3>Der Name ist: {{ name }}</h3>
-  {% else %}
-    <h3>Eingabe mit Checkbox bestätigen</h3>
+    <div class="alert alert-success" role="alert">
+      <h3>Der Name ist: {{ name }}</h3>
+    </div>
+  {% elif name is not none %}
+    <div class="alert alert-danger" role="alert">
+      <h3>Eingabe mit Checkbox bestätigen</h3>
+    </div>
   {% endif %}
 
   <div class="row">
