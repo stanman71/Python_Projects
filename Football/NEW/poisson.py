@@ -14,7 +14,7 @@ from scipy.stats import poisson,skellam
 """ Import data """
 """ ########### """
 
-epl_1617 = pd.read_csv("http://www.football-data.co.uk/mmz4281/1617/E0.csv")
+epl_1617 = pd.read_csv("http://www.football-data.co.uk/mmz4281/1819/D1.csv")
 epl_1617 = epl_1617[['HomeTeam','AwayTeam','FTHG','FTAG']]
 epl_1617 = epl_1617.rename(columns={'FTHG': 'HomeGoals', 'FTAG': 'AwayGoals'})
 
@@ -22,11 +22,12 @@ print(epl_1617.head())
 
 """ Average goals """
 
-epl_1617 = epl_1617[:-10]
+#epl_1617 = epl_1617[:-10]
 
-print(epl_1617.mean())
+#print(epl_1617.mean())
 
 
+'''
 
 """ ##################### """
 """ Poisson for all goals """
@@ -57,6 +58,7 @@ plt.tight_layout()
 plt.show()
 
 
+
 """ ####################### """
 """ Poisson for home / away """
 """ ####################### """
@@ -81,8 +83,6 @@ plt.title("Difference in Goals Scored (Home Team vs Away Team)",size=14,fontweig
 plt.ylim([-0.004, 0.26])
 plt.tight_layout()
 plt.show()
-
-
 
 
 """ ######################## """
@@ -117,6 +117,8 @@ plt.ylim([-0.004, 0.4])
 plt.tight_layout()
 plt.show()
 
+'''
+
 
 """ ################# """
 """ calcutate results """
@@ -136,10 +138,10 @@ poisson_model = smf.glm(formula="goals ~ home + team + opponent", data=goal_mode
 
 print(poisson_model.summary())
 
-print(poisson_model.predict(pd.DataFrame(data={'team': 'Chelsea', 'opponent': 'Sunderland',
+print(poisson_model.predict(pd.DataFrame(data={'team': 'Bayern Munich', 'opponent': 'Augsburg',
                                        'home':1},index=[1])))
 
-print(poisson_model.predict(pd.DataFrame(data={'team': 'Sunderland', 'opponent': 'Chelsea',
+print(poisson_model.predict(pd.DataFrame(data={'team': 'Augsburg', 'opponent': 'Bayern Munich',
                                        'home':0},index=[1])))
 
 def simulate_match(foot_model, homeTeam, awayTeam, max_goals=10):
@@ -160,12 +162,12 @@ def simulate_match(foot_model, homeTeam, awayTeam, max_goals=10):
     represents a Chelsea victory (e.g P(3-0)=0.149), And you can estimate P(Over 2.5 goals) 
     by summing all entries except the four values in the upper left corner. """
 
-print(simulate_match(poisson_model, 'Chelsea', 'Sunderland', max_goals=3))
+print(simulate_match(poisson_model, 'Dortmund', 'Bayern Munich', max_goals=3))
 
 
 """ only result """
 
-chel_sun = simulate_match(poisson_model, "Chelsea", "Sunderland", max_goals=10)
+chel_sun = simulate_match(poisson_model, "Dortmund", "Bayern Munich", max_goals=10)
 # chelsea win
 print(np.sum(np.tril(chel_sun, -1)))
 # draw
