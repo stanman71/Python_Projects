@@ -96,7 +96,8 @@
   <form action="" method="post"> 
         <input type="submit" class="btn btn-secondary" name="Button_1" value="Spielplan"/>
         <input type="submit" class="btn btn-secondary" name="Button_2" value="Punkte"/>
-        <input type="submit" class="btn btn-secondary" name="Button_3" value="Poisson"/>
+        <input type="submit" class="btn btn-secondary" name="Button_3" value="ATT / DEF"/>
+        <input type="submit" class="btn btn-secondary" name="Button_4" value="Poisson"/>
   </form>
 
 
@@ -113,12 +114,31 @@
 
 
   <!-- GRAPH POINTS -->
-  {% if graph1 is defined %}
+  {% if graph_table is defined %}
       <div><h3>Punkte</h3></div>
-      <div><img src='{{ graph1 }}'></img></div>
+      <div><img src='{{ graph_table }}'></img></div>
   {% endif %}
   
  
+
+  <!-- ATT / DEF -->  
+  {% if att_value is defined %}
+      <div><h5>ATT Bestimmtheitsmass: {{ att_value }}</h5></div>
+      <div><h5>DEF Bestimmtheitsmass: {{ def_value }}</h5></div>
+      <br>
+      <br>
+      <div><h4>Tore</h4></div>
+      <br>
+      <div><img src='{{ graph_goals }}'></img></div>
+      <div color="blue"><h6>Blau: reale Ergebnisse</h6></div>
+      <br>
+      <div><h4>Gegentore</h4></div>
+      <br>
+      <div><img src='{{ graph_hits }}'></img></div>
+      <div color="blue"><h6>Blau: reale Ergebnisse</h6></div>
+  {% endif %}
+
+
 
   <!-- TABLE SEASON -->  
   {% if season is defined %}

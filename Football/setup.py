@@ -13,6 +13,6 @@ setup(name='Football',
                         'bs4', 
                         'pandas', 
                         'numpy', 
-                        'scipy.stats', 
+                        'scipy', 
                         'matplotlib'],
       )

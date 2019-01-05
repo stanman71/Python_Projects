@@ -216,6 +216,38 @@ def GET_ATT_DEF_VALUE(Club, file):
 
 
 
+def GET_ATT_DEF_ANALYSE(Club, file):
+
+    from sklearn.metrics import r2_score
+
+    X = []
+    Y = []
+    X_Pred = []
+    Y_Pred = []
+    day = []
+
+    data = CALC_SEASON_POISSON(Club, file)
+
+    for i in range(0,34):
+
+        try:
+            X.append(data[i][4][0][0])
+            Y.append(data[i][4][0][1])
+        except:
+            break
+
+        X_Pred.append(data[i][3][0])
+        Y_Pred.append(data[i][3][2])
+
+        day.append(data[i][0])
+
+    r2_X = r2_score(X, X_Pred)
+    r2_Y = r2_score(Y, Y_Pred)
+
+    return(X, X_Pred, Y, Y_Pred, day, r2_X, r2_Y)
+
+
+
 def GET_ESTIMATE_GOALS_POISSON(Club_1, Club_2, file):
 
     # https://www.onlinemathe.de/forum/Fussballergebnisse-Berechnen-Formel
