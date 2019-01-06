@@ -122,9 +122,36 @@ def club():
                                     )
 
 
-        # Poisson
+        # Gewonnen / Verloren
         if 'Button_4' in request.form:
 
+            anaylse = GET_ATT_DEF_ANALYSE(club_name, file)
+
+            y1_1 = GET_ATT_DEF_ANALYSE(club_name, file)[1] 
+            y1_2 = GET_ATT_DEF_ANALYSE(club_name, file)[3]  
+            x1   = GET_ATT_DEF_ANALYSE(club_name, file)[4]
+
+            y2_1 = GET_ATT_DEF_ANALYSE(club_name, file)[0] 
+            y2_2 = GET_ATT_DEF_ANALYSE(club_name, file)[2] 
+            x2   = GET_ATT_DEF_ANALYSE(club_name, file)[4]
+
+            values_1 = (x1, y1_1, y1_2)
+            values_2 = (x2, y2_1, y2_2)           
+
+            graph_real = build_graph(values_1, "plot")
+            graph_pred = build_graph(values_2, "plot")
+
+            return render_template('club.html',
+                                    site1="Index",                              
+                                    club_name=club_name,
+                                    dropdown_list=dropdown_list,
+                                    graph_real=graph_real,
+                                    graph_pred=graph_pred                             
+                                    )
+
+
+        # Poisson
+        if 'Button_5' in request.form:
             poisson = CALC_SEASON_POISSON(club_name, file) 
 
             return render_template('club.html',

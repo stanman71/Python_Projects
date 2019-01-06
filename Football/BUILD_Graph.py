@@ -30,6 +30,7 @@ def build_graph(values, type):
 
         if y2_coordinates is not None:
             plt.scatter(x_coordinates, y2_coordinates)
+            plt.fill_between(y_coordinates, y2_coordinates, color='grey', alpha='0.5')  
 
     plt.savefig(img, format='png')
     img.seek(0)

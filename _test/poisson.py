@@ -18,13 +18,14 @@ epl_1617 = pd.read_csv("http://www.football-data.co.uk/mmz4281/1819/D1.csv")
 epl_1617 = epl_1617[['HomeTeam','AwayTeam','FTHG','FTAG']]
 epl_1617 = epl_1617.rename(columns={'FTHG': 'HomeGoals', 'FTAG': 'AwayGoals'})
 
-print(epl_1617.head())
+#print(epl_1617.head())
 
 """ Average goals """
 
 #epl_1617 = epl_1617[:-10]
 
 #print(epl_1617.mean())
+
 
 
 '''
@@ -136,13 +137,19 @@ goal_model_data = pd.concat([epl_1617[['HomeTeam','AwayTeam','HomeGoals']].assig
 poisson_model = smf.glm(formula="goals ~ home + team + opponent", data=goal_model_data, 
                         family=sm.families.Poisson()).fit()
 
-print(poisson_model.summary())
+#print(poisson_model.summary())
 
-print(poisson_model.predict(pd.DataFrame(data={'team': 'Bayern Munich', 'opponent': 'Augsburg',
-                                       'home':1},index=[1])))
 
-print(poisson_model.predict(pd.DataFrame(data={'team': 'Augsburg', 'opponent': 'Bayern Munich',
-                                       'home':0},index=[1])))
+df = epl_1617[['HomeTeam','AwayTeam']]
+
+df = df[(df.HomeTeam == "Hertha") | (df.AwayTeam == "Hertha")]
+
+#for row in df.index:
+     #print(poisson_model.predict(pd.DataFrame(data={'team': df.HomeTeam[row], 'opponent': df.AwayTeam[row],'home':1},index=[1])))
+     #print(poisson_model.predict(pd.DataFrame(data={'team': df.AwayTeam[row], 'opponent': df.HomeTeam[row],'home':0},index=[1])))
+     
+
+
 
 def simulate_match(foot_model, homeTeam, awayTeam, max_goals=10):
     home_goals_avg = foot_model.predict(pd.DataFrame(data={'team': homeTeam, 
@@ -162,18 +169,25 @@ def simulate_match(foot_model, homeTeam, awayTeam, max_goals=10):
     represents a Chelsea victory (e.g P(3-0)=0.149), And you can estimate P(Over 2.5 goals) 
     by summing all entries except the four values in the upper left corner. """
 
-print(simulate_match(poisson_model, 'Dortmund', 'Bayern Munich', max_goals=3))
+#print(simulate_match(poisson_model, 'Dortmund', 'Bayern Munich', max_goals=6))
 
 
 """ only result """
 
-chel_sun = simulate_match(poisson_model, "Dortmund", "Bayern Munich", max_goals=10)
-# chelsea win
-print(np.sum(np.tril(chel_sun, -1)))
-# draw
-print(np.sum(np.diag(chel_sun)))
-# sunderland win
-print(np.sum(np.triu(chel_sun, 1)))
+df = epl_1617[['HomeTeam','AwayTeam']]
+
+df = df[(df.HomeTeam == "Hertha") | (df.AwayTeam == "Hertha")]
+
+for row in df.index:
+      print(df.HomeTeam[row])
+      print(df.AwayTeam[row])
+      chel_sun = simulate_match(poisson_model, df.HomeTeam[row], df.AwayTeam[row], max_goals=6)
+      # chelsea win
+      print(np.sum(np.tril(chel_sun, -1)))
+      # draw
+      print(np.sum(np.diag(chel_sun)))
+      # sunderland win
+      print(np.sum(np.triu(chel_sun, 1)))
 
 
 

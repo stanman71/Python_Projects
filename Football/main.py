@@ -39,7 +39,7 @@ file = "./Python_Projects/Football/CSV/1_Bundesliga_2018_2019.csv"
 
 # [ATT_Home, DEF_Home, ATT_Out, DEF_Out]
 
-print(GET_ATT_DEF_ANALYSE("Borussia Dortmund", file))
+#print(GET_ATT_DEF_ANALYSE("Borussia Dortmund", file))
 
 #print(GET_ESTIMATE_GOALS_POISSON("Eintracht Frankfurt", "Bayern München", file))
 
@@ -47,7 +47,7 @@ print(GET_ATT_DEF_ANALYSE("Borussia Dortmund", file))
 
 #print(GET_SEASON("Eintracht Frankfurt", file))
 
-#print(CALC_SEASON_POISSON("Borussia Dortmund", file))
+print(CALC_SEASON_POISSON("Eintracht Frankfurt", file))
 
 # [[Day, Location, Opponent, [Estimate_Goals, [Poisson], 
 #                             Estimate_Hits,  [Poisson]], 

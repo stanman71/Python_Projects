@@ -29,10 +29,6 @@
       <ul class="nav nav-pills">   
         <br>          
         <li role="presentation" class="active"><a href="/">{{ site1 }}</a></li>
-        <li role="presentation" class="active"><a href=#>Site 2</a></li>
-        <li role="presentation" class="active"><a href=#>Site 3</a></li>
-        <li role="presentation" class="active"><a href=#>Site 4</a></li>
-        <li role="presentation" class="active"><a href=#>Site 5</a></li>
         <br>
         <br>
         <br>
@@ -97,7 +93,8 @@
         <input type="submit" class="btn btn-secondary" name="Button_1" value="Spielplan"/>
         <input type="submit" class="btn btn-secondary" name="Button_2" value="Punkte"/>
         <input type="submit" class="btn btn-secondary" name="Button_3" value="ATT / DEF"/>
-        <input type="submit" class="btn btn-secondary" name="Button_4" value="Poisson"/>
+        <input type="submit" class="btn btn-secondary" name="Button_4" value="Ergebnisse"/>
+        <input type="submit" class="btn btn-secondary" name="Button_5" value="Poisson"/>
   </form>
 
 
@@ -130,12 +127,25 @@
       <div><h4>Tore</h4></div>
       <br>
       <div><img src='{{ graph_goals }}'></img></div>
-      <div color="blue"><h6>Blau: reale Ergebnisse</h6></div>
+      <div><h6>Blau: reale Ergebnisse</h6></div>
       <br>
       <div><h4>Gegentore</h4></div>
       <br>
       <div><img src='{{ graph_hits }}'></img></div>
-      <div color="blue"><h6>Blau: reale Ergebnisse</h6></div>
+      <div<h6>Blau: reale Ergebnisse</h6></div>
+  {% endif %}
+  
+ 
+
+  <!-- Results -->  
+  {% if graph_real is defined %}
+      <div><h4>Vorhergesagtes Ergebnis</h4></div>
+      <div><img src='{{ graph_real }}'></img></div>
+       <div><h6>Blau: Tore {{ club_name }}</h6></div>
+      <br>
+      <div><h4>Reales Ergebnis</h4></div>
+      <div><img src='{{ graph_pred }}'></img></div>
+       <div><h6>Blau: Tore {{ club_name }}</h6></div>
   {% endif %}
 
 
