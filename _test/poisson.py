@@ -176,7 +176,7 @@ def simulate_match(foot_model, homeTeam, awayTeam, max_goals=10):
 
 df = epl_1617[['HomeTeam','AwayTeam']]
 
-df = df[(df.HomeTeam == "Hertha") | (df.AwayTeam == "Hertha")]
+df = df[(df.HomeTeam == "Freiburg") | (df.AwayTeam == "Freiburg")]
 
 for row in df.index:
       print(df.HomeTeam[row])
