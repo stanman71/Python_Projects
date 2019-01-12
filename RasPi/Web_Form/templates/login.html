@@ -35,11 +35,19 @@ Login
 
     <div class="container">
 
-      {% if check is defined %}
+      {% if login_check is defined %}
         <br>
         <br>
         <div class="alert alert-danger" role="alert">
           Falsche Benutzereingaben
+        </div>      
+      {% endif %}
+
+      {% if role_check is defined %}
+        <br>
+        <br>
+        <div class="alert alert-danger" role="alert">
+          Keine Zugriffsberechtigung
         </div>      
       {% endif %}
 

@@ -52,6 +52,7 @@ Dashboard
                 <th scope="col">ID</th>
                 <th scope="col">Benutzer</th>
                 <th scope="col">eMail</th>
+                <th scope="col">Rolle</th>
               <tr>
             </thead>
             <tbody>
@@ -60,7 +61,9 @@ Dashboard
                   <td>{{ user.id }}</td>
                   <td>{{ user.username }}</td>
                   <td>{{ user.email }}</td>  
+                  <td>{{ user.role }}</td> 
        
+                  <td><a href="/dashboard/user/role/{{ user.id }}">freischalten</a>
                   <td><a href="/dashboard/user/delete/{{ user.id }}">delete</a>
                   </td>   
                 </tr>

@@ -7,6 +7,7 @@ from wtforms.validators import InputRequired, Email, Length
 from flask_sqlalchemy  import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
+from functools import wraps
 
 from REST_API import TodoListResource, TodoResource
 
@@ -41,7 +42,19 @@ class User(UserMixin, db.Model):
     username = db.Column(db.String(15), unique=True)
     email    = db.Column(db.String(50), unique=True)
     password = db.Column(db.String(80))
-    active   = db.Column(db.Integer)
+    role     = db.Column(db.String(80))
+
+
+
+def admin_required(f):
+    @wraps(f)
+    def wrap(*args, **kwargs):
+        if current_user.role == "admin":
+            return f(*args, **kwargs)
+        else:
+            form = LoginForm()
+            return render_template('login.html', form=form, role_check=False)
+    return wrap
 
 
 @login_manager.user_loader
@@ -85,7 +98,7 @@ def login():
                 login_user(user, remember=form.remember.data)
                 return redirect(url_for('dashboard'))
 
-        return render_template('login.html', form=form, check=False)
+        return render_template('login.html', form=form, login_check=False)
 
     return render_template('login.html', form=form)
 
@@ -106,6 +119,7 @@ def signup():
 
 @app.route('/dashboard', methods=['GET', 'POST'])
 @login_required
+@admin_required
 def dashboard():
     return render_template('dashboard.html', name=current_user.username)
 
@@ -118,6 +132,16 @@ def dashboard_user():
                             name=current_user.username,
                             user_list=user_list 
                             )
+
+
+@app.route('/dashboard/user/role/<int:id>')
+@login_required
+def promote(id):
+    entry = User.query.get(id)
+    entry.role = "admin"
+    db.session.commit()
+    user_list = User.query.all()
+    return redirect(url_for('dashboard_user'))
 
 
 @app.route('/dashboard/user/delete/<int:id>')
