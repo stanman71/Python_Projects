@@ -16,7 +16,7 @@ Base = declarative_base()
 # database login 
 Session = sessionmaker(autocommit = False,
                        autoflush  = False,
-                       bind       = create_engine('mysql+pymysql://python:python@localhost/python'))
+                       bind       = create_engine('mysql+pymysql://python:python@localhost/raspi'))
 session = scoped_session(Session)
 
 # table structure

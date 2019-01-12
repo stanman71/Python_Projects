@@ -25,7 +25,7 @@ api.add_resource(TodoResource, '/api/resource/<string:id>', endpoint='user')
 """ ######## """
 
 # Database login 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://python:python@localhost/python'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://python:python@localhost/raspi'
 bootstrap = Bootstrap(app)
 db = SQLAlchemy(app)
 login_manager = LoginManager()
@@ -41,6 +41,7 @@ class User(UserMixin, db.Model):
     username = db.Column(db.String(15), unique=True)
     email    = db.Column(db.String(50), unique=True)
     password = db.Column(db.String(80))
+    active   = db.Column(db.Integer)
 
 
 @login_manager.user_loader
