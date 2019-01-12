@@ -24,6 +24,7 @@ user_fields = {'id'      : fields.Integer,
                'username': fields.String,
                'email'   : fields.String,
                'password': fields.String, 
+               'role'    : fields.String, 
                'uri'     : fields.Url('user', absolute=True),
                }
 
@@ -31,6 +32,7 @@ parser = reqparse.RequestParser()
 parser.add_argument('username', type=str)
 parser.add_argument('email',    type=str)
 parser.add_argument('password', type=str)
+parser.add_argument('role',     type=str)
 
 class Todo(Base):
 
@@ -42,7 +44,7 @@ class Todo(Base):
     username = Column(String(15), unique=True)
     email    = Column(String(50), unique=True)
     password = Column(String(80))
-
+    role     = Column(String(80))
 
 """ ################ """
 """ authentification """
@@ -98,6 +100,8 @@ class TodoResource(Resource):
             todo.email = parsed_args['email']
         if (parsed_args['password']) is not None:  
             todo.password = parsed_args['password']
+        if (parsed_args['role']) is not None:  
+            todo.role = parsed_args['role']
 
         session.add(todo)
         session.commit()
@@ -117,7 +121,8 @@ class TodoListResource(Resource):
         parsed_args = parser.parse_args()
         todo = Todo(username = parsed_args['username'],
                     email    = parsed_args['email'],
-                    password = parsed_args['password'])
+                    password = parsed_args['password'],
+                    role     = parsed_args['role'])
         session.add(todo)
         session.commit()
         return todo, 201

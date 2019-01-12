@@ -46,10 +46,10 @@ class User(UserMixin, db.Model):
 
 
 
-def admin_required(f):
+def superuser_required(f):
     @wraps(f)
     def wrap(*args, **kwargs):
-        if current_user.role == "admin":
+        if current_user.role == "superuser":
             return f(*args, **kwargs)
         else:
             form = LoginForm()
@@ -109,7 +109,7 @@ def signup():
 
     if form.validate_on_submit():
         hashed_password = generate_password_hash(form.password.data, method='sha256')
-        new_user = User(username=form.username.data, email=form.email.data, password=hashed_password)
+        new_user = User(username=form.username.data, email=form.email.data, password=hashed_password, role="user")
         db.session.add(new_user)
         db.session.commit()
         return render_template('index.html', form=form, check=True)
@@ -119,13 +119,14 @@ def signup():
 
 @app.route('/dashboard', methods=['GET', 'POST'])
 @login_required
-@admin_required
+@superuser_required
 def dashboard():
     return render_template('dashboard.html', name=current_user.username)
 
 
 @app.route('/dashboard/user/', methods=['GET', 'POST'])
 @login_required
+@superuser_required
 def dashboard_user():
     user_list = User.query.all()
     return render_template('dashboard.html',
@@ -136,9 +137,10 @@ def dashboard_user():
 
 @app.route('/dashboard/user/role/<int:id>')
 @login_required
+@superuser_required
 def promote(id):
     entry = User.query.get(id)
-    entry.role = "admin"
+    entry.role = "superuser"
     db.session.commit()
     user_list = User.query.all()
     return redirect(url_for('dashboard_user'))
@@ -146,6 +148,7 @@ def promote(id):
 
 @app.route('/dashboard/user/delete/<int:id>')
 @login_required
+@superuser_required
 def delete(id):
     User.query.filter_by(id=id).delete()
     db.session.commit()
