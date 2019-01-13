@@ -45,7 +45,7 @@ class User(UserMixin, db.Model):
     role     = db.Column(db.String(80))
 
 
-
+# Role Management
 def superuser_required(f):
     @wraps(f)
     def wrap(*args, **kwargs):
@@ -135,6 +135,7 @@ def dashboard_user():
                             )
 
 
+# Change user role
 @app.route('/dashboard/user/role/<int:id>')
 @login_required
 @superuser_required
@@ -146,6 +147,7 @@ def promote(id):
     return redirect(url_for('dashboard_user'))
 
 
+# Delete user
 @app.route('/dashboard/user/delete/<int:id>')
 @login_required
 @superuser_required

@@ -50,7 +50,7 @@ requests.delete('http://localhost:5000/api/resource/8',
 DATABASE (MySQL):
 #################
 
-Database:  python
+Database:  raspi
 Tablename: user
            id       (Integer, primary_key)
            username (String(15), unique)
