@@ -39,10 +39,25 @@ class User(UserMixin, db.Model):
     __tablename__ = 'user'
 
     id       = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(15), unique=True)
+    username = db.Column(db.String(50), unique=True)
     email    = db.Column(db.String(50), unique=True)
-    password = db.Column(db.String(80))
-    role     = db.Column(db.String(80))
+    password = db.Column(db.String(100))
+    role     = db.Column(db.String(20))
+
+
+# Create all database tables
+db.create_all()
+
+# Create default user
+if User.query.filter_by(username='default').first() is None:
+    user = User(
+        username='default',
+        email='member@example.com',
+        password=generate_password_hash('qwer1234', method='sha256'),
+        role='superuser'
+    )
+    db.session.add(user)
+    db.session.commit()
 
 
 # Role Management
@@ -167,5 +182,3 @@ def logout():
 
 if __name__ == '__main__':
     app.run(debug=True)
-
-    
