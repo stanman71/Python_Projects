@@ -1,8 +1,5 @@
-# https://github.com/benknight/hue-python-rgb-converter
-
 from flask import Flask, render_template, redirect, url_for, request
 from flask_bootstrap import Bootstrap
-from flask_colorpicker import colorpicker
 from flask_restful import Api
 from flask_wtf import FlaskForm 
 from wtforms import StringField, PasswordField, BooleanField
@@ -33,7 +30,6 @@ api.add_resource(TodoResource, '/api/resource/<string:id>', endpoint='user')
 # Database login 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://python:python@localhost/raspi'
 bootstrap = Bootstrap(app)
-colorpicker(app)
 db = SQLAlchemy(app)
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -274,7 +270,7 @@ def dashboard_hue():
     #b = Bridge(ip)
 
     return render_template('dashboard.html', 
-                            red=red, 
+                            red=red,
                             green=green, 
                             blue=blue, 
                             brightness=brightness,
