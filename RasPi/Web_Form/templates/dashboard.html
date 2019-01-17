@@ -19,11 +19,13 @@ Dashboard
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="#">Project name</a>
+        <a class="navbar-brand" href="#">RASPI</a>
       </div>
       <div id="navbar" class="collapse navbar-collapse">
         <ul class="nav navbar-nav">
           <li><a href="{{ url_for('logout') }}">Log Out</a></li>
+          <li><a href="{{ url_for('dashboard_user') }}">Benutzer</a></li>
+          <li><a href="{{ url_for('dashboard_hue') }}">Hue</a></li>
         </ul>
       </div><!--/.nav-collapse -->
     </div>
@@ -32,16 +34,7 @@ Dashboard
 
   <div class="col-sm-2 col-sm-offset-2 col-md-10 col-md-offset-1 main">
 
-    <a class="btn btn-primary" href="/dashboard/user" role="button">Benutzer</a>
-    <a class="btn btn-primary" href="/dashboard/hue" role="button">Hue</a>
-    <a class="btn btn-primary" href="/dashboard" role="button">Button_3</a>
-    <a class="btn btn-primary" href="/dashboard" role="button">Button_4</a>
-    <a class="btn btn-primary" href="/dashboard" role="button">Button_5</a>
-
-    <br>
-    <br>
-    
-    {% if user_list is defined %}
+    {% if siteID == "user" %}
     <h2 class="sub-header">Benutzer</h2> 
       <div class="row">
         <div class="col">
@@ -72,7 +65,14 @@ Dashboard
       </div>    
     {% endif %}
   
-    {% if red is defined %}
+    {% if siteID == "hue" %}
+      <a class="btn btn-primary" href="/dashboard/hue/scenes" role="button">Szenen</a>
+      <a class="btn btn-primary" href="/dashboard/hue/groups" role="button">Gruppen</a>
+      <a class="btn btn-primary" href="/dashboard/hue/settings" role="button">Einstellungen</a>
+
+      <br>
+      <br>
+
       <h2 class="sub-header">Philips Hue</h2> 
       <div class="row">
         <div class="col">

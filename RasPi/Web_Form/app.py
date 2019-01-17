@@ -175,7 +175,8 @@ def dashboard_user():
     user_list = User.query.all()
     return render_template('dashboard.html',
                             name=current_user.username,
-                            user_list=user_list 
+                            user_list=user_list,
+                            siteID="user" 
                             )
 
 
@@ -274,7 +275,8 @@ def dashboard_hue():
                             green=green, 
                             blue=blue, 
                             brightness=brightness,
-                            ip=ip)
+                            ip=ip,
+                            siteID="hue")
 
 
 @app.route('/logout')
