@@ -152,7 +152,7 @@ def dashboard():
 @superuser_required
 def dashboard_user():
     user_list = User.query.all()
-    return render_template('dashboard.html',
+    return render_template('dashboard_user.html',
                             name=current_user.username,
                             user_list=user_list,
                             siteID="user" 
@@ -204,7 +204,7 @@ def dashboard_hue():
 
             brightness = GET_Brightness(ID)
 
-            return render_template('dashboard.html', 
+            return render_template('dashboard_hue.html', 
                                     red=red,
                                     green=green, 
                                     blue=blue, 
@@ -215,7 +215,7 @@ def dashboard_hue():
 
         if 'groups' in request.form:
 
-            return render_template('dashboard.html', 
+            return render_template('dashboard_hue.html', 
                                     siteID="hue",
                                     hueSITE="groups")
         
@@ -224,13 +224,13 @@ def dashboard_hue():
             ip = request.args.get("ip")
             SET_IP(ip)
 
-            return render_template('dashboard.html', 
+            return render_template('dashboard_hue.html', 
                                     ip=ip,
                                     siteID="hue",
                                     hueSITE="settings")
 
 
-    return render_template('dashboard.html', 
+    return render_template('dashboard_hue.html', 
                             siteID="hue")
 
 
