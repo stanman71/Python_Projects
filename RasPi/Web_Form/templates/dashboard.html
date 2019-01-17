@@ -66,67 +66,72 @@ Dashboard
     {% endif %}
   
     {% if siteID == "hue" %}
-      <a class="btn btn-primary" href="/dashboard/hue/scenes" role="button">Szenen</a>
-      <a class="btn btn-primary" href="/dashboard/hue/groups" role="button">Gruppen</a>
-      <a class="btn btn-primary" href="/dashboard/hue/settings" role="button">Einstellungen</a>
-
+    
+    <form action="" method="post"> 
+            <input type="submit" class="btn btn-secondary" name="scenes" value="Szenen"/>
+            <input type="submit" class="btn btn-secondary" name="groups" value="Gruppen"/>
+            <input type="submit" class="btn btn-secondary" name="settings" value="Einstellungen"/>
+      </form>
       <br>
       <br>
 
       <h2 class="sub-header">Philips Hue</h2> 
       <div class="row">
         <div class="col">
-          <br>  
+        <br>  
 
-          <div class="panel panel-primary">
-            <div class="panel-heading">RGB Einstellungen</div>
-            <div class="panel-body">
-              <form method="POST">
-                <div class="slidecontainer">
-                  <p>ROT:</p>
-                  <input type="range" min=0 max=255 value={{red}} class="slider" name="slider_red">
-                  <p>GRÜN:</p>
-                  <input type="range" min=0 max=255 value={{green}} class="slider" name="slider_green">
-                  <p>BLAU:</p>
-                  <input type="range" min=0 max=255 value={{blue}} class="slider" name="slider_blue">
-                  <br>
-                  <input type="submit" value="Submit">
-                </div>
-              </form>
+          {% if hueSITE == "scenes" %}
+            <div class="panel panel-primary">
+              <div class="panel-heading">RGB Einstellungen</div>
+              <div class="panel-body">
+                <form method="POST">
+                  <div class="slidecontainer">
+                    <p>ROT:</p>
+                    <input type="range" min=0 max=255 value={{red}} class="slider" name="slider_red">
+                    <p>GRÜN:</p>
+                    <input type="range" min=0 max=255 value={{green}} class="slider" name="slider_green">
+                    <p>BLAU:</p>
+                    <input type="range" min=0 max=255 value={{blue}} class="slider" name="slider_blue">
+                    <br>
+                    <input type="submit" name="scenes" value="Submit">
+                  </div>
+                </form>
+              </div>
             </div>
-          </div>
 
-          <div class="panel panel-primary">
-            <div class="panel-heading">Helligkeit</div>
-            <div class="panel-body">
-              <form method="POST">
-                <div class="slidecontainer">
-                  <input type="range" min=0 max=255 value={{brightness}} class="slider" name="slider_brightness">
-                  <br>
-                  <input type="submit" value="Submit">
-                </div>
-              </form>
+            <div class="panel panel-primary">
+              <div class="panel-heading">Helligkeit</div>
+              <div class="panel-body">
+                <form method="POST">
+                  <div class="slidecontainer">
+                    <input type="range" min=0 max=255 value={{brightness}} class="slider" name="slider_brightness">
+                    <br>
+                    <input type="submit" name="scenes" value="Submit">
+                  </div>
+                </form>
+              </div>
             </div>
-          </div>
+          {% endif %}
 
-          <div class="panel panel-primary">
-            <div class="panel-heading">Systemeinstellungen</div>
-            <div class="panel-body">
-              <form method="GET">
-                <label for="name">BRIDGE IP: </label>
-                <input type="text" name="ip" value="{% if ip != None %}{{ ip }}{% endif %}" />
-                <br>
-                <br>
-                <input type="submit" value="IP ändern" />
-              </form>
-            </div>  
-          </div>         
-          <br>
-          <br>
+          {% if hueSITE == "settings" %}
+            <div class="panel panel-primary">
+              <div class="panel-heading">Systemeinstellungen</div>
+              <div class="panel-body">
+                <form method="GET">
+                  <label for="name">BRIDGE IP: </label>
+                  <input type="text" name="ip" value="{% if ip != None %}{{ ip }}{% endif %}" />
+                  <br>
+                  <br>
+                  <input type="submit" name="settings" value="IP ändern" />
+                </form>
+              </div>  
+            </div>         
+          {% endif %}
 
         </div>
       </div>    
     {% endif %}
+
   </div>
 
 {% endblock %}

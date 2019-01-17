@@ -9,15 +9,17 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 from functools import wraps
 
-from RBGtoXY import RGBtoXY
-from phue import Bridge
 from REST_API import TodoListResource, TodoResource
 
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'Thisissupposedtobesecret!'
 
-# REST_API
+
+""" ######## """
+""" REST_API """
+""" ######## """
+
 api = Api(app)
 api.add_resource(TodoListResource, '/api/resource', endpoint='users')
 api.add_resource(TodoResource, '/api/resource/<string:id>', endpoint='user')
@@ -46,19 +48,6 @@ class User(UserMixin, db.Model):
     password = db.Column(db.String(100))
     role     = db.Column(db.String(20))
 
-
-class Hue(db.Model):
-
-    __tablename__ = 'hue'
-    id          = db.Column(db.Integer, primary_key=True)
-    ip          = db.Column(db.String(50), unique=True)
-    color_red   = db.Column(db.Integer)
-    color_green = db.Column(db.Integer)
-    color_blue  = db.Column(db.Integer)
-    color_y     = db.Column(db.Float)
-    color_x     = db.Column(db.Float)
-    brightness  = db.Column(db.Integer)
-
 # Create all database tables
 db.create_all()
 
@@ -71,15 +60,6 @@ if User.query.filter_by(username='default').first() is None:
         role='superuser'
     )
     db.session.add(user)
-    db.session.commit()
-
-# Create default hue settings
-if Hue.query.filter_by().first() is None:
-    hue = Hue(
-        id = '1',
-        ip = 'default',
-    )
-    db.session.add(hue)
     db.session.commit()
 
 
@@ -128,7 +108,6 @@ class RegisterForm(FlaskForm):
 def index():
 
     return render_template('index.html')
-
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -203,79 +182,55 @@ def delete(id):
     return redirect(url_for('dashboard_user'))
 
 
-# philips hue
+# Philips Hue
 @app.route('/dashboard/hue/', methods=['GET', 'POST'])
 @login_required
 @superuser_required
 def dashboard_hue():
 
-    id = 1
-    entry = Hue.query.get(id)
+    from hue.hue import GET_RGB, GET_Brightness, GET_IP, SET_IP
+
+    ID = 1
+    ip = GET_IP()
+
+    if request.method == "POST": 
+
+        if 'scenes' in request.form:
+
+            rgb = (GET_RGB(ID))
+            red   = rgb[0]
+            green = rgb[1]
+            blue  = rgb[2]
+
+            brightness = GET_Brightness(ID)
+
+            return render_template('dashboard.html', 
+                                    red=red,
+                                    green=green, 
+                                    blue=blue, 
+                                    brightness=brightness,
+                                    siteID="hue",
+                                    hueSITE="scenes")
 
 
-    # RGB control
-    if entry.color_red is not None:
-        red   = entry.color_red
-        green = entry.color_green
-        blue  = entry.color_blue    
-    else:
-        red   = ''
-        green = ''
-        blue  = ''
+        if 'groups' in request.form:
 
-    if request.method == 'POST':
- 
-        try:
-            red   = request.form['slider_red']
-            green = request.form['slider_green']
-            blue  = request.form['slider_blue'] 
+            return render_template('dashboard.html', 
+                                    siteID="hue",
+                                    hueSITE="groups")
+        
+        
+        if 'settings' in request.form:              
+            ip = request.args.get("ip")
+            SET_IP(ip)
 
-            xy = RGBtoXY(float(red), float(green), float(blue))
+            return render_template('dashboard.html', 
+                                    ip=ip,
+                                    siteID="hue",
+                                    hueSITE="settings")
 
-            entry.color_x     = xy[0]
-            entry.color_y     = xy[1]
-            entry.color_red   = red
-            entry.color_green = green
-            entry.color_blue  = blue     
-            db.session.commit()    
-
-        except:
-            pass
-
-
-    # brightness
-    if entry.brightness is not None:
-        brightness = entry.brightness    
-    else:
-        brightness = 0
-
-    if request.method == 'POST':
- 
-        try:
-            brightness = request.form['slider_brightness']
-            entry.brightness = brightness     
-            db.session.commit()    
-   
-        except:
-            pass     
-
-
-    # HUE settings
-    ip = entry.ip 
-
-    if request.args.get("ip") is not None:
-        ip = request.args.get("ip")
-        entry.ip = ip
-        db.session.commit()
-
-    #b = Bridge(ip)
 
     return render_template('dashboard.html', 
-                            red=red,
-                            green=green, 
-                            blue=blue, 
-                            brightness=brightness,
-                            ip=ip,
                             siteID="hue")
 
 
