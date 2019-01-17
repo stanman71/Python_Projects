@@ -1,5 +1,8 @@
+# https://github.com/benknight/hue-python-rgb-converter
+
 from flask import Flask, render_template, redirect, url_for, request
 from flask_bootstrap import Bootstrap
+from flask_colorpicker import colorpicker
 from flask_restful import Api
 from flask_wtf import FlaskForm 
 from wtforms import StringField, PasswordField, BooleanField
@@ -9,6 +12,8 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 from functools import wraps
 
+from RBGtoXY import RGBtoXY
+from phue import Bridge
 from REST_API import TodoListResource, TodoResource
 
 
@@ -28,6 +33,7 @@ api.add_resource(TodoResource, '/api/resource/<string:id>', endpoint='user')
 # Database login 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://python:python@localhost/raspi'
 bootstrap = Bootstrap(app)
+colorpicker(app)
 db = SQLAlchemy(app)
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -45,6 +51,18 @@ class User(UserMixin, db.Model):
     role     = db.Column(db.String(20))
 
 
+class Hue(db.Model):
+
+    __tablename__ = 'hue'
+    id          = db.Column(db.Integer, primary_key=True)
+    ip          = db.Column(db.String(50), unique=True)
+    color_red   = db.Column(db.Integer)
+    color_green = db.Column(db.Integer)
+    color_blue  = db.Column(db.Integer)
+    color_y     = db.Column(db.Float)
+    color_x     = db.Column(db.Float)
+    brightness  = db.Column(db.Integer)
+
 # Create all database tables
 db.create_all()
 
@@ -59,6 +77,19 @@ if User.query.filter_by(username='default').first() is None:
     db.session.add(user)
     db.session.commit()
 
+# Create default hue settings
+if Hue.query.filter_by().first() is None:
+    hue = Hue(
+        id = '1',
+        ip = 'default',
+    )
+    db.session.add(hue)
+    db.session.commit()
+
+
+""" ############### """
+""" Role Management """
+""" ############### """
 
 # Role Management
 def superuser_required(f):
@@ -99,7 +130,9 @@ class RegisterForm(FlaskForm):
 
 @app.route('/')
 def index():
+
     return render_template('index.html')
+
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -171,6 +204,81 @@ def delete(id):
     db.session.commit()
     user_list = User.query.all()
     return redirect(url_for('dashboard_user'))
+
+
+# philips hue
+@app.route('/dashboard/hue/', methods=['GET', 'POST'])
+@login_required
+@superuser_required
+def dashboard_hue():
+
+    id = 1
+    entry = Hue.query.get(id)
+
+
+    # RGB control
+    if entry.color_red is not None:
+        red   = entry.color_red
+        green = entry.color_green
+        blue  = entry.color_blue    
+    else:
+        red   = ''
+        green = ''
+        blue  = ''
+
+    if request.method == 'POST':
+ 
+        try:
+            red   = request.form['slider_red']
+            green = request.form['slider_green']
+            blue  = request.form['slider_blue'] 
+
+            xy = RGBtoXY(float(red), float(green), float(blue))
+
+            entry.color_x     = xy[0]
+            entry.color_y     = xy[1]
+            entry.color_red   = red
+            entry.color_green = green
+            entry.color_blue  = blue     
+            db.session.commit()    
+
+        except:
+            pass
+
+
+    # brightness
+    if entry.brightness is not None:
+        brightness = entry.brightness    
+    else:
+        brightness = 0
+
+    if request.method == 'POST':
+ 
+        try:
+            brightness = request.form['slider_brightness']
+            entry.brightness = brightness     
+            db.session.commit()    
+   
+        except:
+            pass     
+
+
+    # HUE settings
+    ip = entry.ip 
+
+    if request.args.get("ip") is not None:
+        ip = request.args.get("ip")
+        entry.ip = ip
+        db.session.commit()
+
+    #b = Bridge(ip)
+
+    return render_template('dashboard.html', 
+                            red=red, 
+                            green=green, 
+                            blue=blue, 
+                            brightness=brightness,
+                            ip=ip)
 
 
 @app.route('/logout')
