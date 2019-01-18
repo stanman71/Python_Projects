@@ -188,50 +188,43 @@ def delete(id):
 @superuser_required
 def dashboard_hue():
 
-    from hue.hue import GET_RGB, GET_Brightness, GET_IP, SET_IP
+    from hue.hue import GET_IP, SET_IP
 
     ID = 1
     ip = GET_IP()
-
-    if request.method == "POST": 
-
-        if 'scenes' in request.form:
-
-            rgb = (GET_RGB(ID))
-            red   = rgb[0]
-            green = rgb[1]
-            blue  = rgb[2]
-
-            brightness = GET_Brightness(ID)
-
-            return render_template('dashboard_hue.html', 
-                                    red=red,
-                                    green=green, 
-                                    blue=blue, 
-                                    brightness=brightness,
-                                    siteID="hue",
-                                    hueSITE="scenes")
+    hueSITE="scenes"
 
 
-        if 'groups' in request.form:
-
-            return render_template('dashboard_hue.html', 
-                                    siteID="hue",
-                                    hueSITE="groups")
+    if 'scenes' in request.form:   
         
+        return render_template('dashboard_hue.html', 
+                                siteID="hue",
+                                hueSITE="scenes")
+
+
+    if 'settings' in request.form:   
         
-        if 'settings' in request.form:              
-            ip = request.args.get("ip")
-            SET_IP(ip)
-
-            return render_template('dashboard_hue.html', 
-                                    ip=ip,
-                                    siteID="hue",
-                                    hueSITE="settings")
+        return render_template('dashboard_hue.html', 
+                                ip=ip,
+                                siteID="hue",
+                                hueSITE="settings")                                      
 
 
-    return render_template('dashboard_hue.html', 
-                            siteID="hue")
+    if request.method == "GET":  
+            
+            if request.args.get("ip") is not None:
+                ip = request.args.get("ip")   
+                SET_IP(ip)
+                 
+                return render_template('dashboard_hue.html', 
+                                        ip=ip,
+                                        siteID="hue",
+                                        hueSITE="settings")
+
+            else:
+                return render_template('dashboard_hue.html', 
+                                        ip=ip,
+                                        siteID="hue")               
 
 
 @app.route('/logout')
