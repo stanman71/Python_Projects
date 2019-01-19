@@ -47,6 +47,140 @@ Dashboard
         <br>  
 
         {% if hueSITE == "scenes" %}
+          <div class="row">
+              <div class="col">
+                <h3>{{ scene_01_name }}</h3>
+                <br>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                          <th scope="col">Birnen</th>
+                          <th scope="col">Helligkeit</th>                          
+                          <th scope="col">RGB</th>
+                        <tr>
+                    </thead>
+                    <tbody>
+                        {% for entry in entries_scene_01 %}
+                        <tr>
+                          <td>{{ entry.id }}</td>
+                          <td>{{ entry.brightness }}</td>  
+                          <td>{{ entry.color_red }}</td>
+                          <td>{{ entry.color_green }}</td>
+                          <td>{{ entry.color_blue }}</td>   
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+              </div>
+          </div>   
+
+          <div class="row">
+              <div class="col">
+                <h3>{{ scene_02_name }}</h3>
+                <br>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                          <th scope="col">Birnen</th>
+                          <th scope="col">Helligkeit</th>
+                          <th scope="col">RGB</th>
+                        <tr>
+                    </thead>
+                    <tbody>
+                        {% for entry in entries_scene_02 %}
+                        <tr>
+                          <td>{{ entry.id }}</td>
+                          <td>{{ entry.brightness }}</td>  
+                          <td>{{ entry.color_red }}</td>
+                          <td>{{ entry.color_green }}</td>
+                          <td>{{ entry.color_blue }}</td>   
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+              </div>
+          </div>   
+
+          <div class="row">
+              <div class="col">
+                <h3>{{ scene_03_name }}</h3>
+                <br>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                          <th scope="col">Birnen</th>
+                          <th scope="col">Helligkeit</th>
+                          <th scope="col">RGB</th>
+                        <tr>
+                    </thead>
+                    <tbody>
+                        {% for entry in entries_scene_03 %}
+                        <tr>
+                          <td>{{ entry.id }}</td>
+                          <td>{{ entry.brightness }}</td>  
+                          <td>{{ entry.color_red }}</td>
+                          <td>{{ entry.color_green }}</td>
+                          <td>{{ entry.color_blue }}</td>   
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+              </div>
+          </div>   
+
+          <div class="row">
+              <div class="col">
+                <h3>{{ scene_04_name }}</h3>
+                <br>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                          <th scope="col">Birnen</th>
+                          <th scope="col">Helligkeit</th>
+                          <th scope="col">RGB</th>
+                        <tr>
+                    </thead>
+                    <tbody>
+                        {% for entry in entries_scene_04 %}
+                        <tr>
+                          <td>{{ entry.id }}</td>
+                          <td>{{ entry.brightness }}</td>  
+                          <td>{{ entry.color_red }}</td>
+                          <td>{{ entry.color_green }}</td>
+                          <td>{{ entry.color_blue }}</td>   
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+              </div>
+          </div>   
+
+          <div class="row">
+              <div class="col">
+                <h3>{{ scene_05_name }}</h3>
+                <br>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                          <th scope="col">Birnen</th>
+                          <th scope="col">Helligkeit</th>
+                          <th scope="col">RGB</th>
+                        <tr>
+                    </thead>
+                    <tbody>
+                        {% for entry in entries_scene_05 %}
+                        <tr>
+                          <td>{{ entry.id }}</td>
+                          <td>{{ entry.brightness }}</td>  
+                          <td>{{ entry.color_red }}</td>
+                          <td>{{ entry.color_green }}</td>
+                          <td>{{ entry.color_blue }}</td>   
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+              </div>
+          </div>                       
 
         {% endif %}
 

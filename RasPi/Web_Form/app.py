@@ -188,16 +188,67 @@ def delete(id):
 @superuser_required
 def dashboard_hue():
 
-    from hue.hue import GET_IP, SET_IP
+    from hue.hue import GET_IP, SET_IP, GET_SCENE_01, GET_SCENE_02, GET_SCENE_03, GET_SCENE_04, GET_SCENE_05
 
     ID = 1
     ip = GET_IP()
     hueSITE="scenes"
 
-
+    try:
+        entries_scene_01 = GET_SCENE_01()[0]
+    except:
+        entries_scene_01 = ""
+    try:    
+        scene_01_name    = GET_SCENE_01()[1]
+    except:
+        scene_01_name    = ""
+    try:
+        entries_scene_02 = GET_SCENE_02()[0]
+    except:
+        entries_scene_02 = ""
+    try:
+        scene_02_name    = GET_SCENE_02()[1]
+    except: 
+        scene_02_name    = ""
+    try: 
+        entries_scene_03 = GET_SCENE_03()[0]
+    except:  
+        entries_scene_03 = ""
+    try: 
+        scene_03_name    = GET_SCENE_03()[1]
+    except: 
+        scene_03_name    = ""
+    try:
+        entries_scene_04 = GET_SCENE_04()[0]
+    except:  
+        entries_scene_04 = ""
+    try:
+        scene_04_name    = GET_SCENE_04()[1]
+    except:  
+        scene_04_name    = ""
+    try:
+        entries_scene_05 = GET_SCENE_05()[0]
+    except:  
+        entries_scene_05 = ""
+    try:
+        scene_05_name    = GET_SCENE_05()[1]
+    except:  
+        scene_05_name    = ""
+ 
+      
     if 'scenes' in request.form:   
         
         return render_template('dashboard_hue.html', 
+                                entries_scene_01=entries_scene_01,
+                                entries_scene_02=entries_scene_02,
+                                entries_scene_03=entries_scene_03,
+                                entries_scene_04=entries_scene_04,
+                                entries_scene_05=entries_scene_05,
+                                scene_01_name=scene_01_name,
+                                scene_02_name=scene_02_name,
+                                scene_03_name=scene_03_name,
+                                scene_04_name=scene_04_name,
+                                scene_05_name=scene_05_name,
                                 siteID="hue",
                                 hueSITE="scenes")
 
@@ -225,6 +276,7 @@ def dashboard_hue():
                 return render_template('dashboard_hue.html', 
                                         ip=ip,
                                         siteID="hue")               
+
 
 
 @app.route('/logout')
