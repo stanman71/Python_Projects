@@ -161,17 +161,6 @@ def SET_SCENE_NAME(ID, name):
     db.session.commit()
 
 
-def DELETE_SCENE(ID):
-
-    print(ID)
-    if ID == 1:
-        Scene_01.query.filter_by(scene_id=ID).delete()
-        db.session.commit()
-    if ID == 2:
-        Scene_02.query.filter_by(scene_id=ID).delete()
-        db.session.commit()
-
-
 def GET_SCENE_01():
 
     entries = Scene_01.query.all()
