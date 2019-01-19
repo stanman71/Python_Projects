@@ -49,8 +49,16 @@ Dashboard
         {% if hueSITE == "scenes" and entries_scene_01 != None %}
           <div class="row">
               <div class="col">
-                <h3>{{ scene_01_name }}</h3>
-                <br>
+
+                <form method="GET">
+                  <div class="form-group">
+                    <input type="text" class="form-control" name="name_01" value="{{ scene_01_name }}" />
+                  </div>
+                    <input type="submit" class="btn btn-secondary" value="Name ändern" />
+                    <br>
+                    <br>
+                </form>              
+
                 <table class="table table-striped">
                     <thead>
                         <tr>                       
@@ -70,18 +78,27 @@ Dashboard
                         </tr>
                         {% endfor %}
                     </tbody>
-                </table>
+                </table>       
+                <br>
+                <br>              
               </div>
           </div>   
-
 
           {% endif %}
           {% if hueSITE == "scenes" and entries_scene_02 != None %}
 
           <div class="row">
               <div class="col">
-                <h3>{{ scene_02_name }}</h3>
-                <br>
+
+                <form method="GET">
+                  <div class="form-group">
+                    <input type="text" class="form-control" name="name_02" value="{{ scene_02_name }}" />
+                  </div>
+                    <input type="submit" class="btn btn-secondary" value="Name ändern" />
+                    <br>
+                    <br>
+                </form>     
+
                 <table class="table table-striped">
                     <thead>
                         <tr>
@@ -101,7 +118,9 @@ Dashboard
                         </tr>
                         {% endfor %}
                     </tbody>
-                </table>
+                </table>    
+                <br>
+                <br>                  
               </div>
           </div>   
 
@@ -110,8 +129,16 @@ Dashboard
 
           <div class="row">
               <div class="col">
-                <h3>{{ scene_03_name }}</h3>
-                <br>
+
+                <form method="GET">
+                  <div class="form-group">
+                    <input type="text" class="form-control" name="name_03" value="{{ scene_03_name }}" />
+                  </div>
+                    <input type="submit" class="btn btn-secondary" value="Name ändern" />
+                    <br>
+                    <br>
+                </form>     
+
                 <table class="table table-striped">
                     <thead>
                         <tr>
@@ -131,7 +158,9 @@ Dashboard
                         </tr>
                         {% endfor %}
                     </tbody>
-                </table>
+                </table>       
+                <br>
+                <br>      
               </div>
           </div>   
 
@@ -140,8 +169,16 @@ Dashboard
 
           <div class="row">
               <div class="col">
-                <h3>{{ scene_04_name }}</h3>
-                <br>
+
+                <form method="GET">
+                  <div class="form-group">
+                    <input type="text" class="form-control" name="name_04" value="{{ scene_04_name }}" />
+                  </div>
+                    <input type="submit" class="btn btn-secondary" value="Name ändern" />
+                    <br>
+                    <br>
+                </form>     
+
                 <table class="table table-striped">
                     <thead>
                         <tr>
@@ -161,17 +198,27 @@ Dashboard
                         </tr>
                         {% endfor %}
                     </tbody>
-                </table>
+                </table>     
+                <br>
+                <br>      
               </div>
           </div>   
 
           {% endif %}
           {% if hueSITE == "scenes" and entries_scene_05 != None %}
-
+ 
           <div class="row">
               <div class="col">
-                <h3>{{ scene_05_name }}</h3>
-                <br>
+
+                <form method="GET">
+                  <div class="form-group">
+                    <input type="text" class="form-control" name="name_05" value="{{ scene_05_name }}" />
+                  </div>
+                    <input type="submit" class="btn btn-secondary" value="Name ändern" />
+                    <br>
+                    <br>
+                </form>     
+
                 <table class="table table-striped">
                     <thead>
                         <tr>
@@ -191,7 +238,9 @@ Dashboard
                         </tr>
                         {% endfor %}
                     </tbody>
-                </table>
+                </table>     
+                <br>
+                <br>      
               </div>
           </div>                       
 
@@ -206,7 +255,7 @@ Dashboard
               <input type="text" name="ip" value="{% if ip != None %}{{ ip }}{% endif %}" />
               <br>
               <br>
-              <input type="submit" value="IP ändern" />
+              <input type="submit" class="btn btn-secondary" value="IP ändern" />
             </form>
           </div>  
         </div>         

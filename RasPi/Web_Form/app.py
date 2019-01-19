@@ -188,11 +188,10 @@ def delete(id):
 @superuser_required
 def dashboard_hue():
 
-    from hue.hue import GET_IP, SET_IP, GET_SCENE_01, GET_SCENE_02, GET_SCENE_03, GET_SCENE_04, GET_SCENE_05
+    from hue.hue import GET_IP, SET_IP, SET_SCENE_NAME, GET_SCENE_01, GET_SCENE_02, GET_SCENE_03, GET_SCENE_04, GET_SCENE_05
 
     ID = 1
     ip = GET_IP()
-    hueSITE="scenes"
 
     try:
         entries_scene_01 = GET_SCENE_01()[0]
@@ -263,6 +262,7 @@ def dashboard_hue():
 
     if request.method == "GET":  
             
+            # Change ip
             if request.args.get("ip") is not None:
                 ip = request.args.get("ip")   
                 SET_IP(ip)
@@ -272,11 +272,55 @@ def dashboard_hue():
                                         siteID="hue",
                                         hueSITE="settings")
 
+
+            # Change scene name
+            if (request.args.get("name_01") is not None 
+                or request.args.get("name_02") is not None
+                or request.args.get("name_03") is not None
+                or request.args.get("name_04") is not None
+                or request.args.get("name_05") is not None
+                ):
+
+                name_01 = request.args.get("name_01") 
+                if name_01 is not None:
+                    SET_SCENE_NAME(1, name_01)
+                    scene_01_name = GET_SCENE_01()[1]
+                name_02 = request.args.get("name_02")
+                if name_02 is not None:
+                    SET_SCENE_NAME(2, name_02)
+                    scene_02_name = GET_SCENE_02()[1]
+                name_03 = request.args.get("name_03")
+                if name_03 is not None:
+                    SET_SCENE_NAME(3, name_03)
+                    scene_03_name = GET_SCENE_03()[1]
+                name_04 = request.args.get("name_04")
+                if name_04 is not None:                   
+                    SET_SCENE_NAME(4, name_04)
+                    scene_04_name = GET_SCENE_04()[1]
+                name_05 = request.args.get("name_05")
+                if name_05 is not None:
+                    SET_SCENE_NAME(5, name_05)
+                    scene_05_name = GET_SCENE_05()[1]
+
+                return render_template('dashboard_hue.html', 
+                                        entries_scene_01=entries_scene_01,
+                                        entries_scene_02=entries_scene_02,
+                                        entries_scene_03=entries_scene_03,
+                                        entries_scene_04=entries_scene_04,
+                                        entries_scene_05=entries_scene_05,
+                                        scene_01_name=scene_01_name,
+                                        scene_02_name=scene_02_name,
+                                        scene_03_name=scene_03_name,
+                                        scene_04_name=scene_04_name,
+                                        scene_05_name=scene_05_name,
+                                        siteID="hue",
+                                        hueSITE="scenes")
+
+
             else:
                 return render_template('dashboard_hue.html', 
                                         ip=ip,
                                         siteID="hue")               
-
 
 
 @app.route('/logout')
