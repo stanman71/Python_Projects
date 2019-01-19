@@ -133,6 +133,7 @@ if Scenes.query.filter_by().first() is None:
     for i in range(1,11):
         scene = Scenes(
             id = i,
+            name = "Szene " + str(i),
         )
         db.session.add(scene)
         db.session.commit()

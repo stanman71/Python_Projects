@@ -46,33 +46,37 @@ Dashboard
         <div class="col">
         <br>  
 
-        {% if hueSITE == "scenes" %}
+        {% if hueSITE == "scenes" and entries_scene_01 != None %}
           <div class="row">
               <div class="col">
                 <h3>{{ scene_01_name }}</h3>
                 <br>
                 <table class="table table-striped">
                     <thead>
-                        <tr>
-                          <th scope="col">Birnen</th>
-                          <th scope="col">Helligkeit</th>                          
-                          <th scope="col">RGB</th>
+                        <tr>                       
+                          <th scope="col">Birnen</th>                        
+                          <th scope="col" colspan="3">RGB</th>
+                          <th scope="col">Helligkeit</th>                      
                         <tr>
                     </thead>
-                    <tbody>
+                    <tbody>             
                         {% for entry in entries_scene_01 %}
                         <tr>
-                          <td>{{ entry.id }}</td>
-                          <td>{{ entry.brightness }}</td>  
+                          <td>{{ entry.id }}</td> 
                           <td>{{ entry.color_red }}</td>
                           <td>{{ entry.color_green }}</td>
                           <td>{{ entry.color_blue }}</td>   
+                          <td>{{ entry.brightness }}</td>                     
                         </tr>
                         {% endfor %}
                     </tbody>
                 </table>
               </div>
           </div>   
+
+
+          {% endif %}
+          {% if hueSITE == "scenes" and entries_scene_02 != None %}
 
           <div class="row">
               <div class="col">
@@ -81,25 +85,28 @@ Dashboard
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                          <th scope="col">Birnen</th>
-                          <th scope="col">Helligkeit</th>
-                          <th scope="col">RGB</th>
+                          <th scope="col">Birnen</th>                        
+                          <th scope="col" colspan="3">RGB</th>
+                          <th scope="col">Helligkeit</th>  
                         <tr>
                     </thead>
                     <tbody>
                         {% for entry in entries_scene_02 %}
                         <tr>
-                          <td>{{ entry.id }}</td>
-                          <td>{{ entry.brightness }}</td>  
+                          <td>{{ entry.id }}</td> 
                           <td>{{ entry.color_red }}</td>
                           <td>{{ entry.color_green }}</td>
                           <td>{{ entry.color_blue }}</td>   
+                          <td>{{ entry.brightness }}</td>      
                         </tr>
                         {% endfor %}
                     </tbody>
                 </table>
               </div>
           </div>   
+
+          {% endif %}
+          {% if hueSITE == "scenes" and entries_scene_03 != None %}
 
           <div class="row">
               <div class="col">
@@ -108,25 +115,28 @@ Dashboard
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                          <th scope="col">Birnen</th>
-                          <th scope="col">Helligkeit</th>
-                          <th scope="col">RGB</th>
+                          <th scope="col">Birnen</th>                        
+                          <th scope="col" colspan="3">RGB</th>
+                          <th scope="col">Helligkeit</th>  
                         <tr>
                     </thead>
                     <tbody>
                         {% for entry in entries_scene_03 %}
                         <tr>
-                          <td>{{ entry.id }}</td>
-                          <td>{{ entry.brightness }}</td>  
+                          <td>{{ entry.id }}</td> 
                           <td>{{ entry.color_red }}</td>
                           <td>{{ entry.color_green }}</td>
                           <td>{{ entry.color_blue }}</td>   
+                          <td>{{ entry.brightness }}</td>      
                         </tr>
                         {% endfor %}
                     </tbody>
                 </table>
               </div>
           </div>   
+
+          {% endif %}
+          {% if hueSITE == "scenes" and entries_scene_04 != None %}
 
           <div class="row">
               <div class="col">
@@ -135,25 +145,28 @@ Dashboard
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                          <th scope="col">Birnen</th>
-                          <th scope="col">Helligkeit</th>
-                          <th scope="col">RGB</th>
+                          <th scope="col">Birnen</th>                        
+                          <th scope="col" colspan="3">RGB</th>
+                          <th scope="col">Helligkeit</th>  
                         <tr>
                     </thead>
                     <tbody>
                         {% for entry in entries_scene_04 %}
                         <tr>
-                          <td>{{ entry.id }}</td>
-                          <td>{{ entry.brightness }}</td>  
+                          <td>{{ entry.id }}</td> 
                           <td>{{ entry.color_red }}</td>
                           <td>{{ entry.color_green }}</td>
                           <td>{{ entry.color_blue }}</td>   
+                          <td>{{ entry.brightness }}</td>      
                         </tr>
                         {% endfor %}
                     </tbody>
                 </table>
               </div>
           </div>   
+
+          {% endif %}
+          {% if hueSITE == "scenes" and entries_scene_05 != None %}
 
           <div class="row">
               <div class="col">
@@ -162,19 +175,19 @@ Dashboard
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                          <th scope="col">Birnen</th>
-                          <th scope="col">Helligkeit</th>
-                          <th scope="col">RGB</th>
+                          <th scope="col">Birnen</th>                        
+                          <th scope="col" colspan="3">RGB</th>
+                          <th scope="col">Helligkeit</th>  
                         <tr>
                     </thead>
                     <tbody>
                         {% for entry in entries_scene_05 %}
                         <tr>
-                          <td>{{ entry.id }}</td>
-                          <td>{{ entry.brightness }}</td>  
+                          <td>{{ entry.id }}</td> 
                           <td>{{ entry.color_red }}</td>
                           <td>{{ entry.color_green }}</td>
                           <td>{{ entry.color_blue }}</td>   
+                          <td>{{ entry.brightness }}</td>      
                         </tr>
                         {% endfor %}
                     </tbody>
