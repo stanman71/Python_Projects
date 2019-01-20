@@ -9,6 +9,12 @@ Dashboard
 <link rel="stylesheet" href="{{url_for('.static', filename='dashboard.css')}}">
 {% endblock %}
 
+{% block scripts %}
+  {{ super() }}
+  {{ colorpicker.loader() }}
+  {{ colorpicker.picker(ids=[".cp"]) }}
+{% endblock scripts %}
+
 {% block content %}
   <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
@@ -40,6 +46,10 @@ Dashboard
         <div class="col">
         <br>  
 
+<!--########-->
+<!--Scene 1 -->
+<!--########-->
+
         {% if entries_scene_01 != None %}
           <div class="row">
               <div class="col">
@@ -68,7 +78,13 @@ Dashboard
                           <td>{{ entry.color_red }}</td>
                           <td>{{ entry.color_green }}</td>
                           <td>{{ entry.color_blue }}</td>   
-                          <td>{{ entry.brightness }}</td>                     
+                          <td>{{ entry.brightness }}</td> 
+                          <td>
+                            <form method="GET" class="verticalform">
+                              <input type="text" name="{{ entry.scene_id }} {{ entry.bulk_id }}" class="form-control cp" value="rgb({{ entry.color_red }}, {{ entry.color_green }}, {{ entry.color_blue }}) "/>
+                              <input type="submit" class="btn btn-secondary" value="Farbe ändern" />   
+                            </form>
+                          </td>
                         </tr>
                         {% endfor %}
                     </tbody>
@@ -79,10 +95,15 @@ Dashboard
                 <br>
                 <br>
                 <br>              
+      
               </div>
           </div>   
-
           {% endif %}
+
+<!--########-->
+<!--Scene 2 -->
+<!--########-->
+
           {% if entries_scene_02 != None %}
 
           <div class="row">
@@ -113,6 +134,12 @@ Dashboard
                           <td>{{ entry.color_green }}</td>
                           <td>{{ entry.color_blue }}</td>   
                           <td>{{ entry.brightness }}</td>      
+                          <td>
+                            <form method="GET" class="verticalform">
+                              <input type="text" name="{{ entry.scene_id }} {{ entry.bulk_id }}" class="form-control cp" value="rgb(255, 0, 0) "/>
+                              <input type="submit" class="btn btn-secondary" value="Farbe ändern" />   
+                            </form>
+                          </td>
                         </tr>
                         {% endfor %}
                     </tbody>
@@ -125,8 +152,12 @@ Dashboard
                 <br>                  
               </div>
           </div>   
-
           {% endif %}
+ 
+<!--########-->
+<!--Scene 3 -->
+<!--########-->
+
           {% if entries_scene_03 != None %}
 
           <div class="row">
@@ -169,8 +200,12 @@ Dashboard
                 <br>      
               </div>
           </div>   
-
           {% endif %}
+
+<!--########-->
+<!--Scene 4 -->
+<!--########--> 
+
           {% if entries_scene_04 != None %}
 
           <div class="row">
@@ -213,8 +248,12 @@ Dashboard
                 <br>      
               </div>
           </div>   
-
           {% endif %}
+
+<!--########-->
+<!--Scene 5 -->
+<!--########-->
+
           {% if entries_scene_05 != None %}
  
           <div class="row">

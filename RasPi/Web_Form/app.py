@@ -8,12 +8,14 @@ from flask_sqlalchemy  import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 from functools import wraps
+from flask_colorpicker import colorpicker
 
 from REST_API import TodoListResource, TodoResource
 
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'Thisissupposedtobesecret!'
+colorpicker(app)
 
 
 """ ######## """
@@ -104,7 +106,7 @@ class RegisterForm(FlaskForm):
 """ Sites """
 """ ##### """
 
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def index():
 
     return render_template('index.html')
@@ -209,6 +211,14 @@ def dashboard_hue_scenes():
         if name_05 is not None:
             SET_SCENE_NAME(5, name_05)
 
+        # RGB
+        rgb_11 = request.args.get("1 1") 
+        rgb_12 = request.args.get("1 2")
+
+        print(rgb_11)
+        print(rgb_12)
+
+
     if request.method == "POST": 
 
         # Delete scene
@@ -277,6 +287,8 @@ def dashboard_hue_scenes():
                             scene_03_name=scene_03_name,
                             scene_04_name=scene_04_name,
                             scene_05_name=scene_05_name,
+                            rgb_11="rgb(234, 41, 41)",
+                            rgb_12="rgb(234, 0, 41)",
                             siteID="hue",
                             hueSITE="scenes")
 
