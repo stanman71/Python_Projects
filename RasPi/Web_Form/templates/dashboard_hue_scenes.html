@@ -24,8 +24,9 @@ Dashboard
       <div id="navbar" class="collapse navbar-collapse">
         <ul class="nav navbar-nav">
           <li><a href="{{ url_for('logout') }}">Log Out</a></li>
+          <li><a href="{{ url_for('dashboard_hue_scenes') }}">HUE Szenen</a></li>
+          <li><a href="{{ url_for('dashboard_hue_settings') }}">HUE Einstellungen</a></li>
           <li><a href="{{ url_for('dashboard_user') }}">Benutzer</a></li>
-          <li><a href="{{ url_for('dashboard_hue') }}">Hue</a></li>
         </ul>
       </div><!--/.nav-collapse -->
     </div>
@@ -34,19 +35,12 @@ Dashboard
 
   <div class="col-sm-2 col-sm-offset-2 col-md-10 col-md-offset-1 main">
  
-    <form action="" method="post"> 
-      <input type="submit" class="btn btn-secondary" name="scenes" value="Szenen"/>
-      <input type="submit" class="btn btn-secondary" name="settings" value="Einstellungen"/>
-    </form>
-    <br>
-    <br>
-
-      <h2 class="sub-header">Philips Hue</h2> 
+      <h2 class="sub-header">HUE Szenen</h2> 
       <div class="row">
         <div class="col">
         <br>  
 
-        {% if hueSITE == "scenes" and entries_scene_01 != None %}
+        {% if entries_scene_01 != None %}
           <div class="row">
               <div class="col">
 
@@ -78,14 +72,18 @@ Dashboard
                         </tr>
                         {% endfor %}
                     </tbody>
-                </table>       
+                </table>     
+                <form action="" method="post"> 
+                  <input type="submit" class="btn btn-danger" name="delete_1" value="Einträge löschen"/>
+                </form>
+                <br>
                 <br>
                 <br>              
               </div>
           </div>   
 
           {% endif %}
-          {% if hueSITE == "scenes" and entries_scene_02 != None %}
+          {% if entries_scene_02 != None %}
 
           <div class="row">
               <div class="col">
@@ -118,14 +116,18 @@ Dashboard
                         </tr>
                         {% endfor %}
                     </tbody>
-                </table>    
+                </table>   
+                <form action="" method="post"> 
+                  <input type="submit" class="btn btn-danger" name="delete_2" value="Einträge löschen"/>
+                </form>
+                <br>
                 <br>
                 <br>                  
               </div>
           </div>   
 
           {% endif %}
-          {% if hueSITE == "scenes" and entries_scene_03 != None %}
+          {% if entries_scene_03 != None %}
 
           <div class="row">
               <div class="col">
@@ -158,14 +160,18 @@ Dashboard
                         </tr>
                         {% endfor %}
                     </tbody>
-                </table>       
+                </table> 
+                <form action="" method="post"> 
+                  <input type="submit" class="btn btn-danger" name="delete_3" value="Einträge löschen"/>
+                </form>
+                <br>  
                 <br>
                 <br>      
               </div>
           </div>   
 
           {% endif %}
-          {% if hueSITE == "scenes" and entries_scene_04 != None %}
+          {% if entries_scene_04 != None %}
 
           <div class="row">
               <div class="col">
@@ -198,14 +204,18 @@ Dashboard
                         </tr>
                         {% endfor %}
                     </tbody>
-                </table>     
+                </table> 
+                <form action="" method="post"> 
+                  <input type="submit" class="btn btn-danger" name="delete_4" value="Einträge löschen"/>
+                </form>
+                <br>
                 <br>
                 <br>      
               </div>
           </div>   
 
           {% endif %}
-          {% if hueSITE == "scenes" and entries_scene_05 != None %}
+          {% if entries_scene_05 != None %}
  
           <div class="row">
               <div class="col">
@@ -238,28 +248,16 @@ Dashboard
                         </tr>
                         {% endfor %}
                     </tbody>
-                </table>     
+                </table>  
+                <form action="" method="post"> 
+                  <input type="submit" class="btn btn-danger" name="delete_5" value="Einträge löschen"/>
+                </form>
+                <br>
                 <br>
                 <br>      
               </div>
-          </div>                       
-
-        {% endif %}
-
-        {% if hueSITE == "settings" %}
-        <div class="panel panel-primary">
-          <div class="panel-heading">Systemeinstellungen</div>
-          <div class="panel-body">
-            <form method="GET">
-              <label for="name">BRIDGE IP: </label>
-              <input type="text" name="ip" value="{% if ip != None %}{{ ip }}{% endif %}" />
-              <br>
-              <br>
-              <input type="submit" class="btn btn-secondary" value="IP ändern" />
-            </form>
-          </div>  
-        </div>         
-        {% endif %}   
+          </div>
+          {% endif %}     
 
         </div>
       </div>    

@@ -38,7 +38,7 @@ class Scene_01(db.Model):
 
     __tablename__ = 'scene_01'
     id          = db.Column(db.Integer, primary_key=True, autoincrement = True)
-    scene_id    = db.Column(db.Integer, db.ForeignKey('scenes.id'))
+    scene_id    = db.Column(db.Integer, db.ForeignKey('scenes.id'), server_default=("1"))
     scene_name  = db.relationship('Scenes')
     bulk_id     = db.Column(db.Integer, db.ForeignKey('bulks.id'))
     color_red   = db.Column(db.Integer)
@@ -53,7 +53,7 @@ class Scene_02(db.Model):
 
     __tablename__ = 'scene_02'
     id          = db.Column(db.Integer, primary_key=True, autoincrement = True)
-    scene_id    = db.Column(db.Integer, db.ForeignKey('scenes.id'))
+    scene_id    = db.Column(db.Integer, db.ForeignKey('scenes.id'), server_default=("2"))
     scene_name  = db.relationship('Scenes')
     bulk_id     = db.Column(db.Integer, db.ForeignKey('bulks.id'))
     color_red   = db.Column(db.Integer)
@@ -68,7 +68,7 @@ class Scene_03(db.Model):
 
     __tablename__ = 'scene_03'
     id          = db.Column(db.Integer, primary_key=True, autoincrement = True)
-    scene_id    = db.Column(db.Integer, db.ForeignKey('scenes.id'))
+    scene_id    = db.Column(db.Integer, db.ForeignKey('scenes.id'), server_default=("3"))
     scene_name  = db.relationship('Scenes')
     bulk_id     = db.Column(db.Integer, db.ForeignKey('bulks.id'))
     color_red   = db.Column(db.Integer)
@@ -83,7 +83,7 @@ class Scene_04(db.Model):
 
     __tablename__ = 'scene_04'
     id          = db.Column(db.Integer, primary_key=True, autoincrement = True)
-    scene_id    = db.Column(db.Integer, db.ForeignKey('scenes.id'))
+    scene_id    = db.Column(db.Integer, db.ForeignKey('scenes.id'), server_default=("4"))
     scene_name  = db.relationship('Scenes')
     bulk_id     = db.Column(db.Integer, db.ForeignKey('bulks.id'))
     color_red   = db.Column(db.Integer)
@@ -98,7 +98,7 @@ class Scene_05(db.Model):
 
     __tablename__ = 'scene_05'
     id          = db.Column(db.Integer, primary_key=True, autoincrement = True)
-    scene_id    = db.Column(db.Integer, db.ForeignKey('scenes.id'))
+    scene_id    = db.Column(db.Integer, db.ForeignKey('scenes.id'), server_default=("5"))
     scene_name  = db.relationship('Scenes')
     bulk_id     = db.Column(db.Integer, db.ForeignKey('bulks.id'))
     color_red   = db.Column(db.Integer)
@@ -159,6 +159,34 @@ def SET_SCENE_NAME(ID, name):
     entry = Scenes.query.get(ID)
     entry.name = name
     db.session.commit()
+
+
+def DEL_SCENE(ID):
+    if ID == "1":
+        Scene_01.query.delete()
+        entry = Scenes.query.get(1)
+        entry.name = ""
+        db.session.commit()
+    if ID == "2":
+        Scene_02.query.delete()
+        entry = Scenes.query.get(2)
+        entry.name = ""
+        db.session.commit()
+    if ID == "3":
+        Scene_03.query.delete()
+        entry = Scenes.query.get(3)
+        entry.name = ""
+        db.session.commit()
+    if ID == "4":
+        Scene_04.query.delete()
+        entry = Scenes.query.get(4)
+        entry.name = ""
+        db.session.commit()
+    if ID == "5":
+        Scene_05.query.delete()
+        entry = Scenes.query.get(5)
+        entry.name = ""
+        db.session.commit()
 
 
 def GET_SCENE_01():
