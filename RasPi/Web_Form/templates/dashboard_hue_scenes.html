@@ -12,7 +12,7 @@ Dashboard
 {% block scripts %}
   {{ super() }}
   {{ colorpicker.loader() }}
-  {{ colorpicker.picker(ids=[".cp"]) }}
+  {{ colorpicker.picker(ids=[".scene_01_1", ".scene_01_2", ".scene_01_3", ".scene_01_4", ".scene_01_5"]) }}
 {% endblock scripts %}
 
 {% block content %}
@@ -66,7 +66,7 @@ Dashboard
                 <table class="table table-striped">
                     <thead>
                         <tr>                       
-                          <th scope="col">Birnen</th>                        
+                          <th scope="col">Birne</th>                        
                           <th scope="col" colspan="3">RGB</th>
                           <th scope="col">Helligkeit</th>                      
                         <tr>
@@ -81,7 +81,7 @@ Dashboard
                           <td>{{ entry.brightness }}</td> 
                           <td>
                             <form method="GET" class="verticalform">
-                              <input type="text" name="{{ entry.scene_id }} {{ entry.bulk_id }}" class="form-control cp" value="rgb({{ entry.color_red }}, {{ entry.color_green }}, {{ entry.color_blue }}) "/>
+                              <input type="text" name="{{ entry.scene_id }} {{ entry.bulk_id }}" class="form-control scene_01_{{ entry.bulk_id }}" value="rgb({{ entry.color_red }}, {{ entry.color_green }}, {{ entry.color_blue }}) "/>
                               <input type="submit" class="btn btn-secondary" value="Farbe ändern" />   
                             </form>
                           </td>
@@ -121,7 +121,7 @@ Dashboard
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                          <th scope="col">Birnen</th>                        
+                          <th scope="col">Birne</th>                        
                           <th scope="col" colspan="3">RGB</th>
                           <th scope="col">Helligkeit</th>  
                         <tr>
@@ -134,12 +134,6 @@ Dashboard
                           <td>{{ entry.color_green }}</td>
                           <td>{{ entry.color_blue }}</td>   
                           <td>{{ entry.brightness }}</td>      
-                          <td>
-                            <form method="GET" class="verticalform">
-                              <input type="text" name="{{ entry.scene_id }} {{ entry.bulk_id }}" class="form-control cp" value="rgb(255, 0, 0) "/>
-                              <input type="submit" class="btn btn-secondary" value="Farbe ändern" />   
-                            </form>
-                          </td>
                         </tr>
                         {% endfor %}
                     </tbody>
@@ -175,7 +169,7 @@ Dashboard
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                          <th scope="col">Birnen</th>                        
+                          <th scope="col">Birne</th>                        
                           <th scope="col" colspan="3">RGB</th>
                           <th scope="col">Helligkeit</th>  
                         <tr>
@@ -223,7 +217,7 @@ Dashboard
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                          <th scope="col">Birnen</th>                        
+                          <th scope="col">Birne</th>                        
                           <th scope="col" colspan="3">RGB</th>
                           <th scope="col">Helligkeit</th>  
                         <tr>
@@ -271,7 +265,7 @@ Dashboard
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                          <th scope="col">Birnen</th>                        
+                          <th scope="col">Birne</th>                        
                           <th scope="col" colspan="3">RGB</th>
                           <th scope="col">Helligkeit</th>  
                         <tr>
