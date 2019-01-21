@@ -420,7 +420,7 @@ def logout():
 # Host files for colorpicker_local
 @app.route('/get_media/<path:filename>', methods=['GET'])
 def get_media(filename):
-    return send_from_directory('C:/Users/stanman/Desktop/Unterlagen/GIT/Python_Projects/RasPi/Web_Form/static/', filename)
+    return send_from_directory('C:/Users/stanman/Desktop/Unterlagen/GIT/Python_Projects/RasPi/Web_Form/static/colorpicker/', filename)
 
 
 
