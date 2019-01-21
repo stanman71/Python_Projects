@@ -67,13 +67,15 @@ class colorpicker(object):
             '<script src="%s"></script>\n',
             '<link href="%s" rel="stylesheet">\n'
             ] if self.local == [] else [ 
-            '<script src="/%s"></script>\n',
-            '<link href="/%s" rel="stylesheet">\n'
+            '<script src="./%s"></script>\n',
+            '<link href="./%s" rel="stylesheet">\n'
             ] # to fix additional / due to looping !!
             html += tags[i] % [
                 l for l in links if l.split(
                     '.')[len(l.split('.')) - 1] == n][0]
+
         return Markup(html)
+
 
     def picker(self, ids=[".colorpicker"],
                default_color='rgb(0,0,255)',

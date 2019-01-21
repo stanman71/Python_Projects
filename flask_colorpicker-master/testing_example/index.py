@@ -12,11 +12,15 @@ path.append(
     )
 )
 # End of junk
-from flask_colorpicker import colorpicker
+from color import colorpicker
 
 app = Flask(__name__, template_folder='.')
-#colorpicker(app, local=['static/spectrum.js', 'static/spectrum.css'])
+
+#colorpicker(app, local=['./Python_Projects/flask_colorpicker-master/testing_example/static/js/spectrum.js', './Python_Projects/flask_colorpicker-master/testing_example/static/css/spectrum.css'])
+
 colorpicker(app)
+
+print(colorpicker.loader)
 
 @app.route('/')
 def root():
@@ -24,3 +28,5 @@ def root():
 
 
 app.run(debug=True, port=4000)
+
+
