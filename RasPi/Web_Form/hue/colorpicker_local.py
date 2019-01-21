@@ -1,29 +1,16 @@
 from flask import Markup
-from os import path, name as osName
-from sys import version_info
-if version_info.major == 2:
-    FileNotFoundError = IOError
+
 
 class colorpicker(object):
-    def __init__(self, app=None, local=[]):
-        """
-        initiating extension with flask app instance
-        @param: app Flask app instance (Default: None)
-        @param: local to load .js .css source code locally (Default: [])
-        """
+    def __init__(self, app=None):
         self.app = app
-        self.local = local
         if self.app is not None:
             self.init_app(app)
         else:
             raise(AttributeError("must pass app to colorpicker(app=)"))
-        if self.local != []:
-            if len(self.local) != 2:
-                raise(
-                    TypeError(
-                        "colorpicker(local=) requires a list of" +
-                        " two files spectrum.js and spectrum.css"))
+                
         self.injectThem()  # injecting module into the template
+
 
     def init_app(self, app):
         if hasattr(app, 'teardown_appcontext'):
@@ -41,35 +28,18 @@ class colorpicker(object):
             return dict(colorpicker=self)
 
     def loader(self):
-        """ to get html imports of colorpicker scripts and css """
         html = ""
         for i, n in enumerate(['js', 'css']):
-            links = ['https://cdnjs.cloudflare.com/ajax/libs/spectrum/1.8.0/spectrum.min.css',
-                     'https://cdnjs.cloudflare.com/ajax/libs/spectrum/1.8.0/spectrum.min.js'] if self.local == [] else self.local
-            if self.local != []:
-                def togglePath(rev=False, links=links):
-                    """
-                        Function to fix windows OS relative path issue
-                        ISSUE 1 : windows os path
-                        if windows used and windows path not used.
-                    """
-                    if osName == 'nt':
-                        order = ['\\', '/'] if rev else ['/', '\\']
-                        for linkIndex, link in enumerate(links):
-                            links[linkIndex] = link.replace(order[0], order[1])
-                togglePath(False)
-                for sl in links:
-                    if not path.isfile(sl):
-                        raise(FileNotFoundError(
-                            "colorpicker.loader() file not found " + sl))
-                togglePath(True)
+
+            # IMPORTANT
+            # Update the links for your settings
+
+            links = ['http://127.0.0.1:5000/get_media/spectrum.css',
+                     'http://127.0.0.1:5000/get_media/spectrum.js'] 
             tags = [
             '<script src="%s"></script>\n',
             '<link href="%s" rel="stylesheet">\n'
-            ] if self.local == [] else [ 
-            '<script src="./%s"></script>\n',
-            '<link href="./%s" rel="stylesheet">\n'
-            ] # to fix additional / due to looping !!
+            ] 
             html += tags[i] % [
                 l for l in links if l.split(
                     '.')[len(l.split('.')) - 1] == n][0]
@@ -84,18 +54,20 @@ class colorpicker(object):
                showInput='false',
                showButtons='false',
                allowEmpty='true'):
+       
         """
         to get html ready colorpicker initiation with the given options
-        @param: ids list of identifiers of the html element to assign the color picker to
-        (Default: '.colorpicker')
-        @param: default_color for the colorpicker to start with (Default:
-        'rgb(0,0,255)')
+
+        @param: ids list of identifiers of the html element to assign the color picker to (Default: '.colorpicker')
+        @param: default_color for the colorpicker to start with (Default: 'rgb(0,0,255)')
         @param: color_format color format to use (Default: 'rgb')
         @param: showAlpha to enable alpha (Default: 'true')
         @param: showInput to show or hide the color format (Default: 'false')
         @param: showButtons to show or hide buttons (Default: 'false')
         @param: allowEmpty to allow or disallow empty input (Default: 'true')
+
         """
+
         for h, a in {'showAlpha': showAlpha,
                      'showInput': showInput,
                      'showButtons': showButtons,
@@ -122,4 +94,5 @@ class colorpicker(object):
                 '$(this).val(color.toRgbString())',
                 '},', '})',
                 '}) </script>'])
+                
         return Markup(html) # html ready colorpicker

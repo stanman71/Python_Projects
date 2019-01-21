@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, url_for, request
+from flask import Flask, render_template, redirect, url_for, request, send_from_directory
 from flask_bootstrap import Bootstrap
 from flask_restful import Api
 from flask_wtf import FlaskForm 
@@ -8,7 +8,7 @@ from flask_sqlalchemy  import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 from functools import wraps
-from hue.colorpicker import colorpicker
+from hue.colorpicker_local import colorpicker
 
 from REST_API import TodoListResource, TodoResource
 
@@ -415,6 +415,13 @@ def dashboard_hue_settings():
 def logout():
     logout_user()
     return redirect(url_for('index'))
+
+
+# Host files for colorpicker_local
+@app.route('/get_media/<path:filename>', methods=['GET'])
+def get_media(filename):
+    return send_from_directory('C:/Users/stanman/Desktop/Unterlagen/GIT/Python_Projects/RasPi/Web_Form/static/', filename)
+
 
 
 if __name__ == '__main__':
