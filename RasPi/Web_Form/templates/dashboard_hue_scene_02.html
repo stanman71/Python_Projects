@@ -1,0 +1,125 @@
+{% extends "bootstrap/base.html" %}
+
+{% block title %}
+Dashboard
+{% endblock %}
+
+{% block styles %}
+{{super()}}
+<link rel="stylesheet" href="{{url_for('.static', filename='dashboard.css')}}">
+{% endblock %}
+
+{% block scripts %}
+  {{ super() }}
+  {{ colorpicker.loader() }}
+  {{ colorpicker.picker(ids=[".scene_1", ".scene_2", ".scene_3", ".scene_4", ".scene_5", ".scene_6", ".scene_7", ".scene_8", ".scene_9" ]) }}
+{% endblock scripts %}
+
+{% block content %}
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">RASPI</a>
+      </div>
+      <div id="navbar" class="collapse navbar-collapse">
+        <ul class="nav navbar-nav">
+          <li><a href="{{ url_for('logout') }}">Log Out</a></li>
+          <li><a href="{{ url_for('dashboard_hue_scene_01') }}">HUE Szenen</a></li>
+          <li><a href="{{ url_for('dashboard_hue_settings') }}">HUE Einstellungen</a></li>
+          <li><a href="{{ url_for('dashboard_user') }}">Benutzer</a></li>
+        </ul>
+      </div><!--/.nav-collapse -->
+    </div>
+  </nav>
+  <br>
+
+  <div class="col-sm-2 col-sm-offset-2 col-md-10 col-md-offset-1 main">
+ 
+      <ul class="nav nav-pills">
+      <li class="nav-item">
+        <a class="nav-link" href="{{ url_for('dashboard_hue_scene_01') }}">Szene 1</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link active" href="{{ url_for('dashboard_hue_scene_02') }}">Szene 2</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{ url_for('dashboard_hue_scene_03') }}">Szene 3</a>
+      </li>
+    </ul>
+
+    <div class="row">
+        <div class="col">
+
+    <div class="panel panel-primary">
+        <div class="panel-heading"> HUE Szene 2 </div>
+        <div class="panel-body">
+          <form method="GET">
+            <div class="form-group">
+              <input type="text" class="form-control" name="name" value="{{ scene_name }}" />
+            </div>
+              <input type="submit" class="btn btn-secondary" value="Name ändern" />
+              <br>
+          </form>              
+        </div>
+      </div> 
+
+          {% if entries_scene != None %}
+
+          <table class="table table-striped">
+            <thead>
+                <tr>                       
+                  <th scope="col">Birne</th>                        
+                  <th scope="col" colspan="3">RGB</th>                   
+                <tr>
+            </thead>
+            <tbody>             
+                {% for entry in entries_scene %}
+                <tr>
+                  <td>{{ entry.bulk_name.name }}</td> 
+                  <td>{{ entry.color_red }}</td>
+                  <td>{{ entry.color_green }}</td>
+                  <td>{{ entry.color_blue }}</td>   
+                  <td>
+                    <form method="GET" class="verticalform">
+                      <input type="text" name="{{ entry.scene_id }} {{ entry.bulk_id }}" class="form-control scene_{{ entry.bulk_id }}" value="rgb({{ entry.color_red }}, {{ entry.color_green }}, {{ entry.color_blue }}) "/>
+                      <input type="submit" class="btn btn-secondary" value="Farbe ändern" />   
+                    </form>
+                  </td>
+                  <td><a href="/dashboard/hue/scene_02/delete/{{ entry.bulk_id }}">delete</a>
+                </tr>
+                {% endfor %}
+            </tbody>
+          </table>     
+          <form action="" method="post"> 
+            <input type="submit" class="btn pull-right btn-danger" name="delete" value="alle Einträge löschen"/>
+          </form>
+          <br>  
+          <br>
+          <br>            
+    {% endif %}
+ 
+    <div class="panel panel-primary">
+        <div class="panel-heading">  </div>
+        <div class="panel-body">
+          <div class="dropdown">
+            <form method="GET" enctype="multipart/form-data">
+              <select class="btn btn-secondary dropdown-toggle" name="bulb_scene">
+                {% for each in dropdown_list %}
+                <option value="{{each}}">{{each}}</option>
+                {% endfor %}
+              </select>
+            <input type="submit" class="btn btn-secondary" value="Birne hinzufügen">
+            </form>
+          </div> 
+        </div>
+      </div> 
+    </div>
+  </div>    
+
+{% endblock %}

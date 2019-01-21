@@ -8,7 +8,7 @@ from flask_sqlalchemy  import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 from functools import wraps
-from flask_colorpicker import colorpicker
+from hue.colorpicker import colorpicker
 
 from REST_API import TodoListResource, TodoResource
 
@@ -184,113 +184,205 @@ def delete(id):
     return redirect(url_for('dashboard_user'))
 
 
-# HUE scenes
-@app.route('/dashboard/hue/scenes', methods=['GET', 'POST'])
+# HUE scene 01
+@app.route('/dashboard/hue/scene_01', methods=['GET', 'POST'])
 @login_required
 @superuser_required
-def dashboard_hue_scenes():
+def dashboard_hue_scene_01():
 
-    from hue.hue import SET_SCENE_NAME, DEL_SCENE, GET_SCENE_01, GET_SCENE_02, GET_SCENE_03, GET_SCENE_04, GET_SCENE_05
+    from hue.hue import GET_DROPDOWN_LIST, ADD_BULK, SET_SCENE_NAME, SET_SCENE_COLOR, DEL_SCENE, GET_SCENE
+
+    scene = 1
 
     if request.method == "GET":  
             
         # Change scene name
-        name_01 = request.args.get("name_01") 
-        if name_01 is not None:
-            SET_SCENE_NAME(1, name_01)
-        name_02 = request.args.get("name_02")
-        if name_02 is not None:
-            SET_SCENE_NAME(2, name_02)
-        name_03 = request.args.get("name_03")
-        if name_03 is not None:
-            SET_SCENE_NAME(3, name_03)
-        name_04 = request.args.get("name_04")
-        if name_04 is not None:                   
-            SET_SCENE_NAME(4, name_04)
-        name_05 = request.args.get("name_05")
-        if name_05 is not None:
-            SET_SCENE_NAME(5, name_05)
+        name = request.args.get("name") 
+        if name is not None:
+            SET_SCENE_NAME(scene, name)
+    
+        # Set RGB color
+        rgb_scene = []
 
-        # RGB
-        rgb_11 = request.args.get("1 1") 
-        rgb_12 = request.args.get("1 2")
+        for i in range(1,10):
+            rgb_scene.append(request.args.get("1 " + str(i)))
 
-        print(rgb_11)
-        print(rgb_12)
+        SET_SCENE_COLOR(scene, rgb_scene)
 
+        # Add bulb
+        add_bulb = request.args.get("bulb_scene") 
+        if add_bulb is not None:
+            ADD_BULK(scene, add_bulb)
+ 
 
     if request.method == "POST": 
 
         # Delete scene
-        if 'delete_1' in request.form:
-            DEL_SCENE("1")
-        if 'delete_2' in request.form:
-            DEL_SCENE("2")
-        if 'delete_3' in request.form:
-            DEL_SCENE("3")
-        if 'delete_4' in request.form:
-            DEL_SCENE("4")
-        if 'delete_5' in request.form:
-            DEL_SCENE("5")
-
+        if 'delete' in request.form:
+            DEL_SCENE(scene)
 
     try:
-        entries_scene_01 = GET_SCENE_01()[0]
+        entries_scene = GET_SCENE(scene)[0]
     except:
-        entries_scene_01 = None
+        entries_scene = None
     try:    
-        scene_01_name    = GET_SCENE_01()[1]
+        scene_name    = GET_SCENE(scene)[1]
     except:
-        scene_01_name    = None
-    try:
-        entries_scene_02 = GET_SCENE_02()[0]
-    except:
-        entries_scene_02 = None
-    try:
-        scene_02_name    = GET_SCENE_02()[1]
-    except: 
-        scene_02_name    = None
-    try: 
-        entries_scene_03 = GET_SCENE_03()[0]
-    except:  
-        entries_scene_03 = None
-    try: 
-        scene_03_name    = GET_SCENE_03()[1]
-    except: 
-        scene_03_name    = None
-    try:
-        entries_scene_04 = GET_SCENE_04()[0]
-    except:  
-        entries_scene_04 = None
-    try:
-        scene_04_name    = GET_SCENE_04()[1]
-    except:  
-        scene_04_name    = None
-    try:
-        entries_scene_05 = GET_SCENE_05()[0]
-    except:  
-        entries_scene_05 = None
-    try:
-        scene_05_name    = GET_SCENE_05()[1]
-    except:  
-        scene_05_name    = None
+        scene_name    = None
+ 
+    dropdown_list = GET_DROPDOWN_LIST()
+
+    return render_template('dashboard_hue_scene_01.html', 
+                            entries_scene=entries_scene,
+                            scene_name=scene_name,
+                            dropdown_list=dropdown_list
+                            )
+
+
+# Delete bulk scene 01
+@app.route('/dashboard/hue/scene_01/delete/<int:id>')
+@login_required
+@superuser_required
+def delete_bulk_scene_01(id):
+    
+    from hue.hue import DEL_BULK 
+    DEL_BULK(1, id)
+
+    return redirect(url_for('dashboard_hue_scene_01'))
+
+
+# HUE scene 02
+@app.route('/dashboard/hue/scene_02', methods=['GET', 'POST'])
+@login_required
+@superuser_required
+def dashboard_hue_scene_02():
+
+    from hue.hue import GET_DROPDOWN_LIST, ADD_BULK, SET_SCENE_NAME, SET_SCENE_COLOR, DEL_SCENE, GET_SCENE
+
+    scene = 2
+
+    if request.method == "GET":  
+            
+        # Change scene name
+        name = request.args.get("name") 
+        if name is not None:
+            SET_SCENE_NAME(scene, name)
+    
+        # Set RGB color
+        rgb_scene = []
+
+        for i in range(1,10):
+            rgb_scene.append(request.args.get("2 " + str(i)))
+      
+        SET_SCENE_COLOR(scene, rgb_scene)
+
+        # Add bulb
+        add_bulb = request.args.get("bulb_scene") 
+        if add_bulb is not None:
+            ADD_BULK(scene, add_bulb)
  
 
-    return render_template('dashboard_hue_scenes.html', 
-                            entries_scene_01=entries_scene_01,
-                            entries_scene_02=entries_scene_02,
-                            entries_scene_03=entries_scene_03,
-                            entries_scene_04=entries_scene_04,
-                            entries_scene_05=entries_scene_05,
-                            scene_01_name=scene_01_name,
-                            scene_02_name=scene_02_name,
-                            scene_03_name=scene_03_name,
-                            scene_04_name=scene_04_name,
-                            scene_05_name=scene_05_name,
-                            rgb_11="rgb(234, 41, 41)",
-                            rgb_12="rgb(234, 0, 41)",
-                            siteID="hue",
-                            hueSITE="scenes")
+    if request.method == "POST": 
+
+        # Delete scene
+        if 'delete' in request.form:
+            DEL_SCENE(scene)
+   
+    try:
+        entries_scene = GET_SCENE(scene)[0]
+    except:
+        entries_scene = None
+    try:    
+        scene_name    = GET_SCENE(scene)[1]
+    except:
+        scene_name    = None
+ 
+    dropdown_list = GET_DROPDOWN_LIST()
+
+    return render_template('dashboard_hue_scene_02.html', 
+                            entries_scene=entries_scene,
+                            scene_name=scene_name,
+                            dropdown_list=dropdown_list
+                            )
+
+
+# Delete bulk scene 02
+@app.route('/dashboard/hue/scene_02/delete/<int:id>')
+@login_required
+@superuser_required
+def delete_bulk_scene_02(id):
+    
+    from hue.hue import DEL_BULK 
+    DEL_BULK(2, id)
+
+    return redirect(url_for('dashboard_hue_scene_02'))
+
+
+# HUE scene 03
+@app.route('/dashboard/hue/scene_03', methods=['GET', 'POST'])
+@login_required
+@superuser_required
+def dashboard_hue_scene_03():
+
+    from hue.hue import GET_DROPDOWN_LIST, ADD_BULK, SET_SCENE_NAME, SET_SCENE_COLOR, DEL_SCENE, GET_SCENE
+
+    scene = 3
+
+    if request.method == "GET":  
+            
+        # Change scene name
+        name = request.args.get("name") 
+        if name is not None:
+            SET_SCENE_NAME(scene, name)
+    
+        # Set RGB color
+        rgb_scene = []
+
+        for i in range(1,10):
+            rgb_scene.append(request.args.get("3 " + str(i)))
+      
+        SET_SCENE_COLOR(scene, rgb_scene)
+
+        # Add bulb
+        add_bulb = request.args.get("bulb_scene") 
+        if add_bulb is not None:
+            ADD_BULK(scene, add_bulb)
+ 
+
+    if request.method == "POST": 
+
+        # Delete scene
+        if 'delete' in request.form:
+            DEL_SCENE(scene)
+   
+    try:
+        entries_scene = GET_SCENE(scene)[0]
+    except:
+        entries_scene = None
+    try:    
+        scene_name    = GET_SCENE(scene)[1]
+    except:
+        scene_name    = None
+ 
+    dropdown_list = GET_DROPDOWN_LIST()
+
+    return render_template('dashboard_hue_scene_03.html', 
+                            entries_scene=entries_scene,
+                            scene_name=scene_name,
+                            dropdown_list=dropdown_list
+                            )
+
+
+# Delete bulk scene 03
+@app.route('/dashboard/hue/scene_03/delete/<int:id>')
+@login_required
+@superuser_required
+def delete_bulk_scene_03(id):
+    
+    from hue.hue import DEL_BULK 
+    DEL_BULK(3, id)
+
+    return redirect(url_for('dashboard_hue_scene_03'))
 
 
 # HUE settings
