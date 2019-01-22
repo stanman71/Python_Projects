@@ -1,5 +1,6 @@
-import math
 # This is based on original code from http://stackoverflow.com/a/22649803
+
+import math
 
 def EnhanceColor(normalized):
     if normalized > 0.04045:

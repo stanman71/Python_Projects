@@ -27,21 +27,87 @@ Demo App
             <li><a href="{{ url_for('login') }}">Login</a></li>
             <li><a href="{{ url_for('signup') }}">Sign Up</a></li>
           </ul>
-        </div><!--/.nav-collapse -->
+        </div>
       </div>
     </nav>
 
-    <div class="container">
+<!-- LED scene -->
 
-      <div class="starter-template">
-        <h1>Bootstrap starter template</h1>
-        <p class="lead">Use this document as a way to quickly start any new project.<br> All you get is this text and a mostly barebones HTML document.</p>
+    <div class="container">
+      <br>
+      <br>
+
+      <div class="col-sm-2 col-sm-offset-2 col-md-10 col-md-offset-1 main">
+          <div class="row">
+          <div class="col">
+
+          <div class="panel panel-primary">
+              <div class="panel-heading">Szenenwahl</div>
+              <div class="panel-body">
+            <br>
+              <table class="table table-striped">
+              <thead>
+                  <tr>
+                  <th scope="col">Szene</th>
+                  <tr>
+              </thead>
+              <tbody>
+                  {% if scene_name_01 != "" %}
+                  <tr>
+                    <td>{{ scene_name_01 }}</td>
+                    <td>
+                    <form method="POST"> 
+                      <input type="submit" class="btn pull-right btn-secondary" name="1" value="Auswählen"/>
+                    </form>
+                    </td>
+                  </tr>
+                  {% endif %}
+                  {% if scene_name_02 != "" %}
+                  <tr>
+                    <td>{{ scene_name_02 }}</td>
+                    <td>
+                      <form method="POST"> 
+                        <input type="submit" class="btn pull-right btn-secondary" name="2" value="Auswählen"/>
+                      </form>
+                    </td>
+                  </tr>
+                  {% endif %}                
+                  {% if scene_name_03 != "" %}
+                  <tr>
+                    <td>{{ scene_name_03 }}</td>
+                    <td>
+                      <form method="POST"> 
+                        <input type="submit" class="btn pull-right btn-secondary" name="3" value="Auswählen"/>
+                      </form>
+                    </td>
+                  </tr>
+                  {% endif %}
+                  {% if scene_name_04 != "" %}
+                  <tr>
+                    <td>{{ scene_name_04 }}</td>
+                    <td>
+                      <form method="POST"> 
+                        <input type="submit" class="btn pull-right btn-secondary" name="4" value="Auswählen"/>
+                      </form>
+                    </td>
+                  </tr>
+                  {% endif %}
+                  {% if scene_name_05 != "" %}
+                  <tr>
+                    <td>{{ scene_name_05 }}</td>
+                    <td>
+                      <form method="POST"> 
+                        <input type="submit" class="btn pull-right btn-secondary" name="5" value="Auswählen"/>
+                      </form>
+                    </td>
+                  </tr>
+                  {% endif %}
+              </tbody>
+              </table>
+              </div>  
+            </div>    
+          </div>
+        </div>    
       </div>
 
-      {% if check is defined %}   
-        <div class="alert alert-success" role="alert">
-          Benutzer wurde angelegt
-        </div>        
-      {% endif %}
-    </div><!-- /.container -->
 {% endblock %}

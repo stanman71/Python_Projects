@@ -16,6 +16,9 @@ Dashboard
 {% endblock scripts %}
 
 {% block content %}
+
+<!-- nav-bar -->
+
   <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
       <div class="navbar-header">
@@ -30,8 +33,8 @@ Dashboard
       <div id="navbar" class="collapse navbar-collapse">
         <ul class="nav navbar-nav">
           <li><a href="{{ url_for('logout') }}">Log Out</a></li>
-          <li><a href="{{ url_for('dashboard_hue_scene_01') }}">HUE Szenen</a></li>
-          <li><a href="{{ url_for('dashboard_hue_settings') }}">HUE Einstellungen</a></li>
+          <li><a href="{{ url_for('dashboard_LED_scene_01') }}">LED Szenen</a></li>
+          <li><a href="{{ url_for('dashboard_LED_settings') }}">LED Einstellungen</a></li>
           <li><a href="{{ url_for('dashboard_user') }}">Benutzer</a></li>
         </ul>
       </div><!--/.nav-collapse -->
@@ -43,25 +46,33 @@ Dashboard
  
       <ul class="nav nav-pills">
       <li class="nav-item">
-        <a class="nav-link" href="{{ url_for('dashboard_hue_scene_01') }}">Szene 1</a>
+        <a class="nav-link" href="{{ url_for('dashboard_LED_scene_01') }}">Szene 1</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link active" href="{{ url_for('dashboard_hue_scene_02') }}">Szene 2</a>
+        <a class="nav-link active" href="{{ url_for('dashboard_LED_scene_02') }}">Szene 2</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="{{ url_for('dashboard_hue_scene_03') }}">Szene 3</a>
+        <a class="nav-link" href="{{ url_for('dashboard_LED_scene_03') }}">Szene 3</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{ url_for('dashboard_LED_scene_04') }}">Szene 4</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{ url_for('dashboard_LED_scene_05') }}">Szene 5</a>
       </li>
     </ul>
+
+<!-- scene settings -->
 
     <div class="row">
         <div class="col">
 
     <div class="panel panel-primary">
-        <div class="panel-heading"> HUE Szene 2 </div>
+        <div class="panel-heading"> LED Szene 2 </div>
         <div class="panel-body">
           <form method="GET">
             <div class="form-group">
-              <input type="text" class="form-control" name="name" value="{{ scene_name }}" />
+              <input type="text" class="form-control" name="name" value="{% if scene_name != None %}{{ scene_name }}{% endif %}" />
             </div>
               <input type="submit" class="btn btn-secondary" value="Name ändern" />
               <br>
@@ -74,24 +85,24 @@ Dashboard
           <table class="table table-striped">
             <thead>
                 <tr>                       
-                  <th scope="col">Birne</th>                        
+                  <th scope="col">LED</th>                        
                   <th scope="col" colspan="3">RGB</th>                   
                 <tr>
             </thead>
             <tbody>             
                 {% for entry in entries_scene %}
                 <tr>
-                  <td>{{ entry.bulk_name.name }}</td> 
+                  <td>{{ entry.LED_name.name }}</td> 
                   <td>{{ entry.color_red }}</td>
                   <td>{{ entry.color_green }}</td>
                   <td>{{ entry.color_blue }}</td>   
                   <td>
                     <form method="GET" class="verticalform">
-                      <input type="text" name="{{ entry.scene_id }} {{ entry.bulk_id }}" class="form-control scene_{{ entry.bulk_id }}" value="rgb({{ entry.color_red }}, {{ entry.color_green }}, {{ entry.color_blue }}) "/>
+                      <input type="text" name="{{ entry.scene_id }} {{ entry.LED_id }}" class="form-control scene_{{ entry.LED_id }}" value="rgb({{ entry.color_red }}, {{ entry.color_green }}, {{ entry.color_blue }}) "/>
                       <input type="submit" class="btn btn-secondary" value="Farbe ändern" />   
                     </form>
                   </td>
-                  <td><a href="/dashboard/hue/scene_02/delete/{{ entry.bulk_id }}">delete</a>
+                  <td><a href="/dashboard/LED/scene_02/delete/{{ entry.LED_id }}">delete</a>
                 </tr>
                 {% endfor %}
             </tbody>
@@ -109,12 +120,14 @@ Dashboard
         <div class="panel-body">
           <div class="dropdown">
             <form method="GET" enctype="multipart/form-data">
-              <select class="btn btn-secondary dropdown-toggle" name="bulb_scene">
+              <select class="btn btn-secondary dropdown-toggle" name="LED_scene">
                 {% for each in dropdown_list %}
+                {% if each != None %}
                 <option value="{{each}}">{{each}}</option>
+                {% endif %}
                 {% endfor %}
               </select>
-            <input type="submit" class="btn btn-secondary" value="Birne hinzufügen">
+            <input type="submit" class="btn btn-secondary" value="LED hinzufügen">
             </form>
           </div> 
         </div>

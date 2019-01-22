@@ -8,23 +8,12 @@ from flask_sqlalchemy  import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 from functools import wraps
-from hue.colorpicker_local import colorpicker
-
-from REST_API import TodoListResource, TodoResource
+from led.colorpicker_local import colorpicker
 
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'Thisissupposedtobesecret!'
 colorpicker(app)
-
-
-""" ######## """
-""" REST_API """
-""" ######## """
-
-api = Api(app)
-api.add_resource(TodoListResource, '/api/resource', endpoint='users')
-api.add_resource(TodoResource, '/api/resource/<string:id>', endpoint='user')
 
 
 """ ######## """
@@ -102,16 +91,51 @@ class RegisterForm(FlaskForm):
     password = PasswordField('password', validators=[InputRequired(), Length(min=8, max=80)])
 
 
-""" ##### """
-""" Sites """
-""" ##### """
+""" ########## """
+""" Sites User """
+""" ########## """
 
+# landing page
 @app.route('/', methods=['GET', 'POST'])
 def index():
 
-    return render_template('index.html')
+    from led.LED import GET_SCENE
+
+    if request.method == "POST":  
+            
+        # Change LED name
+        for i in range(1,10):
+            if str(i) in request.form:               
+                print(i)
+ 
 
 
+    scene_name_01 = GET_SCENE(1)[1]
+    if scene_name_01 == None:
+        scene_name_01 = ""
+    scene_name_02 = GET_SCENE(2)[1]
+    if scene_name_02 == None:
+        scene_name_02 = ""    
+    scene_name_03 = GET_SCENE(3)[1]
+    if scene_name_03 == None:
+        scene_name_03 = ""
+    scene_name_04 = GET_SCENE(4)[1]
+    if scene_name_04 == None:
+        scene_name_04 = ""
+    scene_name_05 = GET_SCENE(5)[1]
+    if scene_name_05 == None:
+        scene_name_05 = ""
+
+    return render_template('index.html', 
+                            scene_name_01=scene_name_01,
+                            scene_name_02=scene_name_02,
+                            scene_name_03=scene_name_03,
+                            scene_name_04=scene_name_04,
+                            scene_name_05=scene_name_05
+                            )
+
+
+# login
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm()
@@ -128,6 +152,7 @@ def login():
     return render_template('login.html', form=form)
 
 
+# signup
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
     form = RegisterForm()
@@ -137,11 +162,12 @@ def signup():
         new_user = User(username=form.username.data, email=form.email.data, password=hashed_password, role="user")
         db.session.add(new_user)
         db.session.commit()
-        return render_template('index.html', form=form, check=True)
+        return redirect(url_for('index'))
         
     return render_template('signup.html', form=form)
 
 
+# Dashboard
 @app.route('/dashboard', methods=['GET', 'POST'])
 @login_required
 @superuser_required
@@ -149,6 +175,7 @@ def dashboard():
     return render_template('dashboard.html', name=current_user.username)
 
 
+# Dashboard user
 @app.route('/dashboard/user/', methods=['GET', 'POST'])
 @login_required
 @superuser_required
@@ -184,13 +211,17 @@ def delete(id):
     return redirect(url_for('dashboard_user'))
 
 
-# HUE scene 01
-@app.route('/dashboard/hue/scene_01', methods=['GET', 'POST'])
+""" ############ """
+""" Sites Scenes """
+""" ############ """
+
+# LED scene 01
+@app.route('/dashboard/LED/scene_01', methods=['GET', 'POST'])
 @login_required
 @superuser_required
-def dashboard_hue_scene_01():
+def dashboard_LED_scene_01():
 
-    from hue.hue import GET_DROPDOWN_LIST, ADD_BULK, SET_SCENE_NAME, SET_SCENE_COLOR, DEL_SCENE, GET_SCENE
+    from led.LED import GET_DROPDOWN_LIST, ADD_LED, SET_SCENE_NAME, SET_SCENE_COLOR, DEL_SCENE, GET_SCENE
 
     scene = 1
 
@@ -209,10 +240,10 @@ def dashboard_hue_scene_01():
 
         SET_SCENE_COLOR(scene, rgb_scene)
 
-        # Add bulb
-        add_bulb = request.args.get("bulb_scene") 
-        if add_bulb is not None:
-            ADD_BULK(scene, add_bulb)
+        # Add LED
+        add_LED = request.args.get("LED_scene") 
+        if add_LED is not None:
+            ADD_LED(scene, add_LED)
  
 
     if request.method == "POST": 
@@ -221,43 +252,37 @@ def dashboard_hue_scene_01():
         if 'delete' in request.form:
             DEL_SCENE(scene)
 
-    try:
-        entries_scene = GET_SCENE(scene)[0]
-    except:
-        entries_scene = None
-    try:    
-        scene_name    = GET_SCENE(scene)[1]
-    except:
-        scene_name    = None
- 
+
+    entries_scene = GET_SCENE(scene)[0]
+    scene_name    = GET_SCENE(scene)[1]
     dropdown_list = GET_DROPDOWN_LIST()
 
-    return render_template('dashboard_hue_scene_01.html', 
+    return render_template('dashboard_LED_scene_01.html', 
                             entries_scene=entries_scene,
                             scene_name=scene_name,
                             dropdown_list=dropdown_list
                             )
 
 
-# Delete bulk scene 01
-@app.route('/dashboard/hue/scene_01/delete/<int:id>')
+# Delete LED scene 01
+@app.route('/dashboard/LED/scene_01/delete/<int:id>')
 @login_required
 @superuser_required
-def delete_bulk_scene_01(id):
+def delete_LED_scene_01(id):
     
-    from hue.hue import DEL_BULK 
-    DEL_BULK(1, id)
+    from led.LED import DEL_LED 
+    DEL_LED(1, id)
 
-    return redirect(url_for('dashboard_hue_scene_01'))
+    return redirect(url_for('dashboard_LED_scene_01'))
 
 
-# HUE scene 02
-@app.route('/dashboard/hue/scene_02', methods=['GET', 'POST'])
+# LED scene 02
+@app.route('/dashboard/LED/scene_02', methods=['GET', 'POST'])
 @login_required
 @superuser_required
-def dashboard_hue_scene_02():
+def dashboard_LED_scene_02():
 
-    from hue.hue import GET_DROPDOWN_LIST, ADD_BULK, SET_SCENE_NAME, SET_SCENE_COLOR, DEL_SCENE, GET_SCENE
+    from led.LED import GET_DROPDOWN_LIST, ADD_LED, SET_SCENE_NAME, SET_SCENE_COLOR, DEL_SCENE, GET_SCENE
 
     scene = 2
 
@@ -276,10 +301,10 @@ def dashboard_hue_scene_02():
       
         SET_SCENE_COLOR(scene, rgb_scene)
 
-        # Add bulb
-        add_bulb = request.args.get("bulb_scene") 
-        if add_bulb is not None:
-            ADD_BULK(scene, add_bulb)
+        # Add LED
+        add_LED = request.args.get("LED_scene") 
+        if add_LED is not None:
+            ADD_LED(scene, add_LED)
  
 
     if request.method == "POST": 
@@ -288,43 +313,37 @@ def dashboard_hue_scene_02():
         if 'delete' in request.form:
             DEL_SCENE(scene)
    
-    try:
-        entries_scene = GET_SCENE(scene)[0]
-    except:
-        entries_scene = None
-    try:    
-        scene_name    = GET_SCENE(scene)[1]
-    except:
-        scene_name    = None
- 
+
+    entries_scene = GET_SCENE(scene)[0]
+    scene_name    = GET_SCENE(scene)[1]
     dropdown_list = GET_DROPDOWN_LIST()
 
-    return render_template('dashboard_hue_scene_02.html', 
+    return render_template('dashboard_LED_scene_02.html', 
                             entries_scene=entries_scene,
                             scene_name=scene_name,
                             dropdown_list=dropdown_list
                             )
 
 
-# Delete bulk scene 02
-@app.route('/dashboard/hue/scene_02/delete/<int:id>')
+# Delete LED scene 02
+@app.route('/dashboard/LED/scene_02/delete/<int:id>')
 @login_required
 @superuser_required
-def delete_bulk_scene_02(id):
+def delete_LED_scene_02(id):
     
-    from hue.hue import DEL_BULK 
-    DEL_BULK(2, id)
+    from led.LED import DEL_LED 
+    DEL_LED(2, id)
 
-    return redirect(url_for('dashboard_hue_scene_02'))
+    return redirect(url_for('dashboard_LED_scene_02'))
 
 
-# HUE scene 03
-@app.route('/dashboard/hue/scene_03', methods=['GET', 'POST'])
+# LED scene 03
+@app.route('/dashboard/LED/scene_03', methods=['GET', 'POST'])
 @login_required
 @superuser_required
-def dashboard_hue_scene_03():
+def dashboard_LED_scene_03():
 
-    from hue.hue import GET_DROPDOWN_LIST, ADD_BULK, SET_SCENE_NAME, SET_SCENE_COLOR, DEL_SCENE, GET_SCENE
+    from led.LED import GET_DROPDOWN_LIST, ADD_LED, SET_SCENE_NAME, SET_SCENE_COLOR, DEL_SCENE, GET_SCENE
 
     scene = 3
 
@@ -343,10 +362,71 @@ def dashboard_hue_scene_03():
       
         SET_SCENE_COLOR(scene, rgb_scene)
 
-        # Add bulb
-        add_bulb = request.args.get("bulb_scene") 
-        if add_bulb is not None:
-            ADD_BULK(scene, add_bulb)
+        # Add LED
+        add_LED = request.args.get("LED_scene") 
+        if add_LED is not None:
+            ADD_LED(scene, add_LED)
+ 
+
+    if request.method == "POST": 
+
+        # Delete scene
+        if 'delete' in request.form:
+            DEL_SCENE(scene)
+    
+
+    entries_scene = GET_SCENE(scene)[0]
+    scene_name    = GET_SCENE(scene)[1]
+    dropdown_list = GET_DROPDOWN_LIST()
+
+    return render_template('dashboard_LED_scene_03.html', 
+                            entries_scene=entries_scene,
+                            scene_name=scene_name,
+                            dropdown_list=dropdown_list
+                            )
+
+
+# Delete LED scene 03
+@app.route('/dashboard/LED/scene_03/delete/<int:id>')
+@login_required
+@superuser_required
+def delete_LED_scene_03(id):
+    
+    from led.LED import DEL_LED 
+    DEL_LED(3, id)
+
+    return redirect(url_for('dashboard_LED_scene_03'))
+
+
+# LED scene 04
+@app.route('/dashboard/LED/scene_04', methods=['GET', 'POST'])
+@login_required
+@superuser_required
+def dashboard_LED_scene_04():
+
+    from led.LED import GET_DROPDOWN_LIST, ADD_LED, SET_SCENE_NAME, SET_SCENE_COLOR, DEL_SCENE, GET_SCENE
+
+    scene = 4
+
+    if request.method == "GET":  
+            
+        # Change scene name
+        name = request.args.get("name") 
+        if name is not None:
+            SET_SCENE_NAME(scene, name)
+    
+        # Set RGB color
+        rgb_scene = []
+
+        for i in range(1,10):
+            rgb_scene.append(request.args.get("4 " + str(i)))
+      
+        SET_SCENE_COLOR(scene, rgb_scene)
+
+        # Add LED
+        add_LED = request.args.get("LED_scene") 
+        if add_LED is not None:
+            ADD_LED(scene, add_LED)
  
 
     if request.method == "POST": 
@@ -355,60 +435,131 @@ def dashboard_hue_scene_03():
         if 'delete' in request.form:
             DEL_SCENE(scene)
    
-    try:
-        entries_scene = GET_SCENE(scene)[0]
-    except:
-        entries_scene = None
-    try:    
-        scene_name    = GET_SCENE(scene)[1]
-    except:
-        scene_name    = None
- 
+
+    entries_scene = GET_SCENE(scene)[0]
+    scene_name    = GET_SCENE(scene)[1]
     dropdown_list = GET_DROPDOWN_LIST()
 
-    return render_template('dashboard_hue_scene_03.html', 
+    return render_template('dashboard_LED_scene_04.html', 
                             entries_scene=entries_scene,
                             scene_name=scene_name,
                             dropdown_list=dropdown_list
                             )
 
 
-# Delete bulk scene 03
-@app.route('/dashboard/hue/scene_03/delete/<int:id>')
+# Delete LED scene 04
+@app.route('/dashboard/LED/scene_04/delete/<int:id>')
 @login_required
 @superuser_required
-def delete_bulk_scene_03(id):
+def delete_LED_scene_04(id):
     
-    from hue.hue import DEL_BULK 
-    DEL_BULK(3, id)
+    from led.LED import DEL_LED 
+    DEL_LED(4, id)
 
-    return redirect(url_for('dashboard_hue_scene_03'))
+    return redirect(url_for('dashboard_LED_scene_04'))
 
 
-# HUE settings
-@app.route('/dashboard/hue/settings', methods=['GET', 'POST'])
+# LED scene 05
+@app.route('/dashboard/LED/scene_05', methods=['GET', 'POST'])
 @login_required
 @superuser_required
-def dashboard_hue_settings():
+def dashboard_LED_scene_05():
 
-    from hue.hue import GET_IP, SET_IP
+    from led.LED import GET_DROPDOWN_LIST, ADD_LED, SET_SCENE_NAME, SET_SCENE_COLOR, DEL_SCENE, GET_SCENE
+
+    scene = 5
+
+    if request.method == "GET":  
+            
+        # Change scene name
+        name = request.args.get("name") 
+        if name is not None:
+            SET_SCENE_NAME(scene, name)
+    
+        # Set RGB color
+        rgb_scene = []
+
+        for i in range(1,10):
+            rgb_scene.append(request.args.get("5 " + str(i)))
+      
+        SET_SCENE_COLOR(scene, rgb_scene)
+
+        # Add LED
+        add_LED = request.args.get("LED_scene") 
+        if add_LED is not None:
+            ADD_LED(scene, add_LED)
+ 
+
+    if request.method == "POST": 
+
+        # Delete scene
+        if 'delete' in request.form:
+            DEL_SCENE(scene)
+   
+
+    entries_scene = GET_SCENE(scene)[0]
+    scene_name    = GET_SCENE(scene)[1]
+    dropdown_list = GET_DROPDOWN_LIST()
+
+    return render_template('dashboard_LED_scene_05.html', 
+                            entries_scene=entries_scene,
+                            scene_name=scene_name,
+                            dropdown_list=dropdown_list
+                            )
+
+
+# Delete LED scene 05
+@app.route('/dashboard/LED/scene_05/delete/<int:id>')
+@login_required
+@superuser_required
+def delete_LED_scene_05(id):
+    
+    from led.LED import DEL_LED 
+    DEL_LED(5, id)
+
+    return redirect(url_for('dashboard_LED_scene_05'))
+
+
+# LED settings
+@app.route('/dashboard/LED/settings', methods=['GET', 'POST'])
+@login_required
+@superuser_required
+def dashboard_LED_settings():
+
+    from led.LED import GET_IP, SET_IP, GET_LED, SET_LED_NAME
 
     ID = 1
     ip = GET_IP()
-                         
+    entries_LED = GET_LED()        
+    name_error = ""             
+
     if request.method == "GET":  
             
         # Change ip
         if request.args.get("ip") is not None:
             ip = request.args.get("ip")   
             SET_IP(ip)
-                 
-    return render_template('dashboard_hue_settings.html', 
+        
+        # Change LED name
+        for i in range(1,10):
+            name = request.args.get(str(i)) 
+            if name is not None:
+                if name is "":
+                    name_error = "Kein Name vergeben"
+                else:
+                    name_error = SET_LED_NAME(i, name)    
+      
+
+    return render_template('dashboard_LED_settings.html', 
                             ip=ip,
-                            siteID="hue",
-                            hueSITE="settings")
+                            entries_LED=entries_LED,
+                            name_error=name_error
+                            )
 
 
+""" ########### """
+""" Sites Other """
+""" ########### """
 
 @app.route('/logout')
 @login_required
@@ -421,7 +572,7 @@ def logout():
 @app.route('/get_media/<path:filename>', methods=['GET'])
 def get_media(filename):
     return send_from_directory('C:/Users/stanman/Desktop/Unterlagen/GIT/Python_Projects/RasPi/Web_Form/static/colorpicker/', filename)
-
+    #return send_from_directory('C:/Users/mstan/GIT/Python_Projects/RasPi/Web_Form/static/colorpicker/', filename)
 
 
 if __name__ == '__main__':

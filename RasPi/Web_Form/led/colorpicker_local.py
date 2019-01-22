@@ -1,6 +1,5 @@
 from flask import Markup
 
-
 class colorpicker(object):
     def __init__(self, app=None):
         self.app = app
