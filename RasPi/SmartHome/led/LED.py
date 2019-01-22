@@ -6,6 +6,14 @@ from app import app
 
 import re
 
+'''
+RasPi:
+
+import sys
+sys.path.insert(0, "/home/pi/Python/SmartHome/led")
+from phue import Bridge
+'''
+
 
 """ ################# """
 """ database settings """
