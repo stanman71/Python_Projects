@@ -24,7 +24,7 @@ PATH = 'C:/Users/stanman/Desktop/Unterlagen/GIT/Python_Projects/RasPi/SmartHome/
 
 # RasPi:
 #sys.path.insert(0, "/home/pi/Python/SmartHome/led")
-
+#PATH = '/home/pi/Python/SmartHome/static/CDNJS/'
 
 """ ##### """
 """ flask """
