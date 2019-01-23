@@ -1,12 +1,12 @@
 {% extends "bootstrap/base.html" %}
 
 {% block title %}
-Dashboard
+  Scene 5
 {% endblock %}
 
 {% block styles %}
-{{super()}}
-<link rel="stylesheet" href="{{url_for('.static', filename='dashboard.css')}}">
+  {{super()}}
+  <link rel="stylesheet" href="{{url_for('.static', filename='dashboard.css')}}">
 {% endblock %}
 
 {% block scripts %}
@@ -67,7 +67,7 @@ Dashboard
       <div class="row">
           <div class="col">
 
-      <div class="panel panel-primary">
+      <div class="panel panel-info">
           <div class="panel-heading"> LED Szene 5 </div>
           <div class="panel-body">
             <form method="GET">
@@ -86,7 +86,8 @@ Dashboard
               <thead>
                   <tr>                       
                     <th scope="col">LED</th>                        
-                    <th scope="col" colspan="3">RGB</th>                    
+                    <th scope="col" colspan="4">RGB</th> 
+                    <th scope="col" colspan="2">Helligkeit (%)</th>                    
                   <tr>
               </thead>
               <tbody>             
@@ -102,7 +103,16 @@ Dashboard
                         <input type="submit" class="btn btn-secondary" value="Farbe ändern" />   
                       </form>
                     </td>
-                    <td><a href="/dashboard/LED/scene_05/delete/{{ entry.LED_id }}">delete</a>
+                    <td>{{ entry.brightness }}</td>
+                    <td>
+                      <form method="GET" class="range-field my-4 w-5">
+                        <div class="col-md-10 text-center"> 
+                          <input type="range" name="{{ entry.LED_id }}" min="0" max="100" value="{{ entry.brightness }}" />
+                          <input type="submit" class="btn btn-secondary" value="Helligkeit ändern"/>
+                        </div> 
+                      </form>
+                    </td>
+                    <td><a href="/dashboard/LED/scene_05/delete/{{ entry.LED_id }}">löschen</a>
                   </tr>
                   {% endfor %}
               </tbody>
@@ -115,7 +125,7 @@ Dashboard
           <br>   
       {% endif %}
 
-      <div class="panel panel-primary">
+      <div class="panel panel-info">
           <div class="panel-heading">  </div>
           <div class="panel-body">
             <div class="dropdown">

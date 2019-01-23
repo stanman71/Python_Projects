@@ -1,12 +1,12 @@
 {% extends "bootstrap/base.html" %}
 
 {% block title %}
-Dashboard
+  Dashboard
 {% endblock %}
 
 {% block styles %}
-{{super()}}
-<link rel="stylesheet" href="{{url_for('.static', filename='dashboard.css')}}">
+  {{super()}}
+  <link rel="stylesheet" href="{{url_for('.static', filename='dashboard.css')}}">
 {% endblock %}
 
 {% block content %}
@@ -45,7 +45,7 @@ Dashboard
         <div class="col">
         <br>  
 
-        <div class="panel panel-primary">
+        <div class="panel panel-info">
           <div class="panel-heading">HUE Bridge</div>
           <div class="panel-body">
             <form method="GET">
@@ -68,7 +68,7 @@ Dashboard
   
         {% if entries_LED != None %}
  
-        <div class="panel panel-primary">
+        <div class="panel panel-info">
           <div class="panel-heading">LED</div>
           <div class="panel-body">      
 

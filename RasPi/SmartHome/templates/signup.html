@@ -2,12 +2,12 @@
 {% import "bootstrap/wtf.html" as wtf %}
 
 {% block title %}
-Sign Up
+  Sign Up
 {% endblock %}
 
 {% block styles %}
-{{super()}}
-<link rel="stylesheet" href="{{url_for('.static', filename='signin.css')}}">
+  {{super()}}
+  <link rel="stylesheet" href="{{url_for('.static', filename='signin.css')}}">
 {% endblock %}
 
 {% block content %}
@@ -40,7 +40,7 @@ Sign Up
       {{ wtf.form_field(form.username) }}
       {{ wtf.form_field(form.email) }}
       {{ wtf.form_field(form.password) }}
-      <button class="btn btn-lg btn-primary btn-block" type="submit">Sign Up</button>
+      <button class="btn btn-lg btn-info btn-block" type="submit">Sign Up</button>
     </form>
   </div> <!-- /container -->
 {% endblock %}

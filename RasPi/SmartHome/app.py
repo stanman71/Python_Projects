@@ -1,16 +1,3 @@
-import sys
-
-# windows:
-sys.path.insert(0, "Python_Projects/RasPi/SmartHome/led")
-
-
-'''
-RasPi:
-
-sys.path.insert(0, "/home/pi/Python/SmartHome/led")
-from LED import GET_SCENE, GET_DROPDOWN_LIST, ADD_LED, SET_SCENE_NAME, SET_SCENE_COLOR, DEL_SCENE, GET_IP, SET_IP, GET_LED, SET_LED_NAME
-'''
-
 from flask import Flask, render_template, redirect, url_for, request, send_from_directory
 from flask_bootstrap import Bootstrap
 from flask_wtf import FlaskForm 
@@ -20,9 +7,31 @@ from flask_sqlalchemy  import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 from functools import wraps
+import sys
+
+
+""" ################# """
+""" genernal settings """
+""" ################# """
+
+# Windows WORK
+#sys.path.insert(0, "C:/Users/mstan/GIT/Python_Projects/RasPi/SmartHome/led")
+#PATH = 'C:/Users/mstan/GIT/Python_Projects/RasPi/SmartHome/static/CDNJS/'
+
+# Windows HOME
+sys.path.insert(0, "C:/Users/stanman/Desktop/Unterlagen/GIT/Python_Projects/RasPi/SmartHome/led")
+PATH = 'C:/Users/stanman/Desktop/Unterlagen/GIT/Python_Projects/RasPi/SmartHome/static/CDNJS/'
+
+# RasPi:
+#sys.path.insert(0, "/home/pi/Python/SmartHome/led")
+
+
+""" ##### """
+""" flask """
+""" ##### """
 
 from colorpicker_local import colorpicker
-
+from LED import *
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'Thisissupposedtobesecret!'
@@ -43,9 +52,7 @@ login_manager.login_view = 'login'
 
 # Database table entries
 class User(UserMixin, db.Model):
-
     __tablename__ = 'user'
-
     id       = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(50), unique=True)
     email    = db.Column(db.String(50), unique=True)
@@ -82,7 +89,6 @@ def superuser_required(f):
             return render_template('login.html', form=form, role_check=False)
     return wrap
 
-
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
@@ -96,7 +102,6 @@ class LoginForm(FlaskForm):
     username = StringField('username', validators=[InputRequired(), Length(min=4, max=15)])
     password = PasswordField('password', validators=[InputRequired(), Length(min=8, max=80)])
     remember = BooleanField('remember me')
-
 
 class RegisterForm(FlaskForm):
     email    = StringField('email', validators=[InputRequired(), Email(message='Invalid email'), Length(max=50)])
@@ -112,16 +117,17 @@ class RegisterForm(FlaskForm):
 @app.route('/', methods=['GET', 'POST'])
 def index():
 
-    from led.LED import GET_SCENE
-
-    if request.method == "POST":  
-            
-        # Change LED name
+    if request.method == "POST":         
+        # Change scene
         for i in range(1,10):
             if str(i) in request.form:               
                 print(i)
- 
 
+    if request.method == "GET":              
+        # Change brightness
+        brightness_global = request.args.get("brightness_global") 
+        if brightness_global is not None:
+            SET_BRIGHTNESS_GLOBAL(brightness_global) 
 
     scene_name_01 = GET_SCENE(1)[1]
     if scene_name_01 == None:
@@ -139,12 +145,15 @@ def index():
     if scene_name_05 == None:
         scene_name_05 = ""
 
+    brightness_global = GET_BRIGHTNESS_GLOBAL()
+
     return render_template('index.html', 
                             scene_name_01=scene_name_01,
                             scene_name_02=scene_name_02,
                             scene_name_03=scene_name_03,
                             scene_name_04=scene_name_04,
-                            scene_name_05=scene_name_05
+                            scene_name_05=scene_name_05,
+                            brightness_global=brightness_global
                             )
 
 
@@ -233,9 +242,6 @@ def delete(id):
 @login_required
 @superuser_required
 def dashboard_LED_scene_01():
-
-    from led.LED import GET_DROPDOWN_LIST, ADD_LED, SET_SCENE_NAME, SET_SCENE_COLOR, DEL_SCENE, GET_SCENE
-
     scene = 1
 
     if request.method == "GET":  
@@ -246,25 +252,26 @@ def dashboard_LED_scene_01():
             SET_SCENE_NAME(scene, name)
     
         # Set RGB color
-        rgb_scene = []
-
+        rgb_scene  = []
         for i in range(1,10):
             rgb_scene.append(request.args.get("1 " + str(i)))
-
         SET_SCENE_COLOR(scene, rgb_scene)
+
+        # Set brightness
+        brightness = []
+        for i in range(1,10):
+            brightness.append(request.args.get(str(i)))
+        SET_SCENE_BRIGHTNESS(scene, brightness)       
 
         # Add LED
         add_LED = request.args.get("LED_scene") 
         if add_LED is not None:
             ADD_LED(scene, add_LED)
  
-
     if request.method == "POST": 
-
         # Delete scene
         if 'delete' in request.form:
             DEL_SCENE(scene)
-
 
     entries_scene = GET_SCENE(scene)[0]
     scene_name    = GET_SCENE(scene)[1]
@@ -281,11 +288,8 @@ def dashboard_LED_scene_01():
 @app.route('/dashboard/LED/scene_01/delete/<int:id>')
 @login_required
 @superuser_required
-def delete_LED_scene_01(id):
-    
-    from led.LED import DEL_LED 
+def delete_LED_scene_01(id): 
     DEL_LED(1, id)
-
     return redirect(url_for('dashboard_LED_scene_01'))
 
 
@@ -294,9 +298,6 @@ def delete_LED_scene_01(id):
 @login_required
 @superuser_required
 def dashboard_LED_scene_02():
-
-    from led.LED import GET_DROPDOWN_LIST, ADD_LED, SET_SCENE_NAME, SET_SCENE_COLOR, DEL_SCENE, GET_SCENE
-
     scene = 2
 
     if request.method == "GET":  
@@ -308,25 +309,26 @@ def dashboard_LED_scene_02():
     
         # Set RGB color
         rgb_scene = []
-
         for i in range(1,10):
-            rgb_scene.append(request.args.get("2 " + str(i)))
-      
+            rgb_scene.append(request.args.get("2 " + str(i)))  
         SET_SCENE_COLOR(scene, rgb_scene)
+
+        # Set brightness
+        brightness = []
+        for i in range(1,10):
+            brightness.append(request.args.get(str(i)))
+        SET_SCENE_BRIGHTNESS(scene, brightness)  
 
         # Add LED
         add_LED = request.args.get("LED_scene") 
         if add_LED is not None:
             ADD_LED(scene, add_LED)
  
-
     if request.method == "POST": 
-
         # Delete scene
         if 'delete' in request.form:
             DEL_SCENE(scene)
    
-
     entries_scene = GET_SCENE(scene)[0]
     scene_name    = GET_SCENE(scene)[1]
     dropdown_list = GET_DROPDOWN_LIST()
@@ -343,10 +345,7 @@ def dashboard_LED_scene_02():
 @login_required
 @superuser_required
 def delete_LED_scene_02(id):
-    
-    from led.LED import DEL_LED 
     DEL_LED(2, id)
-
     return redirect(url_for('dashboard_LED_scene_02'))
 
 
@@ -355,9 +354,6 @@ def delete_LED_scene_02(id):
 @login_required
 @superuser_required
 def dashboard_LED_scene_03():
-
-    from led.LED import GET_DROPDOWN_LIST, ADD_LED, SET_SCENE_NAME, SET_SCENE_COLOR, DEL_SCENE, GET_SCENE
-
     scene = 3
 
     if request.method == "GET":  
@@ -369,25 +365,26 @@ def dashboard_LED_scene_03():
     
         # Set RGB color
         rgb_scene = []
-
         for i in range(1,10):
-            rgb_scene.append(request.args.get("3 " + str(i)))
-      
+            rgb_scene.append(request.args.get("3 " + str(i))) 
         SET_SCENE_COLOR(scene, rgb_scene)
+
+        # Set brightness
+        brightness = []
+        for i in range(1,10):
+            brightness.append(request.args.get(str(i)))
+        SET_SCENE_BRIGHTNESS(scene, brightness)  
 
         # Add LED
         add_LED = request.args.get("LED_scene") 
         if add_LED is not None:
             ADD_LED(scene, add_LED)
  
-
     if request.method == "POST": 
-
         # Delete scene
         if 'delete' in request.form:
             DEL_SCENE(scene)
     
-
     entries_scene = GET_SCENE(scene)[0]
     scene_name    = GET_SCENE(scene)[1]
     dropdown_list = GET_DROPDOWN_LIST()
@@ -404,10 +401,7 @@ def dashboard_LED_scene_03():
 @login_required
 @superuser_required
 def delete_LED_scene_03(id):
-    
-    from led.LED import DEL_LED 
     DEL_LED(3, id)
-
     return redirect(url_for('dashboard_LED_scene_03'))
 
 
@@ -416,9 +410,6 @@ def delete_LED_scene_03(id):
 @login_required
 @superuser_required
 def dashboard_LED_scene_04():
-
-    from led.LED import GET_DROPDOWN_LIST, ADD_LED, SET_SCENE_NAME, SET_SCENE_COLOR, DEL_SCENE, GET_SCENE
-
     scene = 4
 
     if request.method == "GET":  
@@ -430,25 +421,26 @@ def dashboard_LED_scene_04():
     
         # Set RGB color
         rgb_scene = []
-
         for i in range(1,10):
-            rgb_scene.append(request.args.get("4 " + str(i)))
-      
+            rgb_scene.append(request.args.get("4 " + str(i)))      
         SET_SCENE_COLOR(scene, rgb_scene)
+
+        # Set brightness
+        brightness = []
+        for i in range(1,10):
+            brightness.append(request.args.get(str(i)))
+        SET_SCENE_BRIGHTNESS(scene, brightness)  
 
         # Add LED
         add_LED = request.args.get("LED_scene") 
         if add_LED is not None:
             ADD_LED(scene, add_LED)
  
-
     if request.method == "POST": 
-
         # Delete scene
         if 'delete' in request.form:
             DEL_SCENE(scene)
    
-
     entries_scene = GET_SCENE(scene)[0]
     scene_name    = GET_SCENE(scene)[1]
     dropdown_list = GET_DROPDOWN_LIST()
@@ -465,10 +457,7 @@ def dashboard_LED_scene_04():
 @login_required
 @superuser_required
 def delete_LED_scene_04(id):
-    
-    from led.LED import DEL_LED 
     DEL_LED(4, id)
-
     return redirect(url_for('dashboard_LED_scene_04'))
 
 
@@ -477,9 +466,6 @@ def delete_LED_scene_04(id):
 @login_required
 @superuser_required
 def dashboard_LED_scene_05():
-
-    from led.LED import GET_DROPDOWN_LIST, ADD_LED, SET_SCENE_NAME, SET_SCENE_COLOR, DEL_SCENE, GET_SCENE
-
     scene = 5
 
     if request.method == "GET":  
@@ -491,11 +477,15 @@ def dashboard_LED_scene_05():
     
         # Set RGB color
         rgb_scene = []
-
         for i in range(1,10):
-            rgb_scene.append(request.args.get("5 " + str(i)))
-      
+            rgb_scene.append(request.args.get("5 " + str(i)))     
         SET_SCENE_COLOR(scene, rgb_scene)
+
+        # Set brightness
+        brightness = []
+        for i in range(1,10):
+            brightness.append(request.args.get(str(i)))
+        SET_SCENE_BRIGHTNESS(scene, brightness)  
 
         # Add LED
         add_LED = request.args.get("LED_scene") 
@@ -504,7 +494,6 @@ def dashboard_LED_scene_05():
  
 
     if request.method == "POST": 
-
         # Delete scene
         if 'delete' in request.form:
             DEL_SCENE(scene)
@@ -525,11 +514,8 @@ def dashboard_LED_scene_05():
 @app.route('/dashboard/LED/scene_05/delete/<int:id>')
 @login_required
 @superuser_required
-def delete_LED_scene_05(id):
-    
-    from led.LED import DEL_LED 
+def delete_LED_scene_05(id): 
     DEL_LED(5, id)
-
     return redirect(url_for('dashboard_LED_scene_05'))
 
 
@@ -538,14 +524,9 @@ def delete_LED_scene_05(id):
 @login_required
 @superuser_required
 def dashboard_LED_settings():
-
-    from led.LED import GET_IP, SET_IP, GET_LED, SET_LED_NAME
-
-    ID = 1
     ip = GET_IP()
     entries_LED = GET_LED()        
-    name_error = ""             
-
+        
     if request.method == "GET":  
             
         # Change ip
@@ -554,14 +535,11 @@ def dashboard_LED_settings():
             SET_IP(ip)
         
         # Change LED name
+        name_error = "" 
         for i in range(1,10):
             name = request.args.get(str(i)) 
             if name is not None:
-                if name is "":
-                    name_error = "Kein Name vergeben"
-                else:
-                    name_error = SET_LED_NAME(i, name)    
-      
+                name_error = SET_LED_NAME(i, name)
 
     return render_template('dashboard_LED_settings.html', 
                             ip=ip,
@@ -584,8 +562,7 @@ def logout():
 # Host files for colorpicker_local
 @app.route('/get_media/<path:filename>', methods=['GET'])
 def get_media(filename):
-    return send_from_directory('C:/Users/stanman/Desktop/Unterlagen/GIT/Python_Projects/RasPi/SmartHome/static/colorpicker/', filename)
-    #return send_from_directory('C:/Users/mstan/GIT/Python_Projects/RasPi/SmartHome/static/colorpicker/', filename)
+    return send_from_directory(PATH, filename)
 
 
 if __name__ == '__main__':

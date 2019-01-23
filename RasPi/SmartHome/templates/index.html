@@ -1,15 +1,18 @@
 {% extends "bootstrap/base.html" %}
 
 {% block title %}
-Demo App
+  Index
 {% endblock %}
 
 {% block styles %}
-{{super()}}
-<link rel="stylesheet" href="{{url_for('.static', filename='starter-template.css')}}">
+  {{super()}}
+  <link rel="stylesheet" href="{{url_for('.static', filename='starter-template.css')}}">
 {% endblock %}
 
 {% block content %}
+
+<!-- nav-bar -->
+
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
@@ -31,25 +34,22 @@ Demo App
       </div>
     </nav>
 
-<!-- LED scene -->
 
     <div class="container">
       <br>
       <br>
-
       <div class="col-sm-2 col-sm-offset-2 col-md-10 col-md-offset-1 main">
           <div class="row">
           <div class="col">
 
-          <div class="panel panel-primary">
+<!-- LED scene select -->
+
+          <div class="panel panel-info">
               <div class="panel-heading">Szenenwahl</div>
               <div class="panel-body">
             <br>
               <table class="table table-striped">
               <thead>
-                  <tr>
-                  <th scope="col">Szene</th>
-                  <tr>
               </thead>
               <tbody>
                   {% if scene_name_01 != "" %}
@@ -105,9 +105,26 @@ Demo App
               </tbody>
               </table>
               </div>  
-            </div>    
-          </div>
-        </div>    
-      </div>
+            </div>  
+
+<!-- brightness select -->            
+
+            <div class="panel panel-info">
+                <div class="panel-heading">Helligkeit (%)</div>
+                <div class="panel-body">
+                  <form method="GET" class="range-field my-4 w-5">                   
+                    <br>
+                    <input type="range" name="brightness_global" min="0" max="100" value="{{ brightness_global }}" />
+                    <br>
+                    <br>
+                    <div class="col-md-10 text-center">
+                      <input type="submit" class="btn btn-secondary" value="Helligkeit ändern"/>
+                    </div> 
+                  </form> 
+                </div>
+              </div>    
+            </div>
+          </div>    
+        </div>
 
 {% endblock %}
