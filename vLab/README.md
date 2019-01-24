@@ -24,7 +24,7 @@ Juniper_MOD("172.18.10.90", "netconf", "Juniper", "telnet", "23")
 
 ```
 
-<H3Get Configuration<H3>
+<H3>Get Configuration<H3>
 
 
 Specify in ```main.py``` the part of the configuration that you want to have displayed
