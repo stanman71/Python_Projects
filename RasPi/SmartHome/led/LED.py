@@ -8,17 +8,14 @@ import sys
 """ general settings """
 """ ################ """
 
-# Windows WORK
-#sys.path.insert(0, "C:/Users/mstan/GIT/Python_Projects/RasPi/SmartHome/led")
-#PATH = 'C:/Users/mstan/GIT/Python_Projects/RasPi/SmartHome/static/CDNJS/'
-
-# Windows HOME
+# Windows Home
 sys.path.insert(0, "C:/Users/stanman/Desktop/Unterlagen/GIT/Python_Projects/RasPi/SmartHome/led")
-PATH = 'C:/Users/stanman/Desktop/Unterlagen/GIT/Python_Projects/RasPi/SmartHome/static/CDNJS/'
+
+# Windows Work
+#sys.path.insert(0, "C:/Users/mstan/GIT/Python_Projects/RasPi/SmartHome/led")
 
 # RasPi:
 #sys.path.insert(0, "/home/pi/Python/SmartHome/led")
-
 
 """ ################# """
 """ database settings """

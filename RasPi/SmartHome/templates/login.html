@@ -12,53 +12,58 @@
 
 {% block content %}
 
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">RASPI</a>
-        </div>
-        <div id="navbar" class="collapse navbar-collapse">
-          <ul class="nav navbar-nav">
-            <li><a href="/">Home</a></li>
-            <li class="active"><a href="{{ url_for('login') }}">Login</a></li>
-            <li><a href="{{ url_for('signup') }}">Sign Up</a></li>
-          </ul>
-        </div><!--/.nav-collapse -->
-      </div>
-    </nav>
+<!-- nav-bar --> 
 
-    <div class="container">
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">RASPI</a>
+    </div>
+    <div id="navbar" class="collapse navbar-collapse">
+      <ul class="nav navbar-nav">
+        <li><a href="/">Home</a></li>
+        <li class="active"><a href="{{ url_for('login') }}">Login</a></li>
+        <li><a href="{{ url_for('signup') }}">Sign Up</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
 
-      {% if login_check is defined %}
-        <br>
-        <br>
-        <div class="alert alert-danger" role="alert">
-          Falsche Benutzereingaben
-        </div>      
-      {% endif %}
+<div class="container">
 
-      {% if role_check is defined %}
-        <br>
-        <br>
-        <div class="alert alert-danger" role="alert">
-          Keine Zugriffsberechtigung
-        </div>      
-      {% endif %}
+<!-- login --> 
 
-      <form class="form-signin" method="POST" action="/login">
-        <h2 class="form-signin-heading">Please sign in</h2>
-        {{ form.hidden_tag() }}
-        {{ wtf.form_field(form.username) }}
-        {{ wtf.form_field(form.password) }}
-        {{ wtf.form_field(form.remember) }}
-        <button class="btn btn-lg btn-info btn-block" type="submit">Sign in</button>
-      </form>
+  {% if login_check is defined %}
+    <br>
+    <br>
+    <div class="alert alert-danger" role="alert">
+      Falsche Benutzereingaben
+    </div>      
+  {% endif %}
 
-    </div> <!-- /container -->
+  {% if role_check is defined %}
+    <br>
+    <br>
+    <div class="alert alert-danger" role="alert">
+      Keine Zugriffsberechtigung
+    </div>      
+  {% endif %}
+
+  <form class="form-signin" method="POST" action="/login">
+    <h2 class="form-signin-heading">Please sign in</h2>
+    {{ form.hidden_tag() }}
+    {{ wtf.form_field(form.username) }}
+    {{ wtf.form_field(form.password) }}
+    {{ wtf.form_field(form.remember) }}
+    <button class="btn btn-lg btn-info btn-block" type="submit">Sign in</button>
+  </form>
+
+</div> 
+
 {% endblock %}

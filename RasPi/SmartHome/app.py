@@ -14,17 +14,17 @@ import sys
 """ genernal settings """
 """ ################# """
 
-# Windows WORK
-#sys.path.insert(0, "C:/Users/mstan/GIT/Python_Projects/RasPi/SmartHome/led")
-#PATH = 'C:/Users/mstan/GIT/Python_Projects/RasPi/SmartHome/static/CDNJS/'
-
-# Windows HOME
+# Windows Home
 sys.path.insert(0, "C:/Users/stanman/Desktop/Unterlagen/GIT/Python_Projects/RasPi/SmartHome/led")
 PATH = 'C:/Users/stanman/Desktop/Unterlagen/GIT/Python_Projects/RasPi/SmartHome/static/CDNJS/'
 
+# Windows Work
+#sys.path.insert(0, "C:/Users/mstan/GIT/Python_Projects/RasPi/SmartHome/led")
+#PATH = 'C:/Users/mstan/GIT/Python_Projects/RasPi/SmartHome/static/CDNJS/'
+
 # RasPi:
 #sys.path.insert(0, "/home/pi/Python/SmartHome/led")
-#PATH = '/home/pi/Python/SmartHome/static/CDNJS/'
+#PATH = '/home/pi/Python/static/CDNJS/'
 
 """ ##### """
 """ flask """
@@ -272,6 +272,9 @@ def dashboard_LED_scene_01():
         # Delete scene
         if 'delete' in request.form:
             DEL_SCENE(scene)
+        if 'start' in request.form:
+            print("start")
+
 
     entries_scene = GET_SCENE(scene)[0]
     scene_name    = GET_SCENE(scene)[1]
@@ -328,7 +331,9 @@ def dashboard_LED_scene_02():
         # Delete scene
         if 'delete' in request.form:
             DEL_SCENE(scene)
-   
+        if 'start' in request.form:
+            print("start") 
+
     entries_scene = GET_SCENE(scene)[0]
     scene_name    = GET_SCENE(scene)[1]
     dropdown_list = GET_DROPDOWN_LIST()
@@ -384,7 +389,9 @@ def dashboard_LED_scene_03():
         # Delete scene
         if 'delete' in request.form:
             DEL_SCENE(scene)
-    
+        if 'start' in request.form:
+            print("start") 
+
     entries_scene = GET_SCENE(scene)[0]
     scene_name    = GET_SCENE(scene)[1]
     dropdown_list = GET_DROPDOWN_LIST()
@@ -440,7 +447,9 @@ def dashboard_LED_scene_04():
         # Delete scene
         if 'delete' in request.form:
             DEL_SCENE(scene)
-   
+        if 'start' in request.form:
+            print("start")
+
     entries_scene = GET_SCENE(scene)[0]
     scene_name    = GET_SCENE(scene)[1]
     dropdown_list = GET_DROPDOWN_LIST()
@@ -497,7 +506,8 @@ def dashboard_LED_scene_05():
         # Delete scene
         if 'delete' in request.form:
             DEL_SCENE(scene)
-   
+        if 'start' in request.form:
+            print("start")   
 
     entries_scene = GET_SCENE(scene)[0]
     scene_name    = GET_SCENE(scene)[1]
