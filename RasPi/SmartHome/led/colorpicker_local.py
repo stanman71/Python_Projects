@@ -54,19 +54,6 @@ class colorpicker(object):
                showButtons='false',
                allowEmpty='true'):
        
-        """
-        to get html ready colorpicker initiation with the given options
-
-        @param: ids list of identifiers of the html element to assign the color picker to (Default: '.colorpicker')
-        @param: default_color for the colorpicker to start with (Default: 'rgb(0,0,255)')
-        @param: color_format color format to use (Default: 'rgb')
-        @param: showAlpha to enable alpha (Default: 'true')
-        @param: showInput to show or hide the color format (Default: 'false')
-        @param: showButtons to show or hide buttons (Default: 'false')
-        @param: allowEmpty to allow or disallow empty input (Default: 'true')
-
-        """
-
         for h, a in {'showAlpha': showAlpha,
                      'showInput': showInput,
                      'showButtons': showButtons,
@@ -79,6 +66,7 @@ class colorpicker(object):
             if not isinstance(ids, list):
                 raise(TypeError("colorpicker.picker(ids) requires a list of strings"))
         html = ""
+        
         for id in ids:
             html += " ".join([
                 '<script> $(document).ready(function () {'

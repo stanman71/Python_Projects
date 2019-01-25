@@ -1,13 +1,19 @@
 {% extends "bootstrap/base.html" %}
 
 {% block title %}
-  Benutzer
+  LED Programme
 {% endblock %}
 
 {% block styles %}
-{{super()}}
-<link rel="stylesheet" href="{{url_for('.static', filename='dashboard.css')}}">
+  {{super()}}
+  <link rel="stylesheet" href="{{url_for('.static', filename='dashboard.css')}}">
 {% endblock %}
+
+{% block scripts %}
+  {{ super() }}
+  {{ colorpicker.loader() }}
+  {{ colorpicker.picker(ids=[".scene_1", ".scene_2", ".scene_3", ".scene_4", ".scene_5", ".scene_6", ".scene_7", ".scene_8", ".scene_9" ]) }}
+{% endblock scripts %}
 
 {% block content %}
 
@@ -42,42 +48,5 @@
   </div>
 </nav>
 <br>
-
-<!-- user settings -->
-
-<div class="col-sm-2 col-sm-offset-2 col-md-10 col-md-offset-1 main">
-  <div class="row">
-    <div class="col">
-      <div class="panel panel-info">
-        <div class="panel-heading">Benutzer</div>
-        <div class="panel-body">
-        <br>
-        <table class="table table-striped">
-          <thead>
-            <tr>
-            <th scope="col">Benutzername</th>
-            <th scope="col">eMail</th>
-            <th scope="col">Rolle</th>
-            <tr>
-          </thead>
-          <tbody>
-              {% for user in user_list %}
-              <tr>
-                <td>{{ user.username }}</td>
-                <td>{{ user.email }}</td>  
-                <td>{{ user.role }}</td> 
-                
-                <td><a href="/dashboard/user/role/{{ user.id }}">freischalten</a>
-                <td><a href="/dashboard/user/delete/{{ user.id }}">delete</a>
-                </td>   
-              </tr>
-              {% endfor %}
-          </tbody>
-        </table>
-        </div>  
-      </div>    
-    </div>
-  </div>    
-</div>
 
 {% endblock %}

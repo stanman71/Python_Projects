@@ -1,7 +1,7 @@
 {% extends "bootstrap/base.html" %}
 
 {% block title %}
-  Dashboard
+  LED Einstellungen
 {% endblock %}
 
 {% block styles %}
@@ -26,10 +26,17 @@
     </div>
     <div id="navbar" class="collapse navbar-collapse">
       <ul class="nav navbar-nav">
-        <li><a href="{{ url_for('logout') }}">Log Out</a></li>
-        <li><a href="{{ url_for('dashboard_LED_scene_01') }}">LED Szenen</a></li>
-        <li><a href="{{ url_for('dashboard_LED_settings') }}">LED Einstellungen</a></li>
-        <li><a href="{{ url_for('dashboard_user') }}">Benutzer</a></li>
+        <li><a href="{{ url_for('logout') }}"><span class="glyphicon glyphicon-log-out" style="color:red"></span><font color="red"> Logout</font></a></li>
+        <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#">LED
+          <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="{{ url_for('dashboard_LED_scene_01') }}">Szenen</a></li>
+            <li><a href="{{ url_for('dashboard_LED_programs') }}">Programme</a></li>
+            <li><a href="{{ url_for('dashboard_LED_settings') }}">Einstellungen</a></li>
+          </ul>
+        </li>
+        <li><a href="{{ url_for('dashboard_user') }}"><span class="glyphicon glyphicon-user"></span> Benutzer</a></li>
       </ul>
     </div>
   </div>

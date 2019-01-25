@@ -530,6 +530,15 @@ def delete_LED_scene_05(id):
     return redirect(url_for('dashboard_LED_scene_05'))
 
 
+# LED programs
+@app.route('/dashboard/LED/programs')
+@login_required
+@superuser_required
+def dashboard_LED_programs():
+    return render_template('dashboard_LED_programs.html', 
+                            )
+
+
 # LED settings
 @app.route('/dashboard/LED/settings', methods=['GET', 'POST'])
 @login_required
