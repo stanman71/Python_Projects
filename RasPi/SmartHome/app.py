@@ -263,12 +263,14 @@ def dashboard_LED_scene_01():
         for i in range(1,10):
             rgb_scene.append(request.args.get("1 " + str(i)))
         SET_SCENE_COLOR(scene, rgb_scene)
+        LED_SET_COLOR(rgb_scene)
 
         # Set brightness
         brightness = []
         for i in range(1,10):
             brightness.append(request.args.get(str(i)))
-        SET_SCENE_BRIGHTNESS(scene, brightness)       
+        SET_SCENE_BRIGHTNESS(scene, brightness)  
+        LED_SET_BRIGHTNESS(brightness)
 
         # Add LED
         add_LED = request.args.get("LED_scene") 

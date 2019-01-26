@@ -1,6 +1,7 @@
 from phue import Bridge
 import math
 import sys
+import re
 
 """ ################ """
 """ general settings """
@@ -68,8 +69,6 @@ def GET_LED_NAME():
     return light_list
 
 
-
-
 """ #################### """
 """ brightness functions """
 """ #################### """
@@ -80,11 +79,35 @@ def LED_SET_BRIGHTNESS_GLOBAL(brightness):
 
     for light in lights:
         if brightness > 10:
-                light.on = True
-                light.brightness = brightness
+                light.on = True                
+                current_value = light.brightness      
+                light.brightness = int(current_value * (brightness/100))
         else:
                 light.on = False   
 
+
+def LED_SET_BRIGHTNESS(brightness):
+    b = CONNECT_BRIDGE()
+    lights = b.get_light_objects('list')
+    
+    for i in range(len(brightness)):
+        if brightness[i] is not None:
+            if int(brightness[i]) > 10:
+                    lights[i].on = True
+                    lights[i].brightness = int(brightness[i])
+            else:
+                    lights[i].on = False               
+
+
+def LED_SET_COLOR(rgb_scene):
+    b = CONNECT_BRIDGE()
+    lights = b.get_light_objects('list')
+    
+    for i in range(len(rgb_scene)):
+        if rgb_scene[i] is not None:
+            rgb_color = re.findall(r'\d+', rgb_scene[i])         
+            xy = RGBtoXY(int(rgb_color[0]), int(rgb_color[1]), int(rgb_color[2]))
+            lights[i].xy = xy
 
 
 #b = Bridge('192.168.1.99')
@@ -96,7 +119,8 @@ def LED_SET_BRIGHTNESS_GLOBAL(brightness):
 
 #print(lights)
 
-#lights[1].name
+#print(lights[2].brightness)
+
 #lights[1].brightness = 254 #max
 
 #xy = RGBtoXY(110,70,0)
