@@ -1,6 +1,5 @@
 from phue import Bridge
 from RBGtoXY import RGBtoXY
-from LED import *
 
 """
 
@@ -24,13 +23,18 @@ lights[1].on = True
 
 """
 
-GET_BRIDGE_IP()
+def CONNECT_BRIDGE():
+   
+    from LED import GET_BRIDGE_IP
+    b = Bridge(GET_BRIDGE_IP())
+    b.connect() 
+
+    return b       
+
 
 def LED_SET_BRIGHTNESS_GLOBAL(brightness):
 
-
-    b = Bridge("192.168.1.99")
-    b.connect()
+    b = CONNECT_BRIDGE()
 
     lights = b.get_light_objects('list')
 
