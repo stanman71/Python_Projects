@@ -25,7 +25,7 @@ lights[1].on = True
 
 def CONNECT_BRIDGE():
    
-    from LED import GET_BRIDGE_IP
+    from LED_database import GET_BRIDGE_IP
     b = Bridge(GET_BRIDGE_IP())
     b.connect() 
 

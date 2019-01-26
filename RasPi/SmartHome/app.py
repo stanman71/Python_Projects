@@ -32,7 +32,7 @@ PATH = 'C:/Users/stanman/Desktop/Unterlagen/GIT/Python_Projects/RasPi/SmartHome/
 """ ##### """
 
 from colorpicker_local import colorpicker
-from LED import *
+from LED_database import *
 from LED_control import *
 
 app = Flask(__name__)

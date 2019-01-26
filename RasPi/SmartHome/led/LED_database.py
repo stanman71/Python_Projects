@@ -17,6 +17,7 @@ import sys
 # RasPi:
 #sys.path.insert(0, "/home/pi/Python/SmartHome/led")
 
+
 """ ################# """
 """ database settings """
 """ ################# """
@@ -58,7 +59,7 @@ class Scene_01(db.Model):
     color_red   = db.Column(db.Integer, server_default=("0"))
     color_green = db.Column(db.Integer, server_default=("0"))
     color_blue  = db.Column(db.Integer, server_default=("0"))
-    brightness  = db.Column(db.Integer, server_default=("100"))
+    brightness  = db.Column(db.Integer, server_default=("254"))
 
 class Scene_02(db.Model):
     __tablename__ = 'scene_02'
@@ -70,7 +71,7 @@ class Scene_02(db.Model):
     color_red   = db.Column(db.Integer, server_default=("0"))
     color_green = db.Column(db.Integer, server_default=("0"))
     color_blue  = db.Column(db.Integer, server_default=("0"))
-    brightness  = db.Column(db.Integer, server_default=("100"))
+    brightness  = db.Column(db.Integer, server_default=("254"))
 
 class Scene_03(db.Model):
     __tablename__ = 'scene_03'
@@ -82,7 +83,7 @@ class Scene_03(db.Model):
     color_red   = db.Column(db.Integer, server_default=("0"))
     color_green = db.Column(db.Integer, server_default=("0"))
     color_blue  = db.Column(db.Integer, server_default=("0"))
-    brightness  = db.Column(db.Integer, server_default=("100"))
+    brightness  = db.Column(db.Integer, server_default=("254"))
 
 class Scene_04(db.Model):
     __tablename__ = 'scene_04'
@@ -94,7 +95,7 @@ class Scene_04(db.Model):
     color_red   = db.Column(db.Integer, server_default=("0"))
     color_green = db.Column(db.Integer, server_default=("0"))
     color_blue  = db.Column(db.Integer, server_default=("0"))
-    brightness  = db.Column(db.Integer, server_default=("100"))
+    brightness  = db.Column(db.Integer, server_default=("254"))
 
 class Scene_05(db.Model):
     __tablename__ = 'scene_05'
@@ -106,7 +107,7 @@ class Scene_05(db.Model):
     color_red   = db.Column(db.Integer, server_default=("0"))
     color_green = db.Column(db.Integer, server_default=("0"))
     color_blue  = db.Column(db.Integer, server_default=("0"))
-    brightness  = db.Column(db.Integer, server_default=("100"))
+    brightness  = db.Column(db.Integer, server_default=("254"))
 
 
 """ ############################## """
