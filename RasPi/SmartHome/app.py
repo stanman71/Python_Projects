@@ -33,6 +33,7 @@ PATH = 'C:/Users/stanman/Desktop/Unterlagen/GIT/Python_Projects/RasPi/SmartHome/
 
 from colorpicker_local import colorpicker
 from LED import *
+from LED_control import *
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'Thisissupposedtobesecret!'
@@ -147,7 +148,8 @@ def index():
         scene_name_05 = ""
 
     brightness_global = GET_BRIGHTNESS_GLOBAL()
-
+    LED_SET_BRIGHTNESS_GLOBAL(brightness_global)
+    
     return render_template('index.html', 
                             scene_name_01=scene_name_01,
                             scene_name_02=scene_name_02,
@@ -544,7 +546,7 @@ def dashboard_LED_programs():
 @login_required
 @superuser_required
 def dashboard_LED_settings():
-    ip = GET_IP()
+    ip = GET_BRIDGE_IP()
     entries_LED = GET_LED()        
         
     if request.method == "GET":  
@@ -552,7 +554,7 @@ def dashboard_LED_settings():
         # Change ip
         if request.args.get("ip") is not None:
             ip = request.args.get("ip")   
-            SET_IP(ip)
+            SET_BRIDGE_IP(ip)
         
         # Change LED name
         name_error = "" 

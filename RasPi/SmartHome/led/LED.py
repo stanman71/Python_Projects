@@ -9,7 +9,7 @@ import sys
 """ ################ """
 
 # Windows Home
-sys.path.insert(0, "C:/Users/stanman/Desktop/Unterlagen/GIT/Python_Projects/RasPi/SmartHome/led")
+#sys.path.insert(0, "C:/Users/stanman/Desktop/Unterlagen/GIT/Python_Projects/RasPi/SmartHome/led")
 
 # Windows Work
 #sys.path.insert(0, "C:/Users/mstan/GIT/Python_Projects/RasPi/SmartHome/led")
@@ -170,11 +170,11 @@ def SET_BRIGHTNESS_GLOBAL(brightness_global):
 """ IP Functions """
 """ ############ """
 
-def GET_IP():
+def GET_BRIDGE_IP():
     entry = Bridge.query.filter_by().first()
     return (entry.ip)  
 
-def SET_IP(IP):    
+def SET_BRIDGE_IP(IP):    
     entry = Bridge.query.filter_by().first()
     entry.ip = IP
     db.session.commit()
