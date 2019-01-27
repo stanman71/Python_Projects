@@ -48,7 +48,7 @@
 <div class="col-sm-2 col-sm-offset-2 col-md-10 col-md-offset-1 main">
   <div class="row">
     <div class="col">
-      <div class="panel panel-info">
+      <div class="panel panel-primary">
         <div class="panel-heading">Benutzer</div>
         <div class="panel-body">
         <br>
@@ -67,8 +67,8 @@
                 <td>{{ user.email }}</td>  
                 <td>{{ user.role }}</td> 
                 
-                <td><a href="/dashboard/user/role/{{ user.id }}">freischalten</a>
-                <td><a href="/dashboard/user/delete/{{ user.id }}">delete</a>
+                <td><a href="/dashboard/user/role/{{ user.id }}"><font color="black"><b>freischalten</b></font></a>
+                <td><a href="/dashboard/user/delete/{{ user.id }}"><font color="red"><b>löschen</b></font></a>
                 </td>   
               </tr>
               {% endfor %}

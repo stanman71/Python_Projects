@@ -296,20 +296,12 @@ def dashboard_LED_scene_01():
     scene_name    = GET_SCENE(scene)[1]
     dropdown_list = GET_DROPDOWN_LIST()
 
-    return render_template('dashboard_LED_scene_01.html', 
+    return render_template('dashboard_LED_scene.html', 
                             entries_scene=entries_scene,
                             scene_name=scene_name,
-                            dropdown_list=dropdown_list
+                            dropdown_list=dropdown_list,
+                            number=scene
                             )
-
-
-# Delete LED scene 01
-@app.route('/dashboard/LED/scene_01/delete/<int:id>')
-@login_required
-@superuser_required
-def delete_LED_scene_01(id): 
-    DEL_LED(1, id)
-    return redirect(url_for('dashboard_LED_scene_01'))
 
 
 # LED scene 02
@@ -354,20 +346,12 @@ def dashboard_LED_scene_02():
     scene_name    = GET_SCENE(scene)[1]
     dropdown_list = GET_DROPDOWN_LIST()
 
-    return render_template('dashboard_LED_scene_02.html', 
+    return render_template('dashboard_LED_scene.html', 
                             entries_scene=entries_scene,
                             scene_name=scene_name,
-                            dropdown_list=dropdown_list
+                            dropdown_list=dropdown_list,
+                            number=scene
                             )
-
-
-# Delete LED scene 02
-@app.route('/dashboard/LED/scene_02/delete/<int:id>')
-@login_required
-@superuser_required
-def delete_LED_scene_02(id):
-    DEL_LED(2, id)
-    return redirect(url_for('dashboard_LED_scene_02'))
 
 
 # LED scene 03
@@ -412,20 +396,12 @@ def dashboard_LED_scene_03():
     scene_name    = GET_SCENE(scene)[1]
     dropdown_list = GET_DROPDOWN_LIST()
 
-    return render_template('dashboard_LED_scene_03.html', 
+    return render_template('dashboard_LED_scene.html', 
                             entries_scene=entries_scene,
                             scene_name=scene_name,
-                            dropdown_list=dropdown_list
+                            dropdown_list=dropdown_list,
+                            number=scene
                             )
-
-
-# Delete LED scene 03
-@app.route('/dashboard/LED/scene_03/delete/<int:id>')
-@login_required
-@superuser_required
-def delete_LED_scene_03(id):
-    DEL_LED(3, id)
-    return redirect(url_for('dashboard_LED_scene_03'))
 
 
 # LED scene 04
@@ -470,20 +446,13 @@ def dashboard_LED_scene_04():
     scene_name    = GET_SCENE(scene)[1]
     dropdown_list = GET_DROPDOWN_LIST()
 
-    return render_template('dashboard_LED_scene_04.html', 
+    return render_template('dashboard_LED_scene.html', 
                             entries_scene=entries_scene,
                             scene_name=scene_name,
-                            dropdown_list=dropdown_list
+                            dropdown_list=dropdown_list,
+                            number=scene
                             )
 
-
-# Delete LED scene 04
-@app.route('/dashboard/LED/scene_04/delete/<int:id>')
-@login_required
-@superuser_required
-def delete_LED_scene_04(id):
-    DEL_LED(4, id)
-    return redirect(url_for('dashboard_LED_scene_04'))
 
 
 # LED scene 05
@@ -529,20 +498,31 @@ def dashboard_LED_scene_05():
     scene_name    = GET_SCENE(scene)[1]
     dropdown_list = GET_DROPDOWN_LIST()
 
-    return render_template('dashboard_LED_scene_05.html', 
+    return render_template('dashboard_LED_scene.html', 
                             entries_scene=entries_scene,
                             scene_name=scene_name,
-                            dropdown_list=dropdown_list
+                            dropdown_list=dropdown_list,
+                            number=scene
                             )
 
 
-# Delete LED scene 05
-@app.route('/dashboard/LED/scene_05/delete/<int:id>')
+# Delete LED 
+@app.route('/dashboard/LED/scene/delete/<int:scene>/<int:id>')
 @login_required
 @superuser_required
-def delete_LED_scene_05(id): 
-    DEL_LED(5, id)
-    return redirect(url_for('dashboard_LED_scene_05'))
+def delete_LED_scene_01(scene, id): 
+    DEL_LED(scene, id)
+
+    if scene == 1:
+        return redirect(url_for('dashboard_LED_scene_01'))
+    if scene == 2:
+        return redirect(url_for('dashboard_LED_scene_02'))
+    if scene == 3:
+        return redirect(url_for('dashboard_LED_scene_03'))
+    if scene == 4:
+        return redirect(url_for('dashboard_LED_scene_04'))
+    if scene == 5:
+        return redirect(url_for('dashboard_LED_scene_05'))
 
 
 # LED programs
