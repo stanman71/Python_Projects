@@ -1,7 +1,7 @@
 body {
   padding-top: 40px;
   padding-bottom: 40px;
-  background-color: lightblue;
+  background-image: url(images/background-blur-middle.jpeg);
 }
 
 .form-signin {

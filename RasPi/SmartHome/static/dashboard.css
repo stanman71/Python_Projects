@@ -5,9 +5,12 @@
 /* Move down content because we have a fixed navbar that is 50px tall */
 body {
   padding-top: 50px;
-  background-color: lightblue;
+  background-image: url(images/background-blur-middle.jpeg);
 }
 
+.panel-body {
+  background-image: url(images/background-blur-large.jpg);
+}
 
 /*
  * Global add-ons
