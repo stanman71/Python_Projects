@@ -69,7 +69,7 @@
   </li>
 </ul>
 
-<!-- scene settings -->
+<!-- scene name -->
 
 <div class="row">
   <div class="col">
@@ -89,46 +89,51 @@
       </div>
     </div>       
 
-    <table class="table table-striped">
-      <thead>
-        <tr>                       
-          <th scope="col">LED</th>                        
-          <th scope="col" colspan="4">RGB</th> 
-          <th scope="col" colspan="2">Helligkeit</th>                    
-        <tr>
-      </thead>
-      <tbody>            
+ <!-- scene table -->
 
-        {% for entry in entries_scene %}         
+    <div class="panel panel-info">
+      <div class="panel-body">
 
-        <tr>
-          <td>{{ entry.LED_name.name }}</td> 
-          <td>{{ entry.color_red }}</td>
-          <td>{{ entry.color_green }}</td>
-          <td>{{ entry.color_blue }}</td>   
-          <td>
-            <form method="GET" class="verticalform">
-              <input type="text" name="{{ entry.scene_id }} {{ entry.LED_id }}" class="form-control scene_{{ entry.LED_id }}" value="rgb({{ entry.color_red }}, {{ entry.color_green }}, {{ entry.color_blue }}) "/>
-              <input type="submit" class="btn btn-secondary" value="Farbe ändern" />   
-            </form>
-          </td>
-          <td>{{ entry.brightness }}</td>
-          <td>
-            <form method="GET" class="range-field my-4 w-5">
-              <div class="col-md-10 text-center"> 
-                <input type="range" name="{{ entry.LED_id }}" min="0" max="254" value="{{ entry.brightness }}" />
-                <input type="submit" class="btn btn-secondary" value="Helligkeit ändern"/>
-              </div> 
-            </form>
-          </td>
-          <td><a href="/dashboard/LED/scene_05/delete/{{ entry.LED_id }}">löschen</a>
-        </tr>
+      <table class="table table-striped">
+        <thead>
+          <tr>                       
+            <th scope="col">LED</th>                        
+            <th scope="col" colspan="4">RGB</th> 
+            <th scope="col" colspan="2">Helligkeit</th>                    
+          <tr>
+        </thead>
+        <tbody>            
 
-        {% endfor %}
+          {% for entry in entries_scene %}         
 
-      </tbody>
-    </table>    
-    
+          <tr>
+            <td>{{ entry.LED_name.name }}</td> 
+            <td>{{ entry.color_red }}</td>
+            <td>{{ entry.color_green }}</td>
+            <td>{{ entry.color_blue }}</td>   
+            <td>
+              <form method="GET" class="verticalform">
+                <input type="text" name="{{ entry.scene_id }} {{ entry.LED_id }}" class="form-control scene_{{ entry.LED_id }}" value="rgb({{ entry.color_red }}, {{ entry.color_green }}, {{ entry.color_blue }}) "/>
+                <input type="submit" class="btn btn-secondary" value="Farbe ändern" />   
+              </form>
+            </td>
+            <td>{{ entry.brightness }}</td>
+            <td>
+              <form method="GET" class="range-field my-4 w-5">
+                <div class="col-md-10 text-center"> 
+                  <input type="range" name="{{ entry.LED_id }}" min="0" max="254" value="{{ entry.brightness }}" />
+                  <input type="submit" class="btn btn-secondary" value="Helligkeit ändern"/>
+                </div> 
+              </form>
+            </td>
+            <td><a href="/dashboard/LED/scene_05/delete/{{ entry.LED_id }}">löschen</a>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>    
+      </div>
+    </div>      
+
 <!-- option buttons -->   
 
     <form action="" method="post"> 

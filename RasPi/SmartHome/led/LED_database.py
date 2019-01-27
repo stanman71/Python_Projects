@@ -132,9 +132,9 @@ if Scenes.query.filter_by().first() is None:
         db.session.commit()
 
 
-""" ######### """
-""" Functions """
-""" ######### """
+""" ############# """
+""" Dropdown list """
+""" ############# """
 
 def GET_DROPDOWN_LIST():
     entry_list = []
@@ -142,15 +142,6 @@ def GET_DROPDOWN_LIST():
     for entry in entries:
         entry_list.append(entry.name)
     return entry_list
-
-def GET_BRIGHTNESS_GLOBAL():
-    entry = BRIGHTNESS_GLOBAL.query.filter_by().first()
-    return (entry.brightness_global)
-
-def SET_BRIGHTNESS_GLOBAL(brightness_global):
-    entry = BRIGHTNESS_GLOBAL.query.filter_by().first()
-    entry.brightness_global = brightness_global
-    db.session.commit()
 
 
 """ ################ """
