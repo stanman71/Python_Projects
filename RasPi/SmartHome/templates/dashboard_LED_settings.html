@@ -70,16 +70,19 @@
       {% if LED_names != None %}
 
       <div class="panel panel-info">
-        <div class="panel-heading">LED Namen</div>
+        <div class="panel-heading">LED</div>
         <div class="panel-body">      
 
           <table class="table table-striped">
             <thead>
+              <th scope="col">ID</th>                        
+              <th scope="col">Name</th> 
             </thead>
             <tbody> 
-              {% for entry in LED_names %}
+              {% for entry in LED_list %}
               <tr>
-                <td>{{ entry }}</td> 
+                <td>{{ entry.id }}</td> 
+                <td>{{ entry.name }}</td> 
               </tr>
               {% endfor %}
             </tbody>

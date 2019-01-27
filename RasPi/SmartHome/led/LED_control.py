@@ -69,22 +69,9 @@ def GET_LED_NAME():
     return light_list
 
 
-""" #################### """
-""" brightness functions """
-""" #################### """
-
-def LED_SET_BRIGHTNESS_GLOBAL(brightness):
-    b = CONNECT_BRIDGE()
-    lights = b.get_light_objects('list')
-
-    for light in lights:
-        if brightness > 10:
-                light.on = True                
-                current_value = light.brightness      
-                light.brightness = int(current_value * (brightness/100))
-        else:
-                light.on = False   
-
+""" ############# """
+""" LED functions """
+""" ############# """
 
 def LED_SET_BRIGHTNESS(brightness):
     b = CONNECT_BRIDGE()
@@ -108,6 +95,33 @@ def LED_SET_COLOR(rgb_scene):
             rgb_color = re.findall(r'\d+', rgb_scene[i])         
             xy = RGBtoXY(int(rgb_color[0]), int(rgb_color[1]), int(rgb_color[2]))
             lights[i].xy = xy
+
+
+def LED_SET_SCENE(scene, brightness_global = 100):
+    b = CONNECT_BRIDGE()
+    lights = b.get_light_objects('list')
+    for light in lights:
+        light.on = False
+
+    from LED_database import GET_SCENE
+    entries = GET_SCENE(scene)
+    if entries[0] is not None:
+        entries = entries[0]
+        for entry in entries:
+                xy = RGBtoXY(entry.color_red, entry.color_green, entry.color_blue)
+                brightness = entry.brightness
+                lights[entry.LED_id - 1].on = True
+                lights[entry.LED_id - 1].xy = xy
+                
+                brightness = int(brightness * (int(brightness_global) / 100))
+                if brightness > 10:
+                    lights[entry.LED_id - 1].brightness = brightness
+                else:
+                    lights[entry.LED_id - 1].on = False               
+
+
+                
+
 
 
 #b = Bridge('192.168.1.99')

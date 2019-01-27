@@ -44,11 +44,6 @@ class LED(db.Model):
     id      = db.Column(db.Integer, primary_key=True, autoincrement = True)
     name    = db.Column(db.String(50), unique = True)
 
-class BRIGHTNESS_GLOBAL(db.Model):
-    __tablename__ = 'brightness_global'
-    id                = db.Column(db.Integer, primary_key=True, autoincrement = True)
-    brightness_global = db.Column(db.Integer)
-
 class Scene_01(db.Model):
     __tablename__ = 'scene_01'
     id          = db.Column(db.Integer, primary_key=True, autoincrement = True)
@@ -59,7 +54,7 @@ class Scene_01(db.Model):
     color_red   = db.Column(db.Integer, server_default=("0"))
     color_green = db.Column(db.Integer, server_default=("0"))
     color_blue  = db.Column(db.Integer, server_default=("0"))
-    brightness  = db.Column(db.Integer, server_default=("100"))
+    brightness  = db.Column(db.Integer, server_default=("254"))
 
 class Scene_02(db.Model):
     __tablename__ = 'scene_02'
@@ -71,7 +66,7 @@ class Scene_02(db.Model):
     color_red   = db.Column(db.Integer, server_default=("0"))
     color_green = db.Column(db.Integer, server_default=("0"))
     color_blue  = db.Column(db.Integer, server_default=("0"))
-    brightness  = db.Column(db.Integer, server_default=("100"))
+    brightness  = db.Column(db.Integer, server_default=("254"))
 
 class Scene_03(db.Model):
     __tablename__ = 'scene_03'
@@ -83,7 +78,7 @@ class Scene_03(db.Model):
     color_red   = db.Column(db.Integer, server_default=("0"))
     color_green = db.Column(db.Integer, server_default=("0"))
     color_blue  = db.Column(db.Integer, server_default=("0"))
-    brightness  = db.Column(db.Integer, server_default=("100"))
+    brightness  = db.Column(db.Integer, server_default=("254"))
 
 class Scene_04(db.Model):
     __tablename__ = 'scene_04'
@@ -95,7 +90,7 @@ class Scene_04(db.Model):
     color_red   = db.Column(db.Integer, server_default=("0"))
     color_green = db.Column(db.Integer, server_default=("0"))
     color_blue  = db.Column(db.Integer, server_default=("0"))
-    brightness  = db.Column(db.Integer, server_default=("100"))
+    brightness  = db.Column(db.Integer, server_default=("254"))
 
 class Scene_05(db.Model):
     __tablename__ = 'scene_05'
@@ -107,7 +102,7 @@ class Scene_05(db.Model):
     color_red   = db.Column(db.Integer, server_default=("0"))
     color_green = db.Column(db.Integer, server_default=("0"))
     color_blue  = db.Column(db.Integer, server_default=("0"))
-    brightness  = db.Column(db.Integer, server_default=("100"))
+    brightness  = db.Column(db.Integer, server_default=("254"))
 
 
 """ ############################## """
@@ -124,15 +119,6 @@ if Bridge.query.filter_by().first() is None:
         ip = 'default',
     )
     db.session.add(bridge)
-    db.session.commit()
-
-# Create default brightness_global settings
-if BRIGHTNESS_GLOBAL.query.filter_by().first() is None:
-    brightness_global = BRIGHTNESS_GLOBAL(
-        id                = '1',
-        brightness_global = '100',
-    )
-    db.session.add(brightness_global)
     db.session.commit()
 
 # Create default scenes
@@ -188,6 +174,21 @@ def SET_BRIDGE_IP(IP):
 def GET_LED():
     entries = LED.query.all()
     return (entries)
+
+def UPDATE_LED():
+    led_list = GET_LED_NAME()
+    for i in range (len(led_list)):
+        try:
+            check_entry = LED.query.filter_by(id=i+1).first()
+            if check_entry.name is not led_list[i]:
+                check_entry.name = led_list[i]
+        except:
+            led = LED(
+                id = i + 1,
+                name = led_list[i],
+            )    
+            db.session.add(led)         
+        db.session.commit()  
 
 def ADD_LED(Scene, Name):
     entry = LED.query.filter_by(name=Name).first() 

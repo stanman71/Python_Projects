@@ -119,18 +119,29 @@ class RegisterForm(FlaskForm):
 @app.route('/', methods=['GET', 'POST'])
 def index():
 
-    if request.method == "POST":         
-        # Change scene
-        for i in range(1,10):
-            if str(i) in request.form:               
-                print(i)
+    UPDATE_LED()
 
-    if request.method == "GET":              
-        # Change brightness
-        brightness_global = request.args.get("brightness_global") 
-        if brightness_global is not None:
-            SET_BRIGHTNESS_GLOBAL(brightness_global) 
+    scene = 0
+    brightness_global = 100
 
+    if request.method == "GET":     
+        # Change scene    
+        if request.args.get("scene_01"):
+            brightness_global = request.args.get("scene_01")   
+            scene = 1    
+        if request.args.get("scene_02"):
+            brightness_global = request.args.get("scene_02")   
+            scene = 2    
+        if request.args.get("scene_03"):
+            brightness_global = request.args.get("scene_03")   
+            scene = 3    
+        if request.args.get("scene_04"):
+            brightness_global = request.args.get("scene_04")   
+            scene = 4    
+        if request.args.get("scene_05"):
+            brightness_global = request.args.get("scene_05")   
+            scene = 5                                       
+  
     scene_name_01 = GET_SCENE(1)[1]
     if scene_name_01 == None:
         scene_name_01 = ""
@@ -147,8 +158,7 @@ def index():
     if scene_name_05 == None:
         scene_name_05 = ""
 
-    brightness_global = GET_BRIGHTNESS_GLOBAL()
-    LED_SET_BRIGHTNESS_GLOBAL(brightness_global)
+    LED_SET_SCENE(scene,brightness_global)
   
     return render_template('index.html', 
                             scene_name_01=scene_name_01,
@@ -263,14 +273,12 @@ def dashboard_LED_scene_01():
         for i in range(1,10):
             rgb_scene.append(request.args.get("1 " + str(i)))
         SET_SCENE_COLOR(scene, rgb_scene)
-        LED_SET_COLOR(rgb_scene)
 
         # Set brightness
         brightness = []
         for i in range(1,10):
             brightness.append(request.args.get(str(i)))
         SET_SCENE_BRIGHTNESS(scene, brightness)  
-        LED_SET_BRIGHTNESS(brightness)
 
         # Add LED
         add_LED = request.args.get("LED_scene") 
@@ -281,9 +289,8 @@ def dashboard_LED_scene_01():
         # Delete scene
         if 'delete' in request.form:
             DEL_SCENE(scene)
-        if 'start' in request.form:
-            print("start")
 
+    LED_SET_SCENE(1)
 
     entries_scene = GET_SCENE(scene)[0]
     scene_name    = GET_SCENE(scene)[1]
@@ -340,8 +347,8 @@ def dashboard_LED_scene_02():
         # Delete scene
         if 'delete' in request.form:
             DEL_SCENE(scene)
-        if 'start' in request.form:
-            print("start") 
+
+    LED_SET_SCENE(2)
 
     entries_scene = GET_SCENE(scene)[0]
     scene_name    = GET_SCENE(scene)[1]
@@ -398,8 +405,8 @@ def dashboard_LED_scene_03():
         # Delete scene
         if 'delete' in request.form:
             DEL_SCENE(scene)
-        if 'start' in request.form:
-            print("start") 
+
+    LED_SET_SCENE(3)
 
     entries_scene = GET_SCENE(scene)[0]
     scene_name    = GET_SCENE(scene)[1]
@@ -456,8 +463,8 @@ def dashboard_LED_scene_04():
         # Delete scene
         if 'delete' in request.form:
             DEL_SCENE(scene)
-        if 'start' in request.form:
-            print("start")
+
+    LED_SET_SCENE(4)
 
     entries_scene = GET_SCENE(scene)[0]
     scene_name    = GET_SCENE(scene)[1]
@@ -515,8 +522,8 @@ def dashboard_LED_scene_05():
         # Delete scene
         if 'delete' in request.form:
             DEL_SCENE(scene)
-        if 'start' in request.form:
-            print("start")   
+
+    LED_SET_SCENE(5)
 
     entries_scene = GET_SCENE(scene)[0]
     scene_name    = GET_SCENE(scene)[1]
@@ -562,11 +569,11 @@ def dashboard_LED_settings():
             ip = request.args.get("ip")   
             SET_BRIDGE_IP(ip)
         
-    LED_names = GET_LED_NAME()
+    LED_list = GET_LED()
 
     return render_template('dashboard_LED_settings.html', 
                             ip=ip,
-                            LED_names=LED_names
+                            LED_list=LED_list
                             )
 
 
