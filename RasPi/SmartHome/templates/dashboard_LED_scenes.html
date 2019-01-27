@@ -53,19 +53,19 @@
 
 <ul class="nav nav-pills">
   <li class="nav-item">
-    <a class="nav-link" href="{{ url_for('dashboard_LED_scene_01') }}"><font color="black"><b>Szene 1</b></font></a>
+    <a class="nav-link" href="{{ url_for('dashboard_LED_scene_01') }}"><font color="white"><b>Szene 1</b></font></a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="{{ url_for('dashboard_LED_scene_02') }}"><font color="black"><b>Szene 2</b></font></a>
+    <a class="nav-link" href="{{ url_for('dashboard_LED_scene_02') }}"><font color="white"><b>Szene 2</b></font></a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="{{ url_for('dashboard_LED_scene_03') }}"><font color="black"><b>Szene 3</b></font></a>
+    <a class="nav-link" href="{{ url_for('dashboard_LED_scene_03') }}"><font color="white"><b>Szene 3</b></font></a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="{{ url_for('dashboard_LED_scene_04') }}"><font color="black"><b>Szene 4</b></font></a>
+    <a class="nav-link" href="{{ url_for('dashboard_LED_scene_04') }}"><font color="white"><b>Szene 4</b></font></a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="{{ url_for('dashboard_LED_scene_05') }}"><font color="black"><b>Szene 5</b></font></a>
+    <a class="nav-link" href="{{ url_for('dashboard_LED_scene_05') }}"><font color="white"><b>Szene 5</b></font></a>
   </li>
 </ul>
 
@@ -77,7 +77,7 @@
   {% if entries_scene != None %}
 
     <div class="panel panel-primary">
-      <div class="panel-heading"> LED Szene {{number}} </div>
+      <div class="panel-heading"><font color="black"><b>Szene {{number}}</b></font></div>
       <div class="panel-body">
         <form method="GET">
           <div class="form-group">
@@ -91,7 +91,7 @@
     
  <!-- scene table -->
 
-    <div class="panel panel-info">
+    <div class="panel panel-primary">
       <div class="panel-body">
 
       <table class="table">
@@ -146,7 +146,7 @@
     <br>
     {% endif %}
 
-    <div class="panel panel-info">
+    <div class="panel panel-primary">
       <div class="panel-body">
         <div class="dropdown">
           <form method="GET" enctype="multipart/form-data">

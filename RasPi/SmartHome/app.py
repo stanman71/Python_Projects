@@ -250,9 +250,9 @@ def delete(id):
     return redirect(url_for('dashboard_user'))
 
 
-""" ############ """
-""" Sites Scenes """
-""" ############ """
+""" ######### """
+""" Sites LED """
+""" ######### """
 
 # LED scene 01
 @app.route('/dashboard/LED/scene_01', methods=['GET', 'POST'])
@@ -296,7 +296,7 @@ def dashboard_LED_scene_01():
     scene_name    = GET_SCENE(scene)[1]
     dropdown_list = GET_DROPDOWN_LIST()
 
-    return render_template('dashboard_LED_scene.html', 
+    return render_template('dashboard_LED_scenes.html', 
                             entries_scene=entries_scene,
                             scene_name=scene_name,
                             dropdown_list=dropdown_list,
@@ -346,7 +346,7 @@ def dashboard_LED_scene_02():
     scene_name    = GET_SCENE(scene)[1]
     dropdown_list = GET_DROPDOWN_LIST()
 
-    return render_template('dashboard_LED_scene.html', 
+    return render_template('dashboard_LED_scenes.html', 
                             entries_scene=entries_scene,
                             scene_name=scene_name,
                             dropdown_list=dropdown_list,
@@ -396,7 +396,7 @@ def dashboard_LED_scene_03():
     scene_name    = GET_SCENE(scene)[1]
     dropdown_list = GET_DROPDOWN_LIST()
 
-    return render_template('dashboard_LED_scene.html', 
+    return render_template('dashboard_LED_scenes.html', 
                             entries_scene=entries_scene,
                             scene_name=scene_name,
                             dropdown_list=dropdown_list,
@@ -446,7 +446,7 @@ def dashboard_LED_scene_04():
     scene_name    = GET_SCENE(scene)[1]
     dropdown_list = GET_DROPDOWN_LIST()
 
-    return render_template('dashboard_LED_scene.html', 
+    return render_template('dashboard_LED_scenes.html', 
                             entries_scene=entries_scene,
                             scene_name=scene_name,
                             dropdown_list=dropdown_list,
@@ -498,7 +498,7 @@ def dashboard_LED_scene_05():
     scene_name    = GET_SCENE(scene)[1]
     dropdown_list = GET_DROPDOWN_LIST()
 
-    return render_template('dashboard_LED_scene.html', 
+    return render_template('dashboard_LED_scenes.html', 
                             entries_scene=entries_scene,
                             scene_name=scene_name,
                             dropdown_list=dropdown_list,
@@ -512,7 +512,6 @@ def dashboard_LED_scene_05():
 @superuser_required
 def delete_LED_scene_01(scene, id): 
     DEL_LED(scene, id)
-
     if scene == 1:
         return redirect(url_for('dashboard_LED_scene_01'))
     if scene == 2:
@@ -535,20 +534,11 @@ def dashboard_LED_programs():
 
 
 # LED settings
-@app.route('/dashboard/LED/settings', methods=['GET', 'POST'])
+@app.route('/dashboard/LED/settings')
 @login_required
 @superuser_required
 def dashboard_LED_settings():
-    ip = GET_BRIDGE_IP()
-    entries_LED = GET_LED()        
-        
-    if request.method == "GET":  
-            
-        # Change ip
-        if request.args.get("ip") is not None:
-            ip = request.args.get("ip")   
-            SET_BRIDGE_IP(ip)
-        
+    ip = GET_BRIDGE_IP()            
     LED_list = GET_LED()
 
     return render_template('dashboard_LED_settings.html', 

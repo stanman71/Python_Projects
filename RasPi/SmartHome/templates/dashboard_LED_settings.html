@@ -55,13 +55,7 @@
       <div class="panel panel-primary">
         <div class="panel-heading">HUE Bridge</div>
         <div class="panel-body">
-          <form method="GET">
-            <label for="name">BRIDGE IP: </label>
-            <input type="text" name="ip" value="{% if ip != None %}{{ ip }}{% endif %}" />
-            <br>
-            <br>
-            <input type="submit" class="btn btn-info" value="IP ändern" />
-          </form>
+          <label for="name">BRIDGE IP: {{ ip }}</label>
         </div>  
       </div>         
  

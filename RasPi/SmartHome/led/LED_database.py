@@ -152,11 +152,6 @@ def GET_BRIDGE_IP():
     entry = Bridge.query.filter_by().first()
     return (entry.ip)  
 
-def SET_BRIDGE_IP(IP):    
-    entry = Bridge.query.filter_by().first()
-    entry.ip = IP
-    db.session.commit()
-
 
 """ ############# """
 """ LED Functions """
