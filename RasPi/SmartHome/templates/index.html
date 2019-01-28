@@ -42,138 +42,79 @@
   <div class="col-sm-2 col-sm-offset-2 col-md-10 col-md-offset-1 main">
     <div class="row">
       <div class="col">  
-        <br>
-
-        {% if scene_name_01 != "" %}
-        <div class="panel panel-primary">
-        <div class="panel-heading text-center"><font color="black"><b> {{ scene_name_01 }} </b></font></div>
-          <div class="panel-body">
-            <table class="table">
-              <tbody>   
-              <tr>
-                <td>
-                  <form method="GET" class="range-field my-4 w-5">     
-                  <br>
-                  <br>              
-                  <input type="range" name="scene_01" min="0" max="100" value="{{ brightness_global }}" />
-                  <div class="text-center">
-                    <br>
-                    <br>      
-                    <input type="submit" class="btn btn-info" value="Auswählen"/>
-                  </div> 
-                </form> 
-                </td>
-              </tr>
+        <div class="panel panel-default">
+          <div class="panel-heading text-center"><font color="black"><b> Szenenwahl </b></font></div>
+            <div class="panel-body">
+            <form method="get">
+              <table class="table">
+                <tbody>   
+                  {% if scene_name_01 != "" %}
+                  <tr>
+                    <td>
+                      <div class="text-center">
+                      <div class="radio">
+                        <label><input {{value_1}} type="radio" value="1" name="radio">{{ scene_name_01 }}</label>
+                      </div>
+                    </td>
+                  </tr>
+                  {% endif %}
+                  {% if scene_name_02 != "" %}
+                  <tr>
+                    <td>
+                      <div class="text-center">
+                      <div class="radio">
+                        <label><input {{value_2}} type="radio" value="2" name="radio">{{ scene_name_02 }}</label>
+                      </div>                    
+                    </td>
+                  </tr>
+                  {% endif %}               
+                  {% if scene_name_03 != "" %}
+                  <tr>
+                    <td>
+                      <div class="text-center">
+                      <div class="radio">
+                        <label><input {{value_3}} type="radio" value="3" name="radio">{{ scene_name_03 }}</label>
+                      </div>                    
+                    </td>
+                  </tr>
+                  {% endif %}
+                  {% if scene_name_04 != "" %}
+                  <tr>
+                    <td>
+                      <div class="text-center"> 
+                      <div class="radio">
+                        <label><input {{value_4}} type="radio" value="4" name="radio">{{ scene_name_04 }}</label>
+                      </div>                    
+                    </td>
+                  </tr>
+                  {% endif %}
+                  {% if scene_name_05 != "" %}
+                  <tr>
+                    <td>
+                      <div class="text-center">
+                      <div class="radio">
+                        <label><input {{value_5}} type="radio" value="5" name="radio">{{ scene_name_05 }}</label>
+                      </div>                    
+                    </td>
+                  </tr>
+                  {% endif %}     
+                  <tr>            
+                    <td>
+                      <class="range-field my-4 w-5">     
+                      <br>
+                      <br>              
+                      <input type="range" name="brightness_global" min="0" max="100" value="{{ brightness_global }}" />
+                        <br>
+                        <br>   
+                        <div class="text-center">
+                        <input type="submit" class="btn btn-secondary" value="Auswählen"/>
+                      </div> 
+                    </form> 
+                  </td>
+                </tr>
               </tbody>
             </table>
           </div>  
-        </div> 
-        {% endif %}
-
-        {% if scene_name_02 != "" %}
-        <div class="panel panel-primary">
-        <div class="panel-heading text-center"><font color="black"><b> {{ scene_name_02 }} </b></font></div>
-          <div class="panel-body">
-            <table class="table">
-              <tbody>   
-              <tr>
-                <td>
-                  <form method="GET" class="range-field my-4 w-5">     
-                  <br>
-                  <br>              
-                  <input type="range" name="scene_02" min="0" max="100" value="{{ brightness_global }}" />
-                  <div class="text-center">
-                    <br>
-                    <br>      
-                    <input type="submit" class="btn btn-info" value="Auswählen"/>
-                  </div> 
-                </form> 
-                </td>
-              </tr>
-              </tbody>
-            </table>
-          </div>  
-        </div> 
-        {% endif %}
-
-        {% if scene_name_03 != "" %}
-        <div class="panel panel-primary">
-        <div class="panel-heading text-center"><font color="black"><b> {{ scene_name_03 }} </b></font></div>
-          <div class="panel-body">
-            <table class="table">
-              <tbody>   
-              <tr>
-                <td>
-                  <form method="GET" class="range-field my-4 w-5">     
-                  <br>
-                  <br>              
-                  <input type="range" name="scene_03" min="0" max="100" value="{{ brightness_global }}" />
-                  <div class="text-center">
-                    <br>
-                    <br>      
-                    <input type="submit" class="btn btn-info" value="Auswählen"/>
-                  </div> 
-                </form> 
-                </td>
-              </tr>
-              </tbody>
-            </table>
-          </div>  
-        </div> 
-        {% endif %}
-
-        {% if scene_name_04 != "" %}
-        <div class="panel panel-primary">
-        <div class="panel-heading text-center"><font color="black"><b> {{ scene_name_04 }} </b></font></div>
-          <div class="panel-body">
-            <table class="table">
-              <tbody>   
-              <tr>
-                <td>
-                  <form method="GET" class="range-field my-4 w-5">     
-                  <br>
-                  <br>              
-                  <input type="range" name="scene_04" min="0" max="100" value="{{ brightness_global }}" />
-                  <div class="text-center">
-                    <br>
-                    <br>      
-                    <input type="submit" class="btn btn-info" value="Auswählen"/>
-                  </div> 
-                </form> 
-                </td>
-              </tr>
-              </tbody>
-            </table>
-          </div>  
-        </div> 
-        {% endif %}
-
-        {% if scene_name_05 != "" %}
-        <div class="panel panel-primary">
-        <div class="panel-heading text-center"><font color="black"><b> {{ scene_name_05 }} </b></font></div>
-          <div class="panel-body">
-            <table class="table">
-              <tbody>   
-              <tr>
-                <td>
-                  <form method="GET" class="range-field my-4 w-5">     
-                  <br>
-                  <br>              
-                  <input type="range" name="scene_05" min="0" max="100" value="{{ brightness_global }}" />
-                  <div class="text-center">
-                    <br>
-                    <br>      
-                    <input type="submit" class="btn btn-info" value="Auswählen"/>
-                  </div> 
-                </form> 
-                </td>
-              </tr>
-              </tbody>
-            </table>
-          </div>  
-        </div> 
-        {% endif %}
-
         </div>  
       </div>  
     </div>  

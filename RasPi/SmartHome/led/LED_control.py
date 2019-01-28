@@ -112,7 +112,7 @@ def LED_SET_SCENE(scene, brightness_global = 100):
                 brightness = entry.brightness
                 lights[entry.LED_id - 1].on = True
                 lights[entry.LED_id - 1].xy = xy
-                
+             
                 brightness = int(brightness * (int(brightness_global) / 100))
                 if brightness > 10:
                     lights[entry.LED_id - 1].brightness = brightness

@@ -59,7 +59,7 @@ class User(UserMixin, db.Model):
     username = db.Column(db.String(50), unique=True)
     email    = db.Column(db.String(50), unique=True)
     password = db.Column(db.String(100))
-    role     = db.Column(db.String(20))
+    role     = db.Column(db.String(20), server_default=("user"))
 
 # Create all database tables
 db.create_all()
@@ -123,25 +123,32 @@ def index():
 
     scene = 0
     brightness_global = 100
+    value_1 = ""
+    value_2 = ""
+    value_3 = ""
+    value_4 = ""
+    value_5 = ""
 
     if request.method == "GET":     
-        # Change scene    
-        if request.args.get("scene_01"):
-            brightness_global = request.args.get("scene_01")   
-            scene = 1    
-        if request.args.get("scene_02"):
-            brightness_global = request.args.get("scene_02")   
-            scene = 2    
-        if request.args.get("scene_03"):
-            brightness_global = request.args.get("scene_03")   
-            scene = 3    
-        if request.args.get("scene_04"):
-            brightness_global = request.args.get("scene_04")   
-            scene = 4    
-        if request.args.get("scene_05"):
-            brightness_global = request.args.get("scene_05")   
-            scene = 5                                       
-  
+        # Change scene   
+        try:     
+            scene = int(request.args.get("radio"))
+            brightness_global = request.args.get("brightness_global")
+            LED_SET_SCENE(scene,brightness_global)
+
+            if scene == 1:
+                value_1 = "checked = 'on'"
+            if scene == 2:
+                value_2 = "checked = 'on'"
+            if scene == 3:
+                value_3 = "checked = 'on'"
+            if scene == 4:
+                value_4 = "checked = 'on'"
+            if scene == 5:
+                value_5 = "checked = 'on'"        
+        except:
+            pass
+
     scene_name_01 = GET_SCENE(1)[1]
     if scene_name_01 == None:
         scene_name_01 = ""
@@ -157,8 +164,6 @@ def index():
     scene_name_05 = GET_SCENE(5)[1]
     if scene_name_05 == None:
         scene_name_05 = ""
-
-    LED_SET_SCENE(scene,brightness_global)
   
     return render_template('index.html', 
                             scene_name_01=scene_name_01,
@@ -166,6 +171,11 @@ def index():
                             scene_name_03=scene_name_03,
                             scene_name_04=scene_name_04,
                             scene_name_05=scene_name_05,
+                            value_1=value_1,
+                            value_2=value_2,
+                            value_3=value_3,
+                            value_4=value_4,
+                            value_5=value_5,
                             brightness_global=brightness_global
                             )
 

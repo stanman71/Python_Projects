@@ -53,19 +53,19 @@
 
 <ul class="nav nav-pills">
   <li class="nav-item">
-    <a class="nav-link" href="{{ url_for('dashboard_LED_scene_01') }}"><font color="white"><b>Szene 1</b></font></a>
+    <a class="nav-link" href="{{ url_for('dashboard_LED_scene_01') }}"><font color="black"><b>Szene 1</b></font></a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="{{ url_for('dashboard_LED_scene_02') }}"><font color="white"><b>Szene 2</b></font></a>
+    <a class="nav-link" href="{{ url_for('dashboard_LED_scene_02') }}"><font color="black"><b>Szene 2</b></font></a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="{{ url_for('dashboard_LED_scene_03') }}"><font color="white"><b>Szene 3</b></font></a>
+    <a class="nav-link" href="{{ url_for('dashboard_LED_scene_03') }}"><font color="black"><b>Szene 3</b></font></a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="{{ url_for('dashboard_LED_scene_04') }}"><font color="white"><b>Szene 4</b></font></a>
+    <a class="nav-link" href="{{ url_for('dashboard_LED_scene_04') }}"><font color="black"><b>Szene 4</b></font></a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="{{ url_for('dashboard_LED_scene_05') }}"><font color="white"><b>Szene 5</b></font></a>
+    <a class="nav-link" href="{{ url_for('dashboard_LED_scene_05') }}"><font color="black"><b>Szene 5</b></font></a>
   </li>
 </ul>
 
@@ -76,14 +76,14 @@
 
   {% if entries_scene != None %}
 
-    <div class="panel panel-primary">
+    <div class="panel panel-default">
       <div class="panel-heading"><font color="black"><b>Szene {{number}}</b></font></div>
       <div class="panel-body">
         <form method="GET">
           <div class="form-group">
             <input type="text" class="form-control" name="name" value="{% if scene_name != None %}{{ scene_name }}{% endif %}" />
           </div>
-            <input type="submit" class="btn btn-info" value="Name ändern" />
+            <input type="submit" class="btn btn-secondary" value="Name ändern" />
             <br>
         </form>              
       </div>
@@ -91,7 +91,7 @@
     
  <!-- scene table -->
 
-    <div class="panel panel-primary">
+    <div class="panel panel-default">
       <div class="panel-body">
 
       <table class="table">
@@ -114,7 +114,7 @@
             <td>
               <form method="GET" class="verticalform">
                 <input type="text" name="{{ entry.scene_id }} {{ entry.LED_id }}" class="form-control scene_{{ entry.LED_id }}" value="rgb({{ entry.color_red }}, {{ entry.color_green }}, {{ entry.color_blue }}) "/>
-                <input type="submit" class="btn btn-info" value="Farbe ändern" />  
+                <input type="submit" class="btn btn-secondary" value="Farbe ändern" />  
               </form>
             </td>
               <td>{{ entry.brightness }}</td>
@@ -122,7 +122,7 @@
               <form method="GET" class="range-field my-4 w-5">
                 <div class="col-md-10 text-center"> 
                   <input type="range" name="{{ entry.LED_id }}" min="0" max="254" value="{{ entry.brightness }}" />
-                  <input type="submit" class="btn btn-info" value="Helligkeit ändern"/>
+                  <input type="submit" class="btn btn-secondary" value="Helligkeit ändern"/>
                 </div> 
               </form>
             </td>
@@ -146,7 +146,7 @@
     <br>
     {% endif %}
 
-    <div class="panel panel-primary">
+    <div class="panel panel-default">
       <div class="panel-body">
         <div class="dropdown">
           <form method="GET" enctype="multipart/form-data">
@@ -157,7 +157,7 @@
               {% endif %}
               {% endfor %}
             </select>
-            <input type="submit" class="btn btn-info" value="LED hinzufügen">
+            <input type="submit" class="btn btn-secondary" value="LED hinzufügen">
           </form>
         </div> 
       </div>
