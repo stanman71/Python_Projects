@@ -6,7 +6,7 @@
 
 {% block styles %}
   {{super()}}
-  <link rel="stylesheet" href="{{url_for('.static', filename='starter-template.css')}}">
+  <link rel="stylesheet" href="{{url_for('.static', filename='index.css')}}">
 {% endblock %}
 
 {% block content %}
@@ -100,10 +100,10 @@
                   {% endif %}     
                   <tr>            
                     <td>
-                      <class="range-field my-4 w-5">     
+                      <div class="slidecontainer">   
                       <br>
                       <br>              
-                      <input type="range" name="brightness_global" min="0" max="100" value="{{ brightness_global }}" />
+                      <input type="range" class="slider" name="brightness_global" min="0" max="100" value="{{ brightness_global }}" />
                         <br>
                         <br>   
                         <div class="text-center">

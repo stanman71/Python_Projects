@@ -119,9 +119,10 @@
             </td>
               <td>{{ entry.brightness }}</td>
             <td>
-              <form method="GET" class="range-field my-4 w-5">
+              <form method="GET" class="slidecontainer"> 
                 <div class="col-md-10 text-center"> 
-                  <input type="range" name="{{ entry.LED_id }}" min="0" max="254" value="{{ entry.brightness }}" />
+                  <input type="range" class="slider" name="{{ entry.LED_id }}" min="0" max="254" value="{{ entry.brightness }}" />
+                  <br>
                   <input type="submit" class="btn btn-secondary" value="Helligkeit ändern"/>
                 </div> 
               </form>
