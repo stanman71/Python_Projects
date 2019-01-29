@@ -16,15 +16,15 @@ import sys
 
 # Windows Home
 sys.path.insert(0, "C:/Users/stanman/Desktop/Unterlagen/GIT/Python_Projects/RasPi/SmartHome/led/")
-PATH = 'C:/Users/stanman/Desktop/Unterlagen/GIT/Python_Projects/RasPi/SmartHome/static/CDNJS/'
+PATH_CSS = 'C:/Users/stanman/Desktop/Unterlagen/GIT/Python_Projects/RasPi/SmartHome/static/CDNJS/'
 
 # Windows Work
 #sys.path.insert(0, "C:/Users/mstan/GIT/Python_Projects/RasPi/SmartHome/led")
-#PATH = 'C:/Users/mstan/GIT/Python_Projects/RasPi/SmartHome/static/CDNJS/'
+#PATH_CSS = 'C:/Users/mstan/GIT/Python_Projects/RasPi/SmartHome/static/CDNJS/'
 
 # RasPi:
 #sys.path.insert(0, "/home/pi/Python/SmartHome/led")
-#PATH = '/home/pi/Python/static/CDNJS/'
+#PATH_CSS = '/home/pi/Python/static/CDNJS/'
 
 from colorpicker_local import colorpicker
 from LED_database import *
@@ -313,7 +313,8 @@ def dashboard_LED_scene_01():
                             entries_scene=entries_scene,
                             scene_name=scene_name,
                             dropdown_list=dropdown_list,
-                            number=scene
+                            number=scene,
+                            active01="active"
                             )
 
 
@@ -363,7 +364,8 @@ def dashboard_LED_scene_02():
                             entries_scene=entries_scene,
                             scene_name=scene_name,
                             dropdown_list=dropdown_list,
-                            number=scene
+                            number=scene,
+                            active02="active"
                             )
 
 
@@ -413,7 +415,8 @@ def dashboard_LED_scene_03():
                             entries_scene=entries_scene,
                             scene_name=scene_name,
                             dropdown_list=dropdown_list,
-                            number=scene
+                            number=scene,
+                            active03="active"
                             )
 
 
@@ -463,7 +466,8 @@ def dashboard_LED_scene_04():
                             entries_scene=entries_scene,
                             scene_name=scene_name,
                             dropdown_list=dropdown_list,
-                            number=scene
+                            number=scene,
+                            active04="active"
                             )
 
 
@@ -515,7 +519,8 @@ def dashboard_LED_scene_05():
                             entries_scene=entries_scene,
                             scene_name=scene_name,
                             dropdown_list=dropdown_list,
-                            number=scene
+                            number=scene,
+                            active05="active"
                             )
 
 
@@ -580,7 +585,7 @@ def logout():
 # Host files for colorpicker_local
 @app.route('/get_media/<path:filename>', methods=['GET'])
 def get_media(filename):
-    return send_from_directory(PATH, filename)
+    return send_from_directory(PATH_CSS, filename)
 
 
 if __name__ == '__main__':
