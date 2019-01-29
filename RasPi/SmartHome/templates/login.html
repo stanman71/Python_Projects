@@ -36,34 +36,42 @@
 </nav>
 
 <div class="container">
+  <div class="col-sm-2 col-sm-offset-2 col-md-10 col-md-offset-1 main">
+    <div class="row">
+      <div class="col">  
+        <br>
+        <br>
 
-<!-- login --> 
+<!-- error massages --> 
 
-  {% if login_check is defined %}
-    <br>
-    <br>
-    <div class="alert alert-danger" role="alert">
-      Falsche Benutzereingaben
-    </div>      
-  {% endif %}
+        {% if login_check is defined %}
+          <div class="alert alert-danger" role="alert">
+            Falsche Benutzereingaben
+          </div>      
+        {% endif %}
 
-  {% if role_check is defined %}
-    <br>
-    <br>
-    <div class="alert alert-danger" role="alert">
-      Keine Zugriffsberechtigung
-    </div>      
-  {% endif %}
+        {% if role_check is defined %}
+          <div class="alert alert-danger" role="alert">
+            Keine Zugriffsberechtigung
+          </div>      
+        {% endif %}
 
-  <form class="form-signin" method="POST" action="/login">
-    <h2 class="form-signin-heading">Login</h2>
-    {{ form.hidden_tag() }}
-    {{ wtf.form_field(form.username) }}
-    {{ wtf.form_field(form.password) }}
-    {{ wtf.form_field(form.remember) }}
-    <button class="btn btn-lg btn-secondary btn-block" type="submit">einloggen</button>
-  </form>
-
+<!-- login -->   
+  
+        <div class="panel panel-default">
+          <div class="panel-heading text-center"><font color="black"><b> Login </b></font></div>
+          <div class="panel-body">
+          <form class="form-signin" method="POST" action="/login">
+            {{ form.hidden_tag() }}
+            {{ wtf.form_field(form.username) }}
+            {{ wtf.form_field(form.password) }}
+            {{ wtf.form_field(form.remember) }}
+            <button class="btn btn-lg btn-secondary btn-block" type="submit">einloggen</button>
+          </form>
+        </div>  
+      </div>  
+    </div>  
+  </div>     
 </div> 
 
 {% endblock %}

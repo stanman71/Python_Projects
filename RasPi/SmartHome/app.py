@@ -26,14 +26,14 @@ PATH = 'C:/Users/stanman/Desktop/Unterlagen/GIT/Python_Projects/RasPi/SmartHome/
 #sys.path.insert(0, "/home/pi/Python/SmartHome/led")
 #PATH = '/home/pi/Python/static/CDNJS/'
 
+from colorpicker_local import colorpicker
+from LED_database import *
+from LED_control import *
+
 
 """ ##### """
 """ flask """
 """ ##### """
-
-from colorpicker_local import colorpicker
-from LED_database import *
-from LED_control import *
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'Thisissupposedtobesecret!'
@@ -44,15 +44,16 @@ colorpicker(app)
 """ database """
 """ ######## """
 
-# Database login 
+# connect to database
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://python:python@localhost/raspi'
 bootstrap = Bootstrap(app)
 db = SQLAlchemy(app)
+
 login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = 'login'
 
-# Database table entries
+# define table structure
 class User(UserMixin, db.Model):
     __tablename__ = 'user'
     id       = db.Column(db.Integer, primary_key=True)
@@ -61,10 +62,10 @@ class User(UserMixin, db.Model):
     password = db.Column(db.String(100))
     role     = db.Column(db.String(20), server_default=("user"))
 
-# Create all database tables
+# create all database tables
 db.create_all()
 
-# Create default user
+# create default user
 if User.query.filter_by(username='default').first() is None:
     user = User(
         username='default',
@@ -80,7 +81,7 @@ if User.query.filter_by(username='default').first() is None:
 """ Role Management """
 """ ############### """
 
-# Role Management
+# create role "superuser"
 def superuser_required(f):
     @wraps(f)
     def wrap(*args, **kwargs):
@@ -149,6 +150,7 @@ def index():
         except:
             pass
 
+    # get scene names
     scene_name_01 = GET_SCENE(1)[1]
     if scene_name_01 == None:
         scene_name_01 = ""

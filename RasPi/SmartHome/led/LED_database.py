@@ -17,17 +17,20 @@ sys.path.insert(0, "C:/Users/stanman/Desktop/Unterlagen/GIT/Python_Projects/RasP
 # RasPi:
 #sys.path.insert(0, "/home/pi/Python/SmartHome/led")
 
+from app import app
+from phue import Bridge
+from LED_control import GET_LED_NAME
+
 
 """ ################# """
 """ database settings """
 """ ################# """
 
-from app import app
-from phue import Bridge
-from LED_control import GET_LED_NAME
-
+# connect to database
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://python:python@localhost/raspi'
 db = SQLAlchemy(app)
+
+# define table structure
 
 class Bridge(db.Model):
     __tablename__ = 'bridge'
@@ -48,9 +51,9 @@ class Scene_01(db.Model):
     __tablename__ = 'scene_01'
     id          = db.Column(db.Integer, primary_key=True, autoincrement = True)
     scene_id    = db.Column(db.Integer, db.ForeignKey('scenes.id'), server_default=("1"))
-    scene_name  = db.relationship('Scenes')
+    scene_name  = db.relationship('Scenes') # connection to an other table (Scenes)
     LED_id      = db.Column(db.Integer, db.ForeignKey('LED.id'), unique = True)
-    LED_name    = db.relationship('LED')
+    LED_name    = db.relationship('LED')    # connection to an other table (LED)
     color_red   = db.Column(db.Integer, server_default=("0"))
     color_green = db.Column(db.Integer, server_default=("0"))
     color_blue  = db.Column(db.Integer, server_default=("0"))
@@ -126,7 +129,6 @@ if Scenes.query.filter_by().first() is None:
     for i in range(1,10):
         scene = Scenes(
             id = i,
-            name = "Szene " + str(i),
         )
         db.session.add(scene)
         db.session.commit()
@@ -138,9 +140,12 @@ if Scenes.query.filter_by().first() is None:
 
 def GET_DROPDOWN_LIST():
     entry_list = []
+    # get all LED entries
     entries = LED.query.all()
     for entry in entries:
+        # select the LED names only
         entry_list.append(entry.name)
+
     return entry_list
 
 
@@ -150,6 +155,7 @@ def GET_DROPDOWN_LIST():
 
 def GET_BRIDGE_IP():
     entry = Bridge.query.filter_by().first()
+
     return (entry.ip)  
 
 
@@ -159,27 +165,37 @@ def GET_BRIDGE_IP():
 
 def GET_LED():
     entries = LED.query.all()
+
     return (entries)
+
 
 def UPDATE_LED():
     led_list = GET_LED_NAME()
     for i in range (len(led_list)):
+        # check entries and replace them if nessessary
         try:
             check_entry = LED.query.filter_by(id=i+1).first()
             if check_entry.name is not led_list[i]:
                 check_entry.name = led_list[i]
+        # add new entires, if they not exist
         except:
             led = LED(
                 id = i + 1,
                 name = led_list[i],
             )    
-            db.session.add(led)         
+            db.session.add(led)     
+
         db.session.commit()  
 
+
 def ADD_LED(Scene, Name):
+    # get the selected LED database 
     entry = LED.query.filter_by(name=Name).first() 
+
     if Scene == 1:
+        # LED already exist ?
         check_entry = Scene_01.query.filter_by(LED_id=entry.id).first()
+        # add new LED
         if check_entry is None:
             scene = Scene_01(
                 LED_id = entry.id,
@@ -207,15 +223,18 @@ def ADD_LED(Scene, Name):
         if check_entry is None:
             scene = Scene_05(
                 LED_id = entry.id,
-            )       
+            )      
+
     try:        
         db.session.add(scene)
         db.session.commit()        
     except:
         pass    
 
+
 def DEL_LED(Scene, ID):
     if Scene == 1:
+        # delete LED entry
         Scene_01.query.filter_by(LED_id=ID).delete()
     if Scene == 2:
         Scene_02.query.filter_by(LED_id=ID).delete()
@@ -225,6 +244,7 @@ def DEL_LED(Scene, ID):
         Scene_04.query.filter_by(LED_id=ID).delete()
     if Scene == 5:
         Scene_05.query.filter_by(LED_id=ID).delete()
+
     db.session.commit()
 
 
@@ -236,8 +256,11 @@ def GET_SCENE(Scene):
     entries = None
     name    = None
     if Scene == 1:
+        # scene exist ?
         if Scene_01.query.all():
+            # get all settings
             entries = Scene_01.query.all()
+            # get the scene name of an other table
             name = entries[0].scene_name.name
     if Scene == 2:
         if Scene_02.query.all():
@@ -255,18 +278,24 @@ def GET_SCENE(Scene):
         if Scene_05.query.all():
             entries = Scene_05.query.all()
             name = entries[0].scene_name.name
+
     return (entries, name)
+
 
 def SET_SCENE_NAME(Scene, name):
     entry = Scenes.query.filter_by(id=Scene).first()
     entry.name = name
     db.session.commit()
 
+
 def SET_SCENE_COLOR(Scene, rgb_scene):
     if Scene == 1:
+        # check all array entries
         for i in range(len(rgb_scene)):
             if rgb_scene[i] is not None:
+                # get scene settings
                 entry = Scene_01.query.filter_by(LED_id=i+1).first()
+                # get the rgb values only (source: rgb(xxx, xxx, xxx))
                 rgb_color = re.findall(r'\d+', rgb_scene[i])
                 break
     if Scene == 2:
@@ -293,6 +322,7 @@ def SET_SCENE_COLOR(Scene, rgb_scene):
                 entry = Scene_05.query.filter_by(LED_id=i+1).first()
                 rgb_color = re.findall(r'\d+', rgb_scene[i])
                 break 
+
     try:
         entry.color_red   = rgb_color[0]
         entry.color_green = rgb_color[1]           
@@ -301,10 +331,13 @@ def SET_SCENE_COLOR(Scene, rgb_scene):
     except:
         pass
     
+
 def SET_SCENE_BRIGHTNESS(Scene, brightness):
     if Scene == 1:
+        # check all array entries
         for i in range(len(brightness)):
             if brightness[i] is not None:
+                # get scene settings
                 entry = Scene_01.query.filter_by(LED_id=i+1).first()
                 brightness = brightness[i]
                 break
@@ -332,14 +365,17 @@ def SET_SCENE_BRIGHTNESS(Scene, brightness):
                 entry = Scene_05.query.filter_by(LED_id=i+1).first()
                 brightness = brightness[i]
                 break
+
     try:
         entry.brightness = brightness
         db.session.commit()
     except:
         pass
 
+
 def DEL_SCENE(Scene):
     if Scene == 1:
+        # delete scene settings
         Scene_01.query.delete()
     if Scene == 2:
         Scene_02.query.delete()
@@ -349,6 +385,8 @@ def DEL_SCENE(Scene):
         Scene_04.query.delete()
     if Scene == 5:
         Scene_05.query.delete()
+
+    # delete scene name
     entry = Scenes.query.get(Scene)
     entry.name = ""
     db.session.commit()

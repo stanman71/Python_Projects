@@ -55,6 +55,7 @@ def CONNECT_BRIDGE():
     from LED_database import GET_BRIDGE_IP
     b = Bridge(GET_BRIDGE_IP())
     b.connect() 
+
     return b       
 
 
@@ -77,11 +78,13 @@ def LED_SET_BRIGHTNESS(brightness):
     b = CONNECT_BRIDGE()
     lights = b.get_light_objects('list')
     
+    # set brightness
     for i in range(len(brightness)):
         if brightness[i] is not None:
             if int(brightness[i]) > 10:
                     lights[i].on = True
                     lights[i].brightness = int(brightness[i])
+            # turn LED off if brightness < 10
             else:
                     lights[i].on = False               
 
@@ -89,10 +92,13 @@ def LED_SET_BRIGHTNESS(brightness):
 def LED_SET_COLOR(rgb_scene):
     b = CONNECT_BRIDGE()
     lights = b.get_light_objects('list')
-    
+
+    # set RGB   
     for i in range(len(rgb_scene)):
         if rgb_scene[i] is not None:
-            rgb_color = re.findall(r'\d+', rgb_scene[i])         
+            # get the rgb values only (source: rgb(xxx, xxx, xxx))
+            rgb_color = re.findall(r'\d+', rgb_scene[i])     
+            # convert rgb to xy    
             xy = RGBtoXY(int(rgb_color[0]), int(rgb_color[1]), int(rgb_color[2]))
             lights[i].xy = xy
 
@@ -104,15 +110,20 @@ def LED_SET_SCENE(scene, brightness_global = 100):
         light.on = False
 
     from LED_database import GET_SCENE
+
+    # get scene settings
     entries = GET_SCENE(scene)
     if entries[0] is not None:
         entries = entries[0]
         for entry in entries:
+                # convert rgb to xy  
                 xy = RGBtoXY(entry.color_red, entry.color_green, entry.color_blue)
                 brightness = entry.brightness
+
                 lights[entry.LED_id - 1].on = True
                 lights[entry.LED_id - 1].xy = xy
              
+                # set brightness
                 brightness = int(brightness * (int(brightness_global) / 100))
                 if brightness > 10:
                     lights[entry.LED_id - 1].brightness = brightness
