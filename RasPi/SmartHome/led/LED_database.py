@@ -126,7 +126,7 @@ if Bridge.query.filter_by().first() is None:
 
 # Create default scenes
 if Scenes.query.filter_by().first() is None:   
-    for i in range(1,10):
+    for i in range(1,11):
         scene = Scenes(
             id = i,
         )

@@ -49,28 +49,30 @@
 </nav>
 <br>
 
-<!-- scene navs -->
-
-<nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="#">Szenenwahl:</a>
-    </div>
-    <ul class="nav navbar-nav">
-      <li class={{active01}}><a href="{{ url_for('dashboard_LED_scene_01') }}">Szene 1</a></li>
-      <li class={{active02}}><a href="{{ url_for('dashboard_LED_scene_02') }}">Szene 2</a></li>
-      <li class={{active03}}><a href="{{ url_for('dashboard_LED_scene_03') }}">Szene 3</a></li>
-      <li class={{active04}}><a href="{{ url_for('dashboard_LED_scene_04') }}">Szene 4</a></li>
-      <li class={{active05}}><a href="{{ url_for('dashboard_LED_scene_05') }}">Szene 5</a></li>
-    </ul>
-  </div>
-</nav>
-
-<!-- scene name -->
-
 <div class="col-sm-2 col-sm-offset-2 col-md-10 col-md-offset-1 main">
   <div class="row">
     <div class="col">
+
+<!-- scene navs -->
+
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <ul class="nav navbar-nav">
+          <li class={{active01}}><a href="{{ url_for('dashboard_LED_scene_01') }}">Szene 1</a></li>
+          <li class={{active02}}><a href="{{ url_for('dashboard_LED_scene_02') }}">Szene 2</a></li>
+          <li class={{active03}}><a href="{{ url_for('dashboard_LED_scene_03') }}">Szene 3</a></li>
+          <li class={{active04}}><a href="{{ url_for('dashboard_LED_scene_04') }}">Szene 4</a></li>
+          <li class={{active05}}><a href="{{ url_for('dashboard_LED_scene_05') }}">Szene 5</a></li>
+          
+          <li class={{active06}}><a href="{{ url_for('dashboard_LED_scene_01') }}">Szene 6</a></li>
+          <li class={{active07}}><a href="{{ url_for('dashboard_LED_scene_01') }}">Szene 7</a></li>
+          <li class={{active08}}><a href="{{ url_for('dashboard_LED_scene_01') }}">Szene 8</a></li>
+          <li class={{active09}}><a href="{{ url_for('dashboard_LED_scene_01') }}">Szene 9</a></li>        
+        </ul>
+      </div>
+    </nav>
+
+<!-- scene name -->
 
     {% if entries_scene != None %}
 
