@@ -29,6 +29,7 @@ PATH = 'C:/Users/stanman/Desktop/Unterlagen/GIT/Python_Projects/RasPi/SmartHome/
 from colorpicker_local import colorpicker
 from LED_database import *
 from LED_control import *
+from LED_programs import *
 
 
 """ ##### """
@@ -537,10 +538,16 @@ def delete_LED_scene_01(scene, id):
 
 
 # LED programs
-@app.route('/dashboard/LED/programs')
+@app.route('/dashboard/LED/programs', methods=['GET', 'POST'])
 @login_required
 @superuser_required
 def dashboard_LED_programs():
+
+    if request.method == "GET": 
+        new_csv = request.args.get("new_csv") 
+        if new_csv is not "":
+            NEW_CSV(new_csv)
+            
     return render_template('dashboard_LED_programs.html', 
                             )
 
