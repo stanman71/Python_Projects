@@ -545,7 +545,7 @@ def dashboard_LED_programs():
 
     if request.method == "GET": 
         new_csv = request.args.get("new_csv") 
-        if new_csv is not "":
+        if new_csv is not None and new_csv is not "":
             NEW_CSV(new_csv)
             
     return render_template('dashboard_LED_programs.html', 
