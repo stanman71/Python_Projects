@@ -88,18 +88,19 @@ def LED_SET_SCENE(scene, brightness_global = 100):
     if entries[0] is not None:
         entries = entries[0]
         for entry in entries:
-                # convert rgb to xy  
+                # set rgb 
                 xy = RGBtoXY(entry.color_red, entry.color_green, entry.color_blue)
-                brightness = entry.brightness
-
                 lights[entry.LED_id - 1].on = True
                 lights[entry.LED_id - 1].xy = xy
              
                 # set brightness
+                brightness = entry.brightness
+                # add global brightness setting
                 brightness = int(brightness * (int(brightness_global) / 100))
                 if brightness > 10:
                     lights[entry.LED_id - 1].brightness = brightness
                 else:
+                    # turn LED off if brightness < 10
                     lights[entry.LED_id - 1].on = False               
 
 
@@ -114,14 +115,14 @@ def PROGRAM_SET_BRIGHTNESS(brightness_settings):
     brightness_settings = brightness_settings.split(":")
     # set brightness
     brightness = re.findall(r'\d+', brightness_settings[1]) 
-    # transform list to int   
+    # transform list element to int   
     brightness = int(brightness[0])
     if brightness > 10:
-            # list element stats at 0 for LED ID 1
+            # list element start at 0 for LED ID 1
             lights[int(brightness_settings[0]) - 1].on = True
             lights[int(brightness_settings[0]) - 1].brightness = brightness
-    # turn LED off if brightness < 10
     else:
+            # turn LED off if brightness < 10
             lights[int(brightness_settings[0]) - 1].on = False               
 
 
@@ -148,6 +149,7 @@ def START_PROGRAM(id):
     from LED_database import GET_PROGRAM_ID
     content = GET_PROGRAM_ID(id).content
     
+    # select each command line
     for line in content.splitlines():
         if "rgb" in line: 
             PROGRAM_SET_COLOR(line)
