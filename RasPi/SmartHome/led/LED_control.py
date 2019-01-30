@@ -75,7 +75,6 @@ def GET_LED_NAME():
 """ LED functions """
 """ ############# """
 
-
 def LED_SET_SCENE(scene, brightness_global = 100):
     b = CONNECT_BRIDGE()
     lights = b.get_light_objects('list')
@@ -104,7 +103,11 @@ def LED_SET_SCENE(scene, brightness_global = 100):
                     lights[entry.LED_id - 1].on = False               
 
 
-def LED_SET_BRIGHTNESS(brightness_settings):
+""" ################# """
+""" program functions """
+""" ################# """
+
+def PROGRAM_SET_BRIGHTNESS(brightness_settings):
     b = CONNECT_BRIDGE()
     lights = b.get_light_objects('list')
   
@@ -122,7 +125,7 @@ def LED_SET_BRIGHTNESS(brightness_settings):
             lights[int(brightness_settings[0]) - 1].on = False               
 
 
-def LED_SET_COLOR(rgb_settings):
+def PROGRAM_SET_COLOR(rgb_settings):
     b = CONNECT_BRIDGE()
     lights = b.get_light_objects('list')
 
@@ -147,9 +150,9 @@ def START_PROGRAM(id):
     
     for line in content.splitlines():
         if "rgb" in line: 
-            LED_SET_COLOR(line)
+            PROGRAM_SET_COLOR(line)
         if "bri" in line: 
-            LED_SET_BRIGHTNESS(line)
+            PROGRAM_SET_BRIGHTNESS(line)
         if "pause" in line: 
             break_value = line.split(":")
             break_value = int(break_value[1])
