@@ -56,7 +56,6 @@ def CONNECT_BRIDGE():
     from LED_database import GET_BRIDGE_IP
     b = Bridge(GET_BRIDGE_IP())
     b.connect() 
-
     return b       
 
 
@@ -78,6 +77,7 @@ def GET_LED_NAME():
 def LED_SET_SCENE(scene, brightness_global = 100):
     b = CONNECT_BRIDGE()
     lights = b.get_light_objects('list')
+    # deactivate all LED
     for light in lights:
         light.on = False
 
@@ -113,7 +113,7 @@ def PROGRAM_SET_BRIGHTNESS(brightness_settings):
     lights = b.get_light_objects('list')
   
     brightness_settings = brightness_settings.split(":")
-    # set brightness
+    # get the brightness value only (source: bri(xxx))
     brightness = re.findall(r'\d+', brightness_settings[1]) 
     # transform list element to int   
     brightness = int(brightness[0])
@@ -140,9 +140,9 @@ def PROGRAM_SET_COLOR(rgb_settings):
 
 
 def START_PROGRAM(id):  
-    # deactivate all LED
     b = CONNECT_BRIDGE()
     lights = b.get_light_objects('list')
+    # deactivate all LED
     for light in lights:
         light.on = False
 
@@ -160,4 +160,4 @@ def START_PROGRAM(id):
             break_value = int(break_value[1])
             time.sleep(break_value)
 
-    return (True)
+    return True
