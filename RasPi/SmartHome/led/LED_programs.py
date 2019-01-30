@@ -1,6 +1,5 @@
 import time
 import sys
-import csv
 
 """ ################ """
 """ general settings """
@@ -21,12 +20,5 @@ PATH = 'C:/Users/stanman/Desktop/Unterlagen/GIT/Python_Projects/RasPi/SmartHome/
 from LED_control import CONNECT_BRIDGE
 
 
-""" ############ """
-""" CSV settings """
-""" ############ """
 
-def NEW_CSV(name):
-    csv_name = PATH + name + ".csv"
-    with open(csv_name, 'w') as newFile:
-        newFile.close()
 

@@ -47,6 +47,12 @@ class LED(db.Model):
     id      = db.Column(db.Integer, primary_key=True, autoincrement = True)
     name    = db.Column(db.String(50), unique = True)
 
+class Programs(db.Model):
+    __tablename__ = 'programs'
+    id      = db.Column(db.Integer, primary_key=True, autoincrement = True)
+    name    = db.Column(db.String(50), unique = True)
+    content = db.Column(db.Text)
+
 class Scene_01(db.Model):
     __tablename__ = 'scene_01'
     id          = db.Column(db.Integer, primary_key=True, autoincrement = True)
@@ -138,7 +144,7 @@ if Scenes.query.filter_by().first() is None:
 """ Dropdown list """
 """ ############# """
 
-def GET_DROPDOWN_LIST():
+def GET_DROPDOWN_LIST_LED():
     entry_list = []
     # get all LED entries
     entries = LED.query.all()
@@ -155,7 +161,6 @@ def GET_DROPDOWN_LIST():
 
 def GET_BRIDGE_IP():
     entry = Bridge.query.filter_by().first()
-
     return (entry.ip)  
 
 
@@ -165,7 +170,6 @@ def GET_BRIDGE_IP():
 
 def GET_LED():
     entries = LED.query.all()
-
     return (entries)
 
 
@@ -390,3 +394,46 @@ def DEL_SCENE(Scene):
     entry = Scenes.query.get(Scene)
     entry.name = ""
     db.session.commit()
+
+
+""" ######## """
+""" Programs """
+""" ######## """
+
+def NEW_PROGRAM(name):
+    check_entry = Programs.query.filter_by(name=name).first()
+    if check_entry is None:
+        program = Programs(
+                name = name,
+                content = "",
+            )
+        db.session.add(program)
+        db.session.commit()
+
+
+def GET_DROPDOWN_LIST_PROGRAMS():
+    entry_list = []
+    # get all Programs
+    entries = Programs.query.all()
+    for entry in entries:
+        # select the Programs names only
+        entry_list.append(entry.name)
+
+    return entry_list
+
+
+def GET_PROGRAM(name):
+    entry = Programs.query.filter_by(name=name).first()
+    return (entry)
+
+
+def UPDATE_PROGRAM(id, content):
+    entry = Programs.query.filter_by(id=id).update(dict(content=content))
+    db.session.commit()
+
+
+def DELETE_PROGRAM(name):
+    Programs.query.filter_by(name=name).delete()
+    db.session.commit()
+
+

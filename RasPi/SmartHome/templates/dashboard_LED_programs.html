@@ -53,18 +53,70 @@
   <div class="row">
     <div class="col">
 
-<!-- csv -->
+<!-- create new programs -->
 
       <div class="panel panel-default">
-        <div class="panel-heading"><font color="black"><b>CSV</b></font></div>
+        <div class="panel-heading"><font color="black"><b>Programme</b></font></div>
         <div class="panel-body">
           <form method="GET">
             <div class="form-group">
-              <input type="text" class="form-control" name="new_csv" value="" />
+              <input type="text" class="form-control" name="new_program" value="" />
             </div>
-              <input type="submit" class="btn btn-secondary" value="neue Datei anlegen" />
+              <input type="submit" class="btn btn-secondary" value="neues Programm" />
               <br>
           </form>              
+          <br>
+
+<!-- select a program -->
+
+          <br>
+          <div class="dropdown">
+            <form method="GET" enctype="multipart/form-data">
+              <select class="btn btn-secondary dropdown-toggle" name="get_program">
+                {% for each in dropdown_list %}
+                {% if each != None %}
+                <option value="{{each}}">{{each}}</option>
+                {% endif %}
+                {% endfor %}
+              </select>
+              <input type="submit" class="btn btn-secondary" value="Programm anzeigen">
+            </form>
+          </div> 
+          <br>
+
+<!-- update a program -->
+
+          <br>
+          {% if program != "" %}  
+          <form method="GET">
+            <div class="form-group">
+              <label for="comment">{{ program.name }}</label>
+              <textarea class="form-control" name="{{ program.id }}" rows="20">{{ program.content }}</textarea>
+            </div> 
+              <input type="submit" class="btn btn-secondary" value="Programm updaten" />
+              <br>
+          </form>  
+          {% endif %}
+          <br>
+         </div>
+      </div> 
+
+<!-- delete a program -->
+
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="dropdown">
+            <form method="GET" enctype="multipart/form-data">
+              <select class="btn btn-secondary dropdown-toggle" name="delete_program">
+                {% for each in dropdown_list %}
+                {% if each != None %}
+                <option value="{{each}}">{{each}}</option>
+                {% endif %}
+                {% endfor %}
+              </select>
+              <input type="submit" class="btn btn-danger" value="Programm löschen">
+            </form>
+          </div> 
         </div>
       </div> 
 

@@ -167,7 +167,8 @@ def index():
     scene_name_05 = GET_SCENE(5)[1]
     if scene_name_05 == None:
         scene_name_05 = ""
-  
+
+
     return render_template('index.html', 
                             scene_name_01=scene_name_01,
                             scene_name_02=scene_name_02,
@@ -307,7 +308,7 @@ def dashboard_LED_scene_01():
 
     entries_scene = GET_SCENE(scene)[0]
     scene_name    = GET_SCENE(scene)[1]
-    dropdown_list = GET_DROPDOWN_LIST()
+    dropdown_list = GET_DROPDOWN_LIST_LED()
 
     return render_template('dashboard_LED_scenes.html', 
                             entries_scene=entries_scene,
@@ -358,7 +359,7 @@ def dashboard_LED_scene_02():
 
     entries_scene = GET_SCENE(scene)[0]
     scene_name    = GET_SCENE(scene)[1]
-    dropdown_list = GET_DROPDOWN_LIST()
+    dropdown_list = GET_DROPDOWN_LIST_LED()
 
     return render_template('dashboard_LED_scenes.html', 
                             entries_scene=entries_scene,
@@ -409,7 +410,7 @@ def dashboard_LED_scene_03():
 
     entries_scene = GET_SCENE(scene)[0]
     scene_name    = GET_SCENE(scene)[1]
-    dropdown_list = GET_DROPDOWN_LIST()
+    dropdown_list = GET_DROPDOWN_LIST_LED()
 
     return render_template('dashboard_LED_scenes.html', 
                             entries_scene=entries_scene,
@@ -460,7 +461,7 @@ def dashboard_LED_scene_04():
 
     entries_scene = GET_SCENE(scene)[0]
     scene_name    = GET_SCENE(scene)[1]
-    dropdown_list = GET_DROPDOWN_LIST()
+    dropdown_list = GET_DROPDOWN_LIST_LED()
 
     return render_template('dashboard_LED_scenes.html', 
                             entries_scene=entries_scene,
@@ -513,7 +514,7 @@ def dashboard_LED_scene_05():
 
     entries_scene = GET_SCENE(scene)[0]
     scene_name    = GET_SCENE(scene)[1]
-    dropdown_list = GET_DROPDOWN_LIST()
+    dropdown_list = GET_DROPDOWN_LIST_LED()
 
     return render_template('dashboard_LED_scenes.html', 
                             entries_scene=entries_scene,
@@ -548,12 +549,45 @@ def delete_LED_scene_01(scene, id):
 @superuser_required
 def dashboard_LED_programs():
 
+    program = ""
+
     if request.method == "GET": 
-        new_csv = request.args.get("new_csv") 
-        if new_csv is not None and new_csv is not "":
-            NEW_CSV(new_csv)
-            
-    return render_template('dashboard_LED_programs.html', 
+        # create a new program
+        new_program = request.args.get("new_program") 
+        if new_program is not None and new_program is not "":
+            NEW_PROGRAM(new_program)
+
+        # get the selected program
+        get_Program = request.args.get("get_program") 
+        if get_Program is not None:
+            program = GET_PROGRAM(get_Program)
+
+        # update programs, i = program ID
+        for i in range(1,1000):
+            update_Program = request.args.get(str(i))
+            if update_Program is not None:
+                UPDATE_PROGRAM(i, update_Program)
+
+        # delete the selected program
+        delete_Program = request.args.get("delete_program") 
+        if delete_Program is not None:
+            DELETE_PROGRAM(delete_Program)              
+
+    """
+    #zeilen auslesen:
+
+    test = GET_PROGRAM("newww").content
+
+    for line in test.splitlines():
+        print("")
+        print(line)
+    """
+
+    dropdown_list = GET_DROPDOWN_LIST_PROGRAMS()
+
+    return render_template('dashboard_LED_programs.html',
+                            dropdown_list=dropdown_list,
+                            program=program
                             )
 
 
