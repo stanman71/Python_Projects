@@ -148,16 +148,19 @@ def START_PROGRAM(id):
 
     from LED_database import GET_PROGRAM_ID
     content = GET_PROGRAM_ID(id).content
-    
-    # select each command line
-    for line in content.splitlines():
-        if "rgb" in line: 
-            PROGRAM_SET_COLOR(line)
-        if "bri" in line: 
-            PROGRAM_SET_BRIGHTNESS(line)
-        if "pause" in line: 
-            break_value = line.split(":")
-            break_value = int(break_value[1])
-            time.sleep(break_value)
+
+    try:   
+        # select each command line
+        for line in content.splitlines():
+            if "rgb" in line: 
+                PROGRAM_SET_COLOR(line)
+            if "bri" in line: 
+                PROGRAM_SET_BRIGHTNESS(line)
+            if "pause" in line: 
+                break_value = line.split(":")
+                break_value = int(break_value[1])
+                time.sleep(break_value)
+    except:
+        pass
 
     return True

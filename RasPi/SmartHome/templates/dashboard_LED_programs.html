@@ -63,13 +63,13 @@
               <input type="text" class="form-control" name="new_program" value="" />
             </div>
               <input type="submit" class="btn btn-secondary" value="neues Programm" />
-              <br>
           </form>              
-          <br>
-
+        </div>
+      </div>
 <!-- select a program -->
 
-          <br>
+      <div class="panel panel-default">
+        <div class="panel-body">
           <div class="dropdown">
             <form method="GET" enctype="multipart/form-data">
               <select class="btn btn-secondary dropdown-toggle" name="get_program">
@@ -83,6 +83,7 @@
             </form>
           </div> 
           <br>
+          <br>          
 
 <!-- instructions -->
 
@@ -91,7 +92,7 @@
           <table class="table">
             <thead>
               <tr>
-                <th>Anweisung</th>
+                <th>Eingabe</th>
                 <th>Erklärung</th>
               </tr>
             </thead>
@@ -101,57 +102,69 @@
                 <td>LED Nummer 1, Farbe ändern auf rot</td>
               </tr>
               <tr>
-                <td>1:bri(254)</td>
-                <td>LED Nummer 1, maximale Helligkeit</td>
+                <td>2:bri(254)</td>
+                <td>LED Nummer 2, maximale Helligkeit</td>
               </tr>
               <tr>
                 <td>pause:30</td>
-                <td>Einstellungen für 30 Sekunden beibehalten</td>
+                <td>Pause für 30 Sekunden</td>
               </tr>
             </tbody>
           </table>
 
 <!-- get rgb values -->
-<!--       
-          <form method="GET" class="verticalform">
-            <input type="text" name="get_rgb_{{ program.id }}" class="form-control rgb" value="{{ rgb }}"/>
-            <input type="submit" class="btn btn-secondary" value="RGB-Werte ermitteln" />  
-          </form>
+<!-- GET include get_rgb, update, start -->
+       
+        <form method="GET" class="verticalform">
+          <input type="text" name="get_rgb_{{ program.id }}" class="form-control rgb" value="{{ rgb }}"/>
+          <input type="submit" class="btn btn-secondary" value="RGB-Werte ermitteln" />  
           <br>
           <div class="form-group">
             <textarea class="form-control rounded-0" rows="1">{{ rgb }}</textarea>
           </div>
--->
 
 <!-- update a program -->
 
-          <form method="GET">
-            <div class="form-group">
-              <label for="comment">{{ program.name }}</label>
-              <textarea class="form-control" name="update_{{ program.id }}" rows="20">{{ program.content }}</textarea>
-            </div> 
-              <input type="submit" class="btn btn-secondary" value="Programm speichern" />
-              <br>
-          </form>  
-         </div>
+          <div class="form-group">
+            <br> 
+            <div class="text-center">         
+              <h4><b>{{ program.name }}</b></h4>
+            </div>
+            <br>          
+            <textarea class="form-control" name="update_{{ program.id }}" rows="20">{{ program.content }}</textarea>
+          </div> 
+            <input type="submit" class="btn btn-secondary" value="Programm speichern" />
+            <br>
+        </div>
       </div> 
 
 <!-- start a program -->
 
       <div class="panel panel-default">
         <div class="panel-body">
-          <form method="GET">
-            <input type="submit" class="btn btn-secondary" name="start_{{ program.id }}" value="Programm starten" />
-          </form>  
-          {% endif %}
-         </div>
+          <input type="submit" class="btn btn-secondary" name="start_{{ program.id }}" value="Programm starten" />
+        </form>  
+        {% endif %}        
+        </div>
       </div> 
 
-<!-- delete a program -->
+<!-- rename a program -->
 
       <div class="panel panel-default">
         <div class="panel-body">
-          <div class="dropdown">
+          {% if program != "" %}  
+          <form method="GET">
+            <div class="form-group">
+              <input type="text" class="form-control" name="program_name_{{ program.id }}" value="{% if program.name != None %}{{ program.name }}{% endif %}" />
+            </div>
+              <input type="submit" class="btn btn-secondary" value="Name ändern" />
+              <br>
+          </form>   
+          {% endif %} 
+
+<!-- delete a program -->
+
+          <div class="dropdown text-right">
             <form method="GET" enctype="multipart/form-data">
               <select class="btn btn-secondary dropdown-toggle" name="delete_program">
                 {% for each in dropdown_list %}
@@ -160,7 +173,7 @@
                 {% endif %}
                 {% endfor %}
               </select>
-              <input type="submit" class="btn btn-danger" value="Programm löschen">
+              <input type="submit" class="btn btn-danger text-right" value="Programm löschen">
             </form>
           </div> 
         </div>

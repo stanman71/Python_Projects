@@ -287,9 +287,11 @@ def GET_SCENE(Scene):
 
 
 def SET_SCENE_NAME(Scene, name):
-    entry = Scenes.query.filter_by(id=Scene).first()
-    entry.name = name
-    db.session.commit()
+    check_entry = Scenes.query.filter_by(name=name).first()
+    if check_entry is None:
+        entry = Scenes.query.filter_by(id=Scene).first()
+        entry.name = name
+        db.session.commit()
 
 
 def SET_SCENE_COLOR(Scene, rgb_scene):
@@ -436,7 +438,7 @@ def GET_ALL_PROGRAMS():
     return (entries)    
 
 
-def GET_PROGRAM(name):
+def GET_PROGRAM_NAME(name):
     entry = Programs.query.filter_by(name=name).first()
     return (entry)
 
@@ -444,6 +446,14 @@ def GET_PROGRAM(name):
 def GET_PROGRAM_ID(id):
     entry = Programs.query.filter_by(id=id).first()
     return (entry)
+
+
+def SET_PROGRAM_NAME(id, name):
+    check_entry = Programs.query.filter_by(name=name).first()
+    if check_entry is None:
+        entry = Programs.query.filter_by(id=id).first()
+        entry.name = name
+        db.session.commit()    
 
 
 def UPDATE_PROGRAM(id, content):

@@ -572,7 +572,7 @@ def dashboard_LED_programs():
         # get the selected program
         get_Program = request.args.get("get_program") 
         if get_Program is not None:
-            program = GET_PROGRAM(get_Program)
+            program = GET_PROGRAM_NAME(get_Program)
 
         # update programs, i = program ID
         for i in range(1,25):
@@ -585,26 +585,25 @@ def dashboard_LED_programs():
             start_Program = request.args.get("start_" + str(i))
             if start_Program is not None:
                 START_PROGRAM(i)
- 
-        # delete the selected program
-        delete_Program = request.args.get("delete_program") 
-        if delete_Program is not None:
-            DELETE_PROGRAM(delete_Program)              
 
-
-
-        """
         # get rgb values
         for i in range(1,25):
             get_rgb = request.args.get("get_rgb_" + str(i)) 
             if get_rgb is not None:
-                rgb = get_rgb  
-        """
+                rgb = get_rgb               
+                program = GET_PROGRAM_ID(i)  
 
-
-
-
-
+        # rename program
+        for i in range(1,25):
+            program_name = request.args.get("program_name_" + str(i)) 
+            if program_name is not None:
+                SET_PROGRAM_NAME(i, program_name)              
+                program = GET_PROGRAM_ID(i)  
+            
+        # delete the selected program
+        delete_Program = request.args.get("delete_program") 
+        if delete_Program is not None:
+            DELETE_PROGRAM(delete_Program)              
 
     dropdown_list = GET_DROPDOWN_LIST_PROGRAMS()
 
