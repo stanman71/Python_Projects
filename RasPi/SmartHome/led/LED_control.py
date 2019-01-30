@@ -2,6 +2,7 @@ from phue import Bridge
 import math
 import sys
 import re
+import time
 
 """ ################ """
 """ general settings """
@@ -74,34 +75,6 @@ def GET_LED_NAME():
 """ LED functions """
 """ ############# """
 
-def LED_SET_BRIGHTNESS(brightness):
-    b = CONNECT_BRIDGE()
-    lights = b.get_light_objects('list')
-    
-    # set brightness
-    for i in range(len(brightness)):
-        if brightness[i] is not None:
-            if int(brightness[i]) > 10:
-                    lights[i].on = True
-                    lights[i].brightness = int(brightness[i])
-            # turn LED off if brightness < 10
-            else:
-                    lights[i].on = False               
-
-
-def LED_SET_COLOR(rgb_scene):
-    b = CONNECT_BRIDGE()
-    lights = b.get_light_objects('list')
-
-    # set RGB   
-    for i in range(len(rgb_scene)):
-        if rgb_scene[i] is not None:
-            # get the rgb values only (source: rgb(xxx, xxx, xxx))
-            rgb_color = re.findall(r'\d+', rgb_scene[i])     
-            # convert rgb to xy    
-            xy = RGBtoXY(int(rgb_color[0]), int(rgb_color[1]), int(rgb_color[2]))
-            lights[i].xy = xy
-
 
 def LED_SET_SCENE(scene, brightness_global = 100):
     b = CONNECT_BRIDGE()
@@ -131,27 +104,55 @@ def LED_SET_SCENE(scene, brightness_global = 100):
                     lights[entry.LED_id - 1].on = False               
 
 
-                
+def LED_SET_BRIGHTNESS(brightness_settings):
+    b = CONNECT_BRIDGE()
+    lights = b.get_light_objects('list')
+  
+    brightness_settings = brightness_settings.split(":")
+    # set brightness
+    brightness = re.findall(r'\d+', brightness_settings[1]) 
+    # transform list to int   
+    brightness = int(brightness[0])
+    if brightness > 10:
+            # list element stats at 0 for LED ID 1
+            lights[int(brightness_settings[0]) - 1].on = True
+            lights[int(brightness_settings[0]) - 1].brightness = brightness
+    # turn LED off if brightness < 10
+    else:
+            lights[int(brightness_settings[0]) - 1].on = False               
 
 
+def LED_SET_COLOR(rgb_settings):
+    b = CONNECT_BRIDGE()
+    lights = b.get_light_objects('list')
 
-#b = Bridge('192.168.1.99')
-#b.connect()
-
-#print(b.get_api())
-
-#lights = b.get_light_objects('id')
-
-#print(lights)
-
-#print(lights[2].brightness)
-
-#lights[1].brightness = 254 #max
-
-#xy = RGBtoXY(110,70,0)
-#lights[1].xy = [xy[0], xy[1]]
-
-#lights[1].on = True
-#lights[1].on = False
+    rgb_settings = rgb_settings.split(":")
+    # get the rgb values only (source: rgb(xxx, xxx, xxx))
+    rgb_color = re.findall(r'\d+', rgb_settings[1])     
+    # convert rgb to xy    
+    xy = RGBtoXY(int(rgb_color[0]), int(rgb_color[1]), int(rgb_color[2]))
+    lights[int(rgb_settings[0]) - 1].on = True
+    lights[int(rgb_settings[0]) - 1].xy = xy
 
 
+def START_PROGRAM(id):  
+    # deactivate all LED
+    b = CONNECT_BRIDGE()
+    lights = b.get_light_objects('list')
+    for light in lights:
+        light.on = False
+
+    from LED_database import GET_PROGRAM_ID
+    content = GET_PROGRAM_ID(id).content
+    
+    for line in content.splitlines():
+        if "rgb" in line: 
+            LED_SET_COLOR(line)
+        if "bri" in line: 
+            LED_SET_BRIGHTNESS(line)
+        if "pause" in line: 
+            break_value = line.split(":")
+            break_value = int(break_value[1])
+            time.sleep(break_value)
+
+    return (True)

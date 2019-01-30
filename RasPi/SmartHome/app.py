@@ -29,7 +29,6 @@ PATH_CSS = 'C:/Users/stanman/Desktop/Unterlagen/GIT/Python_Projects/RasPi/SmartH
 from colorpicker_local import colorpicker
 from LED_database import *
 from LED_control import *
-from LED_programs import *
 
 
 """ ##### """
@@ -130,11 +129,12 @@ def index():
     value_3 = ""
     value_4 = ""
     value_5 = ""
+    program_massage = False
 
     if request.method == "GET":     
-        # Change scene   
+        # change scene   
         try:     
-            scene = int(request.args.get("radio"))
+            scene = int(request.args.get("radio_scene"))
             brightness_global = request.args.get("brightness_global")
             LED_SET_SCENE(scene,brightness_global)
 
@@ -148,6 +148,14 @@ def index():
                 value_4 = "checked = 'on'"
             if scene == 5:
                 value_5 = "checked = 'on'"        
+        except:
+            pass
+
+        # select a program   
+        try:     
+            program = int(request.args.get("radio_program"))
+            program_massage = START_PROGRAM(program)
+            
         except:
             pass
 
@@ -168,6 +176,7 @@ def index():
     if scene_name_05 == None:
         scene_name_05 = ""
 
+    program_list = GET_ALL_PROGRAMS()
 
     return render_template('index.html', 
                             scene_name_01=scene_name_01,
@@ -180,7 +189,9 @@ def index():
                             value_3=value_3,
                             value_4=value_4,
                             value_5=value_5,
-                            brightness_global=brightness_global
+                            brightness_global=brightness_global,
+                            program_list=program_list,
+                            program_massage=program_massage
                             )
 
 
@@ -550,6 +561,7 @@ def delete_LED_scene_01(scene, id):
 def dashboard_LED_programs():
 
     program = ""
+    rgb = "rgb(0, 0, 0)"
 
     if request.method == "GET": 
         # create a new program
@@ -563,31 +575,43 @@ def dashboard_LED_programs():
             program = GET_PROGRAM(get_Program)
 
         # update programs, i = program ID
-        for i in range(1,1000):
-            update_Program = request.args.get(str(i))
+        for i in range(1,25):
+            update_Program = request.args.get("update_" + str(i))
             if update_Program is not None:
                 UPDATE_PROGRAM(i, update_Program)
 
+        # start program
+        for i in range(1,25):
+            start_Program = request.args.get("start_" + str(i))
+            if start_Program is not None:
+                START_PROGRAM(i)
+ 
         # delete the selected program
         delete_Program = request.args.get("delete_program") 
         if delete_Program is not None:
             DELETE_PROGRAM(delete_Program)              
 
-    """
-    #zeilen auslesen:
 
-    test = GET_PROGRAM("newww").content
 
-    for line in test.splitlines():
-        print("")
-        print(line)
-    """
+        """
+        # get rgb values
+        for i in range(1,25):
+            get_rgb = request.args.get("get_rgb_" + str(i)) 
+            if get_rgb is not None:
+                rgb = get_rgb  
+        """
+
+
+
+
+
 
     dropdown_list = GET_DROPDOWN_LIST_PROGRAMS()
 
     return render_template('dashboard_LED_programs.html',
                             dropdown_list=dropdown_list,
-                            program=program
+                            program=program,
+                            rgb=rgb
                             )
 
 
@@ -597,7 +621,7 @@ def dashboard_LED_programs():
 @superuser_required
 def dashboard_LED_settings():
     ip = GET_BRIDGE_IP()            
-    LED_list = GET_LED()
+    LED_list = GET_ALL_LEDS()
 
     return render_template('dashboard_LED_settings.html', 
                             ip=ip,

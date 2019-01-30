@@ -12,7 +12,7 @@
 {% block scripts %}
   {{ super() }}
   {{ colorpicker.loader() }}
-  {{ colorpicker.picker(ids=[".scene_1", ".scene_2", ".scene_3", ".scene_4", ".scene_5", ".scene_6", ".scene_7", ".scene_8", ".scene_9" ]) }}
+  {{ colorpicker.picker(ids=[ ".rgb" ]) }}
 {% endblock scripts %}
 
 {% block content %}
@@ -84,20 +84,66 @@
           </div> 
           <br>
 
+<!-- instructions -->
+
+          {% if program != "" %}  
+
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Anweisung</th>
+                <th>Erklärung</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1:rgb(255, 0, 0)</td>
+                <td>LED Nummer 1, Farbe ändern auf rot</td>
+              </tr>
+              <tr>
+                <td>1:bri(254)</td>
+                <td>LED Nummer 1, maximale Helligkeit</td>
+              </tr>
+              <tr>
+                <td>pause:30</td>
+                <td>Einstellungen für 30 Sekunden beibehalten</td>
+              </tr>
+            </tbody>
+          </table>
+
+<!-- get rgb values -->
+<!--       
+          <form method="GET" class="verticalform">
+            <input type="text" name="get_rgb_{{ program.id }}" class="form-control rgb" value="{{ rgb }}"/>
+            <input type="submit" class="btn btn-secondary" value="RGB-Werte ermitteln" />  
+          </form>
+          <br>
+          <div class="form-group">
+            <textarea class="form-control rounded-0" rows="1">{{ rgb }}</textarea>
+          </div>
+-->
+
 <!-- update a program -->
 
-          <br>
-          {% if program != "" %}  
           <form method="GET">
             <div class="form-group">
               <label for="comment">{{ program.name }}</label>
-              <textarea class="form-control" name="{{ program.id }}" rows="20">{{ program.content }}</textarea>
+              <textarea class="form-control" name="update_{{ program.id }}" rows="20">{{ program.content }}</textarea>
             </div> 
-              <input type="submit" class="btn btn-secondary" value="Programm updaten" />
+              <input type="submit" class="btn btn-secondary" value="Programm speichern" />
               <br>
           </form>  
+         </div>
+      </div> 
+
+<!-- start a program -->
+
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <form method="GET">
+            <input type="submit" class="btn btn-secondary" name="start_{{ program.id }}" value="Programm starten" />
+          </form>  
           {% endif %}
-          <br>
          </div>
       </div> 
 

@@ -36,12 +36,13 @@
 <br>
 <br>
 
-<!-- LED scene select -->
-
 <div class="container">
   <div class="col-sm-2 col-sm-offset-2 col-md-10 col-md-offset-1 main">
     <div class="row">
       <div class="col">  
+
+<!-- LED scene select -->
+    
         <div class="panel panel-default">
           <div class="panel-heading text-center"><font color="black"><b> Szenenwahl </b></font></div>
             <div class="panel-body">
@@ -54,7 +55,7 @@
                     <td>
                       <div class="text-center">
                       <div class="radio">
-                        <label><input {{value_1}} type="radio" value="1" name="radio">{{ scene_name_01 }}</label>
+                        <label><input {{value_1}} type="radio" value="1" name="radio_scene">{{ scene_name_01 }}</label>
                       </div>
                     </td>
                   </tr>
@@ -64,7 +65,7 @@
                     <td>
                       <div class="text-center">
                       <div class="radio">
-                        <label><input {{value_2}} type="radio" value="2" name="radio">{{ scene_name_02 }}</label>
+                        <label><input {{value_2}} type="radio" value="2" name="radio_scene">{{ scene_name_02 }}</label>
                       </div>                    
                     </td>
                   </tr>
@@ -74,7 +75,7 @@
                     <td>
                       <div class="text-center">
                       <div class="radio">
-                        <label><input {{value_3}} type="radio" value="3" name="radio">{{ scene_name_03 }}</label>
+                        <label><input {{value_3}} type="radio" value="3" name="radio_scene">{{ scene_name_03 }}</label>
                       </div>                    
                     </td>
                   </tr>
@@ -84,7 +85,7 @@
                     <td>
                       <div class="text-center"> 
                       <div class="radio">
-                        <label><input {{value_4}} type="radio" value="4" name="radio">{{ scene_name_04 }}</label>
+                        <label><input {{value_4}} type="radio" value="4" name="radio_scene">{{ scene_name_04 }}</label>
                       </div>                    
                     </td>
                   </tr>
@@ -94,7 +95,7 @@
                     <td>
                       <div class="text-center">
                       <div class="radio">
-                        <label><input {{value_5}} type="radio" value="5" name="radio">{{ scene_name_05 }}</label>
+                        <label><input {{value_5}} type="radio" value="5" name="radio_scene">{{ scene_name_05 }}</label>
                       </div>                    
                     </td>
                   </tr>
@@ -117,6 +118,46 @@
             </table>
           </div>  
         </div>  
+
+<!-- program select -->
+
+        {% if program_massage == True %}
+          <div class="alert alert-success text-center" role="alert">
+            Programm abgeschlossen
+          </div>      
+        {% endif %}
+
+        <div class="panel panel-default">
+          <div class="panel-heading text-center"><font color="black"><b> Programmwahl </b></font></div>
+            <div class="panel-body">
+            <br>
+            <form method="get">
+              <table class="table">
+                <tbody>   
+                  {% for program in program_list %}
+                  <tr>
+                    <td>
+                      <div class="text-center">
+                      <div class="radio">
+                        <label><input {{value_1}} type="radio" value="{{ program.id }}" name="radio_program">{{ program.name }}</label>
+                      </div>
+                    </td>
+                  </tr>
+                  {% endfor %}               
+                  <tr>            
+                    <td>
+                      <br>
+                      <div class="text-center">
+                        <input type="submit" class="btn btn-secondary" value="Auswählen"/>
+                      </div> 
+                    </form> 
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>  
+        </div>  
+
       </div>  
     </div>  
   </div>    

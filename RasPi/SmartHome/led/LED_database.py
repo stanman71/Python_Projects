@@ -168,7 +168,7 @@ def GET_BRIDGE_IP():
 """ LED Functions """
 """ ############# """
 
-def GET_LED():
+def GET_ALL_LEDS():
     entries = LED.query.all()
     return (entries)
 
@@ -401,14 +401,23 @@ def DEL_SCENE(Scene):
 """ ######## """
 
 def NEW_PROGRAM(name):
+    # name exist ?
     check_entry = Programs.query.filter_by(name=name).first()
     if check_entry is None:
-        program = Programs(
-                name = name,
-                content = "",
-            )
-        db.session.add(program)
-        db.session.commit()
+        # find a unused id
+        for i in range(1,25):
+            if Programs.query.filter_by(id=i).first():
+                pass
+            else:
+                # add the new program
+                program = Programs(
+                        id = i,
+                        name = name,
+                        content = "",
+                    )
+                db.session.add(program)
+                db.session.commit()
+                break
 
 
 def GET_DROPDOWN_LIST_PROGRAMS():
@@ -422,8 +431,18 @@ def GET_DROPDOWN_LIST_PROGRAMS():
     return entry_list
 
 
+def GET_ALL_PROGRAMS():
+    entries = Programs.query.all()
+    return (entries)    
+
+
 def GET_PROGRAM(name):
     entry = Programs.query.filter_by(name=name).first()
+    return (entry)
+
+
+def GET_PROGRAM_ID(id):
+    entry = Programs.query.filter_by(id=id).first()
     return (entry)
 
 
