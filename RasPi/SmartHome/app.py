@@ -27,6 +27,7 @@ PATH_CSS = 'C:/Users/stanman/Desktop/Unterlagen/GIT/Python_Projects/RasPi/SmartH
 # RasPi:
 #PATH_CSS = '/home/pi/Python/static/CDNJS/'
 
+
 from colorpicker_local import colorpicker
 from LED_database import *
 from LED_control import *
@@ -38,8 +39,8 @@ from LED_control import *
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'Thisissupposedtobesecret!'
+Bootstrap(app)
 colorpicker(app)
-
 
 """ ######## """
 """ database """
@@ -47,7 +48,6 @@ colorpicker(app)
 
 # connect to database
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://python:python@localhost/raspi'
-bootstrap = Bootstrap(app)
 db = SQLAlchemy(app)
 
 login_manager = LoginManager()
