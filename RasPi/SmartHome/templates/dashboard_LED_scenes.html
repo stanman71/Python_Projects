@@ -53,6 +53,14 @@
   <div class="row">
     <div class="col">
 
+<!-- LED error massage -->
+
+    {% if led_update == False %}
+    <div class="alert alert-danger" role="alert">
+      Keine Verbindung zur Bridge
+    </div>      
+    {% endif %}     
+
 <!-- scene navs -->
 
     <nav class="navbar navbar-default">
@@ -62,12 +70,11 @@
           <li class={{active02}}><a href="{{ url_for('dashboard_LED_scene_02') }}">Szene 2</a></li>
           <li class={{active03}}><a href="{{ url_for('dashboard_LED_scene_03') }}">Szene 3</a></li>
           <li class={{active04}}><a href="{{ url_for('dashboard_LED_scene_04') }}">Szene 4</a></li>
-          <li class={{active05}}><a href="{{ url_for('dashboard_LED_scene_05') }}">Szene 5</a></li>
-          
-          <li class={{active06}}><a href="{{ url_for('dashboard_LED_scene_01') }}">Szene 6</a></li>
-          <li class={{active07}}><a href="{{ url_for('dashboard_LED_scene_01') }}">Szene 7</a></li>
-          <li class={{active08}}><a href="{{ url_for('dashboard_LED_scene_01') }}">Szene 8</a></li>
-          <li class={{active09}}><a href="{{ url_for('dashboard_LED_scene_01') }}">Szene 9</a></li>        
+          <li class={{active05}}><a href="{{ url_for('dashboard_LED_scene_05') }}">Szene 5</a></li>          
+          <li class={{active06}}><a href="{{ url_for('dashboard_LED_scene_06') }}">Szene 6</a></li>
+          <li class={{active07}}><a href="{{ url_for('dashboard_LED_scene_07') }}">Szene 7</a></li>
+          <li class={{active08}}><a href="{{ url_for('dashboard_LED_scene_08') }}">Szene 8</a></li>
+          <li class={{active09}}><a href="{{ url_for('dashboard_LED_scene_09') }}">Szene 9</a></li>        
         </ul>
       </div>
     </nav>

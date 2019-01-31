@@ -41,6 +41,14 @@
     <div class="row">
       <div class="col">  
 
+<!-- LED error massage -->
+
+      {% if led_update == False %}
+        <div class="alert alert-danger" role="alert">
+          Keine Verbindung zur Bridge
+        </div>      
+      {% endif %}      
+
 <!-- LED scene select -->
     
         <div class="panel panel-default">
@@ -100,6 +108,46 @@
                     </td>
                   </tr>
                   {% endif %}     
+                  {% if scene_name_06 != "" %}
+                  <tr>
+                    <td>
+                      <div class="text-center">
+                      <div class="radio">
+                        <label><input {{value_2}} type="radio" value="6" name="radio_scene">{{ scene_name_06 }}</label>
+                      </div>                    
+                    </td>
+                  </tr>
+                  {% endif %}               
+                  {% if scene_name_07 != "" %}
+                  <tr>
+                    <td>
+                      <div class="text-center">
+                      <div class="radio">
+                        <label><input {{value_7}} type="radio" value="3" name="radio_scene">{{ scene_name_07 }}</label>
+                      </div>                    
+                    </td>
+                  </tr>
+                  {% endif %}
+                  {% if scene_name_08 != "" %}
+                  <tr>
+                    <td>
+                      <div class="text-center"> 
+                      <div class="radio">
+                        <label><input {{value_8}} type="radio" value="4" name="radio_scene">{{ scene_name_08 }}</label>
+                      </div>                    
+                    </td>
+                  </tr>
+                  {% endif %}
+                  {% if scene_name_09 != "" %}
+                  <tr>
+                    <td>
+                      <div class="text-center">
+                      <div class="radio">
+                        <label><input {{value_9}} type="radio" value="5" name="radio_scene">{{ scene_name_09 }}</label>
+                      </div>                    
+                    </td>
+                  </tr>
+                  {% endif %}                      
                   <tr>            
                     <td>
                       <div class="slidecontainer">   

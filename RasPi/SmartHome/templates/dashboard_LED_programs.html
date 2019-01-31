@@ -53,6 +53,14 @@
   <div class="row">
     <div class="col">
 
+<!-- LED error massage -->
+
+    {% if led_update == False %}
+    <div class="alert alert-danger" role="alert">
+      Keine Verbindung zur Bridge
+    </div>      
+    {% endif %}   
+
 <!-- create new programs -->
 
       <div class="panel panel-default">
@@ -66,6 +74,7 @@
           </form>              
         </div>
       </div>
+      
 <!-- select a program -->
 
       <div class="panel panel-default">

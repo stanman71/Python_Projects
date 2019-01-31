@@ -10,12 +10,10 @@ import sys
 
 # Windows Home
 sys.path.insert(0, "C:/Users/stanman/Desktop/Unterlagen/GIT/Python_Projects/RasPi/SmartHome/led/")
-
 # Windows Work
-#sys.path.insert(0, "C:/Users/mstan/GIT/Python_Projects/RasPi/SmartHome/led")
-
+sys.path.insert(0, "C:/Users/mstan/GIT/Python_Projects/RasPi/SmartHome/led")
 # RasPi:
-#sys.path.insert(0, "/home/pi/Python/SmartHome/led")
+sys.path.insert(0, "/home/pi/Python/SmartHome/led")
 
 from app import app
 from phue import Bridge
@@ -113,6 +111,54 @@ class Scene_05(db.Model):
     color_blue  = db.Column(db.Integer, server_default=("0"))
     brightness  = db.Column(db.Integer, server_default=("254"))
 
+class Scene_06(db.Model):
+    __tablename__ = 'scene_06'
+    id          = db.Column(db.Integer, primary_key=True, autoincrement = True)
+    scene_id    = db.Column(db.Integer, db.ForeignKey('scenes.id'), server_default=("6"))
+    scene_name  = db.relationship('Scenes')
+    LED_id      = db.Column(db.Integer, db.ForeignKey('LED.id'), unique = True)
+    LED_name    = db.relationship('LED')    
+    color_red   = db.Column(db.Integer, server_default=("0"))
+    color_green = db.Column(db.Integer, server_default=("0"))
+    color_blue  = db.Column(db.Integer, server_default=("0"))
+    brightness  = db.Column(db.Integer, server_default=("254"))
+
+class Scene_07(db.Model):
+    __tablename__ = 'scene_07'
+    id          = db.Column(db.Integer, primary_key=True, autoincrement = True)
+    scene_id    = db.Column(db.Integer, db.ForeignKey('scenes.id'), server_default=("7"))
+    scene_name  = db.relationship('Scenes')
+    LED_id      = db.Column(db.Integer, db.ForeignKey('LED.id'), unique = True)
+    LED_name    = db.relationship('LED')
+    color_red   = db.Column(db.Integer, server_default=("0"))
+    color_green = db.Column(db.Integer, server_default=("0"))
+    color_blue  = db.Column(db.Integer, server_default=("0"))
+    brightness  = db.Column(db.Integer, server_default=("254"))
+
+class Scene_08(db.Model):
+    __tablename__ = 'scene_08'
+    id          = db.Column(db.Integer, primary_key=True, autoincrement = True)
+    scene_id    = db.Column(db.Integer, db.ForeignKey('scenes.id'), server_default=("8"))
+    scene_name  = db.relationship('Scenes')
+    LED_id      = db.Column(db.Integer, db.ForeignKey('LED.id'), unique = True)
+    LED_name    = db.relationship('LED')
+    color_red   = db.Column(db.Integer, server_default=("0"))
+    color_green = db.Column(db.Integer, server_default=("0"))
+    color_blue  = db.Column(db.Integer, server_default=("0"))
+    brightness  = db.Column(db.Integer, server_default=("254"))
+
+class Scene_09(db.Model):
+    __tablename__ = 'scene_09'
+    id          = db.Column(db.Integer, primary_key=True, autoincrement = True)
+    scene_id    = db.Column(db.Integer, db.ForeignKey('scenes.id'), server_default=("9"))
+    scene_name  = db.relationship('Scenes')
+    LED_id      = db.Column(db.Integer, db.ForeignKey('LED.id'), unique = True)
+    LED_name    = db.relationship('LED') 
+    color_red   = db.Column(db.Integer, server_default=("0"))
+    color_green = db.Column(db.Integer, server_default=("0"))
+    color_blue  = db.Column(db.Integer, server_default=("0"))
+    brightness  = db.Column(db.Integer, server_default=("254"))
+
 
 """ ############################## """
 """ database create default values """
@@ -164,6 +210,12 @@ def GET_BRIDGE_IP():
     return (entry.ip)  
 
 
+def SET_BRIDGE_IP(IP):
+    entry = Bridge.query.filter_by().first()
+    entry.ip = IP
+    db.session.commit() 
+
+
 """ ############# """
 """ LED Functions """
 """ ############# """
@@ -175,21 +227,24 @@ def GET_ALL_LEDS():
 
 def UPDATE_LED():
     led_list = GET_LED_NAME()
-    for i in range (len(led_list)):
-        # check entries and replace them if nessessary
-        try:
-            check_entry = LED.query.filter_by(id=i+1).first()
-            if check_entry.name is not led_list[i]:
-                check_entry.name = led_list[i]
-        # add new entires, if they not exist
-        except:
-            led = LED(
-                id = i + 1,
-                name = led_list[i],
-            )    
-            db.session.add(led)     
+    try:
+        for i in range (len(led_list)):
+            # check entries and replace them if nessessary
+            try:
+                check_entry = LED.query.filter_by(id=i+1).first()
+                if check_entry.name is not led_list[i]:
+                    check_entry.name = led_list[i]
+            # add new entires, if they not exist
+            except:
+                led = LED(
+                    id = i + 1,
+                    name = led_list[i],
+                )    
+                db.session.add(led)     
 
-        db.session.commit()  
+            db.session.commit()  
+    except:
+        return False    
 
 
 def ADD_LED(Scene, Name):
@@ -228,6 +283,30 @@ def ADD_LED(Scene, Name):
             scene = Scene_05(
                 LED_id = entry.id,
             )      
+    if Scene == 6:
+        check_entry = Scene_06.query.filter_by(LED_id=entry.id).first()
+        if check_entry is None:
+            scene = Scene_06(
+                LED_id = entry.id,
+            )
+    if Scene == 7:
+        check_entry = Scene_07.query.filter_by(LED_id=entry.id).first()
+        if check_entry is None:
+            scene = Scene_07(
+                LED_id = entry.id,
+            )
+    if Scene == 8:
+        check_entry = Scene_08.query.filter_by(LED_id=entry.id).first()
+        if check_entry is None:
+            scene = Scene_08(
+                LED_id = entry.id,
+            )
+    if Scene == 9:
+        check_entry = Scene_09.query.filter_by(LED_id=entry.id).first()
+        if check_entry is None:
+            scene = Scene_09(
+                LED_id = entry.id,
+            )      
 
     try:        
         db.session.add(scene)
@@ -248,6 +327,14 @@ def DEL_LED(Scene, ID):
         Scene_04.query.filter_by(LED_id=ID).delete()
     if Scene == 5:
         Scene_05.query.filter_by(LED_id=ID).delete()
+    if Scene == 6:
+        Scene_06.query.filter_by(LED_id=ID).delete()
+    if Scene == 7:
+        Scene_07.query.filter_by(LED_id=ID).delete()
+    if Scene == 8:
+        Scene_08.query.filter_by(LED_id=ID).delete()
+    if Scene == 9:
+        Scene_09.query.filter_by(LED_id=ID).delete()
 
     db.session.commit()
 
@@ -281,6 +368,22 @@ def GET_SCENE(Scene):
     if Scene == 5:
         if Scene_05.query.all():
             entries = Scene_05.query.all()
+            name = entries[0].scene_name.name
+    if Scene == 6:
+        if Scene_06.query.all():
+            entries = Scene_06.query.all()
+            name = entries[0].scene_name.name
+    if Scene == 7:
+        if Scene_07.query.all():
+            entries = Scene_07.query.all()
+            name = entries[0].scene_name.name
+    if Scene == 8:
+        if Scene_08.query.all():
+            entries = Scene_08.query.all()  
+            name = entries[0].scene_name.name
+    if Scene == 9:
+        if Scene_09.query.all():
+            entries = Scene_09.query.all()
             name = entries[0].scene_name.name
 
     return (entries, name)
@@ -328,6 +431,30 @@ def SET_SCENE_COLOR(Scene, rgb_scene):
                 entry = Scene_05.query.filter_by(LED_id=i+1).first()
                 rgb_color = re.findall(r'\d+', rgb_scene[i])
                 break 
+    if Scene == 6:
+        for i in range(len(rgb_scene)):
+            if rgb_scene[i] is not None:
+                entry = Scene_06.query.filter_by(LED_id=i+1).first()
+                rgb_color = re.findall(r'\d+', rgb_scene[i])
+                break
+    if Scene == 7:
+        for i in range(len(rgb_scene)):
+            if rgb_scene[i] is not None:
+                entry = Scene_07.query.filter_by(LED_id=i+1).first()
+                rgb_color = re.findall(r'\d+', rgb_scene[i])
+                break
+    if Scene == 8:
+        for i in range(len(rgb_scene)):
+            if rgb_scene[i] is not None:
+                entry = Scene_08.query.filter_by(LED_id=i+1).first()
+                rgb_color = re.findall(r'\d+', rgb_scene[i])
+                break
+    if Scene == 9:
+        for i in range(len(rgb_scene)):
+            if rgb_scene[i] is not None:
+                entry = Scene_09.query.filter_by(LED_id=i+1).first()
+                rgb_color = re.findall(r'\d+', rgb_scene[i])
+                break 
 
     try:
         entry.color_red   = rgb_color[0]
@@ -371,6 +498,30 @@ def SET_SCENE_BRIGHTNESS(Scene, brightness):
                 entry = Scene_05.query.filter_by(LED_id=i+1).first()
                 brightness = brightness[i]
                 break
+    if Scene == 6:
+        for i in range(len(brightness)):
+            if brightness[i] is not None:
+                entry = Scene_06.query.filter_by(LED_id=i+1).first()
+                brightness = brightness[i]
+                break
+    if Scene == 7:
+        for i in range(len(brightness)):
+            if brightness[i] is not None:
+                entry = Scene_07.query.filter_by(LED_id=i+1).first()
+                brightness = brightness[i]
+                break            
+    if Scene == 8:
+        for i in range(len(brightness)):
+            if brightness[i] is not None:
+                entry = Scene_08.query.filter_by(LED_id=i+1).first()
+                brightness = brightness[i]
+                break
+    if Scene == 9:
+        for i in range(len(brightness)):
+            if brightness[i] is not None:
+                entry = Scene_09.query.filter_by(LED_id=i+1).first()
+                brightness = brightness[i]
+                break
 
     try:
         entry.brightness = brightness
@@ -391,6 +542,14 @@ def DEL_SCENE(Scene):
         Scene_04.query.delete()
     if Scene == 5:
         Scene_05.query.delete()
+    if Scene == 6:
+        Scene_06.query.delete()
+    if Scene == 7:
+        Scene_07.query.delete()
+    if Scene == 8:
+        Scene_08.query.delete()
+    if Scene == 9:
+        Scene_09.query.delete()
 
     # delete scene name
     entry = Scenes.query.get(Scene)

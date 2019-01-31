@@ -47,13 +47,29 @@
   <div class="row">
     <div class="col">
 
+<!-- LED error massage -->
+
+    {% if led_update == False %}
+    <div class="alert alert-danger" role="alert">
+      Keine Verbindung zur Bridge
+    </div>      
+    {% endif %}     
+
 <!-- HUE settings -->
 
       <div class="panel panel-default">
-        <div class="panel-heading"><font color="black"><b>HUE BRIDGE</b></font></div>
-        <div class="panel-body">IP: {{ ip }}</div>  
-      </div>         
- 
+        <div class="panel-heading"><font color="black"><b>HUE BRIDGE IP</b></font></div>
+          <div class="panel-body">      
+          <form method="GET">
+            <div class="form-group">
+              <input type="text" class="form-control" name="bridge_ip" value="{% if ip != None %}{{ ip }}{% endif %}" />
+            </div>
+              <input type="submit" class="btn btn-secondary" value="Name ändern" />
+              <br>
+          </form>   
+        </div>
+      </div>
+
 <!-- LED settings -->
         
       {% if LED_names != None %}
