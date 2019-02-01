@@ -8,13 +8,14 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 from functools import wraps
 import sys
+import datetime
 
 
 """ ################# """
 """ genernal settings """
 """ ################# """
 
-sys.path.insert(0, "C:/Users/stanman/Desktop/Unterlagen/GIT/Python_Projects/RasPi/SmartHome/led/")
+sys.path.insert(0, "C:/Users/stanman/Desktop/Unterlagen/GIT/Python_Projects/RasPi/SmartHome/led")
 sys.path.insert(0, "C:/Users/mstan/GIT/Python_Projects/RasPi/SmartHome/led")
 sys.path.insert(0, "/home/pi/Python/SmartHome/led")
 
@@ -33,6 +34,22 @@ from LED_database import *
 from LED_control import *
 
 
+""" ######### """
+""" schedular """
+""" ######### """
+
+from flask_apscheduler import APScheduler
+
+scheduler = APScheduler()
+
+@scheduler.task('cron', id='scheduler_job', minute='*')
+def scheduler_job():
+    now = datetime.datetime.now()
+    print(now.strftime('%a'))
+    print(now.strftime('%H'))
+    print(now.strftime('%M'))
+
+
 """ ##### """
 """ flask """
 """ ##### """
@@ -41,6 +58,7 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = 'Thisissupposedtobesecret!'
 Bootstrap(app)
 colorpicker(app)
+
 
 """ ######## """
 """ database """
@@ -62,6 +80,16 @@ class User(UserMixin, db.Model):
     email    = db.Column(db.String(50), unique=True)
     password = db.Column(db.String(100))
     role     = db.Column(db.String(20), server_default=("user"))
+
+class Schedular(UserMixin, db.Model):
+    __tablename__ = 'schedular'
+    id     = db.Column(db.Integer, primary_key=True)
+    name   = db.Column(db.String(50), unique=True)
+    day    = db.Column(db.String(50))
+    hour   = db.Column(db.Integer)
+    minute = db.Column(db.Integer)
+    task   = db.Column(db.String(100))
+    repeat = db.Column(db.Integer)
 
 # create all database tables
 db.create_all()
@@ -273,42 +301,6 @@ def signup():
 @superuser_required
 def dashboard():
     return render_template('dashboard.html', name=current_user.username)
-
-
-# Dashboard user
-@app.route('/dashboard/user/', methods=['GET', 'POST'])
-@login_required
-@superuser_required
-def dashboard_user():
-    user_list = User.query.all()
-    return render_template('dashboard_user.html',
-                            name=current_user.username,
-                            user_list=user_list,
-                            siteID="user" 
-                            )
-
-
-# Change user role
-@app.route('/dashboard/user/role/<int:id>')
-@login_required
-@superuser_required
-def promote(id):
-    entry = User.query.get(id)
-    entry.role = "superuser"
-    db.session.commit()
-    user_list = User.query.all()
-    return redirect(url_for('dashboard_user'))
-
-
-# Delete user
-@app.route('/dashboard/user/delete/<int:id>')
-@login_required
-@superuser_required
-def delete(id):
-    User.query.filter_by(id=id).delete()
-    db.session.commit()
-    user_list = User.query.all()
-    return redirect(url_for('dashboard_user'))
 
 
 """ ######### """
@@ -799,7 +791,7 @@ def dashboard_LED_scene_09():
 @app.route('/dashboard/LED/scene/delete/<int:scene>/<int:id>')
 @login_required
 @superuser_required
-def delete_LED_scene_01(scene, id): 
+def delete_LED(scene, id): 
     DEL_LED(scene, id)
     if scene == 1:
         return redirect(url_for('dashboard_LED_scene_01'))
@@ -908,6 +900,61 @@ def dashboard_LED_settings():
                             )
 
 
+""" ############## """
+""" Site Schedular """
+""" ############## """
+
+# Dashboard user
+@app.route('/dashboard/schedular/', methods=['GET', 'POST'])
+@login_required
+@superuser_required
+def dashboard_schedular():
+    user_list = User.query.all()
+    return render_template('dashboard_schedular.html',
+                            name=current_user.username,
+                            user_list=user_list,
+                            )
+
+
+""" ########## """
+""" Sites User """
+""" ########## """
+
+# Dashboard user
+@app.route('/dashboard/user/', methods=['GET', 'POST'])
+@login_required
+@superuser_required
+def dashboard_user():
+    user_list = User.query.all()
+    return render_template('dashboard_user.html',
+                            name=current_user.username,
+                            user_list=user_list,
+                            )
+
+
+# Change user role
+@app.route('/dashboard/user/role/<int:id>')
+@login_required
+@superuser_required
+def promote(id):
+    entry = User.query.get(id)
+    entry.role = "superuser"
+    db.session.commit()
+    user_list = User.query.all()
+    return redirect(url_for('dashboard_user'))
+
+
+# Delete user
+@app.route('/dashboard/user/delete/<int:id>')
+@login_required
+@superuser_required
+def delete(id):
+    User.query.filter_by(id=id).delete()
+    db.session.commit()
+    user_list = User.query.all()
+    return redirect(url_for('dashboard_user'))
+
+
 """ ########### """
 """ Sites Other """
 """ ########### """
@@ -926,4 +973,6 @@ def get_media(filename):
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    scheduler.start()
+    app.run()
+
