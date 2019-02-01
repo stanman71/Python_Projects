@@ -36,7 +36,7 @@
             <li><a href="{{ url_for('dashboard_LED_settings') }}">Einstellungen</a></li>
           </ul>
         </li>
-        <li><a href="{{ url_for('dashboard_schedular') }}"><span class="glyphicon glyphicon-user"></span> Aufgabenplanung</a></li>
+        <li><a href="{{ url_for('dashboard_schedular') }}"><span class="glyphicon glyphicon-calendar"></span> Aufgabenplanung</a></li>
         <li><a href="{{ url_for('dashboard_user') }}"><span class="glyphicon glyphicon-user"></span> Benutzer</a></li>
       </ul>
     </div>
@@ -56,11 +56,45 @@
         </div>      
       {% endif %}
 
-<!-- new task -->
-
       <div class="panel panel-default">
         <div class="panel-heading"><font color="black"><b>Aufgabenplanung</b></font></div>
           <div class="panel-body">      
+
+<!-- instructions -->
+
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Eingabe</th>
+                <th>Erklärung</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>start_Szene:1</td>
+                <td>starte Szene Nummer 1 (ID=1)</td>
+              </tr>
+              <tr>
+                <td>start_Programm:2</td>
+                <td>starte Programm Nummer 2 (ID=2)</td>
+              </tr>
+              <tr>
+                <td> * </td>
+                <td>keine Einschränkungen (z.B. an jedem Tag)</td>
+              </tr>
+            </tbody>
+          </table>
+
+<!-- new task -->
+
+          <br>  
+          <div class="text-center">         
+            <h4><b>Neue Aufgabe erstellen</b></h4>
+          </div>
+          <br>   
+          Zeitpunkt (Tag / Stunde / Minute) 
+          <br>  
+          <br>           
           <form method="GET">
             <select class="btn btn-secondary dropdown-toggle" name="set_day">
               {% for each in dropdown_list_days %}
@@ -85,18 +119,21 @@
             </select>  
             <br>
             <br>
-            Name:
+            Name
+            <br>  
+            <br>             
             <div class="form-group">
               <input type="text" class="form-control" name="set_name" value="{% if set_name != None %}{{ set_name }}{% endif %}" />
-            </div>
+            </div>              
+            Aufgabe
             <br>
-            Aufgabe:
+            <br>              
             <div class="form-group">
               <input type="text" class="form-control" name="set_task" value="{% if set_task != None %}{{ set_task }}{% endif %}" />
-            </div>            
+            </div>                         
+            Wiederholen
             <div class="form-check">
               <input type="checkbox" class="form-check-input" name="checkbox">
-              <label class="form-check-label" for="dropdownCheck">Wiederholen</label>
             </div>
             <br>            
             <input type="submit" class="btn btn-secondary" value="Aufgabe anlegen" />

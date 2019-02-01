@@ -36,7 +36,7 @@
             <li><a href="{{ url_for('dashboard_LED_settings') }}">Einstellungen</a></li>
           </ul>
         </li>
-        <li><a href="{{ url_for('dashboard_schedular') }}"><span class="glyphicon glyphicon-user"></span> Aufgabenplanung</a></li>
+        <li><a href="{{ url_for('dashboard_schedular') }}"><span class="glyphicon glyphicon-calendar"></span> Aufgabenplanung</a></li>
         <li><a href="{{ url_for('dashboard_user') }}"><span class="glyphicon glyphicon-user"></span> Benutzer</a></li>
       </ul>
     </div>
@@ -59,26 +59,27 @@
 <!-- HUE settings -->
 
       <div class="panel panel-default">
-        <div class="panel-heading"><font color="black"><b>HUE BRIDGE IP</b></font></div>
+        <div class="panel-heading"><font color="black"><b>Einstellungen</b></font></div>
           <div class="panel-body">      
           <form method="GET">
+            <b>HUE Bridge IP:</b>
+            <br>
+            <br>            
             <div class="form-group">
               <input type="text" class="form-control" name="bridge_ip" value="{% if ip != None %}{{ ip }}{% endif %}" />
             </div>
-              <input type="submit" class="btn btn-secondary" value="Name ändern" />
+              <input type="submit" class="btn btn-secondary" value="IP ändern" />
               <br>
           </form>   
-        </div>
-      </div>
+          <br>
+          <br> 
 
 <!-- LED settings -->
         
-      {% if LED_names != None %}
 
-      <div class="panel panel-default">
-        <div class="panel-heading"><font color="black"><b>LED</b></font></div>
-        <div class="panel-body">      
-
+          <b>LEDs:</b>
+          <br>
+          <br>  
           <table class="table">
             <thead>
               <th scope="col">ID</th>                        
@@ -93,8 +94,6 @@
               {% endfor %}
             </tbody>
           </table>  
-          
-          {% endif %}
         </div>  
       </div>  
     </div>
