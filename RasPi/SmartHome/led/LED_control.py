@@ -13,6 +13,7 @@ sys.path.insert(0, "/home/pi/Python/SmartHome/led")
 
 from phue import Bridge
 
+
 """ ################# """
 """ support functions """
 """ ################# """
@@ -99,7 +100,7 @@ def LED_SET_SCENE(scene, brightness_global = 100):
                     # set brightness
                     brightness = entry.brightness
                     # add global brightness setting
-                    brightness = int(brightness * (int(brightness_global) / 100))
+                    brightness = int((brightness * (int(brightness_global)) / 100))
                     if brightness > 10:
                         lights[entry.LED_id - 1].brightness = brightness
                     else:

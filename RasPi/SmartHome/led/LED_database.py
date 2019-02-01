@@ -175,9 +175,10 @@ if Bridge.query.filter_by().first() is None:
 
 # Create default scenes
 if Scenes.query.filter_by().first() is None:   
-    for i in range(1,11):
+    for i in range(1,10):
         scene = Scenes(
-            id = i,
+            id   = i,
+            name = "",
         )
         db.session.add(scene)
         db.session.commit()

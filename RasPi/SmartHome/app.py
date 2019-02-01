@@ -11,6 +11,13 @@ import sys
 import datetime
 
 
+""" ######### """
+""" IMPORTANT """
+""" ######### """
+
+""" For each new divice connected to the hue bridge press the bridge button first !!! """
+
+
 """ ################# """
 """ genernal settings """
 """ ################# """
@@ -26,7 +33,7 @@ PATH_CSS = 'C:/Users/stanman/Desktop/Unterlagen/GIT/Python_Projects/RasPi/SmartH
 #PATH_CSS = 'C:/Users/mstan/GIT/Python_Projects/RasPi/SmartHome/static/CDNJS/'
 
 # RasPi:
-#PATH_CSS = '/home/pi/Python/static/CDNJS/'
+#PATH_CSS = '/home/pi/Python/SmartHome/static/CDNJS/'
 
 
 from colorpicker_local import colorpicker
