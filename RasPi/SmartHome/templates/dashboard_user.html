@@ -67,9 +67,8 @@
                 <td>{{ user.email }}</td>  
                 <td>{{ user.role }}</td> 
                 
-                <td><a href="/dashboard/user/role/{{ user.id }}"><font color="black"><b>freischalten</b></font></a>
-                <td><a href="/dashboard/user/delete/{{ user.id }}"><font color="red"><b>löschen</b></font></a>
-                </td>   
+                <td><a href="/dashboard/user/role/{{ user.id }}"><font color="black"><b>freischalten</b></font></a></td>  
+                <td><a href="/dashboard/user/delete/{{ user.id }}"><font color="red"><b>löschen</b></font></a></td>   
               </tr>
               {% endfor %}
           </tbody>

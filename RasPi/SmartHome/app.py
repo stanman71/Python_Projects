@@ -86,10 +86,10 @@ class Schedular(UserMixin, db.Model):
     id     = db.Column(db.Integer, primary_key=True)
     name   = db.Column(db.String(50), unique=True)
     day    = db.Column(db.String(50))
-    hour   = db.Column(db.Integer)
-    minute = db.Column(db.Integer)
+    hour   = db.Column(db.String(50))
+    minute = db.Column(db.String(50))
     task   = db.Column(db.String(100))
-    repeat = db.Column(db.Integer)
+    repeat = db.Column(db.String(50))
 
 # create all database tables
 db.create_all()
@@ -904,16 +904,87 @@ def dashboard_LED_settings():
 """ Site Schedular """
 """ ############## """
 
-# Dashboard user
-@app.route('/dashboard/schedular/', methods=['GET', 'POST'])
+# Dashboard tasks
+@app.route('/dashboard/schedular/', methods=['GET'])
 @login_required
 @superuser_required
 def dashboard_schedular():
-    user_list = User.query.all()
+
+    error_massage = ""
+    set_name = ""
+    set_task = ""
+
+    if request.method == "GET": 
+        # change bridge ip
+        if request.args.get("set_name") is not None:
+            if request.args.get("set_name") == "":
+                error_massage = "Kein Name angegeben"
+                set_task = request.args.get("set_task")
+            elif request.args.get("set_task") == "":
+                error_massage = "Keine Aufgabe angegeben"  
+                set_name = request.args.get("set_name")             
+            else:         
+                name   = request.args.get("set_name")
+                day    = request.args.get("set_day") 
+                hour   = request.args.get("set_hour") 
+                minute = request.args.get("set_minute")
+                task   = request.args.get("set_task")
+                if request.args.get("checkbox"):
+                    repeat = True
+                else:
+                    repeat = False
+
+                check_entry = Schedular.query.filter_by(name=name).first()
+                if check_entry is None:
+                    # find a unused id
+                    for i in range(1,25):
+                        if Schedular.query.filter_by(id=i).first():
+                            pass
+                        else:
+                            # add the new program
+                            task = Schedular(
+                                    id     = i,
+                                    name   = name,
+                                    day    = day,
+                                    hour   = hour,
+                                    minute = minute,
+                                    task   = task,
+                                    repeat = repeat,
+                                )
+                            db.session.add(task)
+                            db.session.commit()
+                            break
+ 
+    schedular_list = Schedular.query.all()
+
+    dropdown_list_days    = ["*", "Mon", "Thu", "Wed", "Thu", "Fri", "Sat", "Sun"]
+    dropdown_list_hours   = ["*", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12",
+                             "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"]
+    dropdown_list_minutes = ["*", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12",
+                             "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", 
+                             "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", 
+                             "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48",
+                             "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59"]
+
     return render_template('dashboard_schedular.html',
-                            name=current_user.username,
-                            user_list=user_list,
+                            dropdown_list_days=dropdown_list_days,
+                            dropdown_list_hours=dropdown_list_hours,
+                            dropdown_list_minutes=dropdown_list_minutes,
+                            schedular_list=schedular_list,
+                            error_massage=error_massage,
+                            set_name=set_name,
+                            set_task=set_task
                             )
+
+
+# Delete tasks
+@app.route('/dashboard/schedular/delete/<int:id>')
+@login_required
+@superuser_required
+def delete_schedular(id):
+    Schedular.query.filter_by(id=id).delete()
+    db.session.commit()
+    return redirect(url_for('dashboard_schedular'))
 
 
 """ ########## """
@@ -936,7 +1007,7 @@ def dashboard_user():
 @app.route('/dashboard/user/role/<int:id>')
 @login_required
 @superuser_required
-def promote(id):
+def promote_user(id):
     entry = User.query.get(id)
     entry.role = "superuser"
     db.session.commit()
@@ -948,7 +1019,7 @@ def promote(id):
 @app.route('/dashboard/user/delete/<int:id>')
 @login_required
 @superuser_required
-def delete(id):
+def delete_user(id):
     User.query.filter_by(id=id).delete()
     db.session.commit()
     user_list = User.query.all()
@@ -974,5 +1045,5 @@ def get_media(filename):
 
 if __name__ == '__main__':
     scheduler.start()
-    app.run()
+    app.run(debug=True)
 
