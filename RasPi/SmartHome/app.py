@@ -34,6 +34,16 @@ from LED_database import *
 from LED_control import *
 
 
+""" ##### """
+""" flask """
+""" ##### """
+
+app = Flask(__name__)
+app.config['SECRET_KEY'] = 'Thisissupposedtobesecret!'
+Bootstrap(app)
+colorpicker(app)
+
+
 """ ######### """
 """ schedular """
 """ ######### """
@@ -68,16 +78,6 @@ def scheduler_job():
                     if entry.repeat == "0":
                         Schedular.query.filter_by(id=entry.id).delete()
                         db.session.commit()
-
-
-""" ##### """
-""" flask """
-""" ##### """
-
-app = Flask(__name__)
-app.config['SECRET_KEY'] = 'Thisissupposedtobesecret!'
-Bootstrap(app)
-colorpicker(app)
 
 
 """ ######## """

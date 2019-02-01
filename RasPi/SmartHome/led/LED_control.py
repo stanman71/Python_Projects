@@ -1,4 +1,3 @@
-from phue import Bridge
 import math
 import sys
 import re
@@ -8,13 +7,11 @@ import time
 """ general settings """
 """ ################ """
 
-# Windows Home
-sys.path.insert(0, "C:/Users/stanman/Desktop/Unterlagen/GIT/Python_Projects/RasPi/SmartHome/led/")
-# Windows Work
+sys.path.insert(0, "C:/Users/stanman/Desktop/Unterlagen/GIT/Python_Projects/RasPi/SmartHome/led")
 sys.path.insert(0, "C:/Users/mstan/GIT/Python_Projects/RasPi/SmartHome/led")
-# RasPi:
 sys.path.insert(0, "/home/pi/Python/SmartHome/led")
 
+from phue import Bridge
 
 """ ################# """
 """ support functions """
