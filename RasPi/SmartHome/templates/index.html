@@ -49,7 +49,7 @@
         </div>      
       {% endif %}      
 
-<!-- LED scene select -->
+<!-- scene selection -->
     
         <div class="panel panel-default">
           <div class="panel-heading text-center"><font color="black"><b> Szenenwahl </b></font></div>
@@ -58,96 +58,18 @@
             <form method="get">
               <table class="table">
                 <tbody>   
-                  {% if scene_name_01 != "" %}
-                  <tr>
-                    <td>
-                      <div class="text-center">
-                      <div class="radio">
-                        <label><input {{value_1}} type="radio" value="1" name="radio_scene">{{ scene_name_01 }}</label>
-                      </div>
-                    </td>
-                  </tr>
-                  {% endif %}
-                  {% if scene_name_02 != "" %}
-                  <tr>
-                    <td>
-                      <div class="text-center">
-                      <div class="radio">
-                        <label><input {{value_2}} type="radio" value="2" name="radio_scene">{{ scene_name_02 }}</label>
-                      </div>                    
-                    </td>
-                  </tr>
-                  {% endif %}               
-                  {% if scene_name_03 != "" %}
-                  <tr>
-                    <td>
-                      <div class="text-center">
-                      <div class="radio">
-                        <label><input {{value_3}} type="radio" value="3" name="radio_scene">{{ scene_name_03 }}</label>
-                      </div>                    
-                    </td>
-                  </tr>
-                  {% endif %}
-                  {% if scene_name_04 != "" %}
-                  <tr>
-                    <td>
-                      <div class="text-center"> 
-                      <div class="radio">
-                        <label><input {{value_4}} type="radio" value="4" name="radio_scene">{{ scene_name_04 }}</label>
-                      </div>                    
-                    </td>
-                  </tr>
-                  {% endif %}
-                  {% if scene_name_05 != "" %}
-                  <tr>
-                    <td>
-                      <div class="text-center">
-                      <div class="radio">
-                        <label><input {{value_5}} type="radio" value="5" name="radio_scene">{{ scene_name_05 }}</label>
-                      </div>                    
-                    </td>
-                  </tr>
-                  {% endif %}     
-                  {% if scene_name_06 != "" %}
-                  <tr>
-                    <td>
-                      <div class="text-center">
-                      <div class="radio">
-                        <label><input {{value_2}} type="radio" value="6" name="radio_scene">{{ scene_name_06 }}</label>
-                      </div>                    
-                    </td>
-                  </tr>
-                  {% endif %}               
-                  {% if scene_name_07 != "" %}
-                  <tr>
-                    <td>
-                      <div class="text-center">
-                      <div class="radio">
-                        <label><input {{value_7}} type="radio" value="3" name="radio_scene">{{ scene_name_07 }}</label>
-                      </div>                    
-                    </td>
-                  </tr>
-                  {% endif %}
-                  {% if scene_name_08 != "" %}
-                  <tr>
-                    <td>
-                      <div class="text-center"> 
-                      <div class="radio">
-                        <label><input {{value_8}} type="radio" value="4" name="radio_scene">{{ scene_name_08 }}</label>
-                      </div>                    
-                    </td>
-                  </tr>
-                  {% endif %}
-                  {% if scene_name_09 != "" %}
-                  <tr>
-                    <td>
-                      <div class="text-center">
-                      <div class="radio">
-                        <label><input {{value_9}} type="radio" value="5" name="radio_scene">{{ scene_name_09 }}</label>
-                      </div>                    
-                    </td>
-                  </tr>
-                  {% endif %}                      
+                  {% for i in range(9) %}
+                    {% if scene_list[i].name != "" %}
+                    <tr>
+                      <td>
+                        <div class="text-center">
+                        <div class="radio">
+                          <label><input {{ value_list[i] }} type="radio" value={{ scene_list[i].id }} name="radio_scene">{{ scene_list[i].name }}</label>
+                        </div>
+                      </td>
+                    </tr>
+                    {% endif %}
+                  {% endfor %}
                   <tr>            
                     <td>
                       <div class="slidecontainer">   
@@ -167,13 +89,15 @@
           </div>  
         </div>  
 
-<!-- program select -->
+<!-- program message -->
 
         {% if program_massage == True %}
           <div class="alert alert-success text-center" role="alert">
             Programm abgeschlossen
           </div>      
         {% endif %}
+
+<!-- program selection -->
 
         <div class="panel panel-default">
           <div class="panel-heading text-center"><font color="black"><b> Programmwahl </b></font></div>

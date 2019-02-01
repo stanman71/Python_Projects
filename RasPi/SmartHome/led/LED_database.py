@@ -389,6 +389,11 @@ def GET_SCENE(Scene):
     return (entries, name)
 
 
+def GET_ALL_SCENES():
+    entries = Scenes.query.all()
+    return (entries)    
+
+
 def SET_SCENE_NAME(Scene, name):
     check_entry = Scenes.query.filter_by(name=name).first()
     if check_entry is None:

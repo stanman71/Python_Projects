@@ -169,20 +169,14 @@ class RegisterForm(FlaskForm):
 @app.route('/', methods=['GET', 'POST'])
 def index():
 
-    connect_bridge = False
+    connect_bridge  = False
+    program_massage = False
     scene = 0
     brightness_global = 100
-    value_1 = ""
-    value_2 = ""
-    value_3 = ""
-    value_4 = ""
-    value_5 = ""
-    value_6 = ""
-    value_7 = ""
-    value_8 = ""
-    value_9 = ""    
-    program_massage = False
-    
+
+    value_list = ["", "", "", "", "", "", "", "", ""]
+
+    # connect to the bridge and an update
     led_update = ""
     led_update = UPDATE_LED()
 
@@ -192,87 +186,27 @@ def index():
             scene = int(request.args.get("radio_scene"))
             brightness_global = request.args.get("brightness_global")
             LED_SET_SCENE(scene,brightness_global)
-
-            if scene == 1:
-                value_1 = "checked = 'on'"
-            if scene == 2:
-                value_2 = "checked = 'on'"
-            if scene == 3:
-                value_3 = "checked = 'on'"
-            if scene == 4:
-                value_4 = "checked = 'on'"
-            if scene == 5:
-                value_5 = "checked = 'on'"        
-            if scene == 6:
-                value_6 = "checked = 'on'"
-            if scene == 7:
-                value_7 = "checked = 'on'"
-            if scene == 8:
-                value_8 = "checked = 'on'"
-            if scene == 9:
-                value_9 = "checked = 'on'"   
+            # add radio check
+            for i in range (1,10):
+                if scene == i:
+                    value_list[i-1] = "checked = 'on'"
         except:
             pass
 
         # select a program   
         try:     
             program = int(request.args.get("radio_program"))
-            program_massage = START_PROGRAM(program)
-            
+            program_massage = START_PROGRAM(program)            
         except:
             pass
 
-    # get scene names
-    scene_name_01 = GET_SCENE(1)[1]
-    if scene_name_01 == None:
-        scene_name_01 = ""
-    scene_name_02 = GET_SCENE(2)[1]
-    if scene_name_02 == None:
-        scene_name_02 = ""    
-    scene_name_03 = GET_SCENE(3)[1]
-    if scene_name_03 == None:
-        scene_name_03 = ""
-    scene_name_04 = GET_SCENE(4)[1]
-    if scene_name_04 == None:
-        scene_name_04 = ""
-    scene_name_05 = GET_SCENE(5)[1]
-    if scene_name_05 == None:
-        scene_name_05 = ""
-    scene_name_06 = GET_SCENE(6)[1]
-    if scene_name_06 == None:
-        scene_name_06 = ""    
-    scene_name_07 = GET_SCENE(7)[1]
-    if scene_name_07 == None:
-        scene_name_07 = ""
-    scene_name_08 = GET_SCENE(8)[1]
-    if scene_name_08 == None:
-        scene_name_08 = ""
-    scene_name_09 = GET_SCENE(9)[1]
-    if scene_name_09 == None:
-        scene_name_09 = ""
-
+    scene_list   = GET_ALL_SCENES()
     program_list = GET_ALL_PROGRAMS()
 
     return render_template('index.html', 
                             led_update=led_update,
-                            scene_name_01=scene_name_01,
-                            scene_name_02=scene_name_02,
-                            scene_name_03=scene_name_03,
-                            scene_name_04=scene_name_04,
-                            scene_name_05=scene_name_05,
-                            scene_name_06=scene_name_06,
-                            scene_name_07=scene_name_07,
-                            scene_name_08=scene_name_08,
-                            scene_name_09=scene_name_09,
-                            value_1=value_1,
-                            value_2=value_2,
-                            value_3=value_3,
-                            value_4=value_4,
-                            value_5=value_5,
-                            value_6=value_6,
-                            value_7=value_7,
-                            value_8=value_8,
-                            value_9=value_9,                            
+                            scene_list=scene_list,
+                            value_list=value_list,                         
                             brightness_global=brightness_global,
                             program_list=program_list,
                             program_massage=program_massage
@@ -935,8 +869,9 @@ def dashboard_schedular():
     set_task = ""
 
     if request.method == "GET": 
-        # change bridge ip
+        # add new task
         if request.args.get("set_name") is not None:
+            # controll name and task input
             if request.args.get("set_name") == "":
                 error_massage = "Kein Name angegeben"
                 set_task = request.args.get("set_task")
@@ -944,6 +879,7 @@ def dashboard_schedular():
                 error_massage = "Keine Aufgabe angegeben"  
                 set_name = request.args.get("set_name")             
             else:         
+                # get database informations
                 name   = request.args.get("set_name")
                 day    = request.args.get("set_day") 
                 hour   = request.args.get("set_hour") 
@@ -954,6 +890,7 @@ def dashboard_schedular():
                 else:
                     repeat = False
 
+                # name exist ?
                 check_entry = Schedular.query.filter_by(name=name).first()
                 if check_entry is None:
                     # find a unused id
@@ -961,7 +898,7 @@ def dashboard_schedular():
                         if Schedular.query.filter_by(id=i).first():
                             pass
                         else:
-                            # add the new program
+                            # add the new task
                             task = Schedular(
                                     id     = i,
                                     name   = name,
@@ -977,6 +914,7 @@ def dashboard_schedular():
  
     schedular_list = Schedular.query.all()
 
+    # dropdown values
     dropdown_list_days    = ["*", "Mon", "Thu", "Wed", "Thu", "Fri", "Sat", "Sun"]
     dropdown_list_hours   = ["*", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12",
                              "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"]
