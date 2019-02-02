@@ -54,13 +54,19 @@
   <div class="row">
     <div class="col">
 
-<!-- LED error massage -->
+<!-- LED error massages -->
 
     {% if led_update == False %}
     <div class="alert alert-danger" role="alert">
       Keine Verbindung zur Bridge
     </div>      
     {% endif %}     
+
+    {% if error_massage != "" %}
+      <div class="alert alert-danger" role="alert">
+        {{ error_massage }}
+      </div>      
+    {% endif %}
 
 <!-- scene navs -->
 

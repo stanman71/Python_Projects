@@ -398,6 +398,9 @@ def SET_SCENE_NAME(Scene, name):
         entry = Scenes.query.filter_by(id=Scene).first()
         entry.name = name
         db.session.commit()
+        return ("")
+    else:
+        return ("Name schon vergeben")
 
 
 def SET_SCENE_COLOR(Scene, rgb_scene):
@@ -581,7 +584,9 @@ def NEW_PROGRAM(name):
                     )
                 db.session.add(program)
                 db.session.commit()
-                break
+                return ("")
+    else:
+        return ("Name schon vergeben")
 
 
 def GET_DROPDOWN_LIST_PROGRAMS():

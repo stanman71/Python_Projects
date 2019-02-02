@@ -41,6 +41,15 @@
       <div class="col">  
         <br>
         <br>
+
+<!-- error massage -->
+
+        {% if error_massage != "" %}
+          <div class="alert alert-danger" role="alert">
+            {{ error_massage }}
+          </div>      
+        {% endif %}
+
         <div class="panel panel-default">
           <div class="panel-heading text-center"><font color="black"><b> Sign up </b></font></div>
           <div class="panel-body">
