@@ -92,20 +92,20 @@ def LED_SET_SCENE(scene, brightness_global = 100):
         if entries[0] is not None:
             entries = entries[0]
             for entry in entries:
-                    # set rgb 
-                    xy = RGBtoXY(entry.color_red, entry.color_green, entry.color_blue)
-                    lights[entry.LED_id - 1].on = True
-                    lights[entry.LED_id - 1].xy = xy
-                
-                    # set brightness
+                    # add global brightness setting                
                     brightness = entry.brightness
-                    # add global brightness setting
                     brightness = int((brightness * (int(brightness_global)) / 100))
                     if brightness > 10:
+                        # set brightness
                         lights[entry.LED_id - 1].brightness = brightness
+                        # set rgb 
+                        xy = RGBtoXY(entry.color_red, entry.color_green, entry.color_blue)
+                        lights[entry.LED_id - 1].on = True
+                        lights[entry.LED_id - 1].xy = xy
                     else:
                         # turn LED off if brightness < 10
                         lights[entry.LED_id - 1].on = False     
+                  
     except:
         return False          
 

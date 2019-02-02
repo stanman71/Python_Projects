@@ -15,7 +15,7 @@ import datetime
 """ IMPORTANT """
 """ ######### """
 
-""" For each new divice connected to the hue bridge press the bridge button first !!! """
+""" For each new device connected to the hue bridge press the bridge round button first !!! """
 
 
 """ ################# """
