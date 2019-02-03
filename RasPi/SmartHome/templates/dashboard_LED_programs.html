@@ -107,6 +107,7 @@
 
           <table class="table">
             <thead>
+              <tr></tr>
               <tr>
                 <th>Eingabe</th>
                 <th>Erklärung</th>
@@ -125,6 +126,7 @@
                 <td>pause:30</td>
                 <td>Pause für 30 Sekunden</td>
               </tr>
+              <tr><td></td><td></td></tr>
             </tbody>
           </table>
 
@@ -134,6 +136,7 @@
         <form method="GET" class="verticalform">
           <input type="text" name="get_rgb_{{ program.id }}" class="form-control rgb" value="{{ rgb }}"/>
           <input type="submit" class="btn btn-secondary" value="RGB-Werte ermitteln" />  
+          <br>
           <br>
           <div class="form-group">
             <textarea class="form-control rounded-0" rows="1">{{ rgb }}</textarea>
