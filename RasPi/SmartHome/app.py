@@ -51,42 +51,6 @@ Bootstrap(app)
 colorpicker(app)
 
 
-""" ######### """
-""" schedular """
-""" ######### """
-
-from flask_apscheduler import APScheduler
-
-scheduler = APScheduler()
-
-@scheduler.task('cron', id='scheduler_job', minute='*')
-def scheduler_job():
-    now    = datetime.datetime.now()
-    day    = now.strftime('%a')
-    hour   = now.strftime('%H')
-    minute = now.strftime('%M')
-
-    entries = Schedular.query.all()
-
-    for entry in entries:
-        if entry.day == day or entry.day == "*":
-            if entry.hour == hour or entry.hour == "*":
-                if entry.minute == minute or entry.minute == "*":
-                    print(entry.name)
-                    # start scene
-                    if "start_Szene" in entry.task:
-                        task = entry.task.split(":")
-                        LED_SET_SCENE(int(task[1]))
-                    # start program
-                    if "start_Programm" in entry.task:
-                        task = entry.task.split(":")
-                        START_PROGRAM(int(task[1]))                    
-                    # remove task without repeat
-                    if entry.repeat == "0":
-                        Schedular.query.filter_by(id=entry.id).delete()
-                        db.session.commit()
-
-
 """ ######## """
 """ database """
 """ ######## """
@@ -131,6 +95,44 @@ if User.query.filter_by(username='default').first() is None:
     )
     db.session.add(user)
     db.session.commit()
+
+
+""" ######### """
+""" schedular """
+""" ######### """
+
+from flask_apscheduler import APScheduler
+
+scheduler = APScheduler()
+
+@scheduler.task('cron', id='scheduler_job', minute='*')
+def scheduler_job():
+    now    = datetime.datetime.now()
+    day    = now.strftime('%a')
+    hour   = now.strftime('%H')
+    minute = now.strftime('%M')
+
+    #reload database
+    db.session.expire_all()
+    entries = Schedular.query.all()
+
+    for entry in entries:
+        if entry.day == day or entry.day == "*":
+            if entry.hour == hour or entry.hour == "*":
+                if entry.minute == minute or entry.minute == "*":
+                    print(entry.name)
+                    # start scene
+                    if "start_Szene" in entry.task:
+                        task = entry.task.split(":")
+                        LED_SET_SCENE(int(task[1]))
+                    # start program
+                    if "start_Programm" in entry.task:
+                        task = entry.task.split(":")
+                        START_PROGRAM(int(task[1]))                    
+                    # remove task without repeat
+                    if entry.repeat == "0":
+                        Schedular.query.filter_by(id=entry.id).delete()
+                        db.session.commit()
 
 
 """ ############### """
