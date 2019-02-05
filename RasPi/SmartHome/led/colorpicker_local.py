@@ -30,8 +30,9 @@ class colorpicker(object):
         html = ""
         for i, n in enumerate(['js', 'css']):
 
-            # IMPORTANT
-            # Update the links for your settings
+            # IMPORTANT: Update the links 
+            # Windows: 127.0.0.1
+            # RasPi: IP of the RasPi 
 
             links = ['http://127.0.0.1:5000/get_media/spectrum.css',
                      'http://127.0.0.1:5000/get_media/spectrum.js'] 
