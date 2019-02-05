@@ -1,7 +1,7 @@
 {% extends "bootstrap/base.html" %}
 
 {% block title %}
-  LED Einstellungen
+  Dashboard
 {% endblock %}
 
 {% block styles %}
@@ -50,48 +50,74 @@
   <div class="row">
     <div class="col">
 
-<!-- LED error massage -->
+<!-- error message -->
 
-    {% if led_update == False %}
-    <div class="alert alert-danger" role="alert">
-      Keine Verbindung zur Bridge
-    </div>      
-    {% endif %}     
+      {% if error_massage != "" %}
+      <div class="alert alert-danger" role="alert">
+        {{ error_massage }}
+      </div>      
+      {% endif %}
 
-<!-- HUE settings -->
+<!-- add new plant -->
 
       <div class="panel panel-default">
-        <div class="panel-heading"><font color="black"><b>Einstellungen</b></font></div>
+        <div class="panel-heading"><font color="black"><b>Bewässerung</b></font></div>
           <div class="panel-body">      
           <form method="GET">
-            <b>HUE Bridge IP:</b>
-            <br>
-            <br>            
+            <b>Pflanze hinzufügen</b>
+            <br>       
+            <br>          
             <div class="form-group">
-              <input type="text" class="form-control" name="bridge_ip" value="{% if ip != None %}{{ ip }}{% endif %}" />
-            </div>
-              <input type="submit" class="btn btn-secondary" value="IP ändern" />
+              <input type="text" class="form-control" name=name value="" />
+              </div>
+                <select class="btn btn-secondary dropdown-toggle" name="set_sensor">
+                  {% for each in dropdown_list_sensor %}
+                  <option value="{{each.id}}"> {{ each.name }} </option>
+                  {% endfor %}
+                </select>    
+              <input type="submit" class="btn btn-secondary" value="Pflanze hinzufügen" />
               <br>
-          </form>   
-          <br>
-          <br> 
+            </form>   
+          </div>  
+        </div>
 
-<!-- LED settings -->
-        
+<!-- plants table -->
 
-          <b>LEDs:</b>
-          <br>
-          <br>  
+        <div class="panel panel-default">
+          <div class="panel-body">     
           <table class="table">
             <thead>
-              <th scope="col">ID</th>                        
-              <th scope="col">Name</th> 
+              <th scope="col">Name</th>                        
+              <th scope="col">Sensor</th>
+              <th scope="col" colspan="2">Feuchtigkeit</th>  
+              <th scope="col">Wasser (ml)</th> 
             </thead>
             <tbody> 
-              {% for entry in LED_list %}
+              {% for entry in plants_list %}
               <tr>
-                <td>{{ entry.id }}</td> 
                 <td>{{ entry.name }}</td> 
+                <td>{{ entry.sensor_name.name }}</td> 
+                <td>{{ entry.moisture }}</td> 
+                <td>
+                  <form method="GET" class="slidecontainer"> 
+                    <div class="col-md-10 text-center"> 
+                      <input type="range" class="slider" name="moisture_{{ entry.id }}" min="0" max="250" value="{{ entry.moisture }}" />
+                      <br>
+                      <input type="submit" class="btn btn-secondary" value="Feuchtigkeit ändern"/>
+                    </div> 
+                  </form>
+                </td>
+                <td>{{ entry.water_volume }}</td>
+                <td>
+                  <form method="GET" class="slidecontainer"> 
+                    <div class="col-md-10 text-center"> 
+                      <input type="range" class="slider" name="water_{{ entry.id }}" min="0" max="250" value="{{ entry.water_volume }}" />
+                      <br>
+                      <input type="submit" class="btn btn-secondary" value="Wassermenge ändern"/>
+                    </div> 
+                  </form>
+                </td>
+                <td><a href="/dashboard/plants/delete/{{ entry.id }}"><font color="red"><b>löschen</b></font></a></td>   
               </tr>
               {% endfor %}
             </tbody>
@@ -101,5 +127,6 @@
     </div>
   </div>    
 </div>
+
 
 {% endblock %}

@@ -37,6 +37,8 @@
           </ul>
         </li>
         <li><a href="{{ url_for('dashboard_schedular') }}"><span class="glyphicon glyphicon-calendar"></span> Aufgabenplanung</a></li>
+        <li><a href="{{ url_for('dashboard_plants') }}"><span class="glyphicon glyphicon-leaf"></span> Bewässerung</a></li>
+        <li><a href="{{ url_for('dashboard_sensors') }}"><span class="glyphicon glyphicon-scale"></span> Sensoren</a></li>
         <li><a href="{{ url_for('dashboard_user') }}"><span class="glyphicon glyphicon-user"></span> Benutzer</a></li>
       </ul>
     </div>
@@ -56,12 +58,11 @@
         </div>      
       {% endif %}
 
+<!-- instructions -->
+
       <div class="panel panel-default">
         <div class="panel-heading"><font color="black"><b>Aufgabenplanung</b></font></div>
           <div class="panel-body">      
-
-<!-- instructions -->
-
           <table class="table">
             <thead>
               <tr><td></td><td></td></tr>
