@@ -22,7 +22,7 @@ from LED_control import GET_LED_NAME
 """ ################# """
 
 # connect to database
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://python:python@localhost/raspi'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///smarthome.sqlite3'
 db = SQLAlchemy(app)
 
 # define table structure

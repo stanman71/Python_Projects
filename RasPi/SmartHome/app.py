@@ -27,10 +27,10 @@ sys.path.insert(0, "C:/Users/mstan/GIT/Python_Projects/RasPi/SmartHome/led")
 sys.path.insert(0, "/home/pi/Python/SmartHome/led")
 
 # Windows Home
-#PATH_CSS = 'C:/Users/stanman/Desktop/Unterlagen/GIT/Python_Projects/RasPi/SmartHome/static/CDNJS/'
+PATH_CSS = 'C:/Users/stanman/Desktop/Unterlagen/GIT/Python_Projects/RasPi/SmartHome/static/CDNJS/'
 
 # Windows Work
-PATH_CSS = 'C:/Users/mstan/GIT/Python_Projects/RasPi/SmartHome/static/CDNJS/'
+#PATH_CSS = 'C:/Users/mstan/GIT/Python_Projects/RasPi/SmartHome/static/CDNJS/'
 
 # RasPi:
 #PATH_CSS = '/home/pi/Python/SmartHome/static/CDNJS/'
@@ -56,7 +56,7 @@ colorpicker(app)
 """ ######## """
 
 # connect to database
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://python:python@localhost/raspi'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///smarthome.sqlite3'
 db = SQLAlchemy(app)
 
 login_manager = LoginManager()
@@ -120,6 +120,12 @@ class Sensor_GPIO_A04(db.Model):
     value     = db.Column(db.Integer)    
     time      = db.Column(db.Date, onupdate=datetime.datetime.now)
 
+class Sensor_GPIO_A05(db.Model):
+    __tablename__ = 'sensor_gpio_a05'
+    id        = db.Column(db.Integer, primary_key=True, autoincrement = True)
+    value     = db.Column(db.Integer)    
+    time      = db.Column(db.Date, onupdate=datetime.datetime.now)
+
 class Sensor_MQTT_01(db.Model):
     __tablename__ = 'sensor_mqtt_01'
     id        = db.Column(db.Integer, primary_key=True, autoincrement = True)
@@ -138,12 +144,6 @@ class Sensor_MQTT_03(db.Model):
     value     = db.Column(db.Integer)    
     time      = db.Column(db.Date, onupdate=datetime.datetime.now)    
 
-class Sensor_MQTT_04(db.Model):
-    __tablename__ = 'sensor_mqtt_04'
-    id        = db.Column(db.Integer, primary_key=True, autoincrement = True)
-    value     = db.Column(db.Integer)    
-    time      = db.Column(db.Date, onupdate=datetime.datetime.now)
-
 # create all database tables
 db.create_all()
 
@@ -160,17 +160,17 @@ if User.query.filter_by(username='default').first() is None:
 
 # create sensors
 if Sensor.query.filter_by().first() is None:   
-    for i in range(1,5):
+    for i in range(1,6):
         sensor = Sensor(
             id   = i,
             name = "GPIO_A0" + str(i),
         )
         db.session.add(sensor)
      
-    for i in range(5,9):
+    for i in range(6,9):
         sensor = Sensor(
             id   = i,
-            name = "MQTT_0" + str(i - 4),
+            name = "MQTT_0" + str(i - 5),
         )
         db.session.add(sensor)
         db.session.commit()
@@ -207,7 +207,11 @@ def scheduler_job():
                     # start program
                     if "start_Programm" in entry.task:
                         task = entry.task.split(":")
-                        START_PROGRAM(int(task[1]))                    
+                        START_PROGRAM(int(task[1]))
+                    # turn off LEDs
+                    if "turn_off" in entry.task:
+                        task = entry.task.split(":")
+                        LED_TURNOFF(int(task[1]))                                                     
                     # remove task without repeat
                     if entry.repeat == "0":
                         Schedular.query.filter_by(id=entry.id).delete()
@@ -1210,14 +1214,14 @@ def dashboard_sensors():
                 sensor_values = Sensor_GPIO_A03.query.all()
             if sensor_name == "GPIO_A04":
                 sensor_values = Sensor_GPIO_A04.query.all()
+            if sensor_name == "GPIO_A05":
+                sensor_values = Sensor_GPIO_A05.query.all()
             if sensor_name == "MQTT_01":
                 sensor_values = Sensor_MQTT_01.query.all()
             if sensor_name == "MQTT_02":
                 sensor_values = Sensor_MQTT_02.query.all()
             if sensor_name == "MQTT_03":
                 sensor_values = Sensor_MQTT_03.query.all()
-            if sensor_name == "MQTT_04":
-                sensor_values = Sensor_MQTT_04.query.all()
             
             if sensor_values == []:
                 sensor_values = None
@@ -1237,14 +1241,14 @@ def dashboard_sensors():
                 Sensor_GPIO_A03.query.delete()
             if sensor_name == "GPIO_A04":
                 Sensor_GPIO_A04.query.delete()
+            if sensor_name == "GPIO_A05":
+                Sensor_GPIO_A05.query.delete()
             if sensor_name == "MQTT_01":
                 Sensor_MQTT_01.query.delete()
             if sensor_name == "MQTT_02":
                 Sensor_MQTT_02.query.delete()
             if sensor_name == "MQTT_03":
                 Sensor_MQTT_03.query.delete()
-            if sensor_name == "MQTT_04":
-                Sensor_MQTT_04.query.delete()
 
             db.session.commit() 
             error_massage = "Werte gelöscht"

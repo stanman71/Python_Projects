@@ -180,3 +180,28 @@ def START_PROGRAM(id):
         return False
 
     return True
+
+
+""" ############# """
+""" LED turn off  """
+""" ############# """
+
+def LED_TURNOFF(break_value):
+    b = CONNECT_BRIDGE()
+    try:
+        lights = b.get_light_objects('list')
+
+        for light in lights:
+            # LED on ?
+            if light.on == True: 
+                # turn off the light
+                while light.brightness > 30:
+                    brightness = int(light.brightness/1.1)
+                    if brightness < 30:
+                        light.on = False
+                        break 
+                    else:
+                        light.brightness = brightness
+                        time.sleep(break_value)               
+    except:
+        pass
