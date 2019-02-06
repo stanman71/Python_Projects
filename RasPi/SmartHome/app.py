@@ -1251,7 +1251,7 @@ def dashboard_sensors():
                 Sensor_MQTT_03.query.delete()
 
             db.session.commit() 
-            error_massage = "Werte gelöscht"
+            error_massage = "Werte geloescht"
 
     print(sensor_values)
     dropdown_list_sensor = Sensor.query.all()
