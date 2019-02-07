@@ -23,17 +23,20 @@ import datetime
 """ ################# """
 
 sys.path.insert(0, "C:/Users/stanman/Desktop/Unterlagen/GIT/Python_Projects/RasPi/SmartHome/led")
+sys.path.insert(0, "C:/Users/stanman/Desktop/Unterlagen/GIT/Python_Projects/RasPi/SmartHome/sensors")
 sys.path.insert(0, "C:/Users/mstan/GIT/Python_Projects/RasPi/SmartHome/led")
+sys.path.insert(0, "C:/Users/mstan/GIT/Python_Projects/RasPi/SmartHome/sensors")
 sys.path.insert(0, "/home/pi/Python/SmartHome/led")
+sys.path.insert(0, "/home/pi/Python/SmartHome/sensors")
 
 # Windows Home
 #PATH_CSS = 'C:/Users/stanman/Desktop/Unterlagen/GIT/Python_Projects/RasPi/SmartHome/static/CDNJS/'
 
 # Windows Work
-PATH_CSS = 'C:/Users/mstan/GIT/Python_Projects/RasPi/SmartHome/static/CDNJS/'
+#PATH_CSS = 'C:/Users/mstan/GIT/Python_Projects/RasPi/SmartHome/static/CDNJS/'
 
 # RasPi:
-#PATH_CSS = '/home/pi/Python/SmartHome/static/CDNJS/'
+PATH_CSS = '/home/pi/Python/SmartHome/static/CDNJS/'
 
 
 from colorpicker_local import colorpicker
@@ -139,7 +142,7 @@ if Sensor.query.filter_by().first() is None:
 """ ######### """
 
 from flask_apscheduler import APScheduler
-from sensors.sensors_control import READ_SENSOR, WATERING_PLANTS
+from sensors_control import READ_SENSOR, WATERING_PLANTS
 
 scheduler = APScheduler()
 
@@ -1163,7 +1166,7 @@ def delete_plant(id):
 @login_required
 def dashboard_sensors():
 
-    from sensors.sensors_control import GET_SENSOR_VALUES, DELETE_SENSOR_VALUES
+    from sensors_control import GET_SENSOR_VALUES, DELETE_SENSOR_VALUES
 
     sensor_values = None
     sensor_name = ""

@@ -196,7 +196,7 @@ def LED_TURNOFF(break_value):
             if light.on == True: 
                 # turn off the light
                 while light.brightness > 30:
-                    brightness = int(light.brightness/1.1)
+                    brightness = int(light.brightness-20)
                     if brightness < 30:
                         light.on = False
                         break 

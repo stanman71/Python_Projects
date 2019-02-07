@@ -34,8 +34,8 @@ class colorpicker(object):
             # Windows: 127.0.0.1
             # RasPi: IP of the RasPi 
 
-            links = ['http://127.0.0.1:5000/get_media/spectrum.css',
-                     'http://127.0.0.1:5000/get_media/spectrum.js'] 
+            links = ['http://192.168.1.40:5000/get_media/spectrum.css',
+                     'http://192.168.1.40:5000/get_media/spectrum.js'] 
             tags = [
             '<script src="%s"></script>\n',
             '<link href="%s" rel="stylesheet">\n'

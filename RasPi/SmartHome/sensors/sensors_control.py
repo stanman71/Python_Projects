@@ -158,7 +158,7 @@ def DELETE_SENSOR_VALUES(id):
         Sensor_MQTT_02.query.delete()
 
     db.session.commit() 
-    return "Werte gelöscht"
+    return "Werte geloescht"
 
 def READ_SENSOR(name):
     pass
