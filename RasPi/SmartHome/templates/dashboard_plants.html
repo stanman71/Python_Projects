@@ -63,18 +63,23 @@
       <div class="panel panel-default">
         <div class="panel-heading"><font color="black"><b>Bewässerung</b></font></div>
           <div class="panel-body">      
-          <form method="GET">
-            <b>Pflanze hinzufügen</b>
-            <br>       
-            <br>          
+          <form method="GET">   
             <div class="form-group">
               <input type="text" class="form-control" name=name value="" />
               </div>
+              Sensor / Pumpe  
                 <select class="btn btn-secondary dropdown-toggle" name="set_sensor">
                   {% for each in dropdown_list_sensor %}
                   <option value="{{each.id}}"> {{ each.name }} </option>
                   {% endfor %}
-                </select>    
+                </select>   
+                <select class="btn btn-secondary dropdown-toggle" name="set_pump">
+                  {% for each in dropdown_list_pump %}
+                  <option value="{{each}}"> {{ each }} </option>
+                  {% endfor %}
+                </select>   
+                <br> 
+                <br>                 
               <input type="submit" class="btn btn-secondary" value="Pflanze hinzufügen" />
               <br>
             </form>   
@@ -89,14 +94,16 @@
             <thead>
               <th scope="col">Name</th>                        
               <th scope="col">Sensor</th>
-              <th scope="col" colspan="2">Feuchtigkeit</th>  
-              <th scope="col">Wasser (ml)</th> 
+              <th scope="col">Pumpe</th>
+              <th scope="col" colspan="2">min. Feuchtigkeit</th>  
+              <th scope="col" colspan="2">Wassermenge (ml)</th> 
             </thead>
             <tbody> 
               {% for entry in plants_list %}
               <tr>
                 <td>{{ entry.name }}</td> 
                 <td>{{ entry.sensor_name.name }}</td> 
+                <td>{{ entry.pump_id }}</td>
                 <td>{{ entry.moisture }}</td> 
                 <td>
                   <form method="GET" class="slidecontainer"> 

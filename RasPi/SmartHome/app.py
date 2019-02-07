@@ -27,10 +27,10 @@ sys.path.insert(0, "C:/Users/mstan/GIT/Python_Projects/RasPi/SmartHome/led")
 sys.path.insert(0, "/home/pi/Python/SmartHome/led")
 
 # Windows Home
-PATH_CSS = 'C:/Users/stanman/Desktop/Unterlagen/GIT/Python_Projects/RasPi/SmartHome/static/CDNJS/'
+#PATH_CSS = 'C:/Users/stanman/Desktop/Unterlagen/GIT/Python_Projects/RasPi/SmartHome/static/CDNJS/'
 
 # Windows Work
-#PATH_CSS = 'C:/Users/mstan/GIT/Python_Projects/RasPi/SmartHome/static/CDNJS/'
+PATH_CSS = 'C:/Users/mstan/GIT/Python_Projects/RasPi/SmartHome/static/CDNJS/'
 
 # RasPi:
 #PATH_CSS = '/home/pi/Python/SmartHome/static/CDNJS/'
@@ -90,59 +90,17 @@ class Plants(db.Model):
     sensor_name  = db.relationship('Sensor')
     moisture     = db.Column(db.Integer)    
     water_volume = db.Column(db.Integer)
+    pump_id      = db.Column(db.Integer)
 
 class Sensor(db.Model):
     __tablename__ = 'sensor'
     id   = db.Column(db.Integer, primary_key=True, autoincrement = True)
     name = db.Column(db.String(50), unique=True)
 
-class Sensor_GPIO_A01(db.Model):
-    __tablename__ = 'sensor_gpio_a01'
-    id        = db.Column(db.Integer, primary_key=True, autoincrement = True)
-    value     = db.Column(db.Integer)    
-    time      = db.Column(db.Date, onupdate=datetime.datetime.now)
 
-class Sensor_GPIO_A02(db.Model):
-    __tablename__ = 'sensor_gpio_a02'
-    id        = db.Column(db.Integer, primary_key=True, autoincrement = True)
-    value     = db.Column(db.Integer)    
-    time      = db.Column(db.Date, onupdate=datetime.datetime.now)
-
-class Sensor_GPIO_A03(db.Model):
-    __tablename__ = 'sensor_gpio_a03'
-    id        = db.Column(db.Integer, primary_key=True, autoincrement = True)
-    value     = db.Column(db.Integer)    
-    time      = db.Column(db.Date, onupdate=datetime.datetime.now)
-
-class Sensor_GPIO_A04(db.Model):
-    __tablename__ = 'sensor_gpio_a04'
-    id        = db.Column(db.Integer, primary_key=True, autoincrement = True)
-    value     = db.Column(db.Integer)    
-    time      = db.Column(db.Date, onupdate=datetime.datetime.now)
-
-class Sensor_GPIO_A05(db.Model):
-    __tablename__ = 'sensor_gpio_a05'
-    id        = db.Column(db.Integer, primary_key=True, autoincrement = True)
-    value     = db.Column(db.Integer)    
-    time      = db.Column(db.Date, onupdate=datetime.datetime.now)
-
-class Sensor_MQTT_01(db.Model):
-    __tablename__ = 'sensor_mqtt_01'
-    id        = db.Column(db.Integer, primary_key=True, autoincrement = True)
-    value     = db.Column(db.Integer)    
-    time      = db.Column(db.Date, onupdate=datetime.datetime.now)
-
-class Sensor_MQTT_02(db.Model):
-    __tablename__ = 'sensor_mqtt_02'
-    id        = db.Column(db.Integer, primary_key=True, autoincrement = True)
-    value     = db.Column(db.Integer)    
-    time      = db.Column(db.Date, onupdate=datetime.datetime.now)
-
-class Sensor_MQTT_03(db.Model):
-    __tablename__ = 'sensor_mqtt_03'
-    id        = db.Column(db.Integer, primary_key=True, autoincrement = True)
-    value     = db.Column(db.Integer)    
-    time      = db.Column(db.Date, onupdate=datetime.datetime.now)    
+""" ############################## """
+""" database create default values """
+""" ############################## """
 
 # create all database tables
 db.create_all()
@@ -160,17 +118,17 @@ if User.query.filter_by(username='default').first() is None:
 
 # create sensors
 if Sensor.query.filter_by().first() is None:   
-    for i in range(1,6):
+    for i in range(0,8):
         sensor = Sensor(
             id   = i,
             name = "GPIO_A0" + str(i),
         )
         db.session.add(sensor)
      
-    for i in range(6,9):
+    for i in range(9,12):
         sensor = Sensor(
             id   = i,
-            name = "MQTT_0" + str(i - 5),
+            name = "MQTT_0" + str(i - 9),
         )
         db.session.add(sensor)
         db.session.commit()
@@ -181,6 +139,7 @@ if Sensor.query.filter_by().first() is None:
 """ ######### """
 
 from flask_apscheduler import APScheduler
+from sensors.sensors_control import READ_SENSOR, WATERING_PLANTS
 
 scheduler = APScheduler()
 
@@ -201,17 +160,25 @@ def scheduler_job():
                 if entry.minute == minute or entry.minute == "*":
                     print(entry.name)
                     # start scene
-                    if "start_Szene" in entry.task:
+                    if "start_scene" in entry.task:
                         task = entry.task.split(":")
                         LED_SET_SCENE(int(task[1]))
                     # start program
-                    if "start_Programm" in entry.task:
+                    if "start_program" in entry.task:
                         task = entry.task.split(":")
                         START_PROGRAM(int(task[1]))
                     # turn off LEDs
-                    if "turn_off" in entry.task:
+                    if "turn_LEDs_off" in entry.task:
                         task = entry.task.split(":")
-                        LED_TURNOFF(int(task[1]))                                                     
+                        LED_TURNOFF(int(task[1])) 
+                    # read sensor
+                    if "read_sensor" in entry.task:
+                        task = entry.task.split(":")
+                        READ_SENSOR(task[1])  
+                    # watering plants
+                    if "watering_plants" in entry.task:
+                        task = entry.task.split(":")
+                        WATERING_PLANTS()                                                                                                 
                     # remove task without repeat
                     if entry.repeat == "0":
                         Schedular.query.filter_by(id=entry.id).delete()
@@ -580,7 +547,6 @@ def dashboard_LED_scene_04():
                             active04="active",
                             error_massage=error_massage
                             )
-
 
 
 # LED scene 05
@@ -1128,6 +1094,7 @@ def dashboard_plants():
                 # get informations
                 name      = request.args.get("name")
                 sensor_id = request.args.get("set_sensor")
+                pump_id   = request.args.get("set_pump")
 
                 # name exist ?
                 check_entry = Plants.query.filter_by(name=name).first()
@@ -1142,6 +1109,7 @@ def dashboard_plants():
                                     id           = i,
                                     name         = name,
                                     sensor_id    = sensor_id,
+                                    pump_id      = pump_id,
                                     moisture     = 0,
                                     water_volume = 0,
                                 )
@@ -1165,10 +1133,12 @@ def dashboard_plants():
                 db.session.commit()        
 
     dropdown_list_sensor = Sensor.query.all()
+    dropdown_list_pump = [0, 1, 2, 3]
     plants_list = Plants.query.all()
 
     return render_template('dashboard_plants.html',
                             dropdown_list_sensor=dropdown_list_sensor,
+                            dropdown_list_pump=dropdown_list_pump,
                             plants_list=plants_list,
                             moisture=moisture,
                             water_volume=water_volume,
@@ -1193,6 +1163,8 @@ def delete_plant(id):
 @login_required
 def dashboard_sensors():
 
+    from sensors.sensors_control import GET_SENSOR_VALUES, DELETE_SENSOR_VALUES
+
     sensor_values = None
     sensor_name = ""
     sensor_id = ""
@@ -1203,57 +1175,15 @@ def dashboard_sensors():
         # get sensor values
         if request.args.get("get_sensor") is not None:               
             sensor_id = request.args.get("get_sensor")
-            sensor_name = Sensor.query.filter_by(id=sensor_id).first()
-            sensor_name = sensor_name.name
-
-            if sensor_name == "GPIO_A01":
-                sensor_values = Sensor_GPIO_A01.query.all()
-            if sensor_name == "GPIO_A02":
-                sensor_values = Sensor_GPIO_A02.query.all()
-            if sensor_name == "GPIO_A03":
-                sensor_values = Sensor_GPIO_A03.query.all()
-            if sensor_name == "GPIO_A04":
-                sensor_values = Sensor_GPIO_A04.query.all()
-            if sensor_name == "GPIO_A05":
-                sensor_values = Sensor_GPIO_A05.query.all()
-            if sensor_name == "MQTT_01":
-                sensor_values = Sensor_MQTT_01.query.all()
-            if sensor_name == "MQTT_02":
-                sensor_values = Sensor_MQTT_02.query.all()
-            if sensor_name == "MQTT_03":
-                sensor_values = Sensor_MQTT_03.query.all()
-            
-            if sensor_values == []:
-                sensor_values = None
-                error_massage = "Keine Werte vorhanden"
+            sensor_values = GET_SENSOR_VALUES(sensor_id)
+            if sensor_values == None:
+                error_massage = "Keine Daten vorhanden"         
 
         # delete the values of a selected sensor
-        delete_values = request.args.get("delete_values") 
-        if delete_values is not None:
-            sensor_name = Sensor.query.filter_by(id=int(delete_values)).first()
-            sensor_name = sensor_name.name
+        if request.args.get("delete_values") is not None:
+            delete_values = request.args.get("delete_values") 
+            error_massage = DELETE_SENSOR_VALUES(delete_values)
 
-            if sensor_name == "GPIO_A01":
-                Sensor_GPIO_A01.query.delete()
-            if sensor_name == "GPIO_A02":
-                Sensor_GPIO_A02.query.delete()
-            if sensor_name == "GPIO_A03":
-                Sensor_GPIO_A03.query.delete()
-            if sensor_name == "GPIO_A04":
-                Sensor_GPIO_A04.query.delete()
-            if sensor_name == "GPIO_A05":
-                Sensor_GPIO_A05.query.delete()
-            if sensor_name == "MQTT_01":
-                Sensor_MQTT_01.query.delete()
-            if sensor_name == "MQTT_02":
-                Sensor_MQTT_02.query.delete()
-            if sensor_name == "MQTT_03":
-                Sensor_MQTT_03.query.delete()
-
-            db.session.commit() 
-            error_massage = "Werte geloescht"
-
-    print(sensor_values)
     dropdown_list_sensor = Sensor.query.all()
 
     return render_template('dashboard_sensors.html',
