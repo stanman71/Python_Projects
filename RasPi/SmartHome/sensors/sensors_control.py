@@ -1,6 +1,5 @@
 from flask import request
 from flask_sqlalchemy import SQLAlchemy
-import datetime
 import time
 
 from app import app
@@ -25,67 +24,67 @@ class Sensor_GPIO_A00(db.Model):
     __tablename__ = 'sensor_gpio_a00'
     id        = db.Column(db.Integer, primary_key=True, autoincrement = True)
     value     = db.Column(db.Integer)    
-    time      = db.Column(db.Date, onupdate=datetime.datetime.now)
+    date      = db.Column(db.String(50))
 
 class Sensor_GPIO_A01(db.Model):
     __tablename__ = 'sensor_gpio_a01'
     id        = db.Column(db.Integer, primary_key=True, autoincrement = True)
     value     = db.Column(db.Integer)    
-    time      = db.Column(db.Date, onupdate=datetime.datetime.now)
+    date      = db.Column(db.String(50))
 
 class Sensor_GPIO_A02(db.Model):
     __tablename__ = 'sensor_gpio_a02'
     id        = db.Column(db.Integer, primary_key=True, autoincrement = True)
     value     = db.Column(db.Integer)    
-    time      = db.Column(db.Date, onupdate=datetime.datetime.now)
+    date      = db.Column(db.String(50))
 
 class Sensor_GPIO_A03(db.Model):
     __tablename__ = 'sensor_gpio_a03'
     id        = db.Column(db.Integer, primary_key=True, autoincrement = True)
     value     = db.Column(db.Integer)    
-    time      = db.Column(db.Date, onupdate=datetime.datetime.now)
+    date      = db.Column(db.String(50))
 
 class Sensor_GPIO_A04(db.Model):
     __tablename__ = 'sensor_gpio_a04'
     id        = db.Column(db.Integer, primary_key=True, autoincrement = True)
     value     = db.Column(db.Integer)    
-    time      = db.Column(db.Date, onupdate=datetime.datetime.now)
+    date      = db.Column(db.String(50))
 
 class Sensor_GPIO_A05(db.Model):
     __tablename__ = 'sensor_gpio_a05'
     id        = db.Column(db.Integer, primary_key=True, autoincrement = True)
     value     = db.Column(db.Integer)    
-    time      = db.Column(db.Date, onupdate=datetime.datetime.now)
+    date      = db.Column(db.String(50))
 
 class Sensor_GPIO_A06(db.Model):
     __tablename__ = 'sensor_gpio_a06'
     id        = db.Column(db.Integer, primary_key=True, autoincrement = True)
     value     = db.Column(db.Integer)    
-    time      = db.Column(db.Date, onupdate=datetime.datetime.now)    
+    date      = db.Column(db.String(50))  
 
 class Sensor_GPIO_A07(db.Model):
     __tablename__ = 'sensor_gpio_a07'
     id        = db.Column(db.Integer, primary_key=True, autoincrement = True)
     value     = db.Column(db.Integer)    
-    time      = db.Column(db.Date, onupdate=datetime.datetime.now)
+    date      = db.Column(db.String(50))
 
 class Sensor_MQTT_00(db.Model):
     __tablename__ = 'sensor_mqtt_00'
     id        = db.Column(db.Integer, primary_key=True, autoincrement = True)
     value     = db.Column(db.Integer)    
-    time      = db.Column(db.Date, onupdate=datetime.datetime.now)
+    date      = db.Column(db.String(50))
 
 class Sensor_MQTT_01(db.Model):
     __tablename__ = 'sensor_mqtt_01'
     id        = db.Column(db.Integer, primary_key=True, autoincrement = True)
     value     = db.Column(db.Integer)    
-    time      = db.Column(db.Date, onupdate=datetime.datetime.now)
+    date      = db.Column(db.String(50))
 
 class Sensor_MQTT_02(db.Model):
     __tablename__ = 'sensor_mqtt_02'
     id        = db.Column(db.Integer, primary_key=True, autoincrement = True)
     value     = db.Column(db.Integer)    
-    time      = db.Column(db.Date, onupdate=datetime.datetime.now)    
+    date      = db.Column(db.String(50))  
 
 
 # create all database tables
@@ -161,50 +160,102 @@ def DELETE_SENSOR_VALUES(id):
     db.session.commit() 
     return "Werte geloescht"
 
-def READ_SENSOR(name):
-    pass
+def READ_SENSOR(sensor_name):
+
+    try:
+
+        import gpiozero
+
+        if sensor_name == "GPIO_A00":
+            adc = gpiozero.MCP3008(channel = 0)
+            voltage = adc.voltage
+            result = "%.2f V" % voltage
+            entry = Sensor_GPIO_A00(
+                value = result,
+                date  = time.strftime("%Y-%m-%d %H:%M"),
+            )   
+        if sensor_name == "GPIO_A01":
+            adc = gpiozero.MCP3008(channel = 1)
+            voltage = adc.voltage
+            result = "%.2f V" % voltage
+            entry = Sensor_GPIO_A01(
+                value = result,
+                date  = time.strftime("%Y-%m-%d %H:%M"),
+            )   
+        if sensor_name == "GPIO_A02":
+            adc = gpiozero.MCP3008(channel = 2)
+            voltage = adc.voltage
+            result = "%.2f V" % voltage
+            entry = Sensor_GPIO_A02(
+                value = result,
+                date  = time.strftime("%Y-%m-%d %H:%M"),
+            )   
+        if sensor_name == "GPIO_A03":
+            adc = gpiozero.MCP3008(channel = 3)
+            voltage = adc.voltage
+            result = "%.2f V" % voltage
+            entry = Sensor_GPIO_A03(
+                value = result,
+                date  = time.strftime("%Y-%m-%d %H:%M"),
+            )   
+        if sensor_name == "GPIO_A04":
+            adc = gpiozero.MCP3008(channel = 4)
+            voltage = adc.voltage
+            result = "%.2f V" % voltage
+            entry = Sensor_GPIO_A04(
+                value = result,
+                date  = time.strftime("%Y-%m-%d %H:%M"),
+            )   
+        if sensor_name == "GPIO_A05":
+            adc = gpiozero.MCP3008(channel = 5)
+            voltage = adc.voltage
+            result = "%.2f V" % voltage
+            entry = Sensor_GPIO_A05(
+                value = result,
+                date  = time.strftime("%Y-%m-%d %H:%M"),
+            )   
+        if sensor_name == "GPIO_A06":
+            adc = gpiozero.MCP3008(channel = 6)
+            voltage = adc.voltage
+            result = "%.2f V" % voltage
+            entry = Sensor_GPIO_A06(
+                value = result,
+                date  = time.strftime("%Y-%m-%d %H:%M"),
+            )   
+        if sensor_name == "GPIO_A07":
+            adc = gpiozero.MCP3008(channel = 7)
+            voltage = adc.voltage
+            result = "%.2f V" % voltage
+            entry = Sensor_GPIO_A07(
+                value = result,
+                date  = time.strftime("%Y-%m-%d %H:%M"),
+            )   
+
+        db.session.add(entry)
+        db.session.commit()   
+
+    except:
+        pass
+    
 
 def WATERING_PLANTS():
-    pass
 
+    try:
 
+        import RPi.GPIO as GPIO
 
-""" ############## """
-""" GPIO Functions """
-""" ############## """
+        GPIO.setmode(GPIO.BCM)
 
-try:
+        RELAIS_1_GPIO = 26
+        RELAIS_2_GPIO = 20
+        GPIO.setup(RELAIS_1_GPIO, GPIO.OUT) 
+        GPIO.setup(RELAIS_2_GPIO, GPIO.OUT) 
 
-    import gpiozero
-    import RPi.GPIO as GPIO
+        #GPIO.output(RELAIS_1_GPIO, GPIO.LOW) 
+        #GPIO.output(RELAIS_2_GPIO, GPIO.LOW)
 
-    # ############
-    # relais modul
-    # ############
+        GPIO.output(RELAIS_1_GPIO, GPIO.HIGH) 
+        GPIO.output(RELAIS_2_GPIO, GPIO.HIGH) 
 
-    GPIO.setmode(GPIO.BCM)
-
-    RELAIS_1_GPIO = 26
-    RELAIS_2_GPIO = 20
-    GPIO.setup(RELAIS_1_GPIO, GPIO.OUT) 
-    GPIO.setup(RELAIS_2_GPIO, GPIO.OUT) 
-
-    #GPIO.output(RELAIS_1_GPIO, GPIO.LOW) 
-    #GPIO.output(RELAIS_2_GPIO, GPIO.LOW)
-
-    GPIO.output(RELAIS_1_GPIO, GPIO.HIGH) 
-    GPIO.output(RELAIS_2_GPIO, GPIO.HIGH) 
-
-    # #######
-    # mcp3008
-    # #######
-
-    adc = gpiozero.MCP3008 (channel = 7)
-
-    while True:
-        voltage = adc.voltage
-        print("%.2f V" % voltage)
-        time.sleep (1)
-
-except:
-    pass
+    except:
+        pass

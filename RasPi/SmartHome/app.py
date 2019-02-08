@@ -1180,8 +1180,12 @@ def dashboard_sensors():
         if request.args.get("get_sensor") is not None:               
             sensor_id = request.args.get("get_sensor")
             sensor_values = GET_SENSOR_VALUES(sensor_id)
+
             if sensor_values == None:
-                error_massage = "Keine Daten vorhanden"         
+                error_massage = "Keine Daten vorhanden"    
+
+            sensor_name = Sensor.query.filter_by(id=sensor_id).first()
+            sensor_name = sensor_name.name  
 
         # delete the values of a selected sensor
         if request.args.get("delete_values") is not None:
@@ -1216,6 +1220,7 @@ def get_media(filename):
 
 
 if __name__ == '__main__':
-    scheduler.start()
+    scheduler.start()    
     app.run(debug=True)
+    #app.run(host="0.0.0.0")
 
