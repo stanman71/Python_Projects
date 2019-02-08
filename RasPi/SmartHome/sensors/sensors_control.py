@@ -1,6 +1,7 @@
 from flask import request
 from flask_sqlalchemy import SQLAlchemy
 import datetime
+import time
 
 from app import app
 
@@ -164,4 +165,46 @@ def READ_SENSOR(name):
     pass
 
 def WATERING_PLANTS():
+    pass
+
+
+
+""" ############## """
+""" GPIO Functions """
+""" ############## """
+
+try:
+
+    import gpiozero
+    import RPi.GPIO as GPIO
+
+    # ############
+    # relais modul
+    # ############
+
+    GPIO.setmode(GPIO.BCM)
+
+    RELAIS_1_GPIO = 26
+    RELAIS_2_GPIO = 20
+    GPIO.setup(RELAIS_1_GPIO, GPIO.OUT) 
+    GPIO.setup(RELAIS_2_GPIO, GPIO.OUT) 
+
+    #GPIO.output(RELAIS_1_GPIO, GPIO.LOW) 
+    #GPIO.output(RELAIS_2_GPIO, GPIO.LOW)
+
+    GPIO.output(RELAIS_1_GPIO, GPIO.HIGH) 
+    GPIO.output(RELAIS_2_GPIO, GPIO.HIGH) 
+
+    # #######
+    # mcp3008
+    # #######
+
+    adc = gpiozero.MCP3008 (channel = 7)
+
+    while True:
+        voltage = adc.voltage
+        print("%.2f V" % voltage)
+        time.sleep (1)
+
+except:
     pass
