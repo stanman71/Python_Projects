@@ -1217,7 +1217,13 @@ def dashboard_sensors():
 # URL for MQTT sensor values
 @app.route('/mqtt/<int:id>/sensor/<string:value>', methods=['GET'])
 def mqtt_sensor(id, value):
-    pass
+    
+    from sensors_control import WRITE_MQTT  
+    
+    WRITE_MQTT(id, value)
+    
+    return("Daten empfangen")
+
 
 # URL for MQTT control
 @app.route('/mqtt/<int:id>/button/<int:button_id>/<int:value>', methods=['GET'])

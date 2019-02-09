@@ -50,7 +50,7 @@ void loop()
 
             // transfer values to the raspberry
             HTTPClient http;
-            http.begin("http://192.168.1.20:5000/mqtt/1/sensor/" + voltage_result);
+            http.begin("http://192.168.1.40:5000/mqtt/0/sensor/" + voltage_result);
             int httpCode = http.GET();
             http.end();
 
