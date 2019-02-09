@@ -129,37 +129,6 @@ def GET_SENSOR_VALUES(id):
         return sensor_values
 
 
-def DELETE_SENSOR_VALUES(id):
-
-    sensor_name = Sensor.query.filter_by(id=id).first()
-    sensor_name = sensor_name.name
-
-    if sensor_name == "GPIO_A00":
-        Sensor_GPIO_A00.query.delete()
-    if sensor_name == "GPIO_A01":
-        Sensor_GPIO_A01.query.delete()
-    if sensor_name == "GPIO_A02":
-        Sensor_GPIO_A02.query.delete()
-    if sensor_name == "GPIO_A03":
-        Sensor_GPIO_A03.query.delete()
-    if sensor_name == "GPIO_A04":
-        Sensor_GPIO_A04.query.delete()
-    if sensor_name == "GPIO_A05":
-        Sensor_GPIO_A05.query.delete()
-    if sensor_name == "GPIO_A06":
-        Sensor_GPIO_A06.query.delete()
-    if sensor_name == "GPIO_A07":
-        Sensor_GPIO_A07.query.delete()
-    if sensor_name == "MQTT_00":
-        Sensor_MQTT_00.query.delete()
-    if sensor_name == "MQTT_01":
-        Sensor_MQTT_01.query.delete()
-    if sensor_name == "MQTT_02":
-        Sensor_MQTT_02.query.delete()
-
-    db.session.commit() 
-    return "Werte geloescht"
-
 def READ_SENSOR(sensor_name):
 
     try:
@@ -238,7 +207,51 @@ def READ_SENSOR(sensor_name):
         pass
     
 
+def DELETE_SENSOR_VALUES(id):
+
+    sensor_name = Sensor.query.filter_by(id=id).first()
+    sensor_name = sensor_name.name
+
+    if sensor_name == "GPIO_A00":
+        Sensor_GPIO_A00.query.delete()
+    if sensor_name == "GPIO_A01":
+        Sensor_GPIO_A01.query.delete()
+    if sensor_name == "GPIO_A02":
+        Sensor_GPIO_A02.query.delete()
+    if sensor_name == "GPIO_A03":
+        Sensor_GPIO_A03.query.delete()
+    if sensor_name == "GPIO_A04":
+        Sensor_GPIO_A04.query.delete()
+    if sensor_name == "GPIO_A05":
+        Sensor_GPIO_A05.query.delete()
+    if sensor_name == "GPIO_A06":
+        Sensor_GPIO_A06.query.delete()
+    if sensor_name == "GPIO_A07":
+        Sensor_GPIO_A07.query.delete()
+    if sensor_name == "MQTT_00":
+        Sensor_MQTT_00.query.delete()
+    if sensor_name == "MQTT_01":
+        Sensor_MQTT_01.query.delete()
+    if sensor_name == "MQTT_02":
+        Sensor_MQTT_02.query.delete()
+
+    db.session.commit() 
+    return "Werte geloescht"
+
+
+""" ################## """
+""" Watering Functions """
+""" ################## """
+
 def WATERING_PLANTS():
+
+    # Wert Feuchtigkeit
+    # Wert Sensor
+    # alter Wert Wassermenge
+
+    # Vergleich Feutigkeit
+    # < mehr gießen, Wassermenge erhöhen
+    # > Wassermenge verringern
 
     try:
 

@@ -329,6 +329,14 @@ def dashboard():
     return render_template('dashboard.html', name=current_user.username)
 
 
+# Logout
+@app.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    return redirect(url_for('index'))
+
+
 """ ######### """
 """ Sites LED """
 """ ######### """
@@ -1038,9 +1046,9 @@ def delete_schedular(id):
     return redirect(url_for('dashboard_schedular'))
 
 
-""" ########## """
-""" Sites User """
-""" ########## """
+""" ##################### """
+""" Sites User Management """
+""" ##################### """
 
 # Dashboard user
 @app.route('/dashboard/user/', methods=['GET', 'POST'])
@@ -1203,15 +1211,23 @@ def dashboard_sensors():
 
 
 """ ########### """
-""" Sites Other """
+""" Sites MQTT """
 """ ########### """
 
-@app.route('/logout')
-@login_required
-def logout():
-    logout_user()
-    return redirect(url_for('index'))
+# URL for MQTT sensor values
+@app.route('/mqtt/<int:id>/sensor/<string:value>', methods=['GET'])
+def mqtt_sensor(id, value):
+    pass
 
+# URL for MQTT control
+@app.route('/mqtt/<int:id>/button/<int:button_id>/<int:value>', methods=['GET'])
+def mqtt_button(id, button_id, value):
+    pass
+
+
+""" ############### """
+""" Sites File host """
+""" ############### """
 
 # Host files for colorpicker_local
 @app.route('/get_media/<path:filename>', methods=['GET'])
@@ -1219,8 +1235,13 @@ def get_media(filename):
     return send_from_directory(PATH_CSS, filename)
 
 
+
+""" ########### """
+""" MAIN METHOD """
+""" ########### """
+
 if __name__ == '__main__':
     scheduler.start()    
-    app.run(debug=True)
-    #app.run(host="0.0.0.0")
+    #app.run(debug=True)
+    app.run(host="0.0.0.0")
 
