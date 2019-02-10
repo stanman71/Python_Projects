@@ -208,7 +208,7 @@ def READ_SENSOR(sensor_name):
         pass
     
 
-def WRITE_MQTT(mqtt, result):
+def WRITE_MQTT_DATA(mqtt, result):
     
     if mqtt == 0:
         entry = Sensor_MQTT_00(

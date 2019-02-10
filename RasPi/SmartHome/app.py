@@ -172,7 +172,7 @@ def scheduler_job():
                         task = entry.task.split(":")
                         START_PROGRAM(int(task[1]))
                     # turn off LEDs
-                    if "turn_LEDs_off" in entry.task:
+                    if "LED_off" in entry.task:
                         task = entry.task.split(":")
                         LED_TURNOFF(int(task[1])) 
                     # read sensor
@@ -184,7 +184,7 @@ def scheduler_job():
                         task = entry.task.split(":")
                         WATERING_PLANTS()                                                                                                 
                     # remove task without repeat
-                    if entry.repeat == "0":
+                    if entry.repeat == "":
                         Schedular.query.filter_by(id=entry.id).delete()
                         db.session.commit()
 
@@ -985,9 +985,9 @@ def dashboard_schedular():
                 minute = request.args.get("set_minute")
                 task   = request.args.get("set_task")
                 if request.args.get("checkbox"):
-                    repeat = True
+                    repeat = "*"
                 else:
-                    repeat = False
+                    repeat = ""
 
                 # name exist ?
                 check_entry = Schedular.query.filter_by(name=name).first()
@@ -1218,11 +1218,11 @@ def dashboard_sensors():
 @app.route('/mqtt/<int:id>/sensor/<string:value>', methods=['GET'])
 def mqtt_sensor(id, value):
     
-    from sensors_control import WRITE_MQTT  
+    from sensors_control import WRITE_MQTT_DATA  
     
     WRITE_MQTT(id, value)
     
-    return("Daten empfangen")
+    return ("Daten empfangen")
 
 
 # URL for MQTT control
@@ -1248,6 +1248,6 @@ def get_media(filename):
 
 if __name__ == '__main__':
     scheduler.start()    
-    #app.run(debug=True)
-    app.run(host="0.0.0.0")
+    app.run(debug=True)
+    #app.run(host="0.0.0.0")
 

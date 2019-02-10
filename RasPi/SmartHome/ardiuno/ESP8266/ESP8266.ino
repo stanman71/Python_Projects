@@ -25,8 +25,10 @@ void setup()
       //  Force the ESP into client-only mode
       WiFi.mode(WIFI_STA); 
 
-      //  Enable light sleep
-      wifi_set_sleep_type(LIGHT_SLEEP_T);
+      // deep sleep 30 minutes
+      ESP.deepSleep(1800*1000000);
+
+      delay(1);
     }
 
 
@@ -53,9 +55,6 @@ void loop()
             http.begin("http://192.168.1.40:5000/mqtt/0/sensor/" + voltage_result);
             int httpCode = http.GET();
             http.end();
-
-            // sleep 1 hour
-            delay(3600000);
           }
 
       else
