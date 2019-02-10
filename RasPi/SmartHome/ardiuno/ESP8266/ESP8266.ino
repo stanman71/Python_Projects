@@ -25,17 +25,13 @@ void setup()
       //  Force the ESP into client-only mode
       WiFi.mode(WIFI_STA); 
 
-      // deep sleep 30 minutes
-      ESP.deepSleep(1800*1000000);
-
-      delay(1);
     }
 
 
 void loop() 
 
     {
-
+   
       if((WiFiMulti.run() == WL_CONNECTED)) 
 
           {
@@ -55,12 +51,16 @@ void loop()
             http.begin("http://192.168.1.40:5000/mqtt/0/sensor/" + voltage_result);
             int httpCode = http.GET();
             http.end();
+
+            Serial.println("Going into deep sleep for 30 minutes");
+            ESP.deepSleep(1800e6); // 1e6 is 1 second
           }
 
       else
 
           {
             Serial.println("No WiFi");
+            delay(5000);
           }
-
+                       
     }
