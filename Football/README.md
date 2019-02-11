@@ -50,6 +50,6 @@ GET_ALL(url)
 
 #### Example:
 
-![Screenshot](pics/prediction.png)
+![Screenshot](pics/prediction.jpg)
 
 
