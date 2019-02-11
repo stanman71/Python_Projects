@@ -3,12 +3,19 @@
 This project was made to modify the configuration of all Juniper devices (e.g. router, switche, firewalls...) and build complete topologies in VMware automatically.
 
 
-### Features
+### Configuration Features 
 
 - get the current configuration
 - update the configuration by using a prepared config file
 - delete selected parts of the configuration
-- build complete virtual topologies
+
+
+### Topology Features 
+
+- build complete virtual topologies based on a YMAL-file
+- create and configure the virtual vMX routers 
+- generate all network connections
+- upload a custum default configuration
 
 ------------
 
