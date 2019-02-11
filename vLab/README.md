@@ -1,6 +1,6 @@
 ##  vLab_Python
 
-This project was made to modify the configuration of all Juniper devices (e.g. router, switche, firewalls...) and build complete topologies in VMware automatically.
+This project was made to modify the configuration of all Juniper devices (e.g. router, switches, firewalls...) and build complete topologies in VMware automatically.
 
 
 ### Configuration features 
