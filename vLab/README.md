@@ -82,7 +82,7 @@ router_01.set_conf("./my-junos-config.conf")
 
 #### Example Config:
 
-##### File: my-junos-config.conf (default folder: CONFIG)
+###### File: my-junos-config.conf (default folder: CONFIG)
 
 ```
     interfaces {
@@ -169,7 +169,7 @@ Create_MAIN.Create("./TOPOLOGY/Test_01.yml")
 
 - Need the configuration settings of your VMware environment (vcenter_ip, username, password...)
 
-##### File: test.yaml (default folder: TOPOLOGY)
+###### File: test.yaml (default folder: TOPOLOGY)
 
 ```
 project_name: Test_01
@@ -222,7 +222,7 @@ devices:
 
 - Need a default management connection (IP address - in this case 172.18.10.85/24)
 
-##### File: template.conf (default folder: CONFIG)
+###### File: template.conf (default folder: CONFIG)
 
 ```
 system {
