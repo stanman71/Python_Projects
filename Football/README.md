@@ -51,6 +51,8 @@ Open ```main.py``` and choose the csv file you want to work with
 
 #### Example:
 
-Python_Projects/Football/pics/table.png
+![Screenshot](pics/table.png)
+
+
       
 
