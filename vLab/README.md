@@ -154,6 +154,7 @@ router_01.del_conf("delete ospf")
 - Creates ressouce pool, virtual maschines and all network connections
 
 - Need Juniper vMX templates (control / forwarding plane)
+  https://support.juniper.net/support/downloads/?p=vmxeval#sw
 
 - Configuration upload on each virtual maschine
 
