@@ -22,7 +22,7 @@ You will find more examples there
 
 ### First Step: Connect to the Juniper device
 
-Open ```main.py``` and specify the device you want to connect with in this format:
+open ```main.py``` and specify the device you want to connect with in this format:
 
 ```
 Juniper_MOD("<IP>", "<user>", "<password>", "telnet", "23")
@@ -72,7 +72,7 @@ router_01.GET_conf("firewall")
 ### Update the configuration
 
 
-Upload configuration from an external file
+upload configuration from an external file
 
 ------------
 
@@ -120,7 +120,7 @@ router_01.set_conf("./my-junos-config.conf")
 
 ### Delete selected part of the configuration
 
-Specify in quotes and keyword delete the part of the configuration that you want to delete:
+specify in quotes and keyword delete the part of the configuration that you want to delete:
 
 
 - delete hostname | delete host-name
@@ -152,13 +152,13 @@ router_01.del_conf("delete ospf")
 
 ### Create virtual topologies
 
-- Build a complete custom topology in VMware by using a YMAL-file
+- build a complete custom topology in VMware by using a YMAL-file
 
-- Creates ressouce pool, virtual maschines and all network connections
+- creates ressouce pool, virtual maschines and all network connections
 
-- Upload a new configuration automatically on each virtual maschine and change the management IPs
+- upload a new configuration automatically on each virtual maschine and change the management IPs
 
-- Need Juniper vMX templates >>> more informations at the end of this document
+- need Juniper vMX templates >>> more informations at the end of this document
 
 ------------
 
@@ -168,9 +168,9 @@ router_01.del_conf("delete ospf")
 Create_MAIN.Create("./TOPOLOGY/Test_01.yml")
 ```
 
-- The configuration settings of your VMware environment (vcenter_ip, username, password...) are in the connection section of the ymal file
+- the configuration settings of your VMware environment (vcenter_ip, username, password...) are in the connection section of the YMAL-file
 
-- All names of the new topology will be automatically generated and got the choosen project_name as prefix
+- all names of the new topology will be automatically generated and got the choosen project_name as prefix
 
 ###### Topology-File: test.yaml 
 ###### (default folder: TOPOLOGY)
@@ -227,15 +227,15 @@ devices:
 #### Create template VMs
 
 
-- The template VMs are created by using the Juniper ova-files (https://support.juniper.net/support/downloads/?p=vmxeval#sw)
+- the template VMs are created by using the Juniper ova-files (https://support.juniper.net/support/downloads/?p=vmxeval#sw)
 
-- VM-Names >>> controlPlane: "TEMPLATE_vCP_" + Version /// forwardingPlane: "TEMPLATE_vFPC_" + Version 
+- VM names >>> controlPlane: "TEMPLATE_vCP_" + Version /// forwardingPlane: "TEMPLATE_vFPC_" + Version 
 
-- Delete all network connections on both machines 
+- delete all network connections on both machines 
 
-- Set on the forwardingPlane the CPU-cores to 3 and the RAM to 3 GB
+- set on the forwardingPlane the CPU-cores to 3 and the RAM to 3 GB
 
-- The template controlPlane needs a default configuration (temporary management IP: 172.18.10.85/24)
+- the template controlPlane needs a default configuration (temporary management IP: 172.18.10.85/24)
 
 ###### Template Config File: template.conf 
 ###### (folder: CONFIG)
