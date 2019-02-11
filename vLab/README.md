@@ -153,7 +153,7 @@ router_01.del_conf("delete ospf")
 
 - Need Juniper vMX templates (https://support.juniper.net/support/downloads/?p=vmxeval#sw)
 
-- Configuration upload on each virtual maschine
+- Upload a new configuration automatically on each virtual maschine
 
 ------------
 
@@ -163,13 +163,11 @@ router_01.del_conf("delete ospf")
 Create_MAIN.Create("./TOPOLOGY/Test_01.yml")
 ```
 
-* The configuration settings of your VMware environment (vcenter_ip, username, password...) are in the connection section of the ymal file
+- The configuration settings of your VMware environment (vcenter_ip, username, password...) are in the connection section of the ymal file
 
-* The template names are "TEMPLATE_vCP_" + Version and "TEMPLATE_vFPC_" + Version 
+- All names of the new topology will be automatically generated and got the choosen project_name as prefix
 
-* All names of the new topology will be automatically generated and got the choosen project_name as prefix
-
-###### Example-File: test.yaml (default folder: TOPOLOGY)
+###### Topology-File: test.yaml (default folder: TOPOLOGY)
 
 ```
 project_name: Test_01
@@ -218,11 +216,18 @@ devices:
           - R02-R03 # ge-0/0/1
 ```
 
-#### Template Config:
+------------
 
-- Need a default management connection (IP address - in this case 172.18.10.85/24)
+#### Create a Template
 
-###### File: template.conf (default folder: CONFIG)
+
+- The template are normal VMs without any network connections and will be copied 
+
+- Names >>> controlPlane: "TEMPLATE_vCP_" + Version / forwardingPlane: "TEMPLATE_vFPC_" + Version 
+
+- The template control-VM need a default management connection IP address and user
+
+###### Template Config File: template.conf (folder: CONFIG)
 
 ```
 system {
