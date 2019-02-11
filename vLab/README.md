@@ -39,7 +39,7 @@ Juniper_MOD("172.18.10.90", "netconf", "Juniper", "telnet", "23")
 ------------
 ------------
 
-### Get the configuration
+### Get the current configuration
 
 Specify the part of the configuration that you want to have displayed:
 
