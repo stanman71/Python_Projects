@@ -1,6 +1,6 @@
 ##  Football
 
-This project can import football results and visualize them in flask
+This small project can import football results and visualize them in flask
 
 It was created to learn flask, web crawling, data processing and data visualization  
 
