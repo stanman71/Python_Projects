@@ -109,7 +109,6 @@ my-junos-config.conf (default folder: CONFIG)
             }
         }
     }
-
 ```
 
 ------------
@@ -210,12 +209,11 @@ devices:
       network: 
           - R01-R03 # ge-0/0/0
           - R02-R03 # ge-0/0/1
-
 ```
 
 ##### Template Config
 
-- Need a default management connection (IP address - in this example 172.18.10.85/24)
+- Need a default management connection (IP address - in this case 172.18.10.85/24)
 
 template.conf (default folder: CONFIG)
 
@@ -259,5 +257,4 @@ routing-options {
         route 0.0.0.0/0 next-hop 172.18.10.1;
     }
 }
-
 ```
