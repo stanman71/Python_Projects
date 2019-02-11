@@ -120,7 +120,7 @@ router_01.set_conf("./my-junos-config.conf")
 
 ### Delete Configuration
 
-Specify in quotes and keyword delete the part of the configuration that you want to delete
+Specify in quotes and keyword delete the part of the configuration that you want to delete:
 
 
 - delete hostname | delete host-name
