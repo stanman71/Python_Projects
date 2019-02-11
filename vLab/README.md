@@ -209,29 +209,29 @@ devices:                             # router list
     - name: R01                      # router name
       type: vMX
       version: 18.2R1.9          
-      mgmt_ip: 172.18.10.101/24      # new management IP
-      mgmt_ip_gw: 172.18.10.1        # gateway
+      mgmt_ip: 192.18.10.101/24      # new management IP
+      mgmt_ip_gw: 192.18.10.1        # gateway
       network: 
-          - R01-R03 # ge-0/0/0       # network connection between router R01 and router R03
-          - R01-R02 # ge-0/0/1       # network connection between router R01 and router R02
+          - R01-R03                  # network connection between router R01 and router R03 (interface ge-0/0/0)
+          - R01-R02                  # network connection between router R01 and router R02 (interface ge-0/0/1)
 
     - name: R02
       type: vMX
       version: 18.2R1.9
-      mgmt_ip: 172.18.10.102/24
-      mgmt_ip_gw: 172.18.10.1 
+      mgmt_ip: 192.18.10.102/24
+      mgmt_ip_gw: 192.18.10.1 
       network: 
-          - R02-R03 # ge-0/0/0
-          - R01-R02 # ge-0/0/1
+          - R02-R03
+          - R01-R02
 
     - name: R03
       type: vMX
       version: 18.2R1.9
-      mgmt_ip: 172.18.10.103/24
-      mgmt_ip_gw: 172.18.10.1 
+      mgmt_ip: 192.18.10.103/24
+      mgmt_ip_gw: 192.18.10.1 
       network: 
-          - R01-R03 # ge-0/0/0
-          - R02-R03 # ge-0/0/1
+          - R01-R03
+          - R02-R03
 ```
 
 ------------
@@ -281,7 +281,7 @@ interfaces {
     fxp0 {
         unit 0 {
             family inet {
-                address 172.18.10.85/24;
+                address 192.18.10.100/24;
             }
         }
     }
@@ -289,7 +289,7 @@ interfaces {
 
 routing-options {
     static {
-        route 0.0.0.0/0 next-hop 172.18.10.1;
+        route 0.0.0.0/0 next-hop 192.18.10.1;
     }
 }
 ```
