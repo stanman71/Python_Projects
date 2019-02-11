@@ -24,12 +24,16 @@ Juniper_MOD("172.18.10.90", "netconf", "Juniper", "telnet", "23")
 
 ```
 
+##### Every following step is also in ```main.py```
+
+You will there some examples
+
 ------------
 ------------
 
 ### Get Configuration
 
-Specify in ```main.py``` the part of the configuration that you want to have displayed
+Specify the part of the configuration that you want to have displayed:
 
 - "" (complete configuration)
 
@@ -60,7 +64,7 @@ router_01.set_conf("./my-junos-config.conf")
 
 #### Example Config
 
-my-junos-config.conf
+my-junos-config.conf (default folder: CONFIG)
 
 ```
     interfaces {
@@ -133,7 +137,7 @@ router_01.del_conf("delete ospf")
 
 #### Example Topology
 
-test.yaml
+test.yaml (default folder: TOPOLOGY)
 
 ```
 project_name: Test_01
@@ -187,9 +191,9 @@ devices:
 
 #### Template Config
 
-- Need a default management connection
+- Need a default management connection (IP address - in this example 172.18.10.85/24)
 
-template.conf
+template.conf (default folder: CONFIG)
 
 ```
 system {
