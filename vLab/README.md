@@ -247,7 +247,7 @@ devices:                             # router list
 
 - set on the VM of the forwardingPlane the CPU-cores to 3 and the RAM to 3 GB
 
-- the template controlPlane needs a default configuration (temporary management IP: 172.18.10.85/24)
+- the template controlPlane needs a default configuration (temporary management IP in this example: 192.18.10.100/24)
 
 ##### template config-file: template.conf
 ###### folder: CONFIG
