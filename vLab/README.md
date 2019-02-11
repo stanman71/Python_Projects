@@ -1,6 +1,6 @@
 ##  vLab_Python
 
-The project was made to modify the configuration of Juniper devices and build topologies in VMware
+This project was made to modify the configuration of Juniper devices and build topologies in VMware
 
 
 ### Features
@@ -20,9 +20,9 @@ You will find more examples there
 ------------
 ------------
 
-### First Step: Deviceconnection
+### First Step: Connect to the Juniper device
 
-Open ```main.py``` and specify the device you want to connect with:
+Open ```main.py``` and specify the device you want to connect with in this format:
 
 ```
 Juniper_MOD("<IP>", "<user>", "<password>", "telnet", "23")
