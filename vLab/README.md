@@ -5,10 +5,10 @@ The project was made to modify the configuration of Juniper devices and build to
 
 ### Features
 
-- Get configuration
-- Update configuration
-- Delete configuration
-- Build complete topologies (by using Juniper vMX templates)
+- get the current configuration
+- update the configuration by using a prepared config file
+- delete selected parts of the configuration
+- build complete virtual topologies
 
 ------------
 
