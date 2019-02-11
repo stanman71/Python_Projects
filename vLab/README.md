@@ -16,7 +16,7 @@ This code can modify the configuration on Juniper devices and build topologies i
 
 ### First Step: Deviceconnection
 
-Open main.py and specify the device you want to connect with:
+Open ```main.py``` and specify the device you want to connect with:
 
 ```
 Juniper_MOD("<IP>", "<user>", "<password>", "telnet", "23")
