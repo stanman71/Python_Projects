@@ -224,10 +224,10 @@ devices:
 
 ------------
 
-#### Create Template VMs
+#### Create template VMs
 
 
-- The template are created by using the Juniper ova-files 
+- The template VMs are created by using the Juniper ova-files 
 
 - VM-Names >>> controlPlane: "TEMPLATE_vCP_" + Version /// forwardingPlane: "TEMPLATE_vFPC_" + Version 
 
