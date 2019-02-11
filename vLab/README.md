@@ -1,6 +1,6 @@
 ##  vLab_Python
 
-This project was made to modify the configuration of Juniper devices and build topologies in VMware
+This project was made to modify the configuration of Juniper devices and build topologies in VMware.
 
 
 ### Features
@@ -41,7 +41,7 @@ Juniper_MOD("172.18.10.90", "netconf", "Juniper", "telnet", "23")
 
 ### Get the current configuration
 
-Specify the part of the configuration that you want to have displayed:
+specify the part of the configuration that you want to have displayed:
 
 - "" (complete configuration)
 
