@@ -17,7 +17,7 @@ This project was made to modify the configuration of all Juniper devices (e.g. r
 - generate all network connections
 - upload a custum default configuration
 - each configuration step will be checked before the implementation starts
-- every step will be written in the console 
+- every step and every result will be written in the console 
 
 ------------
 
