@@ -39,7 +39,7 @@ Juniper_MOD("172.18.10.90", "netconf", "Juniper", "telnet", "23")
 ------------
 ------------
 
-### Get Configuration
+### Get the configuration
 
 Specify the part of the configuration that you want to have displayed:
 
@@ -69,7 +69,7 @@ router_01.GET_conf("firewall")
 ------------
 ------------
 
-### Update Configuration
+### Update the configuration
 
 
 Upload configuration from an external file
@@ -118,7 +118,7 @@ router_01.set_conf("./my-junos-config.conf")
 ------------
 ------------
 
-### Delete Configuration
+### Delete selected part of the configuration
 
 Specify in quotes and keyword delete the part of the configuration that you want to delete:
 
@@ -150,7 +150,7 @@ router_01.del_conf("delete ospf")
 ------------
 ------------
 
-### Create Topologies
+### Create virtuel topologies
 
 - Build a complete custom topology in VMware by using a YMAL-file
 
