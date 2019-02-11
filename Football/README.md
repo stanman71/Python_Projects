@@ -53,6 +53,6 @@ Open ```main.py``` and choose the csv file you want to work with
 
 ![Screenshot](pics/table.png)
 
+![Screenshot](pics/prediction.png)
 
-      
 
