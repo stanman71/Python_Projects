@@ -23,7 +23,7 @@ This project was made to modify the configuration of all Juniper devices (e.g. r
 
 ------------
 
-##### start ```main.py``` to use every feature
+##### start ```main.py``` to use the features
 
 You will find more examples there
 
@@ -93,7 +93,7 @@ upload configuration from an external file
 router_01.set_conf("./my-junos-config.conf")
 ```
 
-##### Config-File: my-junos-config.conf    
+##### config-file: my-junos-config.conf    
 ###### default folder: CONFIG
 
 ```
