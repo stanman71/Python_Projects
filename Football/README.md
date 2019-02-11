@@ -29,7 +29,7 @@ run:
 GET_ALL(url)
 ```
 
->>> The results will automatically saved in a csv-file (folder: CSV)
+- The results will automatically saved in a csv-file (folder: CSV)
 
 #### Choose the data source 
 
