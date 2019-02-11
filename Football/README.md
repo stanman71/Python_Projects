@@ -45,7 +45,7 @@ GET_ALL(url)
 
 - Choose a club in the dropdown menu
 
-- Now you can switch between the options and compare the data
+- Now you can switch between the options and analyse the data
 
 ------------
 
