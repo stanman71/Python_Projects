@@ -11,6 +11,12 @@ This project can modify the configuration on Juniper devices and build topologie
 - Build complete topologies (by using Juniper vMX templates)
 
 ------------
+
+##### Every following step is in ```main.py```
+
+You will find there more examples
+
+------------
 ------------
 ------------
 
@@ -21,10 +27,6 @@ Open ```main.py``` and specify the device you want to connect with:
 ```
 Juniper_MOD("<IP>", "<user>", "<password>", "telnet", "23")
 ```
-
-##### Every following step is also in ```main.py```
-
-You will find there more examples
 
 ------------
 
