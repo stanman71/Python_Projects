@@ -1,6 +1,6 @@
 ##  vLab_Python
 
-This code can modify the configuration on Juniper devices and build topologies in VMware
+This project can modify the configuration on Juniper devices and build topologies in VMware
 
 
 ### Features
