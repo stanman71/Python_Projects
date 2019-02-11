@@ -9,7 +9,7 @@ with open('LICENSE') as f:
     license = f.read()
 
 setup(
-    name='sample',
+    name='vSporn-Python',
     version='1.0.0',
     description='Package to management Juniper devices',
     long_description=readme,
