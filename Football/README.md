@@ -22,9 +22,9 @@ It was created to learn flask, data processing and data visualization
 
 #### Import the results
 
-Open ```main.py``` and choose the url for a league
+- Open ```main.py``` and choose the url for a league
 
-run:
+- run:
 ```
 GET_ALL(url)
 ```
@@ -33,7 +33,7 @@ GET_ALL(url)
 
 #### Choose the data source 
 
-Open ```main.py``` and choose the csv file you want to work with
+- Open ```main.py``` and choose the csv file you want to work with
 
 ------------
 ------------
