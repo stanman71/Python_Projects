@@ -187,7 +187,8 @@ Create_MAIN.Create("./TOPOLOGY/Test_01.yml")
 ```
 project_name: Test_01
 
-connection:
+connection:                          # VMware configuration
+
     vcenter_ip:    
     username:      
     password:      
@@ -197,26 +198,28 @@ connection:
     vm_folder:     
 
 default_settings_TEMPLATE:
+
     template_mgmt_IP:   "192.18.10.100"
     default_username:   "netconf"
     default_password:   "Netconf"
     external_interface: "external_network"
 
-devices:
-    - name: R01
+devices:                             # router list
+
+    - name: R01                      # router name
       type: vMX
-      version: 18.2R1.9
-      mgmt_ip: 172.18.10.101/24
-      mgmt_ip_gw: 172.18.10.1 # gateway
+      version: 18.2R1.9          
+      mgmt_ip: 172.18.10.101/24      # new management IP
+      mgmt_ip_gw: 172.18.10.1        # gateway
       network: 
-          - R01-R03 # ge-0/0/0
-          - R01-R02 # ge-0/0/1
+          - R01-R03 # ge-0/0/0       # network connection between router R01 and router R03
+          - R01-R02 # ge-0/0/1       # network connection between router R01 and router R02
 
     - name: R02
       type: vMX
       version: 18.2R1.9
       mgmt_ip: 172.18.10.102/24
-      mgmt_ip_gw: 172.18.10.1 # gateway
+      mgmt_ip_gw: 172.18.10.1 
       network: 
           - R02-R03 # ge-0/0/0
           - R01-R02 # ge-0/0/1
@@ -225,7 +228,7 @@ devices:
       type: vMX
       version: 18.2R1.9
       mgmt_ip: 172.18.10.103/24
-      mgmt_ip_gw: 172.18.10.1 # gateway
+      mgmt_ip_gw: 172.18.10.1 
       network: 
           - R01-R03 # ge-0/0/0
           - R02-R03 # ge-0/0/1
