@@ -80,7 +80,8 @@ Upload configuration from an external file
 router_01.set_conf("./my-junos-config.conf")
 ```
 
-###### Config-File: my-junos-config.conf (default folder: CONFIG)
+###### Config-File: my-junos-config.conf 
+###### (default folder: CONFIG)
 
 ```
     interfaces {
@@ -167,7 +168,8 @@ Create_MAIN.Create("./TOPOLOGY/Test_01.yml")
 
 - All names of the new topology will be automatically generated and got the choosen project_name as prefix
 
-###### Topology-File: test.yaml (default folder: TOPOLOGY)
+###### Topology-File: test.yaml 
+###### (default folder: TOPOLOGY)
 
 ```
 project_name: Test_01
@@ -227,7 +229,8 @@ devices:
 
 - The template control-VM need a default management connection IP address and user
 
-###### Template Config File: template.conf (folder: CONFIG)
+###### Template Config File: template.conf 
+###### (folder: CONFIG)
 
 ```
 system {
