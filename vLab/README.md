@@ -1,31 +1,32 @@
-<H1>vLab_Python<H1>
+##  vLab_Python
 
-
-<H2>Features<H2>
+### Features
 
 This code can modify the configuration on Juniper devices and build topologies in VMware
 
 - Get configuration
 - Set basic configuration
 - Delete basic configuaration
-- Build Topologies (by using vMX)
+- Build complete topologies (by using Juniper vMX templates)
+
+------------
+------------
 
 
-
-<H2>Usage<H2>
-
+### Deviceconnection
 
 The device you want to connect with:
 
 ```
-
 Juniper_MOD("<IP>", "<user>", "<password>", "telnet", "23")
 Juniper_MOD("172.18.10.90", "netconf", "Juniper", "telnet", "23")
 
 ```
 
-<H3>Get Configuration<H3>
+------------
+------------
 
+### Get Configuration
 
 Specify in ```main.py``` the part of the configuration that you want to have displayed
 
@@ -43,9 +44,10 @@ Specify in ```main.py``` the part of the configuration that you want to have dis
 
 - firewall | firewalls
 
+------------
+------------
 
-
-<H3>Delete Configuration<H3>
+### Delete Configuration
 
 Specify in quotes and keyword delete the part of the configuration that you want to delete
 
@@ -62,16 +64,15 @@ Specify in quotes and keyword delete the part of the configuration that you want
 
 - delete "firewall-role"
 
-
 ```
-
 router_01.del_conf("delete ge-0/0/0")
 router_01.del_conf("delete ospf")
 
 ```
+------------
+------------
 
-
-<H3>Set Configuration<H3>
+### Set Configuration
 
 
 Upload configuration from an external file
@@ -81,12 +82,11 @@ router_01.set_conf("./my-junos-config.conf")
 
 ```
 
-<H5>Example Config<H5>
+#### Example Config
 
 my-junos-config.conf
 
 ```
-
     interfaces {
 
         ge-0/0/0 {
@@ -115,8 +115,10 @@ my-junos-config.conf
     }
 
 ```
+------------
+------------
 
-<H3>Create Topologies<H3>
+### Create Topologies
 
 - Build a complete custom topology in VMware by using a YMAL-file
 
@@ -127,13 +129,16 @@ my-junos-config.conf
 - Configuration upload on each virtual maschine
 
 
-<H5>Example Topology<H5>
+------------
+
+
+
+#### Example Topology
 
 test.yaml
 
 ```
 project_name: Test_01
-
 
 connection:
     vcenter_ip:    
@@ -144,13 +149,11 @@ connection:
     datastore:     
     vm_folder:     
 
-
 default_settings_TEMPLATE:
     template_mgmt_IP:   "192.18.10.100"
     default_username:   "netconf"
     default_password:   "Netconf"
     external_interface: "external_network"
-
 
 devices:
     - name: R01
@@ -182,10 +185,12 @@ devices:
 
 ```
 
-<H5>Template Config<H5>
+------------
+
+
+#### Template Config
 
 - Need a default management connection
-
 
 template.conf
 
@@ -231,4 +236,3 @@ routing-options {
 }
 
 ```
-
