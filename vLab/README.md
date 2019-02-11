@@ -224,7 +224,7 @@ devices:
 
 ------------
 
-#### Create a Template
+#### Create Template VMs
 
 
 - The template are normal VMs without any network connections and will be copied 
