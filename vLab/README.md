@@ -82,7 +82,7 @@ upload configuration from an external file
 router_01.set_conf("./my-junos-config.conf")
 ```
 
-###### Config-File: my-junos-config.conf >>> default folder: CONFIG
+###### Config-File: my-junos-config.conf    >>> default folder: CONFIG
 
 ```
     interfaces {
@@ -171,7 +171,7 @@ Create_MAIN.Create("./TOPOLOGY/Test_01.yml")
 
 - all names of the new topology will be automatically generated and got the chosen project_name as prefix
 
-###### topology-file: test.yaml >>> default folder: TOPOLOGY
+###### topology-file: test.yaml     >>> default folder: TOPOLOGY
 
 ```
 project_name: Test_01
@@ -231,11 +231,11 @@ devices:
 
 - delete all network connections on both machines 
 
-- set on the forwardingPlane the CPU-cores to 3 and the RAM to 3 GB
+- set on the VM of the forwardingPlane the CPU-cores to 3 and the RAM to 3 GB
 
 - the template controlPlane needs a default configuration (temporary management IP: 172.18.10.85/24)
 
-###### template config-file: template.conf >>> folder: CONFIG
+###### template config-file: template.conf    >>> folder: CONFIG
 
 ```
 system {
