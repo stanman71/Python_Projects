@@ -170,7 +170,7 @@ Create_MAIN.Create("./TOPOLOGY/Test_01.yml")
 
 - the configuration settings of your VMware environment (vcenter_ip, username, password...) are in the connection section of the YMAL-file
 
-- all names of the new topology will be automatically generated and got the choosen project_name as prefix
+- all names of the new topology will be automatically generated and got the chosen project_name as prefix
 
 ###### Topology-File: test.yaml 
 ###### (default folder: TOPOLOGY)
