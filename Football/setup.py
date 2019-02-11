@@ -1,18 +1,21 @@
+# -*- coding: utf-8 -*-
 
-from setuptools import setup
+from setuptools import setup, find_packages
 
-setup(name='Football',
-      version='1.0',
-      description='gui example',
-      author='Martin Stan',
-      author_email='...',
-      url='...',
-      install_requires=['flask', 
-                        'flask_bootstrap', 
-                        'requests', 
-                        'bs4', 
-                        'pandas', 
-                        'numpy', 
-                        'scipy', 
-                        'matplotlib'],
-      )
+with open('README.md') as f:
+    readme = f.read()
+
+with open('LICENSE') as f:
+    license = f.read()
+
+setup(
+    name='vSporn-Python',
+    version='1.0.0',
+    description='Package to visualize football results in flask',
+    long_description=readme,
+    author='Martin Stan',
+    author_email='martin.stan@gmx.de',
+    url='https://github.com/stanman71/Python_Projects/Football',
+    license=license,
+    packages=find_packages(exclude=('CSV', 'templates'))
+)
