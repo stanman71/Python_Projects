@@ -59,7 +59,7 @@ Specify the part of the configuration that you want to have displayed:
 
 ------------
 
-#### Examples:
+#### Example:
 
 ```
 router_01.GET_conf("")
@@ -137,7 +137,7 @@ Specify in quotes and keyword delete the part of the configuration that you want
 
 ------------
 
-#### Examples:
+#### Example:
 
 ```
 router_01.del_conf("delete ge-0/0/0")
