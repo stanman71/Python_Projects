@@ -26,7 +26,7 @@ Juniper_MOD("172.18.10.90", "netconf", "Juniper", "telnet", "23")
 
 ##### Every following step is also in ```main.py```
 
-You will find there some examples
+You will find there more some examples
 
 ------------
 ------------
