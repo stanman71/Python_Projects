@@ -14,7 +14,7 @@ This project can modify the configuration on Juniper devices and build topologie
 
 ##### Every following step is in ```main.py```
 
-You will find there more examples
+You will find more examples there
 
 ------------
 ------------
