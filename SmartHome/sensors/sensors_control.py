@@ -16,6 +16,16 @@ db = SQLAlchemy(app)
 
 # define table structure
 
+class Plants(db.Model):
+    __tablename__ = 'plants'
+    id           = db.Column(db.Integer, primary_key=True, autoincrement = True)   
+    name         = db.Column(db.String(50), unique=True)
+    sensor_id    = db.Column(db.Integer, db.ForeignKey('sensor.id'))
+    sensor_name  = db.relationship('Sensor')
+    moisture     = db.Column(db.Integer)    
+    water_volume = db.Column(db.Integer)
+    pump_id      = db.Column(db.Integer)
+
 class Sensor(db.Model):
     __tablename__ = 'sensor'
     id   = db.Column(db.Integer, primary_key=True, autoincrement = True)
@@ -262,19 +272,11 @@ def DELETE_SENSOR_VALUES(id):
     return "Werte geloescht"
 
 
-""" ################## """
-""" Watering Functions """
-""" ################## """
+""" ######## """
+""" Watering """
+""" ######## """
 
-def WATERING_PLANTS():
-
-    # Wert Feuchtigkeit
-    # Wert Sensor
-    # alter Wert Wassermenge
-
-    # Vergleich Feutigkeit
-    # < mehr giessen, Wassermenge erhoehen
-    # > Wassermenge verringern
+def START_PUMP(pump, seconds):
 
     try:
 
@@ -282,16 +284,56 @@ def WATERING_PLANTS():
 
         GPIO.setmode(GPIO.BCM)
 
-        RELAIS_1_GPIO = 26
-        RELAIS_2_GPIO = 20
-        GPIO.setup(RELAIS_1_GPIO, GPIO.OUT) 
-        GPIO.setup(RELAIS_2_GPIO, GPIO.OUT) 
+        if pump == 0:
+           RELAIS_GPIO = 26
+        if pump == 1:
+           RELAIS_GPIO = 26
+        if pump == 2:
+           RELAIS_GPIO = 26
+        if pump == 3:
+           RELAIS_GPIO = 26
 
-        #GPIO.output(RELAIS_1_GPIO, GPIO.LOW) 
-        #GPIO.output(RELAIS_2_GPIO, GPIO.LOW)
+        GPIO.setup(RELAIS_GPIO, GPIO.OUT) 
 
-        GPIO.output(RELAIS_1_GPIO, GPIO.HIGH) 
-        GPIO.output(RELAIS_2_GPIO, GPIO.HIGH) 
+        # start
+        GPIO.output(RELAIS_GPIO, GPIO.LOW) 
+
+        time.sleep(seconds) 
+
+        # stop
+        GPIO.output(RELAIS_GPIO, GPIO.HIGH) 
 
     except:
         pass
+
+
+def WATERING_PLANTS():
+
+    plants_list = Plants.query.all()
+
+    # watering plants
+    for plant in plants_list:
+        START_PUMP(plant.pump, plant.water_volume)
+    
+    # wait 5 minutes  
+    time.sleep(300) 
+
+    # check moisture
+    for plant in plants_list:
+        target_moisture  = plant.moisture
+        current_moisture = READ_SENSOR(plant.sensor_name)
+
+        if current_moisture < target_moisture:
+            new_water_volume = plant.water_volume * 1.1
+
+        if current_moisture > target_moisture:
+            new_water_volume = plant.water_volume * 0.9
+
+        # update database
+        plant.water_volume = new_water_volume
+        db.session.commit()            
+
+
+
+
+

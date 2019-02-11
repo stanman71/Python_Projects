@@ -9,6 +9,7 @@ from flask_login import LoginManager, UserMixin, login_user, login_required, log
 from functools import wraps
 import sys
 import datetime
+import os
 
 
 """ ######### """
@@ -22,18 +23,18 @@ import datetime
 """ genernal settings """
 """ ################# """
 
-sys.path.insert(0, "C:/Users/stanman/Desktop/Unterlagen/GIT/Python_Projects/RasPi/SmartHome/led")
-sys.path.insert(0, "C:/Users/stanman/Desktop/Unterlagen/GIT/Python_Projects/RasPi/SmartHome/sensors")
-sys.path.insert(0, "C:/Users/mstan/GIT/Python_Projects/RasPi/SmartHome/led")
-sys.path.insert(0, "C:/Users/mstan/GIT/Python_Projects/RasPi/SmartHome/sensors")
+sys.path.insert(0, "C:/Users/stanman/Desktop/Unterlagen/GIT/Python_Projects/SmartHome/led")
+sys.path.insert(0, "C:/Users/stanman/Desktop/Unterlagen/GIT/Python_Projects/SmartHome/sensors")
+sys.path.insert(0, "C:/Users/mstan/GIT/Python_Projects/SmartHome/led")
+sys.path.insert(0, "C:/Users/mstan/GIT/Python_Projects/SmartHome/sensors")
 sys.path.insert(0, "/home/pi/Python/SmartHome/led")
 sys.path.insert(0, "/home/pi/Python/SmartHome/sensors")
 
 # Windows Home
-#PATH_CSS = 'C:/Users/stanman/Desktop/Unterlagen/GIT/Python_Projects/RasPi/SmartHome/static/CDNJS/'
+#PATH_CSS = 'C:/Users/stanman/Desktop/Unterlagen/GIT/Python_Projects/SmartHome/static/CDNJS/'
 
 # Windows Work
-#PATH_CSS = 'C:/Users/mstan/GIT/Python_Projects/RasPi/SmartHome/static/CDNJS/'
+#PATH_CSS = 'C:/Users/mstan/GIT/Python_Projects/SmartHome/static/CDNJS/'
 
 # RasPi:
 PATH_CSS = '/home/pi/Python/SmartHome/static/CDNJS/'
@@ -172,17 +173,24 @@ def scheduler_job():
                         task = entry.task.split(":")
                         START_PROGRAM(int(task[1]))
                     # turn off LEDs
-                    if "LED_off" in entry.task:
+                    if "led_off" in entry.task:
                         task = entry.task.split(":")
-                        LED_TURNOFF(int(task[1])) 
+                        LED_OFF(int(task[1])) 
                     # read sensor
                     if "read_sensor" in entry.task:
                         task = entry.task.split(":")
                         READ_SENSOR(task[1])  
                     # watering plants
                     if "watering_plants" in entry.task:
+                        WATERING_PLANTS()
+                    # start LED automatically
+                    if "start_smartphone" in entry.task:
                         task = entry.task.split(":")
-                        WATERING_PLANTS()                                                                                                 
+                        hostname = "google.com"
+                        if os.system("ping -n 1 " + hostname) == 0:
+                            print("ok")
+                            #if READ_SENSOR("GPIO_A07") < 600:
+                            #    LED_SET_SCENE(int(task[1]))                                                                                                                        
                     # remove task without repeat
                     if entry.repeat == "":
                         Schedular.query.filter_by(id=entry.id).delete()

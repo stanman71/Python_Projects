@@ -7,8 +7,8 @@ import time
 """ general settings """
 """ ################ """
 
-sys.path.insert(0, "C:/Users/stanman/Desktop/Unterlagen/GIT/Python_Projects/RasPi/SmartHome/led")
-sys.path.insert(0, "C:/Users/mstan/GIT/Python_Projects/RasPi/SmartHome/led")
+sys.path.insert(0, "C:/Users/stanman/Desktop/Unterlagen/GIT/Python_Projects/SmartHome/led")
+sys.path.insert(0, "C:/Users/mstan/GIT/Python_Projects/SmartHome/led")
 sys.path.insert(0, "/home/pi/Python/SmartHome/led")
 
 from phue import Bridge
@@ -186,7 +186,7 @@ def START_PROGRAM(id):
 """ LED turn off  """
 """ ############# """
 
-def LED_TURNOFF(break_value):
+def LED_OFF(break_value):
     b = CONNECT_BRIDGE()
     try:
         lights = b.get_light_objects('list')
