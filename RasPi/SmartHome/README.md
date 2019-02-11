@@ -14,7 +14,7 @@ This project creates a smart home environment
 - Watering plants
 - SQL-Lite database 
 - user management und user right system
-- smartphone control view
+- smartphone view
 
 ------------
 
