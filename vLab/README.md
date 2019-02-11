@@ -50,6 +50,13 @@ Specify the part of the configuration that you want to have displayed:
 - firewall | firewalls
 
 ------------
+
+#### Examples:
+```
+router_01.GET_conf("")
+router_01.GET_conf("firewall")
+```
+------------
 ------------
 
 ### Update Configuration
@@ -57,12 +64,14 @@ Specify the part of the configuration that you want to have displayed:
 
 Upload configuration from an external file
 
+------------
+
+#### Example:
 ```
 router_01.set_conf("./my-junos-config.conf")
-
 ```
 
-#### Example Config
+##### Example Config
 
 my-junos-config.conf (default folder: CONFIG)
 
@@ -115,10 +124,12 @@ Specify in quotes and keyword delete the part of the configuration that you want
 
 - delete "firewall-role"
 
+------------
+
+#### Examples:
 ```
 router_01.del_conf("delete ge-0/0/0")
 router_01.del_conf("delete ospf")
-
 ```
 ------------
 ------------
@@ -135,7 +146,11 @@ router_01.del_conf("delete ospf")
 
 ------------
 
-#### Example Topology
+#### Example:
+```
+Create_MAIN.Create("./TOPOLOGY/Test_01.yml")
+```
+##### Example Topology
 
 test.yaml (default folder: TOPOLOGY)
 
@@ -187,9 +202,7 @@ devices:
 
 ```
 
-------------
-
-#### Template Config
+##### Template Config
 
 - Need a default management connection (IP address - in this example 172.18.10.85/24)
 
