@@ -29,9 +29,9 @@ You will find there more some examples
 ------------
 
 #### Example:
+
 ```
 Juniper_MOD("172.18.10.90", "netconf", "Juniper", "telnet", "23")
-
 ```
 ------------
 ------------
@@ -58,6 +58,7 @@ Specify the part of the configuration that you want to have displayed:
 ------------
 
 #### Examples:
+
 ```
 router_01.GET_conf("")
 router_01.GET_conf("firewall")
@@ -74,6 +75,7 @@ Upload configuration from an external file
 ------------
 
 #### Example:
+
 ```
 router_01.set_conf("./my-junos-config.conf")
 ```
@@ -135,6 +137,7 @@ Specify in quotes and keyword delete the part of the configuration that you want
 ------------
 
 #### Examples:
+
 ```
 router_01.del_conf("delete ge-0/0/0")
 router_01.del_conf("delete ospf")
@@ -157,9 +160,11 @@ router_01.del_conf("delete ospf")
 ------------
 
 #### Example:
+
 ```
 Create_MAIN.Create("./TOPOLOGY/Test_01.yml")
 ```
+
 ##### Example Topology
 
 test.yaml (default folder: TOPOLOGY)
