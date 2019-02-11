@@ -12,7 +12,7 @@ The project was made to modify the configuration of Juniper devices and build to
 
 ------------
 
-##### Start ```main.py``` to use every feature
+##### start ```main.py``` to use every feature
 
 You will find more examples there
 
