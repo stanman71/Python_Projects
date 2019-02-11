@@ -154,7 +154,7 @@ router_01.del_conf("delete ospf")
 
 - build a complete custom topology in VMware by using a YMAL-file
 
-- creates ressouce pool, virtual maschines and all network connections
+- creates ressouce pool, virtual machines and all network connections
 
 - upload a new configuration automatically on each virtual maschine and change the management IPs
 
