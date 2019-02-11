@@ -150,7 +150,7 @@ router_01.del_conf("delete ospf")
 ------------
 ------------
 
-### Create virtuel topologies
+### Create virtual topologies
 
 - Build a complete custom topology in VMware by using a YMAL-file
 
