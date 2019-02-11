@@ -16,7 +16,7 @@ This project was made to modify the configuration of all Juniper devices (e.g. r
 - create and configure the virtual vMX routers 
 - generate all network connections
 - upload a custum default configuration
-- each configuration step will be checked for possible errors before the implementation starts
+- each configuration step will be checked for possible errors before the implementation starts (exeption handling for different events)
 - every step and every result will be written in the console 
 
 ------------
