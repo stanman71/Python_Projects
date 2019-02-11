@@ -7,12 +7,12 @@ It was created to learn flask, data processing and data visualization
 
 ### Features
 
-- Import soccer results and save them in csv-files
-- Choose a club for more information
-- Get the season overview
-- Create a point diagram
-- Calculate the ATT/DEF value and try to predict the results (based on poisson)
-- Compare the predict results and real results by using the coefficient of determination
+- crawl the soccer results from the official dfb-website and save them in csv-files
+- choose a club for more information
+- get the season overview
+- create a point diagram
+- calculate the ATT/DEF value and try to predict the results (based on poisson)
+- compare the predict results and real results by using the coefficient of determination
 
 ------------
 ------------
