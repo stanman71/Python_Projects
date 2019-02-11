@@ -241,11 +241,11 @@ devices:                             # router list
 #### Create Juniper vMX templates 
 
 
-- template VMs are created by using Juniper ova-files (https://support.juniper.net/support/downloads/?p=vmxeval#sw)
+- template VMs are created by using Juniper OVA-files (https://support.juniper.net/support/downloads/?p=vmxeval#sw)
 
-- created vms have a default name setting as following:
-  - controlPlane: "TEMPLATE_vCP_" + Version
-  - forwardingPlane: "TEMPLATE_vFPC_" + Version 
+- created VMs have a default name setting as following:
+  - controlPlane: "TEMPLATE_vCP_" + version
+  - forwardingPlane: "TEMPLATE_vFPC_" + version 
 
 - delete all network connections on both machines 
 
