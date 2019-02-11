@@ -10,7 +10,7 @@ This project creates a smart home environment
 - Provide a simple script system to create light shows
 - Read sensors
 - Share data with ESP8266 moduls
-- Taskmanagement
+- Taskmanagement to automate processes
 - Watering plants
 - SQL-Lite database 
 - user management und user right system
