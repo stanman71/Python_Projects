@@ -52,6 +52,6 @@ GET_ALL(url)
 
 ![Screenshot](pics/table.png)
 
-![Screenshot](pics/prediction.jpg)
+![Screenshot](pics/prediction.png)
 
 
