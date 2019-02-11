@@ -12,7 +12,7 @@ This code can modify the configuration on Juniper devices and build topologies i
 
 ------------
 ------------
-
+------------
 
 ### First Step: Deviceconnection
 
@@ -26,8 +26,9 @@ Juniper_MOD("172.18.10.90", "netconf", "Juniper", "telnet", "23")
 
 ##### Every following step is also in ```main.py```
 
-You will there some examples
+You will find there some examples
 
+------------
 ------------
 ------------
 
@@ -56,6 +57,7 @@ Specify the part of the configuration that you want to have displayed:
 router_01.GET_conf("")
 router_01.GET_conf("firewall")
 ```
+------------
 ------------
 ------------
 
@@ -104,6 +106,8 @@ my-junos-config.conf (default folder: CONFIG)
     }
 
 ```
+
+------------
 ------------
 ------------
 
@@ -131,6 +135,8 @@ Specify in quotes and keyword delete the part of the configuration that you want
 router_01.del_conf("delete ge-0/0/0")
 router_01.del_conf("delete ospf")
 ```
+
+------------
 ------------
 ------------
 
