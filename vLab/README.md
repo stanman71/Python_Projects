@@ -247,7 +247,7 @@ devices:                             # router list
 
 - delete all network connections on both machines 
 
-- set on the VM of the forwardingPlane the CPU-cores to 3 and the RAM to 3 GB
+- change VM configuration of the forwardingPlane to 3 CPU-cores and 3 GB RAM 
 
 - the VM of the controlPlane needs a default configuration with an user, access permissions and management IP
 
