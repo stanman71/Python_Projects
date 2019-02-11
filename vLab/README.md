@@ -227,9 +227,13 @@ devices:
 #### Create Template VMs
 
 
-- The template are normal VMs without any network connections and will be copied 
+- The template are created by using the Juniper ova-files 
 
-- Names >>> controlPlane: "TEMPLATE_vCP_" + Version /// forwardingPlane: "TEMPLATE_vFPC_" + Version 
+- VM-Names >>> controlPlane: "TEMPLATE_vCP_" + Version /// forwardingPlane: "TEMPLATE_vFPC_" + Version 
+
+- Delete all network connections on both machines 
+
+- Set on the forwardingPlane the CPU-cores to 3 and RAM to 3 GB
 
 - The template controlPlane needs a default configuration (temporary management IP: 172.18.10.85/24)
 
