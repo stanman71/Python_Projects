@@ -224,7 +224,7 @@ devices:
 
 ------------
 
-#### Create template VMs
+#### Create Juniper vMX templates 
 
 
 - the template VMs are created by using the Juniper ova-files (https://support.juniper.net/support/downloads/?p=vmxeval#sw)
