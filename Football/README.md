@@ -7,7 +7,7 @@ It was created to learn flask, data processing and data visualization
 
 ### Features
 
-- Import soccer results
+- Import soccer results and save them in csv-files
 - Choose a club for more information
 - Get the season overview
 - Create a point diagram
