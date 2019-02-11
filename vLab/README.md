@@ -152,9 +152,9 @@ router_01.del_conf("delete ospf")
 
 - Creates ressouce pool, virtual maschines and all network connections
 
-- Need Juniper vMX templates (https://support.juniper.net/support/downloads/?p=vmxeval#sw)
+- Upload a new configuration automatically on each virtual maschine and change the management IPs
 
-- Upload a new configuration automatically on each virtual maschine
+- Need Juniper vMX templates (https://support.juniper.net/support/downloads/?p=vmxeval#sw) >>> more informations at the end of this document
 
 ------------
 
@@ -225,9 +225,9 @@ devices:
 
 - The template are normal VMs without any network connections and will be copied 
 
-- Names >>> controlPlane: "TEMPLATE_vCP_" + Version / forwardingPlane: "TEMPLATE_vFPC_" + Version 
+- Names >>> controlPlane: "TEMPLATE_vCP_" + Version /// forwardingPlane: "TEMPLATE_vFPC_" + Version 
 
-- The template control-VM need a default management connection IP address and user
+- The template control-VM need a default user and management connection IP address (in this case 172.18.10.85/24)
 
 ###### Template Config File: template.conf 
 ###### (folder: CONFIG)
