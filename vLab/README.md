@@ -6,8 +6,8 @@ This code can modify the configuration on Juniper devices and build topologies i
 ### Features
 
 - Get configuration
-- Set basic configuration
-- Delete basic configuaration
+- Update configuration
+- Delete configuration
 - Build complete topologies (by using Juniper vMX templates)
 
 ------------
@@ -48,32 +48,7 @@ Specify in ```main.py``` the part of the configuration that you want to have dis
 ------------
 ------------
 
-### Delete Configuration
-
-Specify in quotes and keyword delete the part of the configuration that you want to delete
-
-
-- delete hostname | delete host-name
-
-- delete router-id | delete id
-
-- delete ge-0/0/0-9 | delete fxp0 | delete lo0
-
-- delete ospf | isis | bgp | bfd | mpls | stp | ldp | rsvp | lldp
-
-- delete "policy-name"
-
-- delete "firewall-role"
-
-```
-router_01.del_conf("delete ge-0/0/0")
-router_01.del_conf("delete ospf")
-
-```
-------------
-------------
-
-### Set Configuration
+### Update Configuration
 
 
 Upload configuration from an external file
@@ -119,6 +94,31 @@ my-junos-config.conf
 ------------
 ------------
 
+### Delete Configuration
+
+Specify in quotes and keyword delete the part of the configuration that you want to delete
+
+
+- delete hostname | delete host-name
+
+- delete router-id | delete id
+
+- delete ge-0/0/0-9 | delete fxp0 | delete lo0
+
+- delete ospf | isis | bgp | bfd | mpls | stp | ldp | rsvp | lldp
+
+- delete "policy-name"
+
+- delete "firewall-role"
+
+```
+router_01.del_conf("delete ge-0/0/0")
+router_01.del_conf("delete ospf")
+
+```
+------------
+------------
+
 ### Create Topologies
 
 - Build a complete custom topology in VMware by using a YMAL-file
@@ -129,10 +129,7 @@ my-junos-config.conf
 
 - Configuration upload on each virtual maschine
 
-
 ------------
-
-
 
 #### Example Topology
 
@@ -187,7 +184,6 @@ devices:
 ```
 
 ------------
-
 
 #### Template Config
 
