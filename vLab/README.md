@@ -231,7 +231,7 @@ devices:
 
 - Names >>> controlPlane: "TEMPLATE_vCP_" + Version /// forwardingPlane: "TEMPLATE_vFPC_" + Version 
 
-- The template control-VM need a default configuration (management IP in this case 172.18.10.85/24)
+- The template controlPlane needs a default configuration (temporary management IP: 172.18.10.85/24)
 
 ###### Template Config File: template.conf 
 ###### (folder: CONFIG)
