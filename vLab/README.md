@@ -24,7 +24,7 @@ Juniper_MOD("<IP>", "<user>", "<password>", "telnet", "23")
 
 ##### Every following step is also in ```main.py```
 
-You will find there more some examples
+You will find there more examples
 
 ------------
 
