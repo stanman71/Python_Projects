@@ -39,17 +39,18 @@ Open ```main.py``` and choose the csv file you want to work with
 ------------
 ------------
 
-### Start the flask server: 
+### flask server: 
 
-Start: ```START_Gui.py```
+- Start: ```START_Gui.py``` (Default IP: 127.0.0.1:5000)
 
-Default IP: 127.0.0.1:5000
+- Choose a club in the dropdown menu
 
-------------
-
-Choose a club in the dropdown menu
+- Now you can switch between the options and compare the data
 
 ------------
 
-Now you can switch between the options and compare the data
+#### Example:
+
+Python_Projects/Football/pics/table.png
+      
 
