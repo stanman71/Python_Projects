@@ -48,12 +48,7 @@ GET_ALL(url)
 
 ------------
 
-#### Examples:
-
-![Screenshot](pics/table.png)
-
-------------
-
+#### Example:
 
 ![Screenshot](pics/prediction.png)
 
