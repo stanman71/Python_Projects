@@ -20,6 +20,12 @@ Open ```main.py``` and specify the device you want to connect with:
 
 ```
 Juniper_MOD("<IP>", "<user>", "<password>", "telnet", "23")
+```
+
+------------
+
+#### Example:
+```
 Juniper_MOD("172.18.10.90", "netconf", "Juniper", "telnet", "23")
 
 ```
