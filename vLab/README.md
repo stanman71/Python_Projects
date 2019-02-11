@@ -5,8 +5,8 @@ This project was made to modify the configuration of all Juniper devices (e.g. r
 
 ### Configuration features 
 
-- get the current configuration
-- update the configuration by using a prepared config file
+- get current configuration
+- update configuration by using a prepared config file
 - delete selected parts of the configuration
 
 
@@ -14,9 +14,11 @@ This project was made to modify the configuration of all Juniper devices (e.g. r
 
 - build complete virtual topologies based on a YMAL-file
 - create and configure virtual vMX routers 
-- generate all network connections (management connection, internal connection between controlPlane and forwardingPlane, external connections between virtual routers)
+- generate all network connections (management connection, internal connection between controlPlane and forwardingPlane, external connections   
+  between virtual routers)
 - upload a custom default configuration
-- each configuration step will be checked for possible errors before the implementation starts (exception handling for different events and adequate dynamic reaction)
+- each configuration step will be checked for possible errors before the implementation starts (exception handling for different events and 
+  adequate dynamic reaction)
 - every step and every result will be written in the console 
 
 ------------
@@ -165,7 +167,7 @@ router_01.del_conf("delete ospf")
 
 - creates ressouce pool, virtual machines and all network connections
 
-- upload a new configuration automatically on each virtual maschine and change the management IPs
+- upload a new configuration automatically on each virtual machines and change the management IPs
 
 - need Juniper vMX templates >>> more informations at the end of this document
 
