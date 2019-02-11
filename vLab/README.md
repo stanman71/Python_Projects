@@ -158,7 +158,7 @@ router_01.del_conf("delete ospf")
 
 - Upload a new configuration automatically on each virtual maschine and change the management IPs
 
-- Need Juniper vMX templates (https://support.juniper.net/support/downloads/?p=vmxeval#sw) >>> more informations at the end of this document
+- Need Juniper vMX templates >>> more informations at the end of this document
 
 ------------
 
@@ -227,13 +227,13 @@ devices:
 #### Create template VMs
 
 
-- The template VMs are created by using the Juniper ova-files 
+- The template VMs are created by using the Juniper ova-files (https://support.juniper.net/support/downloads/?p=vmxeval#sw)
 
 - VM-Names >>> controlPlane: "TEMPLATE_vCP_" + Version /// forwardingPlane: "TEMPLATE_vFPC_" + Version 
 
 - Delete all network connections on both machines 
 
-- Set on the forwardingPlane the CPU-cores to 3 and RAM to 3 GB
+- Set on the forwardingPlane the CPU-cores to 3 and the RAM to 3 GB
 
 - The template controlPlane needs a default configuration (temporary management IP: 172.18.10.85/24)
 
