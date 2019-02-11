@@ -163,11 +163,11 @@ router_01.del_conf("delete ospf")
 Create_MAIN.Create("./TOPOLOGY/Test_01.yml")
 ```
 
-The configuration settings of your VMware environment (vcenter_ip, username, password...) are in the connection section
+* The configuration settings of your VMware environment (vcenter_ip, username, password...) are in the connection section of the ymal file
 
-The Template names are "TEMPLATE_vCP_" + Version and "TEMPLATE_vFPC_" + Version
+* The template names are "TEMPLATE_vCP_" + Version and "TEMPLATE_vFPC_" + Version 
 
-All names of the new topology will be automatically generated and got the choosen project_name as prefix
+* All names of the new topology will be automatically generated and got the choosen project_name as prefix
 
 ###### Example-File: test.yaml (default folder: TOPOLOGY)
 
