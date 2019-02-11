@@ -8,8 +8,7 @@ It was created to learn flask, web crawling, data processing and data visualizat
 ### Features
 
 - crawl the soccer results from the official dfb-website and save them in csv-files
-- choose a club for more information
-- get the season overview
+- get the season overview 
 - create a point diagram
 - calculate the ATT/DEF value and try to predict the results (based on poisson)
 - compare the predict results and real results by using the coefficient of determination
