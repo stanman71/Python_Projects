@@ -15,7 +15,7 @@ setup(
     long_description=readme,
     author='Martin Stan',
     author_email='martin.stan@gmx.de',
-    url='https://github.com/stanman71/Python_Projects/RasPi/SmartHome/',
+    url='https://github.com/stanman71/Python_Projects/SmartHome',
     license=license,
     packages=find_packages(exclude=('arduino', 'static', 'templates'))
 )
