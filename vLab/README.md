@@ -80,9 +80,7 @@ Upload configuration from an external file
 router_01.set_conf("./my-junos-config.conf")
 ```
 
-#### Example Config:
-
-###### File: my-junos-config.conf (default folder: CONFIG)
+###### Config-File: my-junos-config.conf (default folder: CONFIG)
 
 ```
     interfaces {
@@ -165,11 +163,13 @@ router_01.del_conf("delete ospf")
 Create_MAIN.Create("./TOPOLOGY/Test_01.yml")
 ```
 
-#### Example Topology:
+The configuration settings of your VMware environment (vcenter_ip, username, password...) are in the connection section
 
-- Need the configuration settings of your VMware environment (vcenter_ip, username, password...)
+The Template names are "TEMPLATE_vCP_" + Version and "TEMPLATE_vFPC_" + Version
 
-###### File: test.yaml (default folder: TOPOLOGY)
+All names of the new topology will be automatically generated and got the choosen project_name as prefix
+
+###### Example-File: test.yaml (default folder: TOPOLOGY)
 
 ```
 project_name: Test_01
