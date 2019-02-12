@@ -8,7 +8,7 @@ It was created to learn flask, web crawling, data processing and data visualizat
 ### Features
 
 - flask generate an interactive GUI environment
-- extract the soccer results from the official dfb-website
+- extract the soccer results from the official DFB-website (https://www.dfb.de/index/)
 - format and save the data in CSV-files automatically
 - get the season overview 
 - create dynamic data diagrams
