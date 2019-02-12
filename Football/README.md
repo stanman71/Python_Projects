@@ -1,8 +1,8 @@
 ##  Football
 
-This small project can import football results by using a webcrawler and analyse the data in flask
+This small project can import football results by using a webcrawler and analyse the data in flask.
 
-It was created to learn flask, web crawling, data processing and data visualization  
+It was created to learn flask, web crawling, data processing and data visualization.  
 
 
 ### Features
