@@ -21,8 +21,6 @@ It was created to learn flask, web crawling, data processing and data visualizat
 
 ### First Steps: 
 
-</br>
-
 #### Import the results
 
 - Open ```main.py``` and choose the url for a league
