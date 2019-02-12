@@ -50,8 +50,6 @@ start ```START_Gui.py``` (default IP: 127.0.0.1:5000)
 
 <img src="pics/dropdown.png" alt="drawing" width="300"/>
 
-</br>
-
 ###### now you can switch between the options and analyse the data
 
 <img src="pics/menu.png" alt="drawing" width="400"/>
@@ -61,6 +59,8 @@ start ```START_Gui.py``` (default IP: 127.0.0.1:5000)
 ------------
 
 #### Example calculation:
+
+</br>
 
 <img src="pics/prediction.png" alt="drawing" width="600"/>
 
