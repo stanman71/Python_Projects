@@ -11,7 +11,7 @@ def GET_BASICINFO(url, doc):
  
     info = []
 
-    # LIGA
+    # league
 
     if "bundesliga" in url:
         liga = "1_Bundesliga"
@@ -25,7 +25,7 @@ def GET_BASICINFO(url, doc):
     info.append(liga)
 
 
-    # DAY
+    # day
 
     for option in doc.find_all('option', selected=True):
         info.append(option.text)    
@@ -51,7 +51,7 @@ def GET_RESULTS(url):
 
     data_results = GET_BASICINFO(url, doc)
 
-    # RESULTS   
+    # results  
 
     content = doc.select_one(".table-match-comparison")
 
@@ -105,7 +105,7 @@ def GET_CROSS_TABLE(url):
 
     content = doc.select_one(".cross-tab")
 
-    # GET Clubs
+    # get clubs
 
     club_list = []
 
@@ -116,7 +116,7 @@ def GET_CROSS_TABLE(url):
             club_list.append(club)
 
 
-    # GET Cross_Table
+    # get cross_table
 
     rows = content.find_all('tr')
 
