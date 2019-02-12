@@ -50,6 +50,8 @@ GET_ALL(url)
 
 - choose a club in the dropdown menu
 
+![Screenshot](pics/dropdown.png)
+
 - you can switch between the options and analyse the data
 
 </br>
