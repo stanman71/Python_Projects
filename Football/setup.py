@@ -11,11 +11,11 @@ with open('LICENSE') as f:
 setup(
     name='vSporn-Python',
     version='1.0.0',
-    description='Package to visualize football results in flask',
+    description='Package to extract football results and analyse them in flask',
     long_description=readme,
     author='Martin Stan',
     author_email='martin.stan@gmx.de',
-    url='https://github.com/stanman71/Python_Projects/Football',
+    url='https://github.com/stanman71/Football',
     license=license,
     packages=find_packages(exclude=('CSV', 'templates'))
 )
