@@ -36,7 +36,7 @@ GET_ALL(url)
 
 #### Select a data source 
 
-- open ```main.py``` and select the csv file you want to work with
+- open ```main.py``` and select the CSV-file you want to work with
 
 ------------
 ------------
