@@ -50,7 +50,7 @@ GET_ALL(url)
 
 ![dropdown menu](pics/dropdown.png)
 
-- you can switch between the options and analyse the data
+- now you can switch between the options and analyse the data
 
 </br>
 
