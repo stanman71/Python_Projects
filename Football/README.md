@@ -10,7 +10,7 @@ It was created to learn flask, web crawling, data processing and data visualizat
 - flask generate an interactive GUI environment
 - extract the soccer results from the official DFB-website (https://www.dfb.de/index/)
 - format and save the data in CSV-files automatically
-- get the season overview 
+- get season overviews 
 - create dynamic data diagrams
 - calculate the attack/defence value of each club and try to predict the results (based on poisson)
 - compare the predicted and real results by using the coefficient of determination (R²)
@@ -21,9 +21,9 @@ It was created to learn flask, web crawling, data processing and data visualizat
 
 ### First Steps: 
 
-#### Import the results
+#### Import results
 
-- Open ```main.py``` and choose the url for a league
+- open ```main.py``` and choose the url for a league
 
 - run:
 ```
@@ -44,13 +44,15 @@ GET_ALL(url)
 
 ### GUI
 
-- start ```START_Gui.py``` (default IP: 127.0.0.1:5000)
+start ```START_Gui.py``` (default IP: 127.0.0.1:5000)
 
-- choose a club in the dropdown menu
+###### choose a club in the dropdown menu
 
 <img src="pics/dropdown.png" alt="drawing" width="300"/>
 
-- now you can switch between the options and analyse the data
+</br>
+
+###### now you can switch between the options and analyse the data
 
 <img src="pics/menu.png" alt="drawing" width="400"/>
 
