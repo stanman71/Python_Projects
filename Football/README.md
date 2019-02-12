@@ -48,16 +48,19 @@ GET_ALL(url)
 
 - choose a club in the dropdown menu
 
-![dropdown menu](pics/dropdown.png)
+<img src="pics/dropdown.png" alt="drawing" width="250"/>
 
 - now you can switch between the options and analyse the data
+
+<img src="pics/menu.png" alt="drawing" width="400"/>
 
 </br>
 
 ------------
 
-#### Example:
+#### Example calculation:
 
-![Screenshot](pics/prediction.png)
+<img src="pics/prediction.png" alt="drawing" width="600"/>
+
 
 
