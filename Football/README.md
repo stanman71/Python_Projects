@@ -48,7 +48,7 @@ GET_ALL(url)
 
 - choose a club in the dropdown menu
 
-<img src="pics/dropdown.png" alt="drawing" width="250"/>
+<img src="pics/dropdown.png" alt="drawing" width="300"/>
 
 - now you can switch between the options and analyse the data
 
