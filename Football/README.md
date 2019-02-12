@@ -7,17 +7,21 @@ It was created to learn flask, web crawling, data processing and data visualizat
 
 ### Features
 
-- crawl the soccer results from the official dfb-website and save them in csv-files
+- flask generate an interactive GUI environment
+- extract the soccer results from the official dfb-website
+- format and save the data in CSV-files automatically
 - get the season overview 
-- create a point diagram
-- calculate the ATT/DEF value and try to predict the results (based on poisson)
-- compare the predict results and real results by using the coefficient of determination
+- create dynamic data diagrams
+- calculate the attack/defence value of each club and try to predict the results (based on poisson)
+- compare the predicted and real results by using the coefficient of determination (R²)
 
 ------------
 ------------
 ------------
 
 ### First Steps: 
+
+</br>
 
 #### Import the results
 
@@ -28,23 +32,27 @@ It was created to learn flask, web crawling, data processing and data visualizat
 GET_ALL(url)
 ```
 
-- results will automatically saved in a csv-file (folder: CSV)
+- results will automatically save in a CSV-file (folder: CSV)
 
-#### Choose the data source 
+</br>
 
-- open ```main.py``` and choose the csv file you want to work with
+#### Select a data source 
+
+- open ```main.py``` and select the csv file you want to work with
 
 ------------
 ------------
 ------------
 
-### flask server GUI: 
+### GUI
 
-- start: ```START_Gui.py``` (Default IP: 127.0.0.1:5000)
+- start ```START_Gui.py``` (default IP: 127.0.0.1:5000)
 
 - choose a club in the dropdown menu
 
-- now you can switch between the options and analyse the data
+- you can switch between the options and analyse the data
+
+</br>
 
 ------------
 
