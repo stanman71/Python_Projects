@@ -46,11 +46,11 @@ GET_ALL(url)
 
 start ```START_Gui.py``` (default IP: 127.0.0.1:5000)
 
-###### choose a club in the dropdown menu
+###### choose a club in the dropdown menu:
 
 <img src="pics/dropdown.png" alt="drawing" width="300"/>
 
-###### now you can switch between the options and analyse the data
+###### now you can switch between the options and analyse the data:
 
 <img src="pics/menu.png" alt="drawing" width="400"/>
 
