@@ -50,7 +50,7 @@ GET_ALL(url)
 
 - choose a club in the dropdown menu
 
-![Screenshot](pics/dropdown.png)
+![dropdown menu](pics/dropdown.png){:height="600px" width="400px"}
 
 - you can switch between the options and analyse the data
 
