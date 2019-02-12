@@ -54,8 +54,6 @@ GET_ALL(url)
 
 - you can switch between the options and analyse the data
 
-![dropdown menu](pics/menu.png)
-
 </br>
 
 ------------
