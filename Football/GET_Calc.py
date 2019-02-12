@@ -27,13 +27,13 @@ def GET_ALL_GOALS(file):
 
     Sum = int(df.shape[0] / 9)
 
-    # Heimtore
+    # home goals
     df_1         = df["Tore_Team_1"]
     Heim         = int(df_1.sum())
     Heim_AVG     = df_1.mean()
     Heim_AVG     = round(Heim_AVG, 2)
 
-    # Auswärtztore
+    # away goals
     df_2         = df["Tore_Team_2"]
     Aus          = int(df_2.sum())
     Aus_AVG      = df_2.mean()
@@ -64,17 +64,17 @@ def GET_STATS_FROM_CLUB(Club, file, day = 34):
     list_Heim = []  
     list_Aus = []   
 
-    # Table Heim
+    # table home
     df_heim_0 = df.loc[df['Team_1'] == Club]
     Sum_Heim = df_heim_0.shape[0]
 
-    # Table Aus
+    # table away
     df_aus_0 = df.loc[df['Team_2'] == Club]  
     Sum_Aus = df_aus_0.shape[0]
 
     Sum = Sum_Heim + Sum_Aus
 
-    # Tore Heim
+    # home goals (home)
     df_heim_1      = df_heim_0["Tore_Team_1"]
     Heim_Goals     = int(df_heim_1.sum())
     Heim_Goals_AVG = df_heim_1.mean()
@@ -83,7 +83,7 @@ def GET_STATS_FROM_CLUB(Club, file, day = 34):
     list_Heim_Goals = []
 
     try:
-        # Trend Tore Heim
+        # progression home goals (home)
         Last_5 = df_heim_1[-5:]
         Last_5 = sum(Last_5) / float(len(Last_5))
         Last_5 = round(Last_5, 2)
@@ -97,7 +97,7 @@ def GET_STATS_FROM_CLUB(Club, file, day = 34):
     except:
         pass
 
-    # Gegentore Heim
+    # away goals (home)
     df_heim_2      = df_heim_0["Tore_Team_2"]
     Heim_Hits      = int(df_heim_2.sum())
     Heim_Hits_AVG  = df_heim_2.mean()
@@ -106,7 +106,7 @@ def GET_STATS_FROM_CLUB(Club, file, day = 34):
     list_Heim_Hits = []
 
     try:
-        # Trend Gegentore Heim
+        # progression away goals (home)
         Last_5 = df_heim_2[-5:]
         Last_5 = sum(Last_5) / float(len(Last_5))
         Last_5 = round(Last_5, 2)
@@ -124,14 +124,14 @@ def GET_STATS_FROM_CLUB(Club, file, day = 34):
     list_Heim.append(list_Heim_Goals)
     list_Heim.append(list_Heim_Hits)
 
-    # Trend Tore Aus
+    # progression away goals (home)
     df_aus_1       = df_aus_0["Tore_Team_2"]
     Aus_Goals      = int(df_aus_1.sum())
     Aus_Goals_AVG  = df_aus_1.mean()
     Aus_Goals_AVG  = round(Aus_Goals_AVG, 2)
 
     try:
-        # Trend Tore Aus
+        # progression away goals (home)
         Last_5 = df_aus_1[-5:]
         Last_5 = sum(Last_5) / float(len(Last_5))
         Last_5 = round(Last_5, 2)
@@ -146,14 +146,14 @@ def GET_STATS_FROM_CLUB(Club, file, day = 34):
     except:
         pass
 
-    # Gegentore Aus
+    # away goals (away)
     df_aus_2       = df_aus_0["Tore_Team_1"]
     Aus_Hits       = int(df_aus_2.sum())
     Aus_Hits_AVG   = df_aus_2.mean()
     Aus_Hits_AVG   = round(Aus_Hits_AVG, 2)
 
     try:
-        # Trend Gegentore Aus
+        # progression away goals (away)
         Last_5 = df_aus_2[-5:]
         Last_5 = sum(Last_5) / float(len(Last_5))
         Last_5 = round(Last_5, 2)
@@ -187,7 +187,7 @@ def GET_ATT_DEF_VALUE(Club, file):
 
     return_list = []
 
-    # Heim
+    # home
 
     # Verhältnis von den (durchschnittlichen) Heimtoren/Heimtreffern des Vereins zu den 
     # (durchschnittlichen) Heimtoren aller Vereine
@@ -197,7 +197,7 @@ def GET_ATT_DEF_VALUE(Club, file):
     DEF_Heim = (GET_STATS_FROM_CLUB(Club, file)[1][2][1])/(GET_ALL_GOALS(file)[6])
     DEF_Heim = round(DEF_Heim, 2)
 
-    # Aus
+    # away
  
     # Verhältnis von den (durchschnittlichen) Auswärtztoren/Auswärtztreffern des Vereins zu den 
     # (durchschnittlichen) Auswärtztoren aller Vereine
@@ -298,9 +298,11 @@ def GET_POINTS(Club, file):
     df = df[(df.Team_1 == Club) | (df.Team_2 == Club)]
 
     # prevent error massage
+    
     df = df.copy()
 
     # cases
+ 
     conditions = [
         (df['Team_1'] == Club) & ((df['Tore_Team_1']) >  (df['Tore_Team_2'])), 
         (df['Team_1'] == Club) & ((df['Tore_Team_1']) == (df['Tore_Team_2'])),
@@ -317,7 +319,8 @@ def GET_POINTS(Club, file):
     AVG_Points = df['Points'].mean()
     AVG_Points = round(AVG_Points, 2)
 
-    # Trend
+    # progression
+    
     Last_5 = Complete[-5:]
     Last_5 = sum(Last_5) / float(len(Last_5))
     Last_5 = round(Last_5, 2)
