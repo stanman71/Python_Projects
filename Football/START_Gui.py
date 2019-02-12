@@ -62,7 +62,7 @@ def club():
     # input buttons
     if request.method == "POST": 
 
-        # Spielplan
+        # match plan
         if 'Button_1' in request.form:
 
             season = GET_SEASON(club_name, file) 
@@ -74,7 +74,7 @@ def club():
                                     season=season
                                     )
 
-        # Punkte
+        # points
         if 'Button_2' in request.form:
 
             y  = GET_POINTS(club_name, file)[3]            
@@ -92,7 +92,7 @@ def club():
                                     )
 
 
-        # Analyse ATT / DEF
+        # analyse ATT / DEF
         if 'Button_3' in request.form:
 
             anaylse = GET_ATT_DEF_ANALYSE(club_name, file)
@@ -122,7 +122,7 @@ def club():
                                     )
 
 
-        # Gewonnen / Verloren
+        # win / lost
         if 'Button_4' in request.form:
 
             anaylse = GET_ATT_DEF_ANALYSE(club_name, file)
@@ -150,7 +150,7 @@ def club():
                                     )
 
 
-        # Poisson
+        # poisson
         if 'Button_5' in request.form:
             poisson = CALC_SEASON_POISSON(club_name, file) 
 
