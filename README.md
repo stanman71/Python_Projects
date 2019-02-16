@@ -1,1 +1,1 @@
-In this repository are small projects and ideas.
+This repository summarise small projects and ideas.
